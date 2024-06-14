@@ -8,10 +8,10 @@ export default function RootLayout({ children }) {
     );
 
     return (
-        <div className="min-h-screen h-screen w-screen flex flex-1 flex-col justify-between items-center bg-white dark:bg-blue-900">
-            <Header />
+        <div className="min-h-screen w-screen flex flex-1 flex-col justify-between items-center bg-white dark:bg-blue-900">
+            <Header darkMode={darkMode} setDarkMode={setDarkMode} />
             <main>{children}</main>
-            <Footer />
+            <Footer darkMode={darkMode} setDarkMode={setDarkMode} />
         </div>
     );
 }
