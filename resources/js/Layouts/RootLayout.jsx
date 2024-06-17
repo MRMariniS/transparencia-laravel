@@ -8,7 +8,12 @@ export default function RootLayout({ children }) {
     );
 
     return (
-        <div className="min-h-screen w-screen flex flex-1 flex-col justify-between items-center bg-white dark:bg-blue-900">
+        <div
+            className={
+                (darkMode ? "dark " : "") +
+                "min-h-screen max-w-screen flex flex-1 flex-col justify-between items-center bg-white dark:bg-blue-900 text-gray-800 dark:text-white"
+            }
+        >
             <Header darkMode={darkMode} setDarkMode={setDarkMode} />
             <main>{children}</main>
             <Footer darkMode={darkMode} setDarkMode={setDarkMode} />

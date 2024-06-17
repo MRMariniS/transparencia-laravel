@@ -1,3 +1,155 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 100;
+        src: url(../assets/fonts/rawline-100.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 100;
+        src: url(../assets/fonts/rawline-100i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 200;
+        src: url(../assets/fonts/rawline-200.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 200;
+        src: url(../assets/fonts/rawline-200i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 300;
+        src: url(../assets/fonts/rawline-300.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 300;
+        src: url(../assets/fonts/rawline-300i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src: url(../assets/fonts/rawline-400.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 400;
+        src: url(../assets/fonts/rawline-400i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 500;
+        src: url(../assets/fonts/rawline-500.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 500;
+        src: url(../assets/fonts/rawline-500i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 600;
+        src: url(../assets/fonts/rawline-600.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 600;
+        src: url(../assets/fonts/rawline-600i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 700;
+        src: url(../assets/fonts/rawline-700.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 700;
+        src: url(../assets/fonts/rawline-700i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 800;
+        src: url(../assets/fonts/rawline-800.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 800;
+        src: url(../assets/fonts/rawline-800i.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 900;
+        src: url(../assets/fonts/rawline-900.ttf) format("ttf");
+    }
+
+    @font-face {
+        font-family: "Rawline";
+        font-style: italic;
+        font-display: swap;
+        font-weight: 900;
+        src: url(../assets/fonts/rawline-900i.ttf) format("ttf");
+    }
+}
+
+@layer components {
+    .interaction {
+        @apply !bg-blue-700 dark:!bg-sky-200 !text-white dark:!text-gray-800 py-2 px-4 rounded-full flex justify-center items-center gap-2;
+    }
+}
