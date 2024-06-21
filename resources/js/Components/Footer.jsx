@@ -1,17 +1,35 @@
-import React from "react";
+import { usePage } from "@inertiajs/react";
 
 import logo from "../../assets/images/logo.png";
 import logoWhite from "../../assets/images/logo-white.png";
 
-function Footer({ darkMode, setDarkMode }) {
+import Banners from "./Banners";
+import DadosMunicipio from "./DadosMunicipio";
+import RedesSociais from "./RedesSociais";
+
+function Footer({ darkMode }) {
+    const date = new Date();
+    const { app } = usePage().props;
+
     return (
-        <footer className="w-full h-fit pb-2 flex flex-col justify-between items-center bg-gray-50 dark:bg-blue-800">
-            <nav>
-                <img
-                    src={darkMode ? logoWhite : logo}
-                    className="w-20 h-auto"
-                />
-            </nav>
+        <footer className="w-full h-fit pb-2 flex flex-col justify-between items-center gap-2 bg-gray-50 dark:bg-blue-800">
+            <div className="container w-full h-fit flex flex-col justify-end items-center">
+                <div className="w-full h-auto flex flex-row justify-between items-center gap-4">
+                    <img
+                        src={darkMode ? logoWhite : logo}
+                        className="w-20 h-auto"
+                    />
+                    <DadosMunicipio />
+                </div>
+                <div className="w-full h-fit flex flex-row justify-between items-center">
+                    <RedesSociais />
+                    <Banners />
+                </div>
+            </div>
+            <div className="text-xs">
+                Copyright © Pública Tecnologia {date.getFullYear()}. Todos os
+                direitos reservados. Versão {app.version}
+            </div>
         </footer>
     );
 }

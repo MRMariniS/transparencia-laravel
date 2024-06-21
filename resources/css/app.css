@@ -152,4 +152,8 @@
     .interaction {
         @apply !bg-blue-700 dark:!bg-sky-200 !text-white dark:!text-gray-800 py-2 px-4 rounded-full flex justify-center items-center gap-2;
     }
+
+    .defaultIcon {
+        @apply w-6 h-6;
+    }
 }

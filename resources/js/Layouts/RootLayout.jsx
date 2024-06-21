@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         >
             <Header darkMode={darkMode} setDarkMode={setDarkMode} />
             <main>{children}</main>
-            <Footer darkMode={darkMode} setDarkMode={setDarkMode} />
+            <Footer darkMode={darkMode} />
         </div>
     );
 }

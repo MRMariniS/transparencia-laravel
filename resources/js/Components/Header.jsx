@@ -1,15 +1,11 @@
 import {
     FaBars,
     FaChartBar,
-    FaCircleHalfStroke,
     FaComment,
-    FaEllipsisVertical,
     FaHeadset,
     FaMagnifyingGlass,
     FaMoon,
     FaSun,
-    FaTableCells,
-    FaUser,
 } from "react-icons/fa6";
 import { Link } from "@inertiajs/react";
 

@@ -109,6 +109,49 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'scpi2021' => [
+            'driver' => 'firebird',
+            'host' => env('SCPI_DB_HOST'),
+            'port' => env('SCPI_DB_PORT'),
+            'database' => env('SCPI_DB_DATABASE') . '/ARQ2021/SCPI2021.FDB',
+            'username' => env('SCPI_DB_USERNAME'),
+            'password' => env('SCPI_DB_PASSWORD'),
+            'charset' => env('SCPI_DB_CHARSET'),
+            'role' => null,
+        ],
+
+        'scpi2022' => [
+            'driver' => 'firebird',
+            'host' => env('SCPI_DB_HOST'),
+            'port' => env('SCPI_DB_PORT'),
+            'database' => env('SCPI_DB_DATABASE') . '/ARQ2022/SCPI2022.FDB',
+            'username' => env('SCPI_DB_USERNAME'),
+            'password' => env('SCPI_DB_PASSWORD'),
+            'charset' => env('SCPI_DB_CHARSET'),
+            'role' => null,
+        ],
+
+        'scpi2023' => [
+            'driver' => 'firebird',
+            'host' => env('SCPI_DB_HOST'),
+            'port' => env('SCPI_DB_PORT'),
+            'database' => env('SCPI_DB_DATABASE') . '/ARQ2023/SCPI2023.FDB',
+            'username' => env('SCPI_DB_USERNAME'),
+            'password' => env('SCPI_DB_PASSWORD'),
+            'charset' => env('SCPI_DB_CHARSET'),
+            'role' => null,
+        ],
+
+        'scpi2024' => [
+            'driver' => 'firebird',
+            'host' => env('SCPI_DB_HOST'),
+            'port' => env('SCPI_DB_PORT'),
+            'database' => env('SCPI_DB_DATABASE') . '/ARQ2024/SCPI2024.FDB',
+            'username' => env('SCPI_DB_USERNAME'),
+            'password' => env('SCPI_DB_PASSWORD'),
+            'charset' => env('SCPI_DB_CHARSET'),
+            'role' => null,
+        ],
     ],
 
     /*
@@ -144,7 +187,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
