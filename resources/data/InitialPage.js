@@ -30,7 +30,7 @@ const initialPage = {
     entidade: [
         {
             CODCLIENTE: 559,
-            NOME: "Prefeitura Municipal de Corumbiara",
+            NOME: "Município de Corumbiara",
             CNPJ: "63.762.041/0001-35",
             ENDERECO: "Av. Olavo Pires, 2129 - Centro",
             CIDADE: "Corumbiara",

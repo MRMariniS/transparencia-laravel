@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     FaBars,
     FaChartBar,
@@ -8,14 +9,20 @@ import {
     FaSun,
 } from "react-icons/fa6";
 import { Link } from "@inertiajs/react";
+import { Button } from "@material-tailwind/react";
 
 import logo from "../../assets/images/logo.png";
 import logoWhite from "../../assets/images/logo-white.png";
+import initialPage from "../../data/InitialPage";
 
 import LoginPopover from "@/Components/LoginPopover";
 import SelectDefault from "./SelectDefault";
+import { DrawerMenu } from "./DrawerMenu";
 
-function Header({ darkMode, setDarkMode }) {
+DrawerMenu;
+
+function Header({ darkMode, setDarkMode, open, setOpen }) {
+    const drawerControl = () => setOpen(!open);
     return (
         <header className="w-full h-fit flex flex-col justify-center items-center bg-gray-50 dark:bg-blue-800">
             <nav className="w-full h-full flex flex-row justify-between items-center px-10 py-2">
@@ -33,8 +40,15 @@ function Header({ darkMode, setDarkMode }) {
                         </h1>
                     </div>
                     <div className="w-full flex flex-row justify-start items-center gap-4">
-                        <FaBars className="w-6 h-6" />
-                        <h3 className="text-xl">Município de Modelândia</h3>
+                        <Button
+                            className="interaction rounded-full"
+                            onClick={drawerControl}
+                        >
+                            <FaBars className="w-6 h-6" />
+                        </Button>
+                        <h3 className="text-xl">
+                            {initialPage.entidade[0].NOME}
+                        </h3>
                         <SelectDefault darkMode={darkMode} />
                     </div>
                 </div>
