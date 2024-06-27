@@ -2,6 +2,9 @@ import { useState } from "react";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import { DrawerMenu } from "../Components/DrawerMenu";
+import { BreadcrumbsWithIcon } from "../Components/BreadCrumbsWithIcon";
+import { Link } from "@inertiajs/react";
+import initialPage from "../../data/InitialPage";
 
 export default function RootLayout({ children }) {
     const [darkMode, setDarkMode] = useState(

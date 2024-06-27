@@ -12,8 +12,8 @@ function Footer({ darkMode }) {
     const { app } = usePage().props;
 
     return (
-        <footer className="w-full h-fit pb-2 flex flex-col justify-between items-center gap-2 bg-gray-50 dark:bg-blue-800">
-            <div className="container w-full h-fit flex flex-col justify-end items-center">
+        <footer className="w-full h-fit py-2 flex flex-col justify-between items-center gap-2 bg-gray-50 dark:bg-blue-800">
+            <div className="container w-full h-fit flex flex-col justify-end items-center gap-2">
                 <div className="w-full h-auto flex flex-row justify-between items-center gap-4">
                     <img
                         src={darkMode ? logoWhite : logo}
@@ -23,7 +23,7 @@ function Footer({ darkMode }) {
                 </div>
                 <div className="w-full h-fit flex flex-row justify-between items-center">
                     <RedesSociais />
-                    <Banners />
+                    <Banners orientation={"flex-row"} />
                 </div>
             </div>
             <div className="text-xs">

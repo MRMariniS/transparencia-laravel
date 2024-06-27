@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Card,
     Drawer,
@@ -17,7 +17,7 @@ import { FaChevronDown } from "react-icons/fa6";
 import initialPage from "../../data/InitialPage";
 
 export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
-    const [open, setOpen] = React.useState(0);
+    const [open, setOpen] = useState(0);
 
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);

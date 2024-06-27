@@ -18,6 +18,7 @@ import initialPage from "../../data/InitialPage";
 import LoginPopover from "@/Components/LoginPopover";
 import SelectDefault from "./SelectDefault";
 import { DrawerMenu } from "./DrawerMenu";
+import { BreadcrumbsWithIcon } from "./BreadCrumbsWithIcon";
 
 DrawerMenu;
 
@@ -86,6 +87,16 @@ function Header({ darkMode, setDarkMode, open, setOpen }) {
                     </div>
                 </div>
             </nav>
+            <div className="px-10 pb-2 w-full h-fit flex flex-row justify-between items-center">
+                <BreadcrumbsWithIcon />
+                <div className="flex flex-row justify-between items-center gap-4">
+                    {initialPage.menus.menuSuperior.map((menu) => (
+                        <Link key={menu.CODIGO} href="#" className="text-lg">
+                            {menu.APRESENTACAO}
+                        </Link>
+                    ))}
+                </div>
+            </div>
         </header>
     );
 }

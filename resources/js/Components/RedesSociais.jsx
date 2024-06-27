@@ -1,4 +1,6 @@
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa6";
+
+import initialPage from "../../data/InitialPage";
 import RedeSocial from "./RedeSocial";
 
 function RedesSociais() {
