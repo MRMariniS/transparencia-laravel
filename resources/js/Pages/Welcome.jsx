@@ -2,6 +2,8 @@ import { Link, Head } from "@inertiajs/react";
 import { SidebarMenu } from "../Components/SidebarMenu";
 import Banners from "../Components/Banners";
 import { Typography } from "@material-tailwind/react";
+import { SearchBar } from "../Components/SearchBar";
+import BaseLayout from "../Layouts/BaseLayout";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
@@ -9,8 +11,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             <Head title="Welcome" />
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <SidebarMenu />
-                <div className="w-full h-full flex justify-between items-start p-10 gap-4">
-                    <div className="w-1/2 h-full flex flex-col gap-4">
+                <BaseLayout>
+                    <div className="w-full lg:w-1/2 h-full flex flex-col gap-4">
+                        <div className="lg:hidden">
+                            <SearchBar />
+                        </div>
                         <div>
                             <img
                                 src="../../assets/images/selo-prata-2024.jpg"
@@ -68,12 +73,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             </Typography>
                         </div>
                     </div>
-                    <div>
+                    <div className="hidden lg:block">
                         <div>
                             <Banners orientation={"flex-col"} />
                         </div>
                     </div>
-                </div>
+                </BaseLayout>
             </div>
         </>
     );

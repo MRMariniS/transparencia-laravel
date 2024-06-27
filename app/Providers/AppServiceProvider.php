@@ -14,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Inertia::share('app', [
             'name' => env('APP_NAME'),
-            'version' => env('APP_VERSION')
+            'version' => env('APP_VERSION'),
+            'drawerOpen' => false,
         ]);
     }
 

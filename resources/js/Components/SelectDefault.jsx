@@ -5,7 +5,7 @@ function SelectDefault({ darkMode }) {
     const [value, setValue] = useState("exec");
 
     return (
-        <div className="w-fit">
+        <div className="w-full lg:w-fit">
             <Select
                 label="Poder"
                 className="text-gray-800 dark:text-white"

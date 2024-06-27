@@ -20,7 +20,7 @@ export function SidebarMenu() {
     };
 
     return (
-        <Card className="h-full w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 bg-gray-50 dark:bg-blue-800 overflow-y-auto">
+        <Card className="hidden lg:block h-full w-full max-w-[20rem] p-4 shadow-none rounded-none bg-gray-50 dark:bg-blue-800 overflow-y-auto">
             <List>
                 {initialPage.menus.menuLateral.map((menu) => (
                     <Accordion

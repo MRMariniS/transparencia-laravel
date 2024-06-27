@@ -1,4 +1,3 @@
-import { menu } from "@material-tailwind/react";
 import initialPage from "../../data/InitialPage";
 import Banner from "./Banner";
 import {
@@ -50,7 +49,7 @@ function Banners({ orientation }) {
     ];
 
     return (
-        <div className={"flex " + orientation + " gap-4"}>
+        <div className={"w-full flex flex-col " + orientation + " gap-4"}>
             {banners.map((banner) => (
                 <Banner
                     key={banner.titulo}

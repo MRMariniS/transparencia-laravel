@@ -11,10 +11,7 @@ export default function LoginPopover({ darkMode }) {
     return (
         <Popover placement="bottom-end">
             <PopoverHandler>
-                <Button className="interaction rounded-full">
-                    <FaUser className="h-6 w-6 fill-white dark:fill-gray-800" />
-                    Entrar
-                </Button>
+                <Button className="interaction rounded-full">Login</Button>
             </PopoverHandler>
             <PopoverContent
                 className={

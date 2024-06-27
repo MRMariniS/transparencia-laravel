@@ -5,8 +5,8 @@ import { Typography } from "@material-tailwind/react";
 
 function DadosMunicipio() {
     return (
-        <div className="flex flex-1 justify-between items-center">
-            <div className="w-1/2 flex flex-col justify-between items-start">
+        <div className="flex flex-1 flex-col lg:flex-row justify-between items-center">
+            <div className="w-full lg:w-1/2 flex flex-col justify-between items-start">
                 <Typography variant="h5" className="text-2xl uppercase">
                     {initialPage.entidade[0].NOME}
                 </Typography>
@@ -27,7 +27,7 @@ function DadosMunicipio() {
                     </Typography>
                 </div>
             </div>
-            <div className="w-1/2 flex flex-col justify-between items-start">
+            <div className="w-full lg:w-1/2 flex flex-col justify-between items-start">
                 <div className="flex flex-row gap-2">
                     <Typography className="text-xl font-semibold">
                         Telefone:

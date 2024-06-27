@@ -26,7 +26,7 @@ function RedesSociais() {
     ];
 
     return (
-        <div className="w-full h-fit flex flex-col gap-2">
+        <div className="w-full h-fit flex flex-col gap-2 items-center">
             <div className="flex flex-row gap-4">
                 {redesSociais.map((rede) => (
                     <RedeSocial
