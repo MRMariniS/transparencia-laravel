@@ -12,9 +12,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Head title="Welcome" />
             <div className="w-full h-full flex flex-row justify-between items-start">
-                {/* <SidebarMenu /> */}
                 <BaseLayout>
-                    <div className="w-full lg:w-2/3 h-full flex flex-col gap-4">
+                    <div className="w-full h-full flex flex-col gap-4">
                         <img
                             src="../../assets/images/selo-prata-2024.jpg"
                             alt="selo-prata-2024"
@@ -44,34 +43,6 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             {initialPage.menus.menuLateral.map((menu) => (
                                 <MenuDefault key={menu.CODIGO} props={menu} />
                             ))}
-                        </div>
-                    </div>
-                    <div className="hidden lg:flex flex-row justify-between items-start w-1/3 gap-4">
-                        <div className="flex flex-row justify-between items-start gap-4">
-                            <div className="w-full flex flex-col gap-4">
-                                <img
-                                    src="../../assets/images/selo-prata-2024.jpg"
-                                    alt="selo-prata-2024"
-                                    className="w-full h-auto rounded-md"
-                                />
-                                <img
-                                    src="../../assets/images/e-sic.png"
-                                    alt="e-sic.png"
-                                    className="w-full h-auto rounded-md"
-                                />
-                                <img
-                                    src="../../assets/images/e-ouv.png"
-                                    alt="e-ouv.png"
-                                    className="w-full h-auto rounded-md"
-                                />
-                                <img
-                                    src="../../assets/images/carta.jpg"
-                                    alt="carta.jpg"
-                                    className="w-full h-auto rounded-md"
-                                />
-
-                                {/* <Banners orientation={"flex-col"} /> */}
-                            </div>
                         </div>
                     </div>
                 </BaseLayout>

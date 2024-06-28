@@ -10,8 +10,8 @@ function BaseLayout({ children }) {
     const { open, openDrawer } = useContext(PropsContext);
 
     return (
-        <div>
-            <div className="px-4 pt-4 flex flex-col lg:flex-row lg:justify-between items-center gap-4">
+        <div className="container py-4">
+            <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-4">
                 <div className="w-full lg:w-fit flex flex-row justify-start items-center gap-4">
                     <Button
                         className="interaction rounded-full"
@@ -28,7 +28,7 @@ function BaseLayout({ children }) {
 
                 <SearchBar />
             </div>
-            <div className="w-full h-full flex justify-between items-start p-4 gap-4">
+            <div className="w-full h-full flex justify-between items-start pt-4 gap-4">
                 {children}
             </div>
         </div>
