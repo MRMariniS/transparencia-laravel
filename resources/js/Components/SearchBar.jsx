@@ -15,7 +15,7 @@ export function SearchBar() {
                 onChange={onChange}
                 className="pr-20"
                 containerProps={{
-                    className: "min-w-0 bg-white dark:bg-blue-900",
+                    className: "min-w-0 bg-gray-50 dark:bg-blue-800",
                 }}
                 labelProps={{
                     className: "!text-gray-500",
