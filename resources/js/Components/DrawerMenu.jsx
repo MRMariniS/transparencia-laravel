@@ -15,6 +15,7 @@ import {
 } from "@material-tailwind/react";
 import { FaChevronDown } from "react-icons/fa6";
 import initialPage from "../../data/InitialPage";
+import { Link } from "@inertiajs/react";
 
 export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
     const [open, setOpen] = useState(0);
@@ -68,7 +69,7 @@ export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
                             }
                         >
                             <ListItem
-                                className="text-gray-800 dark:text-white"
+                                className="text-gray-800 dark:text-white bg-gray-50 dark:bg-blue-800"
                                 selected={open === menu.CODIGO}
                             >
                                 <AccordionHeader
@@ -93,25 +94,24 @@ export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
                             <AccordionBody className="py-1">
                                 <List className="p-0">
                                     {menu.submenu.map((sub) => (
-                                        <ListItem
-                                            key={sub.CODIGO}
-                                            className="text-gray-800 dark:text-white"
-                                        >
-                                            {sub.GLYPH ? (
-                                                <ListItemPrefix>
-                                                    <img
-                                                        src={`../../assets/images/${sub.GLYPH}`}
-                                                        alt={JSON.stringify(
-                                                            sub.GLYPH
-                                                        )}
-                                                        className="w-10 h-auto"
-                                                    />
-                                                </ListItemPrefix>
-                                            ) : (
-                                                <></>
-                                            )}
-                                            {sub.APRESENTACAO}
-                                        </ListItem>
+                                        <Link key={sub.CODIGO} href={sub.URL}>
+                                            <ListItem className="bg-blue-700 dark:bg-sky-200 text-white dark:text-gray-800">
+                                                {sub.GLYPH ? (
+                                                    <ListItemPrefix>
+                                                        <img
+                                                            src={`../../assets/images/${sub.GLYPH}`}
+                                                            alt={JSON.stringify(
+                                                                sub.GLYPH
+                                                            )}
+                                                            className="w-10 h-auto"
+                                                        />
+                                                    </ListItemPrefix>
+                                                ) : (
+                                                    <></>
+                                                )}
+                                                {sub.APRESENTACAO}
+                                            </ListItem>
+                                        </Link>
                                     ))}
                                 </List>
                             </AccordionBody>

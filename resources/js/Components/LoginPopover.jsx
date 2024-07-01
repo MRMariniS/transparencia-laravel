@@ -4,6 +4,7 @@ import {
     PopoverContent,
     Button,
     Input,
+    Typography,
 } from "@material-tailwind/react";
 import { FaKey, FaUser } from "react-icons/fa6";
 
@@ -11,7 +12,9 @@ export default function LoginPopover({ darkMode }) {
     return (
         <Popover placement="bottom-end">
             <PopoverHandler>
-                <Button className="interaction rounded-full">Login</Button>
+                <button>
+                    <FaUser className="w-6 h-6" />
+                </button>
             </PopoverHandler>
             <PopoverContent
                 className={

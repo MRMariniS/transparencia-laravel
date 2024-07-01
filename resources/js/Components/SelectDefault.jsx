@@ -13,11 +13,11 @@ function SelectDefault({ darkMode }) {
                     className: "text-gray-800 dark:text-white",
                 }}
                 containerProps={{
-                    className: "bg-gray-50 dark:bg-blue-800",
+                    className: "bg-white dark:bg-blue-900 rounded-lg",
                 }}
                 menuProps={{
                     className:
-                        "bg-gray-50 dark:bg-blue-800 text-gray-800 dark:text-white border-gray-500",
+                        "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
                 }}
                 value={value}
                 onChange={(val) => setValue(val)}

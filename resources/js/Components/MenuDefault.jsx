@@ -8,7 +8,6 @@ import {
 } from "@material-tailwind/react";
 
 export function MenuDefault({ props }) {
-    console.log(props);
     return (
         <Menu>
             <MenuHandler>

@@ -15,7 +15,7 @@ import logoWhite from "../../assets/images/logo-white.png";
 import { Link } from "@inertiajs/react";
 import LoginPopover from "./LoginPopover";
 import HeaderButtons from "./HeaderButtons";
-import { FaBars, FaX } from "react-icons/fa6";
+import { FaChevronDown, FaX } from "react-icons/fa6";
 
 export function MainNavbar({ darkMode, setDarkMode }) {
     const [openNav, setOpenNav] = React.useState(false);
@@ -54,7 +54,7 @@ export function MainNavbar({ darkMode, setDarkMode }) {
 
                 <div className="flex items-center gap-4">
                     <div className="mr-4 hidden lg:block">{navList}</div>
-                    <div className="hidden lg:flex flex-row justify-center items-center gap-2">
+                    <div className="hidden lg:flex flex-row justify-center items-center gap-4">
                         <HeaderButtons
                             darkMode={darkMode}
                             setDarkMode={setDarkMode}
@@ -70,7 +70,7 @@ export function MainNavbar({ darkMode, setDarkMode }) {
                         {openNav ? (
                             <FaX className="defaultIcon text-gray-800 dark:text-white" />
                         ) : (
-                            <FaBars className="defaultIcon text-gray-800 dark:text-white" />
+                            <FaChevronDown className="defaultIcon text-gray-800 dark:text-white" />
                         )}
                     </IconButton>
                 </div>
