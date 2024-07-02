@@ -13,9 +13,11 @@ import {
     AccordionHeader,
     AccordionBody,
 } from "@material-tailwind/react";
-import { FaChevronDown } from "react-icons/fa6";
+import { FaChevronDown, FaX } from "react-icons/fa6";
 import initialPage from "../../data/InitialPage";
 import { Link } from "@inertiajs/react";
+import HeaderButtons from "./HeaderButtons";
+import LoginPopover from "./LoginPopover";
 
 export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
     const [open, setOpen] = useState(0);
@@ -31,28 +33,20 @@ export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
                 onClose={closeDrawer}
                 className="bg-white dark:bg-blue-900 overflow-y-auto"
             >
-                <div className="mb-2 flex items-center justify-between p-4">
-                    <h5 className="text-xl">Menu</h5>
-                    <IconButton
-                        variant="text"
-                        onClick={closeDrawer}
-                        className="interaction rounded-full"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                            className="h-5 w-5"
+                <div className="mb-2 flex flex-col justify-center items-center p-4">
+                    <div className="w-full h-fit flex flex-row justify-between items-center">
+                        <h5 className="text-xl">Menu</h5>
+                        <IconButton
+                            variant="text"
+                            onClick={closeDrawer}
+                            className="interaction rounded-full"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </IconButton>
+                            <FaX className="h-6 w-6" />
+                        </IconButton>
+                    </div>
+                    <div className="w-full h-fit flex flex-row justify-center items-center">
+                        <HeaderButtons />
+                    </div>
                 </div>
                 <List>
                     {initialPage.menus.menuLateral.map((menu) => (

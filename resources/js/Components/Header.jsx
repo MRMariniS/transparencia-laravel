@@ -16,13 +16,13 @@ import LogoTitle from "./LogoTitle";
 import HeaderMenu from "./HeaderMenu";
 
 function Header({ darkMode, setDarkMode }) {
-    const { open, openDrawer } = useContext(PropsContext);
+    const { openDrawer } = useContext(PropsContext);
 
     return (
         <header className="w-full h-fit px-4 py-2 lg:px-8 flex flex-col justify-center items-center gap-2 bg-gray-50 dark:bg-blue-800">
             <nav className="w-full flex flex-row items-center">
                 <LogoTitle logo={darkMode ? logoWhite : logo} />
-                <div className="w-3/5 flex flex-row justify-between items-center gap-6">
+                <div className="w-3/5 hidden lg:flex flex-row justify-between items-center gap-6">
                     <HeaderMenu menuSuperior={initialPage.menus.menuSuperior} />
                     <HeaderButtons
                         darkMode={darkMode}
@@ -43,10 +43,14 @@ function Header({ darkMode, setDarkMode }) {
                         {initialPage.entidade[0].NOME}
                     </Typography>
 
-                    <SelectDefault />
+                    <div className="hidden lg:block">
+                        <SelectDefault />
+                    </div>
                 </div>
 
-                <SearchBar />
+                <div className="hidden lg:block">
+                    <SearchBar />
+                </div>
             </div>
         </header>
     );
