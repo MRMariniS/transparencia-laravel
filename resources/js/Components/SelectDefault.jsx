@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 
 function SelectDefault({ darkMode }) {
-    const [value, setValue] = useState("exec");
+    const [value, setValue] = useState("pm");
 
     return (
         <div className="w-full lg:w-fit">
@@ -22,9 +22,9 @@ function SelectDefault({ darkMode }) {
                 value={value}
                 onChange={(val) => setValue(val)}
             >
-                <Option value="exec">Executivo</Option>
-                <Option value="leg">Legislativo</Option>
-                <Option value="previ">Previdência</Option>
+                <Option value="pm">Executivo</Option>
+                <Option value="cm">Legislativo</Option>
+                <Option value="rpps">Previdência</Option>
             </Select>
         </div>
     );

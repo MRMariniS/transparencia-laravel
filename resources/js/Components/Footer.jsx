@@ -6,6 +6,7 @@ import logoWhite from "../../assets/images/logo-white.png";
 import Banners from "./Banners";
 import DadosMunicipio from "./DadosMunicipio";
 import RedesSociais from "./RedesSociais";
+import { Typography } from "@material-tailwind/react";
 
 function Footer({ darkMode }) {
     const date = new Date();
@@ -25,10 +26,6 @@ function Footer({ darkMode }) {
                     <RedesSociais />
                     <Banners orientation={"lg:flex-row"} />
                 </div>
-            </div>
-            <div className="text-xs text-center">
-                Copyright © Pública Tecnologia {date.getFullYear()}. Todos os
-                direitos reservados. Versão {app.version}
             </div>
         </footer>
     );

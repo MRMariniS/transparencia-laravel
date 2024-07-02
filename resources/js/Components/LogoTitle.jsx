@@ -1,21 +1,16 @@
 import { Typography } from "@material-tailwind/react";
 
-function LogoTitle({ logo, title }) {
+function LogoTitle({ logo }) {
     return (
-        <div className="flex flex-row items-center text-gray-800 dark:text-white">
+        <div className="w-2/5 flex flex-row items-center gap-2">
             <img
                 src={logo}
                 alt="Brasão do Município"
-                className="hidden lg:inline-block h-full w-auto"
+                className="hidden lg:inline-block h-12 w-auto"
             />
-            <div>
-                <Typography className="mr-4 font-bold text-2xl uppercase">
-                    {title}
-                </Typography>
-                <Typography className="mr-4 font-semibold text-2xl">
-                    Portal da Transparência
-                </Typography>
-            </div>
+            <Typography className="mr-4 uppercase text-3xl">
+                Portal da Transparência
+            </Typography>
         </div>
     );
 }

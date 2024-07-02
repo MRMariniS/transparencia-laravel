@@ -4,8 +4,8 @@ import Banners from "../Components/Banners";
 import { Typography } from "@material-tailwind/react";
 import { SearchBar } from "../Components/SearchBar";
 import BaseLayout from "../Layouts/BaseLayout";
-import initialPage from "../../data/InitialPage";
 import { MenuDefault } from "../Components/MenuDefault";
+import initialPage from "../../data/InitialPage";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
@@ -15,7 +15,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 <BaseLayout>
                     <div className="w-full h-full flex flex-col gap-4">
                         <img
-                            src="../../assets/images/selo-prata-2024.jpg"
+                            src="/assets/images/selo-prata-2024.jpg"
                             alt="selo-prata-2024"
                             className="block lg:hidden w-full h-auto rounded-md"
                         />
@@ -44,9 +44,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     </Typography>
                                 </div>
                                 <img
-                                    src="../../assets/images/selo-prata-2024.jpg"
+                                    src="/assets/images/selo-prata-2024.jpg"
                                     alt="selo-prata-2024"
-                                    className="hidden lg:block w-2/3 h-auto rounded-md"
+                                    className="hidden lg:block w-72 h-auto rounded-md"
                                 />
                             </div>
                         </div>
