@@ -79,7 +79,7 @@ export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
                                     {menu.GLYPH ? (
                                         <ListItemPrefix>
                                             <img
-                                                src={`/assets/images/${menu.GLYPH}`}
+                                                src={`../../assets/images/${menu.GLYPH}`}
                                                 alt={JSON.stringify(menu.GLYPH)}
                                             />
                                         </ListItemPrefix>
@@ -99,7 +99,7 @@ export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
                                                 {sub.GLYPH ? (
                                                     <ListItemPrefix>
                                                         <img
-                                                            src={`/assets/images/${sub.GLYPH}`}
+                                                            src={`../../assets/images/${sub.GLYPH}`}
                                                             alt={JSON.stringify(
                                                                 sub.GLYPH
                                                             )}

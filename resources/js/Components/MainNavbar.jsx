@@ -10,8 +10,8 @@ import {
 import LogoTitle from "./LogoTitle";
 import initialPage from "/data/InitialPage";
 
-import logo from "/assets/images/logo.png";
-import logoWhite from "/assets/images/logo-white.png";
+import logo from "../../assets/images/logo.png";
+import logoWhite from "../../assets/images/logo-white.png";
 import { Link } from "@inertiajs/react";
 import LoginPopover from "./LoginPopover";
 import HeaderButtons from "./HeaderButtons";

@@ -14,7 +14,7 @@ export function MenuDefault({ props }) {
                 <Button className="w-full h-24 bg-gray-50 dark:bg-blue-800">
                     {props.GLYPH && (
                         <img
-                            src={`/assets/images/${props.GLYPH}`}
+                            src={`../../assets/images/${props.GLYPH}`}
                             alt={JSON.stringify(props.GLYPH)}
                         />
                     )}
@@ -28,7 +28,7 @@ export function MenuDefault({ props }) {
                     <MenuItem key={sub.CODIGO} className="flex flex-row gap-2">
                         {sub.GLYPH && (
                             <img
-                                src={`/assets/images/${sub.GLYPH}`}
+                                src={`../../assets/images/${sub.GLYPH}`}
                                 alt={JSON.stringify(sub.GLYPH)}
                                 className="w-10 h-auto"
                             />
