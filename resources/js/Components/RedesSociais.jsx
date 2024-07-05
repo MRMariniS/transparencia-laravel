@@ -26,18 +26,16 @@ function RedesSociais() {
     ];
 
     return (
-        <div className="w-full h-fit flex flex-col gap-2 items-center">
-            <div className="flex flex-row gap-4">
-                {redesSociais.map((rede) => (
-                    <RedeSocial
-                        key={rede.nome}
-                        nome={rede.nome}
-                        icone={rede.icone}
-                        url={rede.url}
-                        target={rede.target}
-                    />
-                ))}
-            </div>
+        <div className="w-full flex flex-row justify-center lg:justify-start items-center gap-4">
+            {redesSociais.map((rede) => (
+                <RedeSocial
+                    key={rede.nome}
+                    nome={rede.nome}
+                    icone={rede.icone}
+                    url={rede.url}
+                    target={rede.target}
+                />
+            ))}
         </div>
     );
 }

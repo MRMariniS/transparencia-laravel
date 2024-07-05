@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/react";
 
 function Banner({ icone, titulo, url }) {
     return (
-        <Link href={url}>
+        <Link href={url} className="w-full lg:w-fit">
             <div className="interaction">
                 {icone}
                 <div className="flex flex-col justify-around items-center">

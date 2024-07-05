@@ -7,7 +7,7 @@ export function SearchBar() {
     const onChange = ({ target }) => setSearchText(target.value);
 
     return (
-        <div className="relative flex w-full max-w-[24rem]">
+        <div className="relative flex w-full">
             <Input
                 type="search"
                 label="O que você procura?"

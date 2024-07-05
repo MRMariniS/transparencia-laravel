@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 
 function LogoTitle({ logo }) {
     return (
-        <div className="w-full lg:w-2/5 flex flex-row items-center gap-2">
+        <div className="w-full flex flex-row items-center gap-2">
             <img
                 src={logo}
                 alt="Brasão do Município"

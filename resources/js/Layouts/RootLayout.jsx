@@ -43,6 +43,8 @@ export default function RootLayout({ children }) {
                     poder,
                     poderSelecionado,
                     trocaPoder,
+                    darkMode,
+                    setDarkMode,
                 }}
             >
                 <Header darkMode={darkMode} setDarkMode={setDarkMode} />

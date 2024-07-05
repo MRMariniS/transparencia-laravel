@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import {
-    Card,
     Drawer,
     IconButton,
     Typography,
     List,
     ListItem,
     ListItemPrefix,
-    ListItemSuffix,
-    Chip,
     Accordion,
     AccordionHeader,
     AccordionBody,
@@ -17,7 +14,6 @@ import { FaChevronDown, FaX } from "react-icons/fa6";
 import initialPage from "../../data/InitialPage";
 import { Link } from "@inertiajs/react";
 import HeaderButtons from "./HeaderButtons";
-import LoginPopover from "./LoginPopover";
 
 export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
     const [open, setOpen] = useState(0);
@@ -43,9 +39,6 @@ export function DrawerMenu({ isDrawerOpen, closeDrawer }) {
                         >
                             <FaX className="h-6 w-6" />
                         </IconButton>
-                    </div>
-                    <div className="w-full h-fit flex flex-row justify-center items-center">
-                        <HeaderButtons />
                     </div>
                 </div>
                 <List>

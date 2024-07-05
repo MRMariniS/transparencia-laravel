@@ -8,7 +8,7 @@ import {
     FaVirus,
 } from "react-icons/fa6";
 
-function Banners({ orientation }) {
+function Banners() {
     const menu = initialPage.menus.menuLateral.find(
         (menu) => menu.CODIGO === 1
     );
@@ -49,7 +49,11 @@ function Banners({ orientation }) {
     ];
 
     return (
-        <div className={"w-full flex flex-col " + orientation + " gap-4"}>
+        <div
+            className={
+                "w-full lg:w-fit flex flex-col lg:flex-row lg:flex-wrap justify-end items-center gap-4"
+            }
+        >
             {banners.map((banner) => (
                 <Banner
                     key={banner.titulo}

@@ -15,15 +15,29 @@ import { SearchBar } from "./SearchBar";
 import LogoTitle from "./LogoTitle";
 import HeaderMenu from "./HeaderMenu";
 
-function Header({ darkMode, setDarkMode }) {
-    const { openDrawer } = useContext(PropsContext);
+function Header() {
+    const { openDrawer, darkMode, setDarkMode } = useContext(PropsContext);
 
     return (
         <header className="w-full h-fit px-4 py-2 lg:px-8 flex flex-col justify-center items-center gap-2 bg-gray-50 dark:bg-blue-800">
             <nav className="w-full flex flex-row items-center">
-                <LogoTitle logo={darkMode ? logoWhite : logo} />
-                <div className="w-3/5 hidden lg:flex flex-row justify-between items-center gap-6">
-                    <HeaderMenu menuSuperior={initialPage.menus.menuSuperior} />
+                <div className="w-2/3 xl:w-2/5">
+                    <LogoTitle logo={darkMode ? logoWhite : logo} />
+                </div>
+
+                <div className="w-3/5 hidden xl:flex flex-row justify-between items-center gap-6">
+                    <div className="w-full hidden xl:flex flex-row justify-end items-center">
+                        <HeaderMenu
+                            menuSuperior={initialPage.menus.menuSuperior}
+                        />
+                    </div>
+                    <HeaderButtons
+                        darkMode={darkMode}
+                        setDarkMode={setDarkMode}
+                    />
+                </div>
+
+                <div className="hidden w-1/3 md:flex flex-row justify-end items-center xl:hidden">
                     <HeaderButtons
                         darkMode={darkMode}
                         setDarkMode={setDarkMode}
@@ -31,25 +45,31 @@ function Header({ darkMode, setDarkMode }) {
                 </div>
             </nav>
             <div className="w-full flex flex-row items-center justify-between">
-                <div className="flex flex-row items-center gap-6">
-                    <button
-                        onClick={openDrawer}
-                        className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
-                    >
-                        <FaBars className="w-6 h-6 fill-inherit" />
-                    </button>
+                <div className="w-full lg:w-1/2 flex flex-row justify-between lg:justify-start items-center gap-6">
+                    <div className="w-full xl:w-2/3 flex flex-row justify-between items-center">
+                        <div className="flex flex-row justify-start items-center gap-4">
+                            <button
+                                onClick={openDrawer}
+                                className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
+                            >
+                                <FaBars className="w-6 h-6 fill-inherit" />
+                            </button>
 
-                    <Typography className="text-2xl">
-                        {initialPage.entidade[0].NOME}
-                    </Typography>
+                            <Typography className="text-2xl">
+                                {initialPage.entidade[0].NOME}
+                            </Typography>
+                        </div>
 
-                    <div className="hidden lg:block">
-                        <SelectDefault />
+                        <div className="hidden sm:block">
+                            <SelectDefault />
+                        </div>
                     </div>
                 </div>
 
-                <div className="hidden lg:block">
-                    <SearchBar />
+                <div className="hidden w-1/2 lg:flex flex-row justify-end items-center">
+                    <div className="xl:w-2/3">
+                        <SearchBar />
+                    </div>
                 </div>
             </div>
         </header>
