@@ -15,8 +15,8 @@ function BaseLayout({ children }) {
             <div className="lg:hidden flex flex-col items-center pb-4 gap-4">
                 <div className="w-full lg:w-fit sm:hidden flex flex-row justify-center items-center gap-4">
                     <HeaderButtons
-                        darkMode={darkMode}
-                        setDarkMode={setDarkMode}
+                        darkMode={darkMode && darkMode}
+                        setDarkMode={setDarkMode && setDarkMode}
                     />
                 </div>
 
