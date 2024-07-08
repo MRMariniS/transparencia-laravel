@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 
-function SelectDefault({ darkMode }) {
-    const [value, setValue] = useState("pm");
+function SelectDefault({ tipoempresa }) {
+    var tipo = 'executivo';
+    if (tipoempresa == 2) {
+        tipo = 'legislativo';
+    } else if (tipoempresa == 8) {
+        tipo = 'previdencia';
+    }
+
+    const [value, setValue] = useState(tipo);
 
     return (
         <div className="w-full lg:w-fit">
@@ -20,11 +27,13 @@ function SelectDefault({ darkMode }) {
                         "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
                 }}
                 value={value}
-                onChange={(val) => setValue(val)}
+                onChange={(val) => {
+                    window.location.href = './' + val;
+                }}
             >
-                <Option value="pm">Executivo</Option>
-                <Option value="cm">Legislativo</Option>
-                <Option value="rpps">Previdência</Option>
+                <Option value="executivo">Executivo</Option>
+                <Option value="legislativo">Legislativo</Option>
+                <Option value="previdencia">Previdência</Option>
             </Select>
         </div>
     );

@@ -23,7 +23,7 @@ class EntityData
     {
         $entity = $this->entity->getEntity();
 
-        Inertia::share('entidades', $entity);
+        Inertia::share('entidade', $entity);
         return $next($request);
     }
 }

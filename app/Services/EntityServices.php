@@ -24,7 +24,7 @@ class EntityServices
         if (!isset($ano)) {
             $ano = date('Y');
         }
-
+        
         if ($tipo == 'LEGISLATIVO') {
             $filterTipo = 2;
         } elseif ($tipo == 'PREVIDENCIA') {

@@ -12,7 +12,7 @@ class EntityEloquentORM implements EntityInterface
 {
     function getEntityData()
     {
-        $entity = Entity::all([
+        $entity = Entity::whereNull('UG')->get([
             'CODCLIENTE',
             'NOME',
             'CNPJ',

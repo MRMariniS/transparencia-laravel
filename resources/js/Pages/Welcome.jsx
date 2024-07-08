@@ -1,13 +1,13 @@
-import { Link, Head } from "@inertiajs/react";
-import { SidebarMenu } from "../Components/SidebarMenu";
-import Banners from "../Components/Banners";
+import React from "react";
+import { Head } from "@inertiajs/react";
 import { Typography } from "@material-tailwind/react";
-import { SearchBar } from "../Components/SearchBar";
 import BaseLayout from "../Layouts/BaseLayout";
 import { MenuDefault } from "../Components/MenuDefault";
-import initialPage from "../../data/InitialPage";
+import { PropsContext } from "@/Layouts/RootLayout";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
+    const { props } = React.useContext(PropsContext);
+    const menuLateral = props.menus.menuLateral;
     return (
         <>
             <Head title="Welcome" />
@@ -51,7 +51,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             </div>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {initialPage.menus.menuLateral.map((menu) => (
+                            {menuLateral.map((menu) => (
                                 <MenuDefault key={menu.CODIGO} props={menu} />
                             ))}
                         </div>

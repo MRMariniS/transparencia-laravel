@@ -1,21 +1,21 @@
 import React from "react";
 
-import initialPage from "../../data/InitialPage";
 import { Typography } from "@material-tailwind/react";
 
-function DadosMunicipio() {
+function DadosMunicipio({ empresa }) {
+    console.log(empresa)
     return (
         <div className="flex flex-1 flex-col lg:flex-row justify-between items-center">
             <div className="w-full lg:w-1/2 flex flex-col justify-between items-start">
                 <Typography variant="h5" className="text-2xl uppercase">
-                    {initialPage.entidade[0].NOME}
+                    {empresa[0].NOME}
                 </Typography>
                 <div className="flex flex-row gap-2">
                     <Typography className="text-xl font-semibold">
                         Gestor Responsável:
                     </Typography>
                     <Typography className="text-xl">
-                        {initialPage.entidade[0].GESRESPONSAVEL}
+                        {empresa[0].NOME_AUTORID }
                     </Typography>
                 </div>
                 <div className="flex flex-row gap-2">
@@ -23,7 +23,7 @@ function DadosMunicipio() {
                         Gestor Cargo:
                     </Typography>
                     <Typography className="text-xl">
-                        {initialPage.entidade[0].GESCARGO}
+                        {empresa[0].CARGO_AUTORID}
                     </Typography>
                 </div>
             </div>
@@ -33,7 +33,7 @@ function DadosMunicipio() {
                         Telefone:
                     </Typography>
                     <Typography className="text-xl">
-                        {initialPage.entidade[0].TELEFONE}
+                        {empresa[0].FONE}
                     </Typography>
                 </div>
                 <div className="flex flex-row gap-2">
@@ -41,7 +41,7 @@ function DadosMunicipio() {
                         Horário:
                     </Typography>
                     <Typography className="text-xl">
-                        {initialPage.entidade[0].HORARIO}
+                        ....
                     </Typography>
                 </div>
                 <div className="flex flex-row gap-2">
@@ -49,7 +49,7 @@ function DadosMunicipio() {
                         Endereço:
                     </Typography>
                     <Typography className="text-xl">
-                        {initialPage.entidade[0].ENDERECO}
+                        {empresa[0].ENDERECO}
                     </Typography>
                 </div>
             </div>

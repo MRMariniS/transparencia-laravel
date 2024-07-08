@@ -11,7 +11,7 @@ function HeaderMenu() {
 
     return (
         <ul className="w-full h-fit hidden lg:flex flex-row justify-end items-center gap-6">
-            {menuSuperior.map((menu) => (
+            {menuSuperior && menuSuperior.map((menu) => (
                 <Link
                     key={menu.CODIGO}
                     href={menu.URL}

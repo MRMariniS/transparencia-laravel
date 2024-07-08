@@ -10,8 +10,7 @@ export const PropsContext = createContext();
 export default function RootLayout({ children }) {
 
     const { app } = usePage().props;
-    const {props, url} = usePage();
-    console.log(url);
+    const {props} = usePage();
 
     const [darkMode, setDarkMode] = useState(
         window.matchMedia("(prefers-color-scheme: dark)").matches

@@ -23,7 +23,7 @@ export function MenuDefault({ props }) {
                     </Typography>
                 </Button>
             </MenuHandler>
-            <MenuList>
+            <MenuList className="max-h-72">
                 {props.submenu.map((sub) => (
                     <MenuItem key={sub.CODIGO} className="flex flex-row gap-2">
                         {sub.GLYPH && (
