@@ -109,6 +109,17 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'transparencia' => [
+            'driver' => 'firebird',
+            'host' => env('TRANSP_DB_HOST'),
+            'port' => env('TRANSP_DB_PORT'),
+            'database' => env('TRANSP_DB_DATABASE'),
+            'username' => env('TRANSP_DB_USERNAME'),
+            'password' => env('TRANSP_DB_PASSWORD'),
+            'charset' => env('TRANSP_DB_CHARSET'),
+            'role' => null,
+        ],
+
         'scpi2021' => [
             'driver' => 'firebird',
             'host' => env('SCPI_DB_HOST'),

@@ -2,6 +2,18 @@
 
 namespace App\Providers;
 
+use App\Interfaces\EntityInterface;
+use App\Interfaces\PublicacaoInterface;
+use App\Interfaces\SeloInterface;
+use App\Interfaces\SicPedidoInterface;
+use App\Interfaces\UrlInterface;
+use App\Interfaces\WebServiceInterface;
+use App\Repositories\EntityEloquentORM;
+use App\Repositories\EprocWebServices;
+use App\Repositories\PublicacaoEloquentORM;
+use App\Repositories\SeloEloquentORM;
+use App\Repositories\SicPedidoEloquentORM;
+use App\Repositories\UrlEloquentORM;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -17,6 +29,13 @@ class AppServiceProvider extends ServiceProvider
             'version' => env('APP_VERSION'),
             'drawerOpen' => false,
         ]);
+        
+        $this->app->bind(UrlInterface::class, UrlEloquentORM::class);
+        $this->app->bind(EntityInterface::class, EntityEloquentORM::class);
+        $this->app->bind(SeloInterface::class, SeloEloquentORM::class);
+        $this->app->bind(PublicacaoInterface::class, PublicacaoEloquentORM::class);
+        $this->app->bind(WebServiceInterface::class, EprocWebServices::class);
+        $this->app->bind(SicPedidoInterface::class, SicPedidoEloquentORM::class);
     }
 
     /**

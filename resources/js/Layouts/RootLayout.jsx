@@ -8,19 +8,22 @@ import { Typography } from "@material-tailwind/react";
 export const PropsContext = createContext();
 
 export default function RootLayout({ children }) {
+
     const { app } = usePage().props;
+    const {props, url} = usePage();
+    console.log(url);
 
     const [darkMode, setDarkMode] = useState(
         window.matchMedia("(prefers-color-scheme: dark)").matches
     );
     const [open, setOpen] = useState(false);
-    const [poderSelecionado, setPoderSelecionado] = useState("pm");
+    const [poderSelecionado, setPoderSelecionado] = useState("executivo");
 
     const date = new Date();
     const poder = [
-        { value: "pm", nome: "Executivo" },
-        { value: "cm", nome: "Legislativo" },
-        { value: "rpps", nome: "Previdência" },
+        { value: "executivo", nome: "Executivo" },
+        { value: "legislativo", nome: "Legislativo" },
+        { value: "instituto", nome: "Previdência" },
     ];
 
     const openDrawer = () => setOpen(true);
@@ -43,8 +46,10 @@ export default function RootLayout({ children }) {
                     poder,
                     poderSelecionado,
                     trocaPoder,
+                    app,
+                    props,
                     darkMode,
-                    setDarkMode,
+                    setDarkMode
                 }}
             >
                 <Header darkMode={darkMode} setDarkMode={setDarkMode} />
