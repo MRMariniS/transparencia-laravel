@@ -3,7 +3,6 @@ import React from "react";
 import { Typography } from "@material-tailwind/react";
 
 function DadosMunicipio({ empresa }) {
-    console.log(empresa)
     return (
         <div className="flex flex-1 flex-col lg:flex-row justify-between items-center">
             <div className="w-full lg:w-1/2 flex flex-col justify-between items-start">
@@ -15,7 +14,7 @@ function DadosMunicipio({ empresa }) {
                         Gestor Responsável:
                     </Typography>
                     <Typography className="text-xl">
-                        {empresa[0].NOME_AUTORID }
+                        {empresa[0].NOME_AUTORID}
                     </Typography>
                 </div>
                 <div className="flex flex-row gap-2">
@@ -40,9 +39,7 @@ function DadosMunicipio({ empresa }) {
                     <Typography className="text-xl font-semibold">
                         Horário:
                     </Typography>
-                    <Typography className="text-xl">
-                        ....
-                    </Typography>
+                    <Typography className="text-xl">....</Typography>
                 </div>
                 <div className="flex flex-row gap-2">
                     <Typography className="text-xl font-semibold">

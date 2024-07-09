@@ -6,9 +6,10 @@ import Banners from "./Banners";
 import DadosMunicipio from "./DadosMunicipio";
 import RedesSociais from "./RedesSociais";
 import { PropsContext } from "@/Layouts/RootLayout";
+import { usePage } from "@inertiajs/react";
 
 function Footer({ darkMode }) {
-    const { props } = React.useContext(PropsContext);
+    const { props } = usePage();
     const empresa = props.empresas;
 
     return (
@@ -23,7 +24,7 @@ function Footer({ darkMode }) {
                 </div>
                 <div className="w-full h-fit flex flex-col lg:flex-row gap-4 justify-between items-center">
                     <div className="w-full lg:w-1/4 h-fit flex flex-col gap-2 items-center">
-                        <RedesSociais />
+                        <RedesSociais props={props} />
                     </div>
 
                     <div className="w-full lg:w-3/4 h-fit flex flex-col gap-2 items-center">

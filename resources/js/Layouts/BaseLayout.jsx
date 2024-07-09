@@ -1,7 +1,4 @@
-import { usePage } from "@inertiajs/react";
-import { Button } from "@material-tailwind/react";
-import React, { useContext, useState } from "react";
-import { FaBars, FaChevronRight } from "react-icons/fa6";
+import React, { useContext } from "react";
 import { PropsContext } from "./RootLayout";
 import { SearchBar } from "../Components/SearchBar";
 import SelectDefault from "../Components/SelectDefault";
@@ -12,11 +9,11 @@ function BaseLayout({ children }) {
 
     return (
         <div className="container py-4 px-4 md:px-0">
-            <div className="lg:hidden flex flex-col items-center pb-4 gap-4">
+            <div className="md:hidden flex flex-col items-center pb-4 gap-4">
                 <div className="w-full lg:w-fit sm:hidden flex flex-row justify-center items-center gap-4">
                     <HeaderButtons
-                        darkMode={darkMode && darkMode}
-                        setDarkMode={setDarkMode && setDarkMode}
+                        darkMode={darkMode}
+                        setDarkMode={setDarkMode}
                     />
                 </div>
 

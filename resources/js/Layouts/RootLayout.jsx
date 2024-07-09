@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import { DrawerMenu } from "../Components/DrawerMenu";
@@ -8,26 +8,36 @@ import { Typography } from "@material-tailwind/react";
 export const PropsContext = createContext();
 
 export default function RootLayout({ children }) {
-
-    const { app } = usePage().props;
-    const {props} = usePage();
+    const { props } = usePage();
+    const app = props.app;
 
     const [darkMode, setDarkMode] = useState(
-        window.matchMedia("(prefers-color-scheme: dark)").matches
+        localStorage.getItem("darkMode")
+            ? JSON.parse(localStorage.getItem("darkMode"))
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
     );
     const [open, setOpen] = useState(false);
-    const [poderSelecionado, setPoderSelecionado] = useState("executivo");
+
+    useMemo(() => {
+        localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    }, [darkMode]);
 
     const date = new Date();
-    const poder = [
-        { value: "executivo", nome: "Executivo" },
-        { value: "legislativo", nome: "Legislativo" },
-        { value: "instituto", nome: "Previdência" },
-    ];
-
     const openDrawer = () => setOpen(true);
     const closeDrawer = () => setOpen(false);
-    const trocaPoder = (value) => setPoderSelecionado(value);
+
+    const contextValue = useMemo(
+        () => ({
+            date,
+            open,
+            openDrawer,
+            closeDrawer,
+            app,
+            darkMode,
+            setDarkMode,
+        }),
+        [date, open, props, darkMode]
+    );
 
     return (
         <div
@@ -36,21 +46,7 @@ export default function RootLayout({ children }) {
                 "min-h-screen max-w-screen flex flex-1 flex-col justify-between items-center bg-white dark:bg-blue-900 text-gray-800 dark:text-white"
             }
         >
-            <PropsContext.Provider
-                value={{
-                    date,
-                    open,
-                    openDrawer,
-                    closeDrawer,
-                    poder,
-                    poderSelecionado,
-                    trocaPoder,
-                    app,
-                    props,
-                    darkMode,
-                    setDarkMode
-                }}
-            >
+            <PropsContext.Provider value={contextValue}>
                 <Header darkMode={darkMode} setDarkMode={setDarkMode} />
                 <DrawerMenu
                     isDrawerOpen={open}

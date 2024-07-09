@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import {
     Menu,
     MenuHandler,
@@ -33,9 +34,11 @@ export function MenuDefault({ props }) {
                                 className="w-10 h-auto"
                             />
                         )}
-                        <Typography className="text-gray-800 dark:text-white font-semibold">
-                            {sub.APRESENTACAO}
-                        </Typography>
+                        <Link href={sub.URL}>
+                            <Typography className="text-gray-800 dark:text-white font-semibold">
+                                {sub.APRESENTACAO}
+                            </Typography>
+                        </Link>
                     </MenuItem>
                 ))}
             </MenuList>

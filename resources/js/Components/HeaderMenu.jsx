@@ -1,17 +1,14 @@
-
-
 import { PropsContext } from "@/Layouts/RootLayout";
 import { Link } from "@inertiajs/react";
 import { Typography } from "@material-tailwind/react";
 import React, { useContext } from "react";
 
-function HeaderMenu() {
-    const {props} = useContext(PropsContext);
+function HeaderMenu({ props }) {
     const menuSuperior = props.menus.menuSuperior;
 
     return (
         <ul className="w-full h-fit hidden lg:flex flex-row justify-end items-center gap-6">
-            {menuSuperior && menuSuperior.map((menu) => (
+            {menuSuperior.map((menu) => (
                 <Link
                     key={menu.CODIGO}
                     href={menu.URL}
