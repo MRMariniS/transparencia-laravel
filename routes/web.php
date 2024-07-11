@@ -32,34 +32,34 @@ use Inertia\Inertia;
 // require __DIR__ . '/auth.php';
 
 Route::prefix('{entidade?}')->group(function () {
-        //RAIZ
-       Route::get('/', [SeloController::class, 'getImagemSelo'])->name('selo');
-        
-        //E-SIC
-        Route::get(session()->get('ENTIDADEROTA') . '/aplicacoes-esic-frmesic', [EsicController::class, 'esic'])
-            ->middleware([
-                'publicacaoPorModulo:98,2',
-            ])->name('esic');
+    //RAIZ
+    Route::get('/', [SeloController::class, 'getImagemSelo'])->name('selo');
 
-        //E-OUV
-        Route::get(session()->get('ENTIDADEROTA') . '/aplicacoes-eouv-frmeouv', [EsicController::class, 'eouv'])
-            ->middleware([
-                'publicacaoPorModulo:98,4',
-            ])->name('eouv');
-        
-        //LGPD
-        Route::get(session()->get('ENTIDADEROTA') . '/aplicacoes-lgpd-frmlgpd', [EsicController::class, 'lgpd'])
-            ->middleware([
-                'publicacaoPorModulo:98,6|7',
-            ])->name('lgpd');
-         //404
-        Route::get(session()->get('ENTIDADEROTA') . '/error', [ErrorController::class, 'pageError'])->name('error');
+    // //E-SIC
+    // Route::get(session()->get('ENTIDADEROTA') . '/aplicacoes-esic-frmesic', [EsicController::class, 'esic'])
+    //     ->name('esic');
+
+    // //E-OUV
+    // Route::get(session()->get('ENTIDADEROTA') . '/aplicacoes-eouv-frmeouv', [EsicController::class, 'eouv'])
+    //     ->middleware([
+    //         'publicacaoPorModulo:98,4',
+    //     ])->name('eouv');
+
+    // //LGPD
+    // Route::get(session()->get('ENTIDADEROTA') . '/aplicacoes-lgpd-frmlgpd', [EsicController::class, 'lgpd'])
+    //     ->middleware([
+    //         'publicacaoPorModulo:98,6|7',
+    //     ])->name('lgpd');
+    //404
+    Route::get(session()->get('ENTIDADEROTA') . '/error', [ErrorController::class, 'pageError'])->name('error');
 });
+
+Route::get('/aplicacoes/esic', [EsicController::class, 'index'])->name('esic');
 
 //ROTAS WEBSERVICES EPROC
 Route::get('/visualizar/{idDoc}', [EprocController::class, 'PublicArqsView'])->name('visualizar.documento');
 
 //DETALHE PEDIDO
-Route::post('/sicpedido', [SicPedidoController::class, 'getPedidoPorProtocolo'])->name('esic');
+Route::post('/sicpedido', [SicPedidoController::class, 'getPedidoPorProtocolo'])->name('sicpedido');
 
 

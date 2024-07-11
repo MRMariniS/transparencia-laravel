@@ -1,8 +1,13 @@
+import { Link } from "@inertiajs/react";
 import { Typography } from "@material-tailwind/react";
+import { route } from "../../../vendor/tightenco/ziggy/dist";
 
 function LogoTitle({ logo, empresa }) {
     return (
-        <div className="w-full flex flex-row items-center gap-2">
+        <Link
+            href={route("selo")}
+            className="w-full flex flex-row items-center gap-2"
+        >
             <img
                 src={logo}
                 alt="Brasão do Município"
@@ -19,7 +24,7 @@ function LogoTitle({ logo, empresa }) {
                     {empresa[0].NOME || entidade[0].NOME}
                 </Typography>
             </div>
-        </div>
+        </Link>
     );
 }
 

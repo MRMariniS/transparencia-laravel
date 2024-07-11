@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class EsicController extends Controller
+class EsicController2 extends Controller
 {
     function esic()
     {
-        return Inertia::render('aplicacoes/esic/frmesic');
+        return Inertia::render('aplicacoes/esic/index');
     }
     function eouv()
     {

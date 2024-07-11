@@ -1,4 +1,3 @@
-import React from "react";
 import { Head, usePage } from "@inertiajs/react";
 import { Typography } from "@material-tailwind/react";
 import BaseLayout from "../Layouts/BaseLayout";
@@ -6,6 +5,7 @@ import { MenuDefault } from "../Components/MenuDefault";
 
 export default function Welcome() {
     const { props } = usePage();
+    console.log(props);
 
     return (
         <>

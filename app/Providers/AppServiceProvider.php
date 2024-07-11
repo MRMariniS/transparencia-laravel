@@ -26,10 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Inertia::share('app', [
             'name' => env('APP_NAME'),
-            'version' => env('APP_VERSION'),
-            'drawerOpen' => false,
+            'version' => env('APP_VERSION')
         ]);
-        
+
         $this->app->bind(UrlInterface::class, UrlEloquentORM::class);
         $this->app->bind(EntityInterface::class, EntityEloquentORM::class);
         $this->app->bind(SeloInterface::class, SeloEloquentORM::class);

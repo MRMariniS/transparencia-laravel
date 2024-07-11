@@ -7,6 +7,7 @@ import {
     Button,
     Typography,
 } from "@material-tailwind/react";
+import { route } from "../../../vendor/tightenco/ziggy/dist";
 
 export function MenuDefault({ props }) {
     return (
@@ -34,7 +35,7 @@ export function MenuDefault({ props }) {
                                 className="w-10 h-auto"
                             />
                         )}
-                        <Link href={sub.URL}>
+                        <Link href={route("esic")}>
                             <Typography className="text-gray-800 dark:text-white font-semibold">
                                 {sub.APRESENTACAO}
                             </Typography>
