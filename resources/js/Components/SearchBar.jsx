@@ -20,14 +20,13 @@ export function SearchBar() {
                 labelProps={{
                     className: "!text-gray-400",
                 }}
+                icon={
+                    <FaMagnifyingGlass
+                        onClick={() => console.log("SearchBar")}
+                        className="h-5 w-5 cursor-pointer fill-gray-800 dark:fill-white"
+                    />
+                }
             />
-            <Button
-                size="sm"
-                disabled={!searchText}
-                className="!absolute right-1 top-1 interaction"
-            >
-                <FaMagnifyingGlass className="w-full h-auto" />
-            </Button>
         </div>
     );
 }
