@@ -3,6 +3,7 @@
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\EsicController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SeloController;
 use App\Http\Controllers\SicPedidoController;
@@ -54,7 +55,9 @@ Route::prefix('{entidade?}')->group(function () {
     Route::get(session()->get('ENTIDADEROTA') . '/error', [ErrorController::class, 'pageError'])->name('error');
 });
 
-Route::get('/aplicacoes/esic', [EsicController::class, 'index'])->name('esic');
+Route::get('/aplicacoes/esic', [InfoController::class, 'esic'])->name('esic');
+Route::get('/aplicacoes/eouv', [InfoController::class, 'eouv'])->name('eouv');
+Route::get('/aplicacoes/lgpd', [InfoController::class, 'lgpd'])->name('lgpd');
 
 //ROTAS WEBSERVICES EPROC
 Route::get('/visualizar/{idDoc}', [EprocController::class, 'PublicArqsView'])->name('visualizar.documento');
