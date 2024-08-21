@@ -189,7 +189,7 @@ export function SortableTable() {
                                 const isLast = index === TABLE_ROWS.length - 1;
                                 const classes = isLast
                                     ? "p-4"
-                                    : "p-4 border-b border-blue-gray-50";
+                                    : "p-4 border-b border-gray-800 dark:border-white";
 
                                 return (
                                     <tr key={name}>
@@ -204,14 +204,14 @@ export function SortableTable() {
                                                     <Typography
                                                         variant="small"
                                                         color="blue-gray"
-                                                        className="font-normal"
+                                                        className="font-normal text-gray-800 dark:text-white"
                                                     >
                                                         {name}
                                                     </Typography>
                                                     <Typography
                                                         variant="small"
                                                         color="blue-gray"
-                                                        className="font-normal opacity-70"
+                                                        className="font-normal opacity-70 text-gray-800 dark:text-white"
                                                     >
                                                         {email}
                                                     </Typography>
@@ -223,14 +223,14 @@ export function SortableTable() {
                                                 <Typography
                                                     variant="small"
                                                     color="blue-gray"
-                                                    className="font-normal"
+                                                    className="font-normal text-gray-800 dark:text-white"
                                                 >
                                                     {job}
                                                 </Typography>
                                                 <Typography
                                                     variant="small"
                                                     color="blue-gray"
-                                                    className="font-normal opacity-70"
+                                                    className="font-normal opacity-70 text-gray-800 dark:text-white"
                                                 >
                                                     {org}
                                                 </Typography>
@@ -251,6 +251,7 @@ export function SortableTable() {
                                                             ? "green"
                                                             : "blue-gray"
                                                     }
+                                                    className="text-gray-800 dark:text-white"
                                                 />
                                             </div>
                                         </td>
@@ -258,7 +259,7 @@ export function SortableTable() {
                                             <Typography
                                                 variant="small"
                                                 color="blue-gray"
-                                                className="font-normal"
+                                                className="font-normal text-gray-800 dark:text-white"
                                             >
                                                 {date}
                                             </Typography>
@@ -266,7 +267,7 @@ export function SortableTable() {
                                         <td className={classes}>
                                             <Tooltip content="Edit User">
                                                 <IconButton variant="text">
-                                                    <FaPencil className="h-4 w-4" />
+                                                    <FaPencil className="h-4 w-4 fill-gray-800 dark:fill-white" />
                                                 </IconButton>
                                             </Tooltip>
                                         </td>
@@ -277,19 +278,27 @@ export function SortableTable() {
                     </tbody>
                 </table>
             </CardBody>
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+            <CardFooter className="flex items-center justify-between border-t border-gray-800 dark:border-white p-4">
                 <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal"
+                    className="font-normal text-gray-800 dark:text-white"
                 >
                     Page 1 of 10
                 </Typography>
                 <div className="flex gap-2">
-                    <Button variant="outlined" size="sm">
+                    <Button
+                        variant="outlined"
+                        size="sm"
+                        className="interaction"
+                    >
                         Previous
                     </Button>
-                    <Button variant="outlined" size="sm">
+                    <Button
+                        variant="outlined"
+                        size="sm"
+                        className="interaction"
+                    >
                         Next
                     </Button>
                 </div>

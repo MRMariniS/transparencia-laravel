@@ -5,7 +5,6 @@ import { MenuDefault } from "../Components/MenuDefault";
 
 export default function Welcome() {
     const { props } = usePage();
-    console.log(props);
 
     return (
         <>

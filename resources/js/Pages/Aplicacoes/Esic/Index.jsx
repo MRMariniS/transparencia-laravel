@@ -6,6 +6,7 @@ import { SortableTable } from "../../../Components/SortableTable";
 
 function EsicIndex() {
     const props = usePage();
+    console.log(props);
 
     return (
         <>
