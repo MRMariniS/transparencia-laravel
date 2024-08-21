@@ -239,7 +239,6 @@ export function SortableTable() {
                                         <td className={classes}>
                                             <div className="w-max">
                                                 <Chip
-                                                    variant="ghost"
                                                     size="sm"
                                                     value={
                                                         online
@@ -247,9 +246,7 @@ export function SortableTable() {
                                                             : "offline"
                                                     }
                                                     color={
-                                                        online
-                                                            ? "green"
-                                                            : "blue-gray"
+                                                        online ? "green" : "red"
                                                     }
                                                     className="text-gray-800 dark:text-white"
                                                 />

@@ -6,6 +6,9 @@ import {
     FaMoon,
     FaSun,
 } from "react-icons/fa6";
+import { Link } from "@inertiajs/react";
+import { route } from "../../../vendor/tightenco/ziggy/src/js";
+
 import LoginPopover from "./LoginPopover";
 
 function HeaderButtons({ darkMode, setDarkMode }) {
@@ -18,9 +21,12 @@ function HeaderButtons({ darkMode, setDarkMode }) {
                 <button className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800">
                     <FaHeadset className="h-6 w-6 fill-inherit" />
                 </button>
-                <button className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800">
+                <Link
+                    href={route("esic")}
+                    className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
+                >
                     <FaComment className="h-6 w-6 fill-inherit" />
-                </button>
+                </Link>
                 <button
                     onClick={() => setDarkMode(!darkMode)}
                     className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
