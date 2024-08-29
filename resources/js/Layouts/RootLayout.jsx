@@ -11,6 +11,7 @@ export default function RootLayout({ children }) {
     const { props } = usePage();
     const app = props.app;
 
+
     const [darkMode, setDarkMode] = useState(
         localStorage.getItem("darkMode")
             ? JSON.parse(localStorage.getItem("darkMode"))

@@ -13,6 +13,20 @@ class SicPedidoController extends Controller
     ) {
     }
 
+    public function esic()
+    {
+        $pedido = $this->sic->getPedidosColetivo();
+        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
+    }
+    function eouv()
+    {
+        return inertia('Aplicacoes/Eouv/Index');
+    }
+    function lgpd()
+    {
+        return inertia('Aplicacoes/Esic/Index');
+    }
+
     function getPedidoPorProtocolo(Request $request)
     {
 

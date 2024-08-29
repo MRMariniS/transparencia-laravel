@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Exercicio;
 use App\Models\Url;
-use App\Services\ConvertingData;
+use App\Helpers\ConvertingData;
 use App\Services\DefinedUg;
 use Closure;
 use Illuminate\Http\Request;

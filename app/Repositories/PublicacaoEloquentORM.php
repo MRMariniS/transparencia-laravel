@@ -4,7 +4,8 @@ namespace App\Repositories;
 
 use App\Interfaces\PublicacaoInterface;
 use App\Models\Publicacao;
-use App\Services\ConvertingData;
+use App\Helpers\ConvertingData;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
 
 class PublicacaoEloquentORM implements PublicacaoInterface
@@ -15,12 +16,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
         ->where('GRUPO', $grupo)
         ->whereIn('SUBGRUPO', $subgrupo)
         ->where(function($query){
-            if (session()->get('TIPOEMPRESA') == 1) {
-                $query->whereNotIn('UG', [session()->get('UGCAMARA'), session()->get('UGRPPS')])
-                    ->orWhereNull("UG");
-            } else {
-                $query->where('UG', session()->get('UG'))->orWhereNull("UG");
-            }
+            Helper::filterQueryUg($query);
         })
         ->orderBy('DATA','DESC')
         ->orderBy('NUMERO','DESC')

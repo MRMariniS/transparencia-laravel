@@ -4,7 +4,8 @@ namespace App\Repositories;
 
 use App\Interfaces\UrlInterface;
 use App\Models\UrlGrupo;
-use App\Services\ConvertingData;
+use App\Helpers\ConvertingData;
+use App\Helpers\Helper;
 use HarryGulliford\Firebird\Query\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Url;
@@ -16,12 +17,7 @@ class UrlEloquentORM implements UrlInterface
     {
         $menuSuperior = Url::where('ATIVO', 'S')->where('TIPOMENU', 'SUPERIOR')
             ->where(function ($query) {
-                if (session()->get('TIPOEMPRESA') == 1) {
-                    $query->whereNotIn('UG', [session()->get('UGCAMARA'), session()->get('UGRPPS')])
-                        ->orWhereNull("UG");
-                } else {
-                    $query->where('UG', session()->get('UG'))->orWhereNull("UG");
-                }
+                Helper::filterQueryUg($query);
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL']);
         $menuSuperior = ConvertingData::convertingData($menuSuperior, ['APRESENTACAO']);
@@ -35,12 +31,7 @@ class UrlEloquentORM implements UrlInterface
             'submenu' => function ($query) {
                 $query->select('CODIGO', 'APRESENTACAO', 'DEFINICAO', 'URL', 'CDGRUPO', 'GLYPH', 'UG')
                     ->where(function ($query) {
-                        if (session()->get('TIPOEMPRESA') == 1) {
-                            $query->whereNotIn('UG', [session()->get('UGCAMARA'), session()->get('UGRPPS')])
-                                ->orWhereNull("UG");
-                        } else {
-                            $query->where('UG', session()->get('UG'))->orWhereNull("UG");
-                        }
+                        Helper::filterQueryUg($query);
                     });
             }
         ])
@@ -81,12 +72,7 @@ class UrlEloquentORM implements UrlInterface
     {
         $menuHome = Url::where('ATIVO', 'S')->where('TIPOMENU', 'HOME')
             ->where(function ($query) {
-                if (session()->get('TIPOEMPRESA') == 1) {
-                    $query->whereNotIn('UG', [session()->get('UGCAMARA'), session()->get('UGRPPS')])
-                        ->orWhereNull("UG");
-                } else {
-                    $query->where('UG', session()->get('UG'))->orWhereNull("UG");
-                }
+                Helper::filterQueryUg($query);
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL', 'UG', 'GLYPH']);
         $menuHome = ConvertingData::convertingData($menuHome, ['APRESENTACAO']);
@@ -97,12 +83,7 @@ class UrlEloquentORM implements UrlInterface
     {
         $menuSocial = Url::where('ATIVO', 'S')->where('TIPOMENU', 'SOCIAL')
             ->where(function ($query) {
-                if (session()->get('TIPOEMPRESA') == 1) {
-                    $query->whereNotIn('UG', [session()->get('UGCAMARA'), session()->get('UGRPPS')])
-                        ->orWhereNull("UG");
-                } else {
-                    $query->where('UG', session()->get('UG'))->orWhereNull("UG");
-                }
+                Helper::filterQueryUg($query);
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL', 'GLYPH']);
         $menuSocial = ConvertingData::convertingData($menuSocial, ['APRESENTACAO']);

@@ -1,3 +1,4 @@
+import { usePage } from "@inertiajs/react";
 import {
     Card,
     CardHeader,
@@ -36,57 +37,14 @@ const TABS = [
     },
 ];
 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
 
-const TABLE_ROWS = [
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-        name: "John Michael",
-        email: "john@creative-tim.com",
-        job: "Manager",
-        org: "Organization",
-        online: true,
-        date: "23/04/18",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-        name: "Alexa Liras",
-        email: "alexa@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: false,
-        date: "23/04/18",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-        name: "Laurent Perrier",
-        email: "laurent@creative-tim.com",
-        job: "Executive",
-        org: "Projects",
-        online: false,
-        date: "19/09/17",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-        name: "Michael Levi",
-        email: "michael@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: true,
-        date: "24/12/08",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-        name: "Richard Gran",
-        email: "richard@creative-tim.com",
-        job: "Manager",
-        org: "Executive",
-        online: false,
-        date: "04/10/21",
-    },
-];
 
-export function SortableTable() {
+
+
+export function SortableTable({dataTable, tableHeader, tabs = []}) {
+    const TABLE_HEAD = tableHeader;
+    const TABLE_ROWS = dataTable;
+
     return (
         <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 ">
             <CardHeader
@@ -100,10 +58,10 @@ export function SortableTable() {
                             variant="h5"
                             className="text-gray-800 dark:text-white"
                         >
-                            Members list
+                            Informações de interesse coletivo
                         </Typography>
                         <Typography className="mt-1 font-normal text-gray-800 dark:text-white">
-                            See information about all members
+                            Veja abaixo alguns pedidos que podem te ajudar
                         </Typography>
                     </div>
                     <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
@@ -112,14 +70,14 @@ export function SortableTable() {
                             size="sm"
                             className="interaction"
                         >
-                            view all
+                            Meus pedidos
                         </Button>
                         <Button
                             className="interaction flex items-center gap-3"
                             size="sm"
                         >
                             <FaUserPlus strokeWidth={2} className="h-4 w-4" />
-                            Add member
+                            Novo pedido
                         </Button>
                     </div>
                 </div>
@@ -155,8 +113,8 @@ export function SortableTable() {
                     </div>
                 </div>
             </CardHeader>
-            <CardBody className="overflow-scroll px-0">
-                <table className="mt-4 w-full min-w-max table-auto text-left">
+            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
+                <table className="mt-4 w-full max-w-full table-auto text-left">
                     <thead>
                         <tr>
                             {TABLE_HEAD.map((head, index) => (
@@ -181,97 +139,34 @@ export function SortableTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {TABLE_ROWS.map(
-                            (
-                                { img, name, email, job, org, online, date },
-                                index
-                            ) => {
-                                const isLast = index === TABLE_ROWS.length - 1;
+                        {TABLE_ROWS.map((content, index) => {
+                            const keys = Object.keys(content);
+                            const isLast = index === TABLE_ROWS.length - 1;
                                 const classes = isLast
                                     ? "p-4"
                                     : "p-4 border-b border-gray-800 dark:border-white";
+                            const isOdd = index % 2;
 
-                                return (
-                                    <tr key={name}>
-                                        <td className={classes}>
-                                            <div className="flex items-center gap-3">
-                                                <Avatar
-                                                    src={img}
-                                                    alt={name}
-                                                    size="sm"
-                                                />
-                                                <div className="flex flex-col">
+                            return (
+                                <tr key={content.ID} className={isOdd ? "" : "bg-white dark:bg-blue-900"}>
+                                    {keys.map((keyColumn)=>{
+                                        return(
+                                            <td key={keyColumn} className={classes} >
+                                                <div className="flex items-center gap-3">
                                                     <Typography
                                                         variant="small"
                                                         color="blue-gray"
-                                                        className="font-normal text-gray-800 dark:text-white"
+                                                        className="font-normal text-gray-800 dark:text-white text-wrap"
                                                     >
-                                                        {name}
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal opacity-70 text-gray-800 dark:text-white"
-                                                    >
-                                                        {email}
+                                                        {content[keyColumn]}
                                                     </Typography>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="flex flex-col">
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal text-gray-800 dark:text-white"
-                                                >
-                                                    {job}
-                                                </Typography>
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal opacity-70 text-gray-800 dark:text-white"
-                                                >
-                                                    {org}
-                                                </Typography>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="w-max">
-                                                <Chip
-                                                    size="sm"
-                                                    value={
-                                                        online
-                                                            ? "online"
-                                                            : "offline"
-                                                    }
-                                                    color={
-                                                        online ? "green" : "red"
-                                                    }
-                                                    className="text-gray-800 dark:text-white"
-                                                />
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal text-gray-800 dark:text-white"
-                                            >
-                                                {date}
-                                            </Typography>
-                                        </td>
-                                        <td className={classes}>
-                                            <Tooltip content="Edit User">
-                                                <IconButton variant="text">
-                                                    <FaPencil className="h-4 w-4 fill-gray-800 dark:fill-white" />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </td>
-                                    </tr>
-                                );
-                            }
-                        )}
+                                             </td>
+                                        )
+                                    })}
+                                </tr>
+                            )   
+                        })}
                     </tbody>
                 </table>
             </CardBody>

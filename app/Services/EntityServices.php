@@ -29,12 +29,26 @@ class EntityServices
             $filterTipo = 2;
         } elseif ($tipo == 'PREVIDENCIA') {
             $filterTipo = 8;
-        } else {
-            $tipo = 'EXECUTIVO';
+        } elseif ($tipo == 'EXECUTIVO') {
             $filterTipo = 1;
+        }else{
+            if(session()->has('TIPOEMPRESA')){
+               $filterTipo = session()->get('TIPOEMPRESA');
+            }else{
+               $filterTipo = 1;
+            }
+        }
+        
+        if(!session()->has('EMPRESAS') || session()->get('TIPOEMPRESA') != $filterTipo){
+            session()->forget('EMPRESAS');
+            $accountingEntity = $this->repository->getAccountingEntity($ano, $filterTipo);
+            session()->put('EMPRESAS', $accountingEntity);
+        }else{
+             $accountingEntity = session()->get('EMPRESAS');
         }
 
-        $accountingEntity = $this->repository->getAccountingEntity($ano, $filterTipo);
+        //dd($accountingEntity, $filterTipo);
+            
         return $accountingEntity;
     }
 

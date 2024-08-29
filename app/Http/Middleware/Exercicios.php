@@ -41,10 +41,9 @@ class Exercicios extends Middleware
      */
     public function share(Request $request): array
     {
-        $ano = Exercicio::where('ATIVO', 'S')->max('ANO');
+        $ano = Exercicio::where('ATIVO', 'S')->max('ANO'); 
         $tipo = strtoupper($request->entidade);
         $entidades = $this->entity->getAccountingEntity($ano, $tipo);
-
         $exercicio = [
             'ano' => $ano,
             'empresas' => $entidades

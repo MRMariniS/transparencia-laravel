@@ -5,12 +5,11 @@ import { Typography } from "@material-tailwind/react";
 import { SortableTable } from "../../../Components/SortableTable";
 
 function EsicIndex() {
-    const props = usePage();
-    console.log(props);
-
+    const { props } = usePage();
+    console.log(props.pedidos);
     return (
         <>
-            <Head title={props.url.split("/").pop().toUpperCase()} />
+            <Head title={'E-SIC'} />
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <BaseLayout>
                     <div className="w-full h-full flex flex-col gap-4">
@@ -35,7 +34,7 @@ function EsicIndex() {
                                 </Typography>
                             </div>
                         </div>
-                        <SortableTable />
+                        <SortableTable dataTable={props.pedidos} tableHeader={["OBJETIVO", "PEDIDO", "STATUS"]} />   
                     </div>
                 </BaseLayout>
             </div>

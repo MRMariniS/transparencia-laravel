@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\WebServiceInterface;
 use App\Models\Publicarqs;
-use App\Services\ConvertingData;
+use App\Helpers\ConvertingData;
 use Illuminate\Support\Facades\Http;
 
 class EprocWebServices implements WebServiceInterface

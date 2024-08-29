@@ -28,7 +28,7 @@ function SelectDefault({ tipoempresa }) {
                 }}
                 value={value}
                 onChange={(val) => {
-                    window.location.href = './' + val;
+                    window.location.href = window.location.origin + '/'+ val;
                 }}
             >
                 <Option value="executivo">Executivo</Option>

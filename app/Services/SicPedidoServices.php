@@ -16,4 +16,9 @@ final class SicPedidoServices
         $pedido = $this->sic->getPedidoPorProtocolo($cpf, $protocolo, $tipo);
         return $pedido;
     }
+
+    function getPedidosColetivo(){
+        $pedido = $this->sic->getPedidosColetivo();
+        return $pedido;
+    }
 }

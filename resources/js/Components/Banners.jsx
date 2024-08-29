@@ -1,4 +1,4 @@
-import initialPage from "../../data/InitialPage";
+// import initialPage from "../../data/InitialPage";
 import Banner from "./Banner";
 import {
     FaComment,

@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Services;
-use Illuminate\Database\Eloquent\Collection;
+namespace App\Helpers;
 
 class ConvertingData
 {

@@ -28,7 +28,7 @@ function Footer({ darkMode }) {
                     </div>
 
                     <div className="w-full lg:w-3/4 h-fit flex flex-col gap-2 items-center">
-                        <Banners />
+                        {/* <Banners /> */}
                     </div>
                 </div>
             </div>
