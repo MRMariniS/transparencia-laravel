@@ -6,15 +6,15 @@ class ConvertingData
 {
     static function convertingData($object, array $fields)
     {
-        return $object->map(function ($item) use ($fields) {
+        $object->map(function ($item) use ($fields) {
             foreach ($fields as $field) {
                 if (is_string($item->$field)) {
                     $item->$field = mb_convert_encoding($item->$field, 'UTF-8', 'ISO-8859-1');
                 }
             }
-
-            return $item;
         });
+
+        return $object;
     }
 
     static function convertingDataSCPI($array, array $fields)
