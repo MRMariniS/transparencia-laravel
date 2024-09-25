@@ -6,10 +6,10 @@ import { SortableTable } from "../../../Components/SortableTable";
 
 function EsicIndex() {
     const { props } = usePage();
-    console.log(props.pedidos);
+    console.log(props);
     return (
         <>
-            <Head title={'E-SIC'} />
+            <Head title={"E-SIC"} />
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <BaseLayout>
                     <div className="w-full h-full flex flex-col gap-4">
@@ -34,7 +34,38 @@ function EsicIndex() {
                                 </Typography>
                             </div>
                         </div>
-                        <SortableTable dataTable={props.pedidos} tableHeader={["OBJETIVO", "PEDIDO", "STATUS"]} />   
+                        <SortableTable
+                            dataTable={props.pedidos}
+                            tableHeader={["ID", "OBJETIVO", "PEDIDO", "STATUS"]}
+                            tabs={[
+                                {
+                                    label: "Todos",
+                                    value: "todos",
+                                },
+                                {
+                                    label: "Atendidos",
+                                    value: "atendidos",
+                                },
+                                {
+                                    label: "Pendentes",
+                                    value: "pendentes",
+                                },
+                                {
+                                    label: "Cancelados",
+                                    value: "cancelados",
+                                },
+                                {
+                                    label: "PDF",
+                                    value: "pdf",
+                                    classes: "bg-red-500 text-white dark:text-white"
+                                },
+                                {
+                                    label: "Excel",
+                                    value: "excel",
+                                    classes: "bg-green-500 text-white dark:text-white"
+                                },
+                            ]}
+                        />
                     </div>
                 </BaseLayout>
             </div>

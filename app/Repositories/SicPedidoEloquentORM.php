@@ -31,17 +31,16 @@ class SicPedidoEloquentORM implements SicPedidoInterface
         ->where(function($query){
             Helper::filterQueryUg($query);
         })
-        ->select(['OBJETIVO', 'PEDIDO', 'STATUS'])
+        ->select(['ID','OBJETIVO', 'PEDIDO', 'STATUS'])
         ->paginate(10);
         
 
         $pedido = ConvertingData::convertingData($pedido, [
-            'ID',
             'OBJETIVO',
             'PEDIDO',
             'STATUS'
         ]);
-
+     
         return $pedido;
     }
 }
