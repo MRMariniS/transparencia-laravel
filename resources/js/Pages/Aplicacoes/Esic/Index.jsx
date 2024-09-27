@@ -1,12 +1,12 @@
 import React from "react";
 import BaseLayout from "../../../Layouts/BaseLayout";
 import { Head, usePage } from "@inertiajs/react";
-import { Typography } from "@material-tailwind/react";
+import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
 import { SortableTable } from "../../../Components/SortableTable";
+import CardHeaderTablePedido from "@/Components/CardHeaderTablePedido";
 
 function EsicIndex() {
     const { props } = usePage();
-    console.log(props);
     return (
         <>
             <Head title={"E-SIC"} />
@@ -34,38 +34,51 @@ function EsicIndex() {
                                 </Typography>
                             </div>
                         </div>
-                        <SortableTable
-                            dataTable={props.pedidos}
-                            tableHeader={["ID", "OBJETIVO", "PEDIDO", "STATUS"]}
-                            tabs={[
-                                {
-                                    label: "Todos",
-                                    value: "todos",
-                                },
-                                {
-                                    label: "Atendidos",
-                                    value: "atendidos",
-                                },
-                                {
-                                    label: "Pendentes",
-                                    value: "pendentes",
-                                },
-                                {
-                                    label: "Cancelados",
-                                    value: "cancelados",
-                                },
-                                {
-                                    label: "PDF",
-                                    value: "pdf",
-                                    classes: "bg-red-500 text-white dark:text-white"
-                                },
-                                {
-                                    label: "Excel",
-                                    value: "excel",
-                                    classes: "bg-green-500 text-white dark:text-white"
-                                },
-                            ]}
-                        />
+                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 ">
+                            <CardHeader
+                                floated={false}
+                                shadow={false}
+                                className="rounded-none bg-inherit"
+                            >
+                                <CardHeaderTablePedido tabs={[
+                                        {
+                                            label: "Todos",
+                                            value: "todos",
+                                        },
+                                        {
+                                            label: "Atendidos",
+                                            value: "atendidos",
+                                        },
+                                        {
+                                            label: "Pendentes",
+                                            value: "pendentes",
+                                        },
+                                        {
+                                            label: "Cancelados",
+                                            value: "cancelados",
+                                        },
+                                        {
+                                            label: "PDF",
+                                            value: "pdf",
+                                            classes: "bg-red-500 text-white dark:text-white"
+                                        },
+                                        {
+                                            label: "Excel",
+                                            value: "excel",
+                                            classes: "bg-green-500 text-white dark:text-white"
+                                        },
+                                    ]} />
+                            </CardHeader>
+                            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
+                                <SortableTable
+                                    dataTable={props.pedidos.data}
+                                    tableHeader={["#", "PROTOCOLO", "OBJETIVO", "PEDIDO", "DATA PEDIDO", "STATUS"]}
+                                    routeName="DetalharPedido"
+                                    paramRoute="idpedido"
+                                    valueFieldParam="PROTOCOLO"
+                                />
+                            </CardBody>
+                        </Card>
                     </div>
                 </BaseLayout>
             </div>

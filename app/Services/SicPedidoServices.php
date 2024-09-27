@@ -21,4 +21,9 @@ final class SicPedidoServices
         $pedido = $this->sic->getPedidosColetivo();
         return $pedido;
     }
+
+    function getDetalhesPedidoColetivo($idpedido){
+        $pedido = $this->sic->getDetalhesPedidoColetivo($idpedido);
+        return $pedido;
+    }
 }

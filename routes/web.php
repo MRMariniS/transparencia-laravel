@@ -15,6 +15,7 @@ Route::get('/aplicacoes/lgpd', [SicPedidoController::class, 'lgpd'])->name('lgpd
 
 //DETALHE PEDIDO
 Route::post('/Info', [SicPedidoController::class, 'getPedidoPorProtocolo'])->name('Info');
+Route::get('/detalhar-pedido/{idpedido}', [SicPedidoController::class, 'getDetalhesPedidoColetivo'])->name('DetalharPedido');
 
 //ROTAS WEBSERVICES EPROC
 Route::get('/visualizar/{idDoc}', [EprocController::class, 'PublicArqsView'])->name('visualizar.documento');

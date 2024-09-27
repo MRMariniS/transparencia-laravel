@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SicMovimento extends Model
 {
-    use HasFactory;
+    protected $table = 'SIC_MOVIMENTO';
+
+    function pedido(){
+        return $this->hasOne(SicPedido::class, 'ID', 'ID_PEDIDO');
+    }
 }
