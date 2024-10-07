@@ -1,20 +1,40 @@
-import { Head, usePage } from "@inertiajs/react";
+import { Head, router, usePage } from "@inertiajs/react";
 import BaseLayout from "@/Layouts/BaseLayout";
 import ListData from "@/Components/ListData";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { SortableTable } from "@/Components/SortableTable";
+import { FaFilePdf } from "react-icons/fa6";
+import AlertMessage from "@/Components/AlertMessage";
+import { useMemo, useState } from "react";
 
-const DetalhePedido = () => {
+const DetalhePublicacao = () => {
     const { props } = usePage();
+    const error = Object.keys(props.errors).length > 0 ? props.errors : null;
+    
     return (
         <>
-            <Head title="Detalhe Pedido" />
+            <Head title="Publicacao" />
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <BaseLayout >
-                    {props.pedido.map((pedido) => {
-                        console.log(pedido.movimento)
+                    {props.publicacao.map((publicacao) => {
                         return (
-                            <div className="w-full flex flex-col gap-4" key={pedido.PROTOCOLO}>
+                            <div className="w-full flex flex-col gap-4" key={publicacao.ID}>
+                                <div className="w-full h-full flex flex-col gap-4">
+                                    <div className="w-full flex flex-row justify-between items-center gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
+                                        <div className="flex gap-2 text-justify indent-10">
+                                            <Typography
+                                                variant="h5"
+                                                className="text-gray-800 dark:text-white"
+                                            >
+                                                Publicação {publicacao.NUMERO}/{publicacao.ANO}
+                                                <Typography className="text-gray-800 dark:text-white">
+                                                    {publicacao.DESCRICAO}
+                                                </Typography>
+                                            </Typography>
+
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="w-full h-full flex flex-col gap-4">
                                     <div className="w-full flex flex-row justify-between items-center gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                                         <div className="flex gap-2 text-justify indent-10">
@@ -22,54 +42,27 @@ const DetalhePedido = () => {
                                                 variant="h6"
                                                 className="text-gray-800 dark:text-white"
                                             >
-                                                Protocolo
+                                                Ano
                                                 <Typography className="text-gray-800 dark:text-white">
-                                                    {pedido.PROTOCOLO}
+                                                    {publicacao.ANO}
                                                 </Typography>
                                             </Typography>
                                             <Typography
                                                 variant="h6"
                                                 className="text-gray-800 dark:text-white"
                                             >
-                                                Data Pedido
+                                                Data
                                                 <Typography className="text-gray-800 dark:text-white">
-                                                    {pedido.DTHRPEDIDO}
+                                                    {publicacao.DATA}
                                                 </Typography>
                                             </Typography>
                                             <Typography
                                                 variant="h6"
                                                 className="text-gray-800 dark:text-white"
                                             >
-                                                Atualizado em
+                                                Publicada em
                                                 <Typography className="text-gray-800 dark:text-white">
-                                                    {pedido.DTHRSTATUS}
-                                                </Typography>
-                                            </Typography>
-                                            <Typography
-                                                variant="h6"
-                                                className="text-gray-800 dark:text-white"
-                                            >
-                                                Status
-                                                <Typography className="text-gray-800 dark:text-white">
-                                                    {pedido.STATUS}
-                                                </Typography>
-                                            </Typography>
-                                            <Typography
-                                                variant="h6"
-                                                className="text-gray-800 dark:text-white"
-                                            >
-                                                Objetivo
-                                                <Typography className="text-gray-800 dark:text-white">
-                                                    {pedido.OBJETIVO}
-                                                </Typography>
-                                            </Typography>
-                                            <Typography
-                                                variant="h6"
-                                                className="text-gray-800 dark:text-white"
-                                            >
-                                                Prioridade
-                                                <Typography className="text-gray-800 dark:text-white">
-                                                    {pedido.PRIORIDADE}
+                                                    {publicacao.DTHRPUBLICADO}
                                                 </Typography>
                                             </Typography>
                                         </div>
@@ -82,11 +75,24 @@ const DetalhePedido = () => {
                                                 variant="h6"
                                                 className="text-gray-800 dark:text-white"
                                             >
-                                                Pedido {pedido.PROTOCOLO}
+                                                Ementa
                                             </Typography>
                                             <Typography>
-                                                {pedido.PEDIDO}
+                                                {publicacao.EMENTA}
                                             </Typography>
+
+                                            {publicacao.EMENTAHTML != '' ? (<>
+                                                <Typography
+                                                    variant="h6"
+                                                    className="text-gray-800 dark:text-white"
+                                                >
+                                                    Detalhes da Ementa
+                                                </Typography>
+                                                <Typography
+                                                    className="render-html"
+                                                    dangerouslySetInnerHTML={{ __html: publicacao.EMENTAHTML }}
+                                                />
+                                            </>) : <></>}
                                         </div>
                                     </div>
                                 </div>
@@ -94,30 +100,31 @@ const DetalhePedido = () => {
                                     <div className="w-full flex flex-row justify-between items-center gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                                         <div className="flex flex-col gap-2 text-justify indent-10 w-full">
                                             <Typography
-                                                variant="h5"
+                                                variant="h6"
                                                 className="text-gray-800 dark:text-white"
                                             >
-                                                Movimentação do Pedido
+                                                Anexo(s)
                                             </Typography>
+
+                                            {error ? (<AlertMessage title={"Error"} message={error.mensagem} />) : <></>}
+                                            
                                             <SortableTable
-                                                dataTable={pedido.movimento}
-                                                routeName="DetalharPublicacao"
-                                                paramRoute="idpublicacao"
-                                                valueFieldParam="ID_PUBLICACAO"
+                                                dataTable={publicacao.documentos}
+                                                routeName="VisualizarDocumento"
+                                                paramRoute="iddoc"
+                                                valueFieldParam="ID"
+                                                newWindow={"_blank"}
+                                                icon={<FaFilePdf />}
                                                 tableHeader={[
-                                                    "PUBLICACAO",
-                                                    "SEQUÊNCIA",
-                                                    "STATUS",
-                                                    "DATA STATUS",
-                                                    "RESPOSTA",
-                                                    "DATA MOVIMENTO"
+                                                    "ANEXO",
+                                                    "TIPO ANEXO",
+                                                    "DESCRIÇÃO",
+                                                    "PUBLICADO EM",
                                                 ]}
                                                 tableKeysObject={[
-                                                    'SEQUENCIA',
-                                                    'STATUS',
-                                                    'DTHRSTATUS',
-                                                    'RESPOSTA',
-                                                    'DTHRMOVTO'
+                                                    'TIPO',
+                                                    'DESCRICAO',
+                                                    'DTHRPUBLICADO',
                                                 ]}
                                             />
                                         </div>
@@ -132,4 +139,4 @@ const DetalhePedido = () => {
     );
 };
 
-export default DetalhePedido;
+export default DetalhePublicacao;

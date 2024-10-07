@@ -1,9 +1,13 @@
-import { Button, Input, Tab, Tabs,TabsHeader, Typography } from "@material-tailwind/react";
+import { Button, Input, Tab, Tabs, TabsBody, TabsHeader, Typography } from "@material-tailwind/react";
 import PopoverForm from "./PopoverForm";
 import { FaMagnifyingGlass, FaUserPlus } from "react-icons/fa6";
 
-const CardHeaderTablePedido = ({tabs = []}) => {
+const CardHeaderTablePedido = ({ tabs = [] }) => {
     const TABS = tabs;
+
+    function linkValueTabs(value) {
+        window.location.href = `/aplicacoes/esic/${value}`;
+    }
     return (
         <>
             <div className="mb-8 flex items-center justify-between gap-8">
@@ -19,14 +23,15 @@ const CardHeaderTablePedido = ({tabs = []}) => {
                     </Typography>
                 </div>
                 <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                    {/* <Button
-                            variant="outlined"
-                            size="sm"
-                            className="interaction"
-                        >
-                            Meus pedidos
-                        </Button> */}
-                    <PopoverForm />
+                    <PopoverForm
+                        routerForm={"/aplicacoes/esic"}
+                        label={"Consultar pedido"}
+                        labelInputFieldOne={"Protocolo"}
+                        labelInputFieldTwo={"CPF"}
+                        nameInputFieldOne={"protocolo"}
+                        nameInputFieldTwo={"cpf"}
+                        method={"post"}
+                    />
                     <Button
                         className="interaction flex items-center gap-3"
                         size="sm"
@@ -46,7 +51,7 @@ const CardHeaderTablePedido = ({tabs = []}) => {
                             }}
                         >
                             {tabs.map(({ label, value, classes }) => (
-                                <Tab key={value} value={value} className={classes ? classes : ""}>
+                                <Tab key={value} value={value} className={classes ? classes : ""} onClick={() => linkValueTabs(value)}>
                                     <Typography className="text-gray-800 dark:text-white">
                                         &nbsp;&nbsp;{label}&nbsp;&nbsp;
                                     </Typography>

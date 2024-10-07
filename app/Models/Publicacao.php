@@ -50,6 +50,8 @@ class Publicacao extends Model
             'ID',
             'PUBLICACAO',
             'TIPO',
+            'DESCRICAO',
+            'DTHRPUBLICADO',
             'QTACESSOS'
         ]);
     }

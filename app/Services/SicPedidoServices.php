@@ -11,19 +11,19 @@ final class SicPedidoServices
     ) {
     }
 
-    function getPedidoPorProtocolo($cpf, $protocolo, $tipo)
+    function getPedidoPorProtocolo($cpf, $protocolo)
     {
-        $pedido = $this->sic->getPedidoPorProtocolo($cpf, $protocolo, $tipo);
+        $pedido = $this->sic->getPedidoPorProtocolo($cpf, $protocolo);
         return $pedido;
     }
 
-    function getPedidosColetivo(){
-        $pedido = $this->sic->getPedidosColetivo();
+    function getPedidos($tipo){
+        $pedido = $this->sic->getPedidos($tipo);
         return $pedido;
     }
 
-    function getDetalhesPedidoColetivo($idpedido){
-        $pedido = $this->sic->getDetalhesPedidoColetivo($idpedido);
+    function getDetalhesPedido($protocolo){
+        $pedido = $this->sic->getDetalhesPedido($protocolo);
         return $pedido;
     }
 }

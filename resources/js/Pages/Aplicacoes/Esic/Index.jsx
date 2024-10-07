@@ -41,41 +41,37 @@ function EsicIndex() {
                                 className="rounded-none bg-inherit"
                             >
                                 <CardHeaderTablePedido tabs={[
-                                        {
-                                            label: "Todos",
-                                            value: "todos",
-                                        },
-                                        {
-                                            label: "Atendidos",
-                                            value: "atendidos",
-                                        },
-                                        {
-                                            label: "Pendentes",
-                                            value: "pendentes",
-                                        },
-                                        {
-                                            label: "Cancelados",
-                                            value: "cancelados",
-                                        },
-                                        {
-                                            label: "PDF",
-                                            value: "pdf",
-                                            classes: "bg-red-500 text-white dark:text-white"
-                                        },
-                                        {
-                                            label: "Excel",
-                                            value: "excel",
-                                            classes: "bg-green-500 text-white dark:text-white"
-                                        },
-                                    ]} />
+                                    {
+                                        label: "Pedidos Coletivo",
+                                        value: "coletivo",
+                                        classes: "w-50"
+                                    },
+                                    {
+                                        label: "Pedidos Desclassificados",
+                                        value: "desclassificados",
+                                        classes: "w-50"
+                                    },
+                                    {
+                                        label: "Exportar PDF",
+                                        value: "pdf",
+                                        classes: "bg-red-500 text-white dark:text-white w-50"
+                                    },
+                                    {
+                                        label: "Exportar Excel",
+                                        value: "excel",
+                                        classes: "bg-green-500 text-white dark:text-white w-50"
+                                    },
+                                ]} />
                             </CardHeader>
                             <CardBody className="overflow-y-auto overflow-x-hidden px-0">
                                 <SortableTable
-                                    dataTable={props.pedidos.data}
+                                    dataTable={props.pedidos}
                                     tableHeader={["#", "PROTOCOLO", "OBJETIVO", "PEDIDO", "DATA PEDIDO", "STATUS"]}
+                                    tableKeysObject={['PROTOCOLO', 'OBJETIVO', 'PEDIDO', 'DTHRPEDIDO', 'STATUS']}
                                     routeName="DetalharPedido"
-                                    paramRoute="idpedido"
+                                    paramRoute="protocolo"
                                     valueFieldParam="PROTOCOLO"
+                                    paginate={true}
                                 />
                             </CardBody>
                         </Card>

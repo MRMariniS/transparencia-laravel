@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Services\EprocServices;
+use ErrorException;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Exceptions;
+use Inertia\Inertia;
+use Throwable;
 
 class EprocController extends Controller
 {
     function __construct(
         protected EprocServices $webservices,
-    ) {
-    }
+    ) {}
 
     function PublicArqsView(int $idDoc)
     {
@@ -27,8 +31,8 @@ class EprocController extends Controller
                         'Content-Disposition' => 'inline; filename="' . $nome . '"'
                     ]);
             }
-        } else {
-            return redirect(session()->get('ENTIDADEROTA') . '/error');
+        }else{
+            return back()->withErrors(["mensagem" => "Documento não existe ou indisponível"]);
         }
     }
 }

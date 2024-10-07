@@ -14,17 +14,18 @@ import {
     FaUserPlus,
     FaMagnifyingGlass,
     FaSort,
-    FaArrowUpRightFromSquare
+    FaArrowUpRightFromSquare,
 } from "react-icons/fa6";
 import PopoverForm from "./PopoverForm";
 import { Link } from "@inertiajs/react";
 
 
 
-export function SortableTable({ dataTable, tableHeader, routeName = '', paramRoute = '', valueFieldParam = '' }) {
-    console.log(dataTable)
+
+export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], routeName = '', paramRoute = '', icon = (<FaArrowUpRightFromSquare />), valueFieldParam = '', newWindow = "_self", paginate = null }) {
+    //console.log(tableKeysObject)
     const TABLE_HEAD = tableHeader;
-    const TABLE_ROWS = dataTable;
+    const TABLE_ROWS = paginate ? dataTable.data : dataTable;
 
     const page = (page) => {
         window.location.href = `?page=${page}`;
@@ -58,8 +59,6 @@ export function SortableTable({ dataTable, tableHeader, routeName = '', paramRou
                 </thead>
                 <tbody>
                     {TABLE_ROWS.map((content, index) => {
-                        console.log(content)
-                        const keys = Object.keys(content);
                         const isLast = index === TABLE_ROWS.length - 1;
                         const classes = isLast
                             ? "p-4"
@@ -81,9 +80,11 @@ export function SortableTable({ dataTable, tableHeader, routeName = '', paramRou
                                             color="blue-gray"
                                             className="font-normal text-gray-800 dark:text-white text-wrap"
                                         >
-                                            <Link href={param ? route(routeName, param) : route(routeName)}>
-                                                <FaArrowUpRightFromSquare />
-                                            </Link>
+                                            {content[valueFieldParam] != null ? (
+                                                <a as={true} target={newWindow} href={param ? route(routeName, param) : route(routeName)}>
+                                                    {icon}
+                                                </a>
+                                            ) : <></>}
                                         </Typography>
                                     </div>
                                 </td>
@@ -94,9 +95,9 @@ export function SortableTable({ dataTable, tableHeader, routeName = '', paramRou
                         return (
                             <tr key={index} className={isOdd ? "" : "bg-white dark:bg-blue-900"}>
                                 {detalhar ? detalhar : <></>}
-                                {keys.map((keyColumn) => {
-                                    return (
+                                {tableKeysObject.map((keyColumn) => {
 
+                                    return (
                                         <td key={keyColumn} className={classes} >
                                             <div className="flex items-center gap-3">
                                                 <Typography
@@ -108,7 +109,6 @@ export function SortableTable({ dataTable, tableHeader, routeName = '', paramRou
                                                 </Typography>
                                             </div>
                                         </td>
-
                                     )
                                 })}
                             </tr>
@@ -116,38 +116,40 @@ export function SortableTable({ dataTable, tableHeader, routeName = '', paramRou
                     })}
                 </tbody>
             </table>
-            <CardFooter className="flex items-center justify-between border-t border-gray-800 dark:border-white p-4">
-                <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal text-gray-800 dark:text-white"
-                >
-                    Página {dataTable.current_page} de {dataTable.last_page} -{" "}
-                    {dataTable.from} a {dataTable.to} de {dataTable.total} registro(s)
-                </Typography>
-                <div className="flex gap-2">
-                    {dataTable.current_page > 1 ? (
-                        <Button
-                            variant="outlined"
-                            size="sm"
-                            className="interaction"
-                            onClick={() => page(dataTable.current_page - 1)}
-                        >
-                            Anterior
-                        </Button>
-                    ) : (<></>)}
-                    {dataTable.current_page != dataTable.last_page ? (
-                        <Button
-                            variant="outlined"
-                            size="sm"
-                            className="interaction"
-                            onClick={() => page(dataTable.current_page + 1)}
-                        >
-                            Próxima
-                        </Button>
-                    ) : (<></>)}
-                </div>
-            </CardFooter>
+            {paginate ? (
+                <CardFooter className="flex items-center justify-between border-t border-gray-800 dark:border-white p-4">
+                    <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal text-gray-800 dark:text-white"
+                    >
+                        Página {dataTable.current_page} de {dataTable.last_page} -{" "}
+                        {dataTable.from} a {dataTable.to} de {dataTable.total} registro(s)
+                    </Typography>
+                    <div className="flex gap-2">
+                        {dataTable.current_page > 1 ? (
+                            <Button
+                                variant="outlined"
+                                size="sm"
+                                className="interaction"
+                                onClick={() => page(dataTable.current_page - 1)}
+                            >
+                                Anterior
+                            </Button>
+                        ) : (<></>)}
+                        {dataTable.current_page != dataTable.last_page ? (
+                            <Button
+                                variant="outlined"
+                                size="sm"
+                                className="interaction"
+                                onClick={() => page(dataTable.current_page + 1)}
+                            >
+                                Próxima
+                            </Button>
+                        ) : (<></>)}
+                    </div>
+                </CardFooter>
+            ) : <></>}
         </>
     );
 }

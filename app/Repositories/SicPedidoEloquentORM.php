@@ -9,25 +9,31 @@ use App\Helpers\Helper;
 
 class SicPedidoEloquentORM implements SicPedidoInterface
 {
-    function getPedidoPorProtocolo($cpf,  $protocolo, $tipo)
+    function getPedidoPorProtocolo($cpf,  $protocolo)
     {
         $pedido = SicPedido::where('CPF', $cpf)->where('PROTOCOLO', $protocolo)
-            ->where('TIPO', $tipo)->get();
+            ->select(['PROTOCOLO', 'OBJETIVO', 'PEDIDO', 'DTHRPEDIDO', 'STATUS'])
+            ->paginate(10);
 
-        $pedido = ConvertingData::convertingData($pedido, [
-            'NOME',
-            'OBJETIVO',
-            'PEDIDO',
-            'PRIORIDADE',
-            'STATUS'
-        ]);
-
+        $pedido = ConvertingData::convertingData(
+            $pedido,
+            [
+                'OBJETIVO',
+                'PEDIDO',
+                'STATUS'
+            ],
+            [
+                'DTHRPEDIDO'
+            ]
+        );
         return $pedido;
     }
 
-    function getPedidosColetivo()
+    function getPedidos($tipo)
     {
-        $pedido = SicPedido::where('COLETIVO', 'N')
+        $pedido = SicPedido::where(function ($query) use ($tipo) {
+            Helper::filterPedido($query, $tipo);
+        })
             ->where(function ($query) {
                 Helper::filterQueryUg($query);
             })
@@ -49,14 +55,14 @@ class SicPedidoEloquentORM implements SicPedidoInterface
         return $pedido;
     }
 
-    function getDetalhesPedidoColetivo($idpedido)
+    function getDetalhesPedido($protocolo)
     {
-        $pedido = SicPedido::with('movimento:ID_PEDIDO,SEQUENCIA,DTHRMOVTO,RESPOSTA,STATUS,DTHRSTATUS,ID_PUBLICACAO')->where('COLETIVO', 'N')
-            ->where(function ($query) {
-                Helper::filterQueryUg($query);
-            })
-            ->where('PROTOCOLO', $idpedido)
-            ->get();
+        $pedido = SicPedido::with(['movimento' => function ($query) {
+            $query->select(['ID_PEDIDO', 'SEQUENCIA', 'STATUS', 'DTHRSTATUS', 'RESPOSTA', 'DTHRMOVTO', 'ID_PUBLICACAO'])
+                ->paginate(10);
+        }])->where('PROTOCOLO', $protocolo)
+            ->get(['ID', 'PROTOCOLO', 'DTHRPEDIDO', 'OBJETIVO', 'PEDIDO', 'PRIORIDADE', 'STATUS', 'DTHRSTATUS', 'COLETIVO']);
+
 
         $pedido = ConvertingData::convertingData(
             $pedido,
@@ -64,7 +70,7 @@ class SicPedidoEloquentORM implements SicPedidoInterface
                 'OBJETIVO',
                 'PEDIDO',
                 'STATUS'
-                
+
             ],
             [
                 'DTHRPEDIDO',
@@ -85,4 +91,8 @@ class SicPedidoEloquentORM implements SicPedidoInterface
 
         return $pedido;
     }
+
+    // private function verificaColetivo($query, $protocolo){
+    //     $pedido = SicPedido::where('PROTOCOLO', $protocolo)
+    // }
 }

@@ -14,4 +14,12 @@ class Helper
         }
         return $query;
     }
+
+    static function filterPedido($query, $tipo)
+    {
+        if ($tipo == "coletivo")
+            return $query->where('COLETIVO', 'S');
+        if ($tipo == "desclassificados")
+            return $query->where('STATUS', 'Indeferido');
+    }
 }
