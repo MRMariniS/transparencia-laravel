@@ -19,9 +19,6 @@ import {
 import PopoverForm from "./PopoverForm";
 import { Link } from "@inertiajs/react";
 
-
-
-
 export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], routeName = '', paramRoute = '', icon = (<FaArrowUpRightFromSquare />), valueFieldParam = '', newWindow = "_self", paginate = null }) {
     //console.log(tableKeysObject)
     const TABLE_HEAD = tableHeader;
@@ -66,9 +63,7 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                         const isOdd = index % 2;
 
                         if (paramRoute != '' && valueFieldParam != '') {
-                            var param = {
-                                [paramRoute]: content[valueFieldParam]
-                            }
+                            var param =  content[valueFieldParam]
                         }
 
                         if (routeName != '') {
@@ -81,7 +76,7 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                                             className="font-normal text-gray-800 dark:text-white text-wrap"
                                         >
                                             {content[valueFieldParam] != null ? (
-                                                <a as={true} target={newWindow} href={param ? route(routeName, param) : route(routeName)}>
+                                                <a target={newWindow} href={param ? route(routeName, param) : route(routeName)}>
                                                     {icon}
                                                 </a>
                                             ) : <></>}

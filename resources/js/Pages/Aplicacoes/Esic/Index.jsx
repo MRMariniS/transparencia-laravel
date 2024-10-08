@@ -68,7 +68,7 @@ function EsicIndex() {
                                     dataTable={props.pedidos}
                                     tableHeader={["#", "PROTOCOLO", "OBJETIVO", "PEDIDO", "DATA PEDIDO", "STATUS"]}
                                     tableKeysObject={['PROTOCOLO', 'OBJETIVO', 'PEDIDO', 'DTHRPEDIDO', 'STATUS']}
-                                    routeName="DetalharPedido"
+                                    routeName='esic.show'
                                     paramRoute="protocolo"
                                     valueFieldParam="PROTOCOLO"
                                     paginate={true}

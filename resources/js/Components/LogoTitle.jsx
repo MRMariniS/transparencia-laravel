@@ -5,7 +5,7 @@ import { route } from "../../../vendor/tightenco/ziggy/dist";
 function LogoTitle({ logo, empresa }) {
     return (
         <Link
-            href={route("selo")}
+            href={route("selo.index")}
             className="w-full flex flex-row items-center gap-2"
         >
             <img

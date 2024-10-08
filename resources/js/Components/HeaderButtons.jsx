@@ -22,7 +22,7 @@ function HeaderButtons({ darkMode, setDarkMode }) {
                     <FaHeadset className="h-6 w-6 fill-inherit" />
                 </button>
                 <Link
-                    href={route("esic")}
+                    href={route("esic.index")}
                     className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
                 >
                     <FaComment className="h-6 w-6 fill-inherit" />

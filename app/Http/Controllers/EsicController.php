@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\SeloServices;
+use App\Services\SicPedidoServices;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class SeloController extends Controller
+class EsicController extends Controller
 {
-   function __construct(
-      protected SeloServices $service,
-  ) {}
+    function __construct(
+        protected SicPedidoServices $sic,
+    ) {
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($tipo = "coletivo")
     {
-        return $this->service->getImagemSelo();
+        $pedido = $this->sic->getPedidos($tipo);
+        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
     }
 
     /**
@@ -37,7 +40,7 @@ class SeloController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $protocolo)
     {
         //
     }

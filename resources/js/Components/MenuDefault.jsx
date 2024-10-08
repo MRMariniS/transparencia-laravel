@@ -35,7 +35,7 @@ export function MenuDefault({ props }) {
                                 className="w-10 h-auto"
                             />
                         )}
-                        <Link href={route("esic")}>
+                        <Link href={route("esic.index")}>
                             <Typography className="text-gray-800 dark:text-white font-semibold">
                                 {sub.APRESENTACAO}
                             </Typography>

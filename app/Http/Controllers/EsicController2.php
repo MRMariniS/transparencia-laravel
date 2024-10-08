@@ -9,7 +9,7 @@ class EsicController2 extends Controller
 {
     function esic()
     {
-        return Inertia::render('aplicacoes/esic/index');
+        return inertia('Aplicacoes/Esic/index');
     }
     function eouv()
     {
