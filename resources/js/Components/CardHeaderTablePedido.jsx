@@ -1,6 +1,15 @@
-import { Button, Input, Tab, Tabs, TabsBody, TabsHeader, Typography } from "@material-tailwind/react";
+import {
+    Button,
+    Input,
+    Tab,
+    Tabs,
+    TabsBody,
+    TabsHeader,
+    Typography,
+} from "@material-tailwind/react";
 import PopoverForm from "./PopoverForm";
-import { FaMagnifyingGlass, FaUserPlus } from "react-icons/fa6";
+import { FaMagnifyingGlass, FaPrint, FaUserPlus } from "react-icons/fa6";
+import PopoverPrint from "./PopoverPrint";
 
 const CardHeaderTablePedido = ({ tabs = [] }) => {
     const TABS = tabs;
@@ -42,25 +51,36 @@ const CardHeaderTablePedido = ({ tabs = [] }) => {
                 </div>
             </div>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-                {TABS.length > 0 ? (
-                    <Tabs value="all" className="w-full md:w-max">
-                        <TabsHeader
-                            className="bg-red dark:bg-blue-900"
-                            indicatorProps={{
-                                className: "bg-gray-50 dark:bg-blue-800",
-                            }}
-                        >
-                            {tabs.map(({ label, value, classes }) => (
-                                <Tab key={value} value={value} className={classes ? classes : ""} onClick={() => linkValueTabs(value)}>
-                                    <Typography className="text-gray-800 dark:text-white">
-                                        &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                                    </Typography>
-                                </Tab>
-                            ))}
-                        </TabsHeader>
-                    </Tabs>
-                ) : (<></>)
-                }
+                <div className="flex flex-row gap-4 justify-between h-fit">
+                    {TABS.length > 0 ? (
+                        <Tabs value="coletivo" className="w-full md:w-max">
+                            <TabsHeader
+                                className="bg-red dark:bg-blue-900"
+                                indicatorProps={{
+                                    className: "bg-gray-50 dark:bg-blue-800",
+                                }}
+                            >
+                                {tabs.map(({ label, value, classes }) => (
+                                    <Tab
+                                        key={value}
+                                        value={value}
+                                        className={classes ? classes : ""}
+                                        onClick={() => linkValueTabs(value)}
+                                    >
+                                        <Typography className="text-gray-800 dark:text-white">
+                                            &nbsp;&nbsp;{label}&nbsp;&nbsp;
+                                        </Typography>
+                                    </Tab>
+                                ))}
+                            </TabsHeader>
+                        </Tabs>
+                    ) : (
+                        <></>
+                    )}
+
+                    <PopoverPrint />
+                </div>
+
                 <div className="w-full md:w-72 bg-white dark:bg-blue-900">
                     <Input
                         label="Pesquisar"
@@ -77,6 +97,6 @@ const CardHeaderTablePedido = ({ tabs = [] }) => {
             </div>
         </>
     );
-}
+};
 
 export default CardHeaderTablePedido;

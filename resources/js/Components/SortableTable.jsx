@@ -1,32 +1,23 @@
-import {
-    Card,
-    CardHeader,
-    Input,
-    Typography,
-    Button,
-    CardBody,
-    CardFooter,
-    Tabs,
-    TabsHeader,
-    Tab,
-} from "@material-tailwind/react";
-import {
-    FaUserPlus,
-    FaMagnifyingGlass,
-    FaSort,
-    FaArrowUpRightFromSquare,
-} from "react-icons/fa6";
-import PopoverForm from "./PopoverForm";
-import { Link } from "@inertiajs/react";
+import { Typography, Button, CardFooter } from "@material-tailwind/react";
+import { FaSort, FaArrowUpRightFromSquare } from "react-icons/fa6";
 
-export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], routeName = '', paramRoute = '', icon = (<FaArrowUpRightFromSquare />), valueFieldParam = '', newWindow = "_self", paginate = null }) {
-    //console.log(tableKeysObject)
+export function SortableTable({
+    dataTable,
+    tableHeader,
+    tableKeysObject = [],
+    routeName = "",
+    paramRoute = "",
+    icon = <FaArrowUpRightFromSquare />,
+    valueFieldParam = "",
+    newWindow = "_self",
+    paginate = null,
+}) {
     const TABLE_HEAD = tableHeader;
     const TABLE_ROWS = paginate ? dataTable.data : dataTable;
 
     const page = (page) => {
         window.location.href = `?page=${page}`;
-    }
+    };
 
     return (
         <>
@@ -62,11 +53,11 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                             : "p-4 border-b border-gray-800 dark:border-white";
                         const isOdd = index % 2;
 
-                        if (paramRoute != '' && valueFieldParam != '') {
-                            var param =  content[valueFieldParam]
+                        if (paramRoute != "" && valueFieldParam != "") {
+                            var param = content[valueFieldParam];
                         }
 
-                        if (routeName != '') {
+                        if (routeName != "") {
                             var detalhar = (
                                 <td className={classes}>
                                     <div className="flex items-center gap-3">
@@ -75,25 +66,41 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                                             color="blue-gray"
                                             className="font-normal text-gray-800 dark:text-white text-wrap"
                                         >
-                                            {content[valueFieldParam] != null ? (
-                                                <a target={newWindow} href={param ? route(routeName, param) : route(routeName)}>
+                                            {content[valueFieldParam] !=
+                                            null ? (
+                                                <a
+                                                    target={newWindow}
+                                                    href={
+                                                        param
+                                                            ? route(
+                                                                  routeName,
+                                                                  param
+                                                              )
+                                                            : route(routeName)
+                                                    }
+                                                >
                                                     {icon}
                                                 </a>
-                                            ) : <></>}
+                                            ) : (
+                                                <></>
+                                            )}
                                         </Typography>
                                     </div>
                                 </td>
-                            )
+                            );
                         }
 
-
                         return (
-                            <tr key={index} className={isOdd ? "" : "bg-white dark:bg-blue-900"}>
+                            <tr
+                                key={index}
+                                className={
+                                    isOdd ? "" : "bg-white dark:bg-blue-900"
+                                }
+                            >
                                 {detalhar ? detalhar : <></>}
                                 {tableKeysObject.map((keyColumn) => {
-
                                     return (
-                                        <td key={keyColumn} className={classes} >
+                                        <td key={keyColumn} className={classes}>
                                             <div className="flex items-center gap-3">
                                                 <Typography
                                                     variant="small"
@@ -104,10 +111,10 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                                                 </Typography>
                                             </div>
                                         </td>
-                                    )
+                                    );
                                 })}
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
@@ -118,8 +125,9 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                         color="blue-gray"
                         className="font-normal text-gray-800 dark:text-white"
                     >
-                        Página {dataTable.current_page} de {dataTable.last_page} -{" "}
-                        {dataTable.from} a {dataTable.to} de {dataTable.total} registro(s)
+                        Página {dataTable.current_page} de {dataTable.last_page}{" "}
+                        - {dataTable.from} a {dataTable.to} de {dataTable.total}{" "}
+                        registro(s)
                     </Typography>
                     <div className="flex gap-2">
                         {dataTable.current_page > 1 ? (
@@ -131,7 +139,9 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                             >
                                 Anterior
                             </Button>
-                        ) : (<></>)}
+                        ) : (
+                            <></>
+                        )}
                         {dataTable.current_page != dataTable.last_page ? (
                             <Button
                                 variant="outlined"
@@ -141,10 +151,14 @@ export function SortableTable({ dataTable, tableHeader, tableKeysObject = [], ro
                             >
                                 Próxima
                             </Button>
-                        ) : (<></>)}
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </CardFooter>
-            ) : <></>}
+            ) : (
+                <></>
+            )}
         </>
     );
 }

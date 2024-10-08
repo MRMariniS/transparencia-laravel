@@ -1,7 +1,12 @@
 import React from "react";
 import BaseLayout from "../../../Layouts/BaseLayout";
 import { Head, usePage } from "@inertiajs/react";
-import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    Typography,
+} from "@material-tailwind/react";
 import { SortableTable } from "../../../Components/SortableTable";
 import CardHeaderTablePedido from "@/Components/CardHeaderTablePedido";
 
@@ -40,35 +45,40 @@ function EsicIndex() {
                                 shadow={false}
                                 className="rounded-none bg-inherit"
                             >
-                                <CardHeaderTablePedido tabs={[
-                                    {
-                                        label: "Pedidos Coletivo",
-                                        value: "coletivo",
-                                        classes: "w-50"
-                                    },
-                                    {
-                                        label: "Pedidos Desclassificados",
-                                        value: "desclassificados",
-                                        classes: "w-50"
-                                    },
-                                    {
-                                        label: "Exportar PDF",
-                                        value: "pdf",
-                                        classes: "bg-red-500 text-white dark:text-white w-50"
-                                    },
-                                    {
-                                        label: "Exportar Excel",
-                                        value: "excel",
-                                        classes: "bg-green-500 text-white dark:text-white w-50"
-                                    },
-                                ]} />
+                                <CardHeaderTablePedido
+                                    tabs={[
+                                        {
+                                            label: "Pedidos Coletivo",
+                                            value: "coletivo",
+                                            classes: "w-50",
+                                        },
+                                        {
+                                            label: "Pedidos Desclassificados",
+                                            value: "desclassificados",
+                                            classes: "w-50",
+                                        },
+                                    ]}
+                                />
                             </CardHeader>
                             <CardBody className="overflow-y-auto overflow-x-hidden px-0">
                                 <SortableTable
                                     dataTable={props.pedidos}
-                                    tableHeader={["#", "PROTOCOLO", "OBJETIVO", "PEDIDO", "DATA PEDIDO", "STATUS"]}
-                                    tableKeysObject={['PROTOCOLO', 'OBJETIVO', 'PEDIDO', 'DTHRPEDIDO', 'STATUS']}
-                                    routeName='esic.show'
+                                    tableHeader={[
+                                        "#",
+                                        "PROTOCOLO",
+                                        "OBJETIVO",
+                                        "PEDIDO",
+                                        "DATA PEDIDO",
+                                        "STATUS",
+                                    ]}
+                                    tableKeysObject={[
+                                        "PROTOCOLO",
+                                        "OBJETIVO",
+                                        "PEDIDO",
+                                        "DTHRPEDIDO",
+                                        "STATUS",
+                                    ]}
+                                    routeName="esic.show"
                                     paramRoute="protocolo"
                                     valueFieldParam="PROTOCOLO"
                                     paginate={true}
