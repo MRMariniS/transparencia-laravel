@@ -1,10 +1,13 @@
+import { router } from "@inertiajs/react";
 import { Typography, Button, CardFooter } from "@material-tailwind/react";
 import { FaSort, FaArrowUpRightFromSquare } from "react-icons/fa6";
+import Modal from "./Modal";
 
 export function SortableTable({
     dataTable,
     tableHeader,
     tableKeysObject = [],
+    openInModal = false,
     routeName = "",
     paramRoute = "",
     icon = <FaArrowUpRightFromSquare />,
@@ -16,7 +19,7 @@ export function SortableTable({
     const TABLE_ROWS = paginate ? dataTable.data : dataTable;
 
     const page = (page) => {
-        window.location.href = `?page=${page}`;
+        router(`?page=${page}`);
     };
 
     return (
@@ -58,36 +61,51 @@ export function SortableTable({
                         }
 
                         if (routeName != "") {
-                            var detalhar = (
-                                <td className={classes}>
-                                    <div className="flex items-center gap-3">
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-normal text-gray-800 dark:text-white text-wrap"
-                                        >
-                                            {content[valueFieldParam] !=
-                                            null ? (
-                                                <a
-                                                    target={newWindow}
-                                                    href={
-                                                        param
-                                                            ? route(
-                                                                  routeName,
-                                                                  param
-                                                              )
-                                                            : route(routeName)
-                                                    }
-                                                >
-                                                    {icon}
-                                                </a>
-                                            ) : (
-                                                <></>
-                                            )}
-                                        </Typography>
-                                    </div>
-                                </td>
-                            );
+                            if (openInModal == true) {
+                                var detalhar = (
+                                    <td className={classes}>
+                                        <div className="flex items-center gap-3">
+                                            <Modal routeName={param
+                                                ? route(
+                                                    routeName,
+                                                    param
+                                                )
+                                                : route(routeName)} />
+                                        </div>
+                                    </td>
+                                )
+                            } else {
+                                var detalhar = (
+                                    <td className={classes}>
+                                        <div className="flex items-center gap-3">
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="font-normal text-gray-800 dark:text-white text-wrap"
+                                            >
+                                                {content[valueFieldParam] !=
+                                                    null ? (
+                                                    <a
+                                                        target={newWindow}
+                                                        href={
+                                                            param
+                                                                ? route(
+                                                                    routeName,
+                                                                    param
+                                                                )
+                                                                : route(routeName)
+                                                        }
+                                                    >
+                                                        {icon}
+                                                    </a>
+                                                ) : (
+                                                    <></>
+                                                )}
+                                            </Typography>
+                                        </div>
+                                    </td>
+                                );
+                            }
                         }
 
                         return (

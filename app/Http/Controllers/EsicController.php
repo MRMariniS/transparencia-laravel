@@ -15,11 +15,31 @@ class EsicController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($tipo = "coletivo")
+    public function index()
     {
+        $pedido = $this->sic->getPedidos("coletivo");
+        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
+    }
+
+    function listaPedidoPorCPF(Request $request)
+    {
+        $request->validate([
+            'cpf' => 'required|numeric',
+            'protocolo' => 'required|numeric'
+        ]);
+
+        $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
+        
+        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
+        
+    }
+
+    function filtroPedido($tipo){
         $pedido = $this->sic->getPedidos($tipo);
         return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,8 +62,10 @@ class EsicController extends Controller
      */
     public function show(string $protocolo)
     {
-        //
+        $pedido = $this->sic->getDetalhesPedido($protocolo);
+        return Inertia::render('DetalhePedido', ['pedido' => $pedido]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

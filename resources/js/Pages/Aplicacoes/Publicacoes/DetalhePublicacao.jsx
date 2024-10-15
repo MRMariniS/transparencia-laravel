@@ -110,7 +110,7 @@ const DetalhePublicacao = () => {
                                             
                                             <SortableTable
                                                 dataTable={publicacao.documentos}
-                                                routeName="VisualizarDocumento"
+                                                routeName=""
                                                 paramRoute="iddoc"
                                                 valueFieldParam="ID"
                                                 newWindow={"_blank"}

@@ -12,7 +12,6 @@ const DetalhePedido = () => {
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <BaseLayout >
                     {props.pedido.map((pedido) => {
-                        console.log(pedido.movimento)
                         return (
                             <div className="w-full flex flex-col gap-4" key={pedido.PROTOCOLO}>
                                 <div className="w-full h-full flex flex-col gap-4">
@@ -101,11 +100,12 @@ const DetalhePedido = () => {
                                             </Typography>
                                             <SortableTable
                                                 dataTable={pedido.movimento}
-                                                routeName="DetalharPublicacao"
+                                                routeName="publicacao.show"
                                                 paramRoute="idpublicacao"
                                                 valueFieldParam="ID_PUBLICACAO"
+                                                openInModal={true}
                                                 tableHeader={[
-                                                    "PUBLICACAO",
+                                                    "PUBLICACÃO",
                                                     "SEQUÊNCIA",
                                                     "STATUS",
                                                     "DATA STATUS",

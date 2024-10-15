@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\PublicacaoInterface;
 
-class Publicacao
+class PublicacaoServices
 {
     function __construct(
         protected PublicacaoInterface $publicacao,
