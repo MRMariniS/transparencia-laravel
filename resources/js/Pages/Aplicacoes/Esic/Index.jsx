@@ -10,6 +10,8 @@ import {
 import { SortableTable } from "../../../Components/SortableTable";
 import CardHeaderTablePedido from "@/Components/CardHeaderTablePedido";
 import EnunciadoPedidos from "../../../Components/EnunciadoPedidos";
+import PublicacoesAssociadas from "../../../Components/PublicacoesAssociadas";
+import TabelaPedidos from "../../../Components/TabelaPedidos";
 
 function EsicIndex() {
     const { props } = usePage();
@@ -21,144 +23,17 @@ function EsicIndex() {
                     <div className="w-full h-full flex flex-col gap-4">
                         <div className="w-full flex flex-row justify-between items-center gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                             <EnunciadoPedidos
-                                title={"Informação ao Cidado - E-SIC"}
+                                title={"O que é o e-SIC?"}
                                 resumo={
                                     "O Sistema Eletrônico do Serviço de Informações ao Cidadão (e-SIC) permite que qualquer pessoa, física ou jurídica, encaminhe pedidos de acesso à informação, acompanhe o prazo e receba a resposta da solicitação realizada para órgãos e entidades da administração. O cidadão ainda pode entrar com recursos e apresentar reclamações sem burocracia."
                                 }
-                                tableData={props.estruturas[0]}
+                                estruturasData={props.estruturas[0]}
                             />
                         </div>
-                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
-                            <CardHeader
-                                floated={false}
-                                shadow={false}
-                                className="rounded-none bg-inherit"
-                            >
-                                <div className="mb-8 flex-col items-center justify-between gap-8">
-                                    <Typography
-                                        className="text-gray-800 dark:text-white mb-2"
-                                        variant="h5"
-                                        color="blue-gray"
-                                    >
-                                        {props.estruturas[0].DESCRICAO}
-                                    </Typography>
-                                    <Typography className="text-gray-800 dark:text-white">
-                                        {props.estruturas[0].ATRIBUICOES}
-                                    </Typography>
-                                </div>
-                            </CardHeader>
-                            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
-                                <SortableTable
-                                    dataTable={props.estruturas}
-                                    tableHeader={[
-                                        "DESCRIÇÃO",
-                                        "EMAIL",
-                                        "ENDERECO",
-                                        "ATENDIMENTO",
-                                    ]}
-                                    tableKeysObject={[
-                                        "DESCRICAO",
-                                        "EMAIL",
-                                        "ENDERECO",
-                                        "HORARIO",
-                                    ]}
-                                />
-                            </CardBody>
-                        </Card>
-
-                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
-                            <CardHeader
-                                floated={false}
-                                shadow={false}
-                                className="rounded-none bg-inherit"
-                            >
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <Typography
-                                            className="text-gray-800 dark:text-white mb-2"
-                                            variant="h5"
-                                            color="blue-gray"
-                                        >
-                                            Publicações -{" "}
-                                            {
-                                                props.estruturas[0]
-                                                    .tipo_estrutura.DESCRICAO
-                                            }
-                                        </Typography>
-                                    </div>
-                                </div>
-                            </CardHeader>
-                            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
-                                <SortableTable
-                                    dataTable={props.publicacoes}
-                                    routeName="publicacao.show"
-                                    paramRoute="idpublicacao"
-                                    valueFieldParam="ID"
-                                    openInModal={true}
-                                    aplicacaoModal="publicacao"
-                                    tableHeader={[
-                                        "#",
-                                        "DESCRIÇÃO",
-                                        "ANO",
-                                        "PUBLICADO EM",
-                                        "EMENTA",
-                                    ]}
-                                    tableKeysObject={[
-                                        "DESCRICAO",
-                                        "ANO",
-                                        "DTHRPUBLICADO",
-                                        "EMENTA",
-                                    ]}
-                                />
-                            </CardBody>
-                        </Card>
-
-                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
-                            <CardHeader
-                                floated={false}
-                                shadow={false}
-                                className="rounded-none bg-inherit"
-                            >
-                                <CardHeaderTablePedido
-                                    tabs={[
-                                        {
-                                            label: "Pedidos Coletivo",
-                                            value: "coletivo",
-                                            classes: "w-50",
-                                        },
-                                        {
-                                            label: "Pedidos Desclassificados",
-                                            value: "desclassificados",
-                                            classes: "w-50",
-                                        },
-                                    ]}
-                                />
-                            </CardHeader>
-                            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
-                                <SortableTable
-                                    dataTable={props.pedidos}
-                                    tableHeader={[
-                                        "#",
-                                        "PROTOCOLO",
-                                        "OBJETIVO",
-                                        "PEDIDO",
-                                        "DATA PEDIDO",
-                                        "STATUS",
-                                    ]}
-                                    tableKeysObject={[
-                                        "PROTOCOLO",
-                                        "OBJETIVO",
-                                        "PEDIDO",
-                                        "DTHRPEDIDO",
-                                        "STATUS",
-                                    ]}
-                                    routeName="esic.show"
-                                    paramRoute="protocolo"
-                                    valueFieldParam="PROTOCOLO"
-                                    paginate={true}
-                                />
-                            </CardBody>
-                        </Card>
+                        <TabelaPedidos pedidosData={props.pedidos} />
+                        <PublicacoesAssociadas
+                            publicacoesData={props.publicacoes}
+                        />
                     </div>
                 </BaseLayout>
             </div>

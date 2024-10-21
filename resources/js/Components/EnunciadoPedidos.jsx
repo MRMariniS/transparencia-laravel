@@ -1,26 +1,21 @@
-import {
-    Card,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-} from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
+import DadosResponsavel from "./DadosResponsavel";
 
-const EnunciadoPedidos = ({ title, resumo, icon = null, tableData }) => {
-    console.log(tableData);
+const EnunciadoPedidos = ({ title, resumo, icon = null, estruturasData }) => {
     return (
-        <div>
+        <div className="flex flex-col gap-3">
             {icon ? icon : <></>}
             <Typography
-                className="text-gray-800 dark:text-white mb-2"
+                className="text-gray-800 dark:text-white text-2xl"
                 variant="h5"
-                color="blue-gray"
             >
                 {title}
             </Typography>
-            <Typography className="text-gray-800 dark:text-white">
+            <Typography className="text-gray-800 dark:text-white text-xl">
                 {resumo}
             </Typography>
+
+            <DadosResponsavel estruturasData={estruturasData} />
         </div>
     );
 };

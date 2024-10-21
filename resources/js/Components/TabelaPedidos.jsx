@@ -1,0 +1,56 @@
+import { Card, CardBody, CardHeader } from "@material-tailwind/react";
+import CardHeaderTablePedido from "./CardHeaderTablePedido";
+import { SortableTable } from "./SortableTable";
+
+const TabelaPedidos = ({ pedidosData }) => {
+    return (
+        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800">
+            <CardHeader
+                floated={false}
+                shadow={false}
+                className="rounded-none bg-inherit"
+            >
+                <CardHeaderTablePedido
+                    tabs={[
+                        {
+                            label: "Pedidos Coletivo",
+                            value: "coletivo",
+                            classes: "w-50",
+                        },
+                        {
+                            label: "Pedidos Desclassificados",
+                            value: "desclassificados",
+                            classes: "w-50",
+                        },
+                    ]}
+                />
+            </CardHeader>
+            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
+                <SortableTable
+                    dataTable={pedidosData}
+                    tableHeader={[
+                        "#",
+                        "PROTOCOLO",
+                        "OBJETIVO",
+                        "PEDIDO",
+                        "DATA PEDIDO",
+                        "STATUS",
+                    ]}
+                    tableKeysObject={[
+                        "PROTOCOLO",
+                        "OBJETIVO",
+                        "PEDIDO",
+                        "DTHRPEDIDO",
+                        "STATUS",
+                    ]}
+                    routeName="esic.show"
+                    paramRoute="protocolo"
+                    valueFieldParam="PROTOCOLO"
+                    paginate={true}
+                />
+            </CardBody>
+        </Card>
+    );
+};
+
+export default TabelaPedidos;
