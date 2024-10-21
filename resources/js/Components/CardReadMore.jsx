@@ -6,8 +6,12 @@ import {
     Button,
   } from "@material-tailwind/react";
   import Modal from './Modal';
+import { router } from "@inertiajs/react";
    
-  export function CardReadMore({title, resumo, icon = null}) {
+  
+  export function CardReadMore({title, resumo, routeName = null, paramRoute = null, icon = null}) {
+
+   
     return (
       <Card className="mt-6 w-96  bg-gray-50 dark:bg-blue-900">
         <CardBody>
@@ -20,7 +24,7 @@ import {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
-          <a href="#" className="inline-block">
+          <a href={paramRoute ? route(routeName, paramRoute) : route(routeName)} className="inline-block">
             <Button size="sm" variant="text" className="flex items-center gap-2 text-gray-800 dark:text-white">
               Leia Mais
               <svg

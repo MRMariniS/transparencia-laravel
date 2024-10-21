@@ -22,7 +22,92 @@ function EsicIndex() {
                                 }
                             />
                         </div>
-                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 ">
+                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
+                            <CardHeader
+                                floated={false}
+                                shadow={false}
+                                className="rounded-none bg-inherit"
+                            >
+                                <div className="mb-8 flex-col items-center justify-between gap-8">
+                                    <Typography
+                                        className="text-gray-800 dark:text-white mb-2"
+                                        variant="h5"
+                                        color="blue-gray"
+                                    >
+                                        {props.estruturas[0].DESCRICAO}
+                                    </Typography>
+                                    <Typography className="text-gray-800 dark:text-white">
+                                        {props.estruturas[0].ATRIBUICOES}
+                                    </Typography>
+                                </div>
+                            </CardHeader>
+                            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
+                                <SortableTable
+                                    dataTable={props.estruturas}
+                                    tableHeader={[
+                                        "DESCRIÇÃO",
+                                        "EMAIL",
+                                        "ENDERECO",
+                                        "ATENDIMENTO",
+                                    ]}
+                                    tableKeysObject={[
+                                        "DESCRICAO",
+                                        "EMAIL",
+                                        "ENDERECO",
+                                        "HORARIO",
+                                    ]}
+                                />
+                            </CardBody>
+                        </Card>
+
+                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
+                            <CardHeader
+                                floated={false}
+                                shadow={false}
+                                className="rounded-none bg-inherit"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <Typography
+                                            className="text-gray-800 dark:text-white mb-2"
+                                            variant="h5"
+                                            color="blue-gray"
+                                        >
+                                            Publicações -{" "}
+                                            {
+                                                props.estruturas[0]
+                                                    .tipo_estrutura.DESCRICAO
+                                            }
+                                        </Typography>
+                                    </div>
+                                </div>
+                            </CardHeader>
+                            <CardBody className="overflow-y-auto overflow-x-hidden px-0">
+                                <SortableTable
+                                    dataTable={props.publicacoes}
+                                    routeName="publicacao.show"
+                                    paramRoute="idpublicacao"
+                                    valueFieldParam="ID"
+                                    openInModal={true}
+                                    aplicacaoModal="publicacao"
+                                    tableHeader={[
+                                        "#",
+                                        "DESCRIÇÃO",
+                                        "ANO",
+                                        "PUBLICADO EM",
+                                        "EMENTA",
+                                    ]}
+                                    tableKeysObject={[
+                                        "DESCRICAO",
+                                        "ANO",
+                                        "DTHRPUBLICADO",
+                                        "EMENTA",
+                                    ]}
+                                />
+                            </CardBody>
+                        </Card>
+
+                        <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
                             <CardHeader
                                 floated={false}
                                 shadow={false}

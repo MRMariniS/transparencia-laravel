@@ -36,11 +36,6 @@ class CanaisDeInformacao
             $estrutura = $this->estrutura->getEstrutura(16);
         }
 
-        $informacoes = [
-            'publicacao' => $publicacoes,
-            'estrutura' => $estrutura
-        ];
-
         Inertia::share([
             'publicacoes' => $publicacoes,
             'estruturas' => $estrutura

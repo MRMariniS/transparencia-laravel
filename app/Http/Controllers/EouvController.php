@@ -6,7 +6,7 @@ use App\Services\SicPedidoServices;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class EsicController extends Controller
+class EouvController extends Controller
 {
     function __construct(
         protected SicPedidoServices $sic,
@@ -24,7 +24,6 @@ class EsicController extends Controller
             'pedidos' => $pedido
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -44,12 +43,10 @@ class EsicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $protocolo)
+    public function show(string $id)
     {
-        $pedido = $this->sic->getDetalhesPedido($protocolo);
-        return Inertia::render('DetalhePedido', ['pedido' => $pedido]);
+        //
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -74,26 +71,4 @@ class EsicController extends Controller
     {
         //
     }
-
-
-    //OUTROS MÉTODOS
-    function listaPedidoPorCPF(Request $request)
-    {
-        $request->validate([
-            'cpf' => 'required|numeric',
-            'protocolo' => 'required|numeric'
-        ]);
-
-        $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
-        
-        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
-        
-    }
-
-    //TIPO = INDEFERIDOS, COLETIVOS
-    function filtroPedido($tipo){
-        $pedido = $this->sic->getPedidos($tipo);
-        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
-    }
-
 }
