@@ -13,6 +13,7 @@ import { FaMagnifyingGlass, FaPrint, FaUserPlus } from "react-icons/fa6";
 import PopoverPrint from "./PopoverPrint";
 import { useState } from  "react";
 import { router } from "@inertiajs/react";
+import PopoverNovoPedido from "./PopoverNovoPedido";
 
 
 const CardHeaderTablePedido = ({ tabs = [] }) => {
@@ -49,13 +50,7 @@ const CardHeaderTablePedido = ({ tabs = [] }) => {
                         nameInputFieldTwo={"cpf"}
                         method={"post"}
                     />
-                    <Button
-                        className="interaction flex items-center gap-3"
-                        size="sm"
-                    >
-                        <FaUserPlus strokeWidth={2} className="h-4 w-4" />
-                        Novo pedido
-                    </Button>
+                    <PopoverNovoPedido />
                 </div>
             </div>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">

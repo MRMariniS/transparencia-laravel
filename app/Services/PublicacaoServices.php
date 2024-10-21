@@ -19,4 +19,8 @@ class PublicacaoServices
     function getPublicacao($idpublicacao){
         return $this->publicacao->getPublicacao($idpublicacao);
     }
+
+    function getPublicacaoPorGrupoOuSubgrupo(int $grupo = 1, array $subgrupo = []){
+        return $this->publicacao->getPublicacaoPorGrupoOuSubgrupo($grupo, $subgrupo);
+    }
 }

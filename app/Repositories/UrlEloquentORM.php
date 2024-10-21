@@ -4,12 +4,8 @@ namespace App\Repositories;
 
 use App\Interfaces\UrlInterface;
 use App\Models\UrlGrupo;
-use App\Helpers\ConvertingData;
 use App\Helpers\Helper;
-use HarryGulliford\Firebird\Query\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use App\Models\Url;
-use stdClass;
 
 class UrlEloquentORM implements UrlInterface
 {
@@ -20,7 +16,7 @@ class UrlEloquentORM implements UrlInterface
                 Helper::filterQueryUg($query);
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL']);
-        $menuSuperior = ConvertingData::convertingData($menuSuperior, ['APRESENTACAO']);
+        $menuSuperior = Helper::convertingData($menuSuperior, ['APRESENTACAO']);
 
         return $menuSuperior;
     }
@@ -38,7 +34,7 @@ class UrlEloquentORM implements UrlInterface
             ->orderBy('ORDEM', 'ASC')
             ->get(['CODIGO', 'APRESENTACAO', 'GLYPH']);
 
-        $menuLateral = ConvertingData::convertingData(
+        $menuLateral = Helper::convertingData(
             $menuLateral,
             [
                 'APRESENTACAO'
@@ -54,7 +50,7 @@ class UrlEloquentORM implements UrlInterface
                     unset($submenuitem);
                 }
             }
-            $item->submenu = ConvertingData::convertingData(
+            $item->submenu = Helper::convertingData(
                 $item->submenu,
                 [
                     'APRESENTACAO',
@@ -75,7 +71,7 @@ class UrlEloquentORM implements UrlInterface
                 Helper::filterQueryUg($query);
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL', 'UG', 'GLYPH']);
-        $menuHome = ConvertingData::convertingData($menuHome, ['APRESENTACAO']);
+        $menuHome = Helper::convertingData($menuHome, ['APRESENTACAO']);
         return $menuHome;
     }
 
@@ -86,7 +82,7 @@ class UrlEloquentORM implements UrlInterface
                 Helper::filterQueryUg($query);
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL', 'GLYPH']);
-        $menuSocial = ConvertingData::convertingData($menuSocial, ['APRESENTACAO']);
+        $menuSocial = Helper::convertingData($menuSocial, ['APRESENTACAO']);
         return $menuSocial;
     }
 }

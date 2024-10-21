@@ -1,4 +1,4 @@
-import { router } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { Typography, Button, CardFooter } from "@material-tailwind/react";
 import { FaSort, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import Modal from "./Modal";
@@ -8,6 +8,7 @@ export function SortableTable({
     tableHeader,
     tableKeysObject = [],
     openInModal = false,
+    aplicacaoModal = "",
     routeName = "",
     paramRoute = "",
     icon = <FaArrowUpRightFromSquare />,
@@ -61,16 +62,13 @@ export function SortableTable({
                         }
 
                         if (routeName != "") {
-                            if (openInModal == true) {
+                            if (!param) {
+                                var detalhar = (<td className={classes}></td>)
+                            } else if (openInModal == true) {
                                 var detalhar = (
                                     <td className={classes}>
                                         <div className="flex items-center gap-3">
-                                            <Modal routeName={param
-                                                ? route(
-                                                    routeName,
-                                                    param
-                                                )
-                                                : route(routeName)} />
+                                            <Modal routeName={route("publicacao.formatJson", param)} aplicacao={aplicacaoModal} />
                                         </div>
                                     </td>
                                 )
@@ -85,16 +83,9 @@ export function SortableTable({
                                             >
                                                 {content[valueFieldParam] !=
                                                     null ? (
-                                                    <a
+                                                    <a as="link"
                                                         target={newWindow}
-                                                        href={
-                                                            param
-                                                                ? route(
-                                                                    routeName,
-                                                                    param
-                                                                )
-                                                                : route(routeName)
-                                                        }
+                                                        href={route(routeName, param)}
                                                     >
                                                         {icon}
                                                     </a>

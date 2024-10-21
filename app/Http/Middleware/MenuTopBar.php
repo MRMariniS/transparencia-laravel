@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Exercicio;
 use App\Models\Url;
-use App\Helpers\ConvertingData;
+use App\Helpers\Helper;
 use App\Services\DefinedUg;
 use Closure;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class MenuTopBar
     {
         $menutopbar = Url::where('TIPOMENU', 'SUPERIOR')->get(['CODIGO','APRESENTACAO', 'URL']);
 
-        $menutopbar = ConvertingData::convertingData($menutopbar,
+        $menutopbar = Helper::convertingData($menutopbar,
             [
                 'APRESENTACAO',
                 'URL'

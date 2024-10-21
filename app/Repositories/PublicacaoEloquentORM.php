@@ -4,12 +4,32 @@ namespace App\Repositories;
 
 use App\Interfaces\PublicacaoInterface;
 use App\Models\Publicacao;
-use App\Helpers\ConvertingData;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
 
 class PublicacaoEloquentORM implements PublicacaoInterface
 {
+    private $camposPublicacao = [
+        'ID',
+        'ANO',
+        'DATA',
+        'DESCRICAO',
+        'EMENTA',
+        'NUMERO',
+        'DESCRICAO',
+        'DTHRPUBLICADO',
+        'EMENTAHTML',
+        'PALAVRASCHAVE'
+    ];
+
+    private $camposConvertingData = [
+        'NUMERO',
+        'DESCRICAO',
+        'EMENTA',
+        'PALAVRASCHAVE',
+        'EMENTAHTML',
+    ];
+
     function publicacaoPorModulo($cdmodulo = null, int $grupo = null, array $subgrupo = null)
     {
         $publicacoes = Publicacao::with('documentos')
@@ -23,13 +43,9 @@ class PublicacaoEloquentORM implements PublicacaoInterface
             ->orderBy('ANO', 'DESC')
             ->orderBy('DTHRPUBLICADO', 'DESC')
             ->orderBy('DESCRICAO', 'DESC')
-            ->get(['ID', 'NUMERO', 'DESCRICAO', 'EMENTA', 'ANO', 'DTHRPUBLICADO']);
+            ->get($this->camposPublicacao);
 
-        $publicacoes = ConvertingData::convertingData($publicacoes, [
-            'NUMERO',
-            'DESCRICAO',
-            'EMENTA'
-        ]);
+        $publicacoes = Helper::convertingData($publicacoes, $this->camposConvertingData);
 
         return $publicacoes;
     }
@@ -37,29 +53,42 @@ class PublicacaoEloquentORM implements PublicacaoInterface
     function getPublicacao($idpublicacao)
     {
         $publicacao = Publicacao::with('documentos')->where('ID', $idpublicacao)
-            ->get([
-                'ID',
-                'ANO',
-                'DATA',
-                'DESCRICAO',
-                'EMENTA',
-                'NUMERO',
-                'DESCRICAO',
-                'DTHRPUBLICADO',
-                'EMENTAHTML',
-                'PALAVRASCHAVE'
-            ]);
+            ->get($this->camposPublicacao);
 
-        $publicacao = ConvertingData::convertingData($publicacao, [
-            'NUMERO',
-            'DESCRICAO',
-            'EMENTA',
-            'PALAVRASCHAVE',
-            'EMENTAHTML',
-        ], ['DTHRPUBLICADO', 'DATA']);
+        $publicacao = Helper::convertingData($publicacao, $this->camposConvertingData, ['DTHRPUBLICADO', 'DATA']);
 
         foreach ($publicacao as $item) {
-            $item->documentos = ConvertingData::convertingData(
+            $item->documentos = Helper::convertingData(
+                $item->documentos,
+                [
+                    'DESCRICAO'
+                ],
+                [
+                    'DTHRPUBLICADO'
+                ]
+            );
+        }
+
+        return $publicacao;
+    }
+
+    function getPublicacaoPorGrupoOuSubgrupo(int $grupo = 1, array $subgrupo = [])
+    {
+        $publicacao = Publicacao::with('documentos')->where(function ($query) use ($grupo, $subgrupo) {
+            $query->where('GRUPO', $grupo);
+            if (count($subgrupo) > 0) {
+                $query->whereIn('SUBGRUPO', $subgrupo);
+            }
+        })
+            ->where(function ($query) {
+                Helper::filterQueryUg($query);
+            })
+            ->get($this->camposPublicacao);
+
+        $publicacao = Helper::convertingData($publicacao, $this->camposConvertingData, ['DTHRPUBLICADO', 'DATA']);
+
+        foreach ($publicacao as $item) {
+            $item->documentos = Helper::convertingData(
                 $item->documentos,
                 [
                     'DESCRICAO'

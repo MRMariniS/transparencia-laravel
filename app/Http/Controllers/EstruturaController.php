@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\PublicacaoServices;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
-class PublicacaoController extends Controller
+class EstruturaController extends Controller
 {
-    function __construct(
-        protected PublicacaoServices $publicacao,
-    ) {}
     /**
      * Display a listing of the resource.
      */
@@ -38,12 +33,9 @@ class PublicacaoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $idpublicacao)
+    public function show(string $id)
     {
-        // $publicacao = $this->publicacao->getPublicacao($idpublicacao);
-        // return Inertia::render('Aplicacoes/Publicacoes/DetalhePublicacao', [
-        //     'publicacao' => $publicacao
-        // ]);
+        //
     }
 
     /**
@@ -68,12 +60,5 @@ class PublicacaoController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    //OUTROS MÉTODOS
-    public function showFormatJson(int $idpublicacao)
-    {
-        $publicacao = $this->publicacao->getPublicacao($idpublicacao);
-        return $publicacao;
     }
 }

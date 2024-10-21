@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\EntityInterface;
 use App\Models\Entity;
-use App\Helpers\ConvertingData;
+use App\Helpers\Helper;
 use InvalidArgumentException;
 use PDOException;
 use PhpParser\Node\Stmt\Else_;
@@ -30,7 +30,7 @@ class EntityEloquentORM implements EntityInterface
             'UG'
         ]);
 
-        $entity = ConvertingData::convertingData(
+        $entity = Helper::convertingData(
             $entity,
             [
                 'NOME',
@@ -71,7 +71,7 @@ class EntityEloquentORM implements EntityInterface
             session()->put('TIPOEMPRESA', $entityContability[0]->TIPO);
             session()->put('NOMEENTIDADE', "{$entityContability[0]->EMPRESA} - {$entityContability[0]->NOME}");
 
-            $entityContability = ConvertingData::convertingDataSCPI($entityContability, [
+            $entityContability = Helper::convertingDataSCPI($entityContability, [
                 'NOME',
                 'ENDERECO',
                 'NOME_AUTORID',

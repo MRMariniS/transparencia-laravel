@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CanaisDeInformacao;
+use App\Services\EstruturaServices;
+use App\Services\PublicacaoServices;
 use App\Services\SicPedidoServices;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -10,7 +13,10 @@ class EsicController extends Controller
 {
     function __construct(
         protected SicPedidoServices $sic,
+        protected PublicacaoServices $publicacao,
+        protected EstruturaServices $estrutura,
     ) {
+        
     }
     /**
      * Display a listing of the resource.
@@ -18,28 +24,11 @@ class EsicController extends Controller
     public function index()
     {
         $pedido = $this->sic->getPedidos("coletivo");
-        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
-    }
 
-    function listaPedidoPorCPF(Request $request)
-    {
-        $request->validate([
-            'cpf' => 'required|numeric',
-            'protocolo' => 'required|numeric'
+        return Inertia::render('Aplicacoes/Esic/Index', [
+            'pedidos' => $pedido
         ]);
-
-        $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
-        
-        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
-        
     }
-
-    function filtroPedido($tipo){
-        $pedido = $this->sic->getPedidos($tipo);
-        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
-    }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -90,4 +79,26 @@ class EsicController extends Controller
     {
         //
     }
+
+
+    //OUTROS MÉTODOS
+    function listaPedidoPorCPF(Request $request)
+    {
+        $request->validate([
+            'cpf' => 'required|numeric',
+            'protocolo' => 'required|numeric'
+        ]);
+
+        $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
+        
+        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
+        
+    }
+
+    //TIPO = INDEFERIDOS, COLETIVOS
+    function filtroPedido($tipo){
+        $pedido = $this->sic->getPedidos($tipo);
+        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
+    }
+
 }

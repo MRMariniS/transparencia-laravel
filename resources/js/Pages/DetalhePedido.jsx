@@ -104,6 +104,7 @@ const DetalhePedido = () => {
                                                 paramRoute="idpublicacao"
                                                 valueFieldParam="ID_PUBLICACAO"
                                                 openInModal={true}
+                                                aplicacaoModal="publicacao"
                                                 tableHeader={[
                                                     "PUBLICACÃO",
                                                     "SEQUÊNCIA",

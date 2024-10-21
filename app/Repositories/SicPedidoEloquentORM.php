@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Interfaces\SicPedidoInterface;
 use App\Models\SicPedido;
-use App\Helpers\ConvertingData;
 use App\Helpers\Helper;
 
 class SicPedidoEloquentORM implements SicPedidoInterface
@@ -15,7 +14,7 @@ class SicPedidoEloquentORM implements SicPedidoInterface
             ->select(['PROTOCOLO', 'OBJETIVO', 'PEDIDO', 'DTHRPEDIDO', 'STATUS'])
             ->paginate(10);
 
-        $pedido = ConvertingData::convertingData(
+        $pedido = Helper::convertingData(
             $pedido,
             [
                 'OBJETIVO',
@@ -41,7 +40,7 @@ class SicPedidoEloquentORM implements SicPedidoInterface
             ->paginate(10);
 
 
-        $pedido = ConvertingData::convertingData(
+        $pedido = Helper::convertingData(
             $pedido,
             [
                 'OBJETIVO',
@@ -64,7 +63,7 @@ class SicPedidoEloquentORM implements SicPedidoInterface
             ->get(['ID', 'PROTOCOLO', 'DTHRPEDIDO', 'OBJETIVO', 'PEDIDO', 'PRIORIDADE', 'STATUS', 'DTHRSTATUS', 'COLETIVO']);
 
 
-        $pedido = ConvertingData::convertingData(
+        $pedido = Helper::convertingData(
             $pedido,
             [
                 'OBJETIVO',
@@ -79,7 +78,7 @@ class SicPedidoEloquentORM implements SicPedidoInterface
         );
 
         foreach ($pedido as $item) {
-            $item->movimento = ConvertingData::convertingData(
+            $item->movimento = Helper::convertingData(
                 $item->movimento,
                 ['RESPOSTA'],
                 [
