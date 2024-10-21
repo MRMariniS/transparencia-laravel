@@ -64,7 +64,6 @@ class Helper
     static function convertingDataHasOne($object, array $fields, array $fieldsDate = [])
     {
         $countFieldDate = count($fieldsDate);
-
         foreach ($fields as $field) {
             $object->$field = mb_convert_encoding($object->$field, 'UTF-8', 'ISO-8859-1');
         }
@@ -74,5 +73,7 @@ class Helper
                 $object->$field = date('d/m/Y', strtotime($object->$field));
             }
         }
+        
+        return $object;
     }
 }
