@@ -11,7 +11,7 @@ import { SortableTable } from "../../../Components/SortableTable";
 import CardHeaderTablePedido from "@/Components/CardHeaderTablePedido";
 import EnunciadoPedidos from "../../../Components/EnunciadoPedidos";
 
-function EsicIndex() {
+function EouvIndex() {
     const { props } = usePage();
     return (
         <>
@@ -21,11 +21,8 @@ function EsicIndex() {
                     <div className="w-full h-full flex flex-col gap-4">
                         <div className="w-full flex flex-row justify-between items-center gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                             <EnunciadoPedidos
-                                title={"Informação ao Cidado - E-SIC"}
-                                resumo={
-                                    "O Sistema Eletrônico do Serviço de Informações ao Cidadão (e-SIC) permite que qualquer pessoa, física ou jurídica, encaminhe pedidos de acesso à informação, acompanhe o prazo e receba a resposta da solicitação realizada para órgãos e entidades da administração. O cidadão ainda pode entrar com recursos e apresentar reclamações sem burocracia."
-                                }
-                                tableData={props.estruturas[0]}
+                                title={"Ouvidoria - E-OUV"}
+                                resumo={`O e-Ouv é um canal para você apresentar sugestões, elogios, solicitações, reclamações e denúncias. No serviço público, a ouvidoria é uma espécie de “ponte” entre você e a Administração Pública...`}
                             />
                         </div>
                         <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
@@ -166,4 +163,4 @@ function EsicIndex() {
     );
 }
 
-export default EsicIndex;
+export default EouvIndex;

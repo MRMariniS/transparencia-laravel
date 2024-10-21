@@ -6,7 +6,8 @@ import {
     Button,
 } from "@material-tailwind/react";
 
-const EnunciadoPedidos = ({ title, resumo, icon = null }) => {
+const EnunciadoPedidos = ({ title, resumo, icon = null, tableData }) => {
+    console.log(tableData);
     return (
         <div>
             {icon ? icon : <></>}

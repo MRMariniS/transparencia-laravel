@@ -11,7 +11,7 @@ import { SortableTable } from "../../../Components/SortableTable";
 import CardHeaderTablePedido from "@/Components/CardHeaderTablePedido";
 import EnunciadoPedidos from "../../../Components/EnunciadoPedidos";
 
-function EsicIndex() {
+function LgpdIndex() {
     const { props } = usePage();
     return (
         <>
@@ -21,11 +21,8 @@ function EsicIndex() {
                     <div className="w-full h-full flex flex-col gap-4">
                         <div className="w-full flex flex-row justify-between items-center gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                             <EnunciadoPedidos
-                                title={"Informação ao Cidado - E-SIC"}
-                                resumo={
-                                    "O Sistema Eletrônico do Serviço de Informações ao Cidadão (e-SIC) permite que qualquer pessoa, física ou jurídica, encaminhe pedidos de acesso à informação, acompanhe o prazo e receba a resposta da solicitação realizada para órgãos e entidades da administração. O cidadão ainda pode entrar com recursos e apresentar reclamações sem burocracia."
-                                }
-                                tableData={props.estruturas[0]}
+                                title={"Proteção de Dados - LGPD"}
+                                resumo={`A Lei Geral de Proteção de Dados (LGPD) é uma legislação brasileira que tem como objetivo principal proteger os dados pessoais dos cidadãos...`}
                             />
                         </div>
                         <Card className="h-full w-full bg-gray-50 dark:bg-blue-800 mt-3">
@@ -166,4 +163,4 @@ function EsicIndex() {
     );
 }
 
-export default EsicIndex;
+export default LgpdIndex;

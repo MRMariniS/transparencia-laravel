@@ -11,7 +11,7 @@ class EouvController extends Controller
     function __construct(
         protected SicPedidoServices $sic,
     ) {
-        
+
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class EouvController extends Controller
     {
         $pedido = $this->sic->getPedidos("coletivo");
 
-        return Inertia::render('Aplicacoes/Esic/Index', [
+        return Inertia::render('Aplicacoes/Eouv/Index', [
             'pedidos' => $pedido
         ]);
     }
