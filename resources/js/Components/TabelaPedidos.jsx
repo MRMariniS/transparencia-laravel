@@ -2,7 +2,7 @@ import { Card, CardBody, CardHeader } from "@material-tailwind/react";
 import CardHeaderTablePedido from "./CardHeaderTablePedido";
 import { SortableTable } from "./SortableTable";
 
-const TabelaPedidos = ({ pedidosData }) => {
+const TabelaPedidos = ({ pedidosData, routeCreate = "/" }) => {
     return (
         <Card className="h-full w-full bg-gray-50 dark:bg-blue-800">
             <CardHeader
@@ -23,6 +23,7 @@ const TabelaPedidos = ({ pedidosData }) => {
                             classes: "w-50",
                         },
                     ]}
+                    routeCreate={routeCreate}
                 />
             </CardHeader>
             <CardBody className="overflow-y-auto overflow-x-hidden px-0">

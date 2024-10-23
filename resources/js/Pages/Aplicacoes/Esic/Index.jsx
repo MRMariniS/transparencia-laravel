@@ -30,7 +30,10 @@ function EsicIndex() {
                                 estruturasData={props.estruturas[0]}
                             />
                         </div>
-                        <TabelaPedidos pedidosData={props.pedidos} />
+                        <TabelaPedidos
+                            pedidosData={props.pedidos}
+                            routeCreate={route("esic.create")}
+                        />
                         <PublicacoesAssociadas
                             publicacoesData={props.publicacoes}
                         />

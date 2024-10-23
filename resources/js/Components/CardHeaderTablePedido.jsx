@@ -1,26 +1,22 @@
-import react from "react";
 import {
     Button,
     Input,
     Tab,
     Tabs,
-    TabsBody,
     TabsHeader,
     Typography,
 } from "@material-tailwind/react";
 import PopoverForm from "./PopoverForm";
-import { FaMagnifyingGlass, FaPrint, FaUserPlus } from "react-icons/fa6";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import PopoverPrint from "./PopoverPrint";
-import { useState } from  "react";
-import { router } from "@inertiajs/react";
-import PopoverNovoPedido from "./PopoverNovoPedido";
+import { Link, router } from "@inertiajs/react";
 
-
-const CardHeaderTablePedido = ({ tabs = [] }) => {
+const CardHeaderTablePedido = ({ tabs = [], routeCreate }) => {
     const TABS = tabs;
     const currentPath = window.location.pathname;
     const selectedTab = currentPath.split("/").pop();
-    const tabSelect  = "desclassificados" == selectedTab ? selectedTab : "coletivo";
+    const tabSelect =
+        "desclassificados" == selectedTab ? selectedTab : "coletivo";
 
     function linkValueTabs(value) {
         router.get(`/aplicacoes/esic/pedidos/${value}`);
@@ -50,7 +46,14 @@ const CardHeaderTablePedido = ({ tabs = [] }) => {
                         nameInputFieldTwo={"cpf"}
                         method={"post"}
                     />
-                    <PopoverNovoPedido />
+                    <Link href={routeCreate}>
+                        <Button
+                            className="interaction flex items-center gap-3"
+                            size="sm"
+                        >
+                            Novo Pedido
+                        </Button>
+                    </Link>
                 </div>
             </div>
             <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -69,7 +72,7 @@ const CardHeaderTablePedido = ({ tabs = [] }) => {
                                         value={value}
                                         className={classes ? classes : ""}
                                         onClick={() => {
-                                            linkValueTabs(value)
+                                            linkValueTabs(value);
                                         }}
                                     >
                                         <Typography className="text-gray-800 dark:text-white">

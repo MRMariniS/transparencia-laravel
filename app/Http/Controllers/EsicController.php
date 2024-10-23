@@ -11,7 +11,7 @@ class EsicController extends Controller
     function __construct(
         protected SicPedidoServices $sic,
     ) {
-        
+
     }
     /**
      * Display a listing of the resource.
@@ -30,7 +30,7 @@ class EsicController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Aplicacoes/Esic/Create');
     }
 
     /**
@@ -85,13 +85,14 @@ class EsicController extends Controller
         ]);
 
         $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
-        
+
         return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
-        
+
     }
 
     //TIPO = INDEFERIDOS, COLETIVOS
-    function filtroPedido($tipo){
+    function filtroPedido($tipo)
+    {
         $pedido = $this->sic->getPedidos($tipo);
         return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
     }
