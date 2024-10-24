@@ -1,101 +1,327 @@
 import {
-    Card,
     Input,
-    Checkbox,
     Button,
     Typography,
+    Select,
+    Option,
+    Textarea,
 } from "@material-tailwind/react";
+import { useContext } from "react";
+import { PropsContext } from "../Layouts/RootLayout";
+import DatePicker from "./DatePicker";
 
-const PedidoForm = () => {
+const PedidoForm = ({ tipo = "" }) => {
+    const { darkMode } = useContext(PropsContext);
+
     return (
-        <Card color="transparent" shadow={false}>
-            <Typography variant="h4" color="blue-gray">
-                Sign Up
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-                Nice to meet you! Enter your details to register.
-            </Typography>
-            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-                <div className="mb-1 flex flex-col gap-6">
-                    <Typography
-                        variant="h6"
-                        color="blue-gray"
-                        className="-mb-3"
-                    >
-                        Your Name
-                    </Typography>
+        <form className="flex flex-col gap-4">
+            <div className="w-full flex flex-col gap-1">
+                <Typography
+                    variant="h4"
+                    className="text-gray-800 dark:text-white"
+                >
+                    Registro de pedido {tipo}
+                </Typography>
+                <Typography className="font-normal text-gray-800 dark:text-white">
+                    Informe os dados abaixo e clique em enviar pedido para gerar
+                    o número do protocolo.
+                </Typography>
+            </div>
+            <div className="flex flex-col gap-2">
+                <Typography
+                    variant="h5"
+                    className="text-gray-800 dark:text-white text-lg"
+                >
+                    Dados Pessoais
+                </Typography>
+                <div className="flex flex-row gap-2 w-full">
+                    <div className="flex flex-row gap-2 w-1/2">
+                        <div className="w-2/3">
+                            <Input
+                                label="Nome"
+                                placeholder="Fulano da Silva"
+                                color={darkMode ? "white" : "gray"}
+                                className="w-full"
+                                containerProps={{
+                                    className:
+                                        "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
+                                }}
+                                labelProps={{
+                                    className: "!text-gray-400",
+                                }}
+                            />
+                        </div>
+                        <div className="w-1/3">
+                            <Input
+                                label="CPF"
+                                placeholder="000.000.000-00"
+                                color={darkMode ? "white" : "gray"}
+                                className="w-full"
+                                containerProps={{
+                                    className:
+                                        "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
+                                }}
+                                labelProps={{
+                                    className: "!text-gray-400",
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className="flex flex-row gap-2 w-1/2">
+                        <Input
+                            label="Telefone"
+                            placeholder="(99) 99999-9999"
+                            color={darkMode ? "white" : "gray"}
+                            className="w-1/3"
+                            containerProps={{
+                                className:
+                                    "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            labelProps={{
+                                className: "!text-gray-400",
+                            }}
+                        />
+                        <div className="w-1/3">
+                            <Select
+                                label="Sexo"
+                                className="text-gray-800 dark:text-white"
+                                labelProps={{
+                                    className: "text-gray-800 dark:text-white",
+                                }}
+                                containerProps={{
+                                    className:
+                                        "bg-white dark:bg-blue-900 rounded-lg",
+                                }}
+                                menuProps={{
+                                    className:
+                                        "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
+                                }}
+                            >
+                                <Option>Masc</Option>
+                                <Option>Fem</Option>
+                                <Option>Outros</Option>
+                            </Select>
+                        </div>
+                        <DatePicker classeHerdada={"w-1/3"} />
+                    </div>
+                </div>
+                <div className="flex flex-row gap-2 w-full">
                     <Input
-                        size="lg"
-                        placeholder="name@mail.com"
-                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                        label="E-mail"
+                        placeholder="fulanosilva@email.com"
+                        color={darkMode ? "white" : "gray"}
+                        className="w-1/2"
+                        containerProps={{
+                            className:
+                                "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
+                        }}
                         labelProps={{
-                            className: "before:content-none after:content-none",
+                            className: "!text-gray-400",
                         }}
                     />
-                    <Typography
-                        variant="h6"
-                        color="blue-gray"
-                        className="-mb-3"
-                    >
-                        Your Email
-                    </Typography>
                     <Input
-                        size="lg"
-                        placeholder="name@mail.com"
-                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-                        labelProps={{
-                            className: "before:content-none after:content-none",
+                        label="Confirme seu e-mail"
+                        placeholder="fulanosilva@email.com"
+                        color={darkMode ? "white" : "gray"}
+                        className="w-1/2"
+                        containerProps={{
+                            className:
+                                "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
                         }}
-                    />
-                    <Typography
-                        variant="h6"
-                        color="blue-gray"
-                        className="-mb-3"
-                    >
-                        Password
-                    </Typography>
-                    <Input
-                        type="password"
-                        size="lg"
-                        placeholder="********"
-                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
-                            className: "before:content-none after:content-none",
+                            className: "!text-gray-400",
                         }}
                     />
                 </div>
-                <Checkbox
-                    label={
-                        <Typography
-                            variant="small"
-                            color="gray"
-                            className="flex items-center font-normal"
+                <div className="flex flex-row gap-2 w-full">
+                    <div className="w-1/2">
+                        <Select
+                            label="Escolaridade"
+                            className="text-gray-800 dark:text-white"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            menuProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
+                            }}
                         >
-                            I agree the
-                            <a
-                                href="#"
-                                className="font-medium transition-colors hover:text-gray-900"
-                            >
-                                &nbsp;Terms and Conditions
-                            </a>
-                        </Typography>
-                    }
-                    containerProps={{ className: "-ml-2.5" }}
-                />
-                <Button className="mt-6" fullWidth>
-                    sign up
-                </Button>
+                            <Option value="Fundamental - Incompleto">
+                                Fundamental - Incompleto
+                            </Option>
+                            <Option value="Fundamental - Completo">
+                                Fundamental - Completo
+                            </Option>
+                            <Option value="Médio - Incompleto">
+                                Médio - Incompleto
+                            </Option>
+                            <Option value="Médio - Completo">
+                                Médio - Completo
+                            </Option>
+                            <Option value="Técnico - Incompleto">
+                                Técnico - Incompleto
+                            </Option>
+                            <Option value="Técnico - Completo">
+                                Técnico - Completo
+                            </Option>
+                            <Option value="Superior - Incompleto">
+                                Superior - Incompleto
+                            </Option>
+                            <Option value="Superior - Completo">
+                                Superior - Completo
+                            </Option>
+                            <Option value="Pós-graduação - Incompleto">
+                                Pós-graduação - Incompleto
+                            </Option>
+                            <Option value="Pós-graduação - Completo">
+                                Pós-graduação - Completo
+                            </Option>
+                            <Option value="Mestrado - Incompleto">
+                                Mestrado - Incompleto
+                            </Option>
+                            <Option value="Mestrado - completo">
+                                Mestrado - completo
+                            </Option>
+                            <Option value="Doutorado - incompleto">
+                                Doutorado - incompleto
+                            </Option>
+                            <Option value="Doutorado - completo">
+                                Doutorado - completo
+                            </Option>
+                        </Select>
+                    </div>
+                    <div className="w-1/2">
+                        <Input
+                            label="Profissão"
+                            placeholder="Agente de vendas"
+                            color={darkMode ? "white" : "gray"}
+                            className="w-full"
+                            containerProps={{
+                                className:
+                                    "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            labelProps={{
+                                className: "!text-gray-400",
+                            }}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className="flex flex-col gap-2">
                 <Typography
-                    color="gray"
-                    className="mt-4 text-center font-normal"
+                    variant="h5"
+                    className="text-gray-800 dark:text-white text-lg"
                 >
-                    Already have an account?{" "}
-                    <a href="#" className="font-medium text-gray-900">
-                        Sign In
-                    </a>
+                    Dados do Pedido
                 </Typography>
-            </form>
-        </Card>
+                <div className="flex flex-row gap-2 w-full">
+                    <div className="w-1/2">
+                        <Select
+                            label="Poder"
+                            className="text-gray-800 dark:text-white"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            menuProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
+                            }}
+                        >
+                            <Option value="executivo">Executivo</Option>
+                            <Option value="legislativo">Legislativo</Option>
+                            <Option value="previdencia">Previdência</Option>
+                        </Select>
+                    </div>
+                    <div className="w-1/2">
+                        <Select
+                            label="Estrutura Organizacional"
+                            className="text-gray-800 dark:text-white"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            menuProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
+                            }}
+                        >
+                            <Option value="executivo">Executivo</Option>
+                            <Option value="legislativo">Legislativo</Option>
+                            <Option value="previdencia">Previdência</Option>
+                        </Select>
+                    </div>
+                </div>
+                <div className="flex flex-row gap-2 w-full">
+                    <div className="w-1/2">
+                        <Select
+                            label="Objetivo"
+                            className="text-gray-800 dark:text-white"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            menuProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
+                            }}
+                        >
+                            <Option value="info">Informação</Option>
+                        </Select>
+                    </div>
+                    <div className="w-1/2">
+                        <Select
+                            label="Prioridade"
+                            className="text-gray-800 dark:text-white"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            menuProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
+                            }}
+                        >
+                            <Option value="baixa">Baixa</Option>
+                            <Option value="normal">Normal</Option>
+                            <Option value="alta">Alta</Option>
+                        </Select>
+                    </div>
+                </div>
+                <div className="w-full">
+                    <Textarea
+                        label="Pedido"
+                        className="bg-white dark:bg-blue-900 text-gray-800 dark:text-white w-full h-52 overflow-auto"
+                        containerProps={{
+                            className:
+                                "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
+                        }}
+                        labelProps={{
+                            className: "!text-gray-800 dark:!text-white",
+                        }}
+                    />
+                </div>
+            </div>
+            <Button className="interaction" fullWidth>
+                Enviar Pedido
+            </Button>
+        </form>
     );
 };
 

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 
-function SelectDefault({ tipoempresa }) {
-    var tipo = 'executivo';
+function SelectDefault({ tipoempresa, width }) {
+    var tipo = "executivo";
     if (tipoempresa == 2) {
-        tipo = 'legislativo';
+        tipo = "legislativo";
     } else if (tipoempresa == 8) {
-        tipo = 'previdencia';
+        tipo = "previdencia";
     }
 
     const [value, setValue] = useState(tipo);
@@ -28,7 +28,7 @@ function SelectDefault({ tipoempresa }) {
                 }}
                 value={value}
                 onChange={(val) => {
-                    window.location.href = window.location.origin + '/'+ val;
+                    window.location.href = window.location.origin + "/" + val;
                 }}
             >
                 <Option value="executivo">Executivo</Option>

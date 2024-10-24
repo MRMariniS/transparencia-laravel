@@ -1,6 +1,7 @@
 import { Head, useForm, usePage } from "@inertiajs/react";
 import BaseLayout from "../../../Layouts/BaseLayout";
 import PedidoForm from "../../../Components/PedidoForm";
+import { Typography } from "@material-tailwind/react";
 
 const EsicCreate = () => {
     const { props } = usePage();
@@ -31,12 +32,11 @@ const EsicCreate = () => {
     return (
         <>
             <Head title="E-SIC - Novo Pedido" />
-            <div className="w-full h-full flex flex-row justify-between items-start">
-                <BaseLayout>
-                    <div></div>
-                    <PedidoForm />
-                </BaseLayout>
-            </div>
+            <BaseLayout>
+                <div className="flex flex-col w-screen h-fit p-4 gap-4 justify-between items-stretch bg-gray-50 dark:bg-blue-800 rounded-md">
+                    <PedidoForm tipo="E-SIC" />
+                </div>
+            </BaseLayout>
         </>
     );
 };
