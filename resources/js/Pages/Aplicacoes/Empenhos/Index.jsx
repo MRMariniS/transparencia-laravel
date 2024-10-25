@@ -22,7 +22,7 @@ const EmpenhosIndex = () => {
                         "CNPJ",
                         "EMPENHADO",
                         "LIQUIDADO",
-                        "PAGO"
+                        "PAGO",
                     ]}
                     tableKeysObject={[
                         "NEMPG",
@@ -34,12 +34,12 @@ const EmpenhosIndex = () => {
                         "INSMF",
                         "EMPENHADO",
                         "LIQUIDADO",
-                        "PAGO"
+                        "PAGO",
                     ]}
                 />
             </div>
         </>
-    )
+    );
 };
 
 export default EmpenhosIndex;
