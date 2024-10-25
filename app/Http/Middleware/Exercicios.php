@@ -41,14 +41,20 @@ class Exercicios extends Middleware
      */
     public function share(Request $request): array
     {
-        $ano = Exercicio::where('ATIVO', 'S')->max('ANO'); 
+        $ano = Exercicio::where('ATIVO', 'S')->max('ANO');
+        session()->put('ULTIMOANOATIVO', $ano);
+        $exercicios = Exercicio::where('ATIVO', 'S')->orderBy('ANO', 'ASC')->get();
+        $ugDefault =  session()->get('UG');
+        $nomeUgDefault = session()->get('NOMEENTIDADE');
         $tipo = strtoupper($request->entidade);
         $entidades = $this->entity->getAccountingEntity($ano, $tipo);
-        $exercicio = [
-            'ano' => $ano,
-            'empresas' => $entidades
-        ];
 
-        return array_merge(parent::share($request), $exercicio);
+        return array_merge(parent::share($request), [
+            'exercicioDefault' => $ano,
+            'ugDefault' => $ugDefault,
+            'nomeUgDefault' => $nomeUgDefault,
+            'exercicios'=> $exercicios,
+            'empresas' => $entidades
+        ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmpenhoController;
 use App\Http\Controllers\EouvController;
 use App\Http\Controllers\EprocController;
 use App\Http\Controllers\EsicController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LgpdController;
 use App\Http\Controllers\PublicacaoController;
 use App\Http\Controllers\SeloController;
+use App\Http\Controllers\TabEmpresaController;
 use App\Http\Middleware\CanaisDeInformacao;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +32,10 @@ Route::resource('/aplicacoes/lgpd', LgpdController::class)->only('index')->middl
 Route::resource('/aplicacoes/eouv', EouvController::class)->only('index')->middleware(CanaisDeInformacao::class . ':eouv');
 
 Route::resource('/aplicacoes/publicacao', PublicacaoController::class);
+
+Route::resource('/aplicacoes/empenhos', EmpenhoController::class)->only(['index']);
+Route::post('/aplicacoes/empenhos', [EmpenhoController::class, 'filter'])->name('empenho.filter');
+
+Route::get('aplicacoes/scpi/empresas/{exercicio}', [TabEmpresaController::class, 'getEmpresaReturnJson'])->name('scpi.tabempresa');
+
 Route::get('PublicArqsView/{iddoc}', [EprocController::class, 'PublicArqsView'])->name('eproc.publicarqsview');

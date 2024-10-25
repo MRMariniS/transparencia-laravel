@@ -2,6 +2,12 @@
 
 namespace App\Helpers;
 
+use Illuminate\Database\QueryException;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
+use Symfony\Component\Console\Input\Input;
+
 class Helper
 {
     static function filterQueryUg($query)
@@ -13,6 +19,31 @@ class Helper
             $query->where('UG', session()->get('UG'))->orWhereNull("UG");
         }
         return $query;
+    }
+
+    static function filterQueryEmpresaScpi($alias, $empresa = '')
+    {
+        
+        $query = "AND ($alias.EMPRESA=" . session()->get('UG') . ")";
+
+        if ($empresa) {
+            $query = "AND ($alias.EMPRESA=" . $empresa . ")";
+        }
+
+        return $query;
+    }
+
+    static function filterQueryTipoEmpresaScpi()
+    {
+        if (session()->get('TIPOEMPRESA') == 1) {
+            $sqlug = 'AND TIPO NOT IN(2)';
+        } elseif (session()->get('TIPOEMPRESA') == 2) {
+            $sqlug = 'AND TIPO IN(2)';
+        } elseif (session()->get('TIPOEMPRESA') == 8) {
+            $sqlug = 'AND TIPO IN(8)';
+        }
+
+        return $sqlug;
     }
 
     static function filterPedido($query, $tipo)
@@ -73,7 +104,17 @@ class Helper
                 $object->$field = date('d/m/Y', strtotime($object->$field));
             }
         }
-        
+
         return $object;
+    }
+
+    static function verificaConnectionBdExercicio($exercicio){
+          try{
+            DB::connection('scpi'.$exercicio)->getPdo();
+            return $exercicio;
+          }catch(QueryException | InvalidArgumentException $e){
+            return session()->get('ULTIMOANOATIVO');
+          }
+           
     }
 }

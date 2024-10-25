@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
+import { Link, router } from "@inertiajs/react";
 
 function SelectDefault({ tipoempresa, width }) {
     var tipo = "executivo";
@@ -28,7 +29,7 @@ function SelectDefault({ tipoempresa, width }) {
                 }}
                 value={value}
                 onChange={(val) => {
-                    window.location.href = window.location.origin + "/" + val;
+                    router.get('/'+ val);
                 }}
             >
                 <Option value="executivo">Executivo</Option>

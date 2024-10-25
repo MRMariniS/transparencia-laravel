@@ -50,7 +50,7 @@ class EntityEloquentORM implements EntityInterface
         try {
 
             if ($filterTipo == 1) {
-                $sqlug = '';
+                $sqlug = 'AND TIPO NOT IN(2)';
             } elseif ($filterTipo == 2) {
                 $sqlug = 'AND TIPO IN(2)';
             } elseif ($filterTipo == 8) {
@@ -69,7 +69,7 @@ class EntityEloquentORM implements EntityInterface
 
             session()->put('UG', $entityContability[0]->EMPRESA);
             session()->put('TIPOEMPRESA', $entityContability[0]->TIPO);
-            session()->put('NOMEENTIDADE', "{$entityContability[0]->EMPRESA} - {$entityContability[0]->NOME}");
+            session()->put('NOMEENTIDADE', "{$entityContability[0]->NOME}");
 
             $entityContability = Helper::convertingDataSCPI($entityContability, [
                 'NOME',

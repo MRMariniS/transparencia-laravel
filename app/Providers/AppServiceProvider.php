@@ -2,20 +2,27 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\EmpenhoController;
+use App\Http\Controllers\TabEmpresaController;
+use App\Interfaces\EmpenhoInterface;
 use App\Interfaces\EntityInterface;
 use App\Interfaces\EstruturaInterface;
 use App\Interfaces\PublicacaoInterface;
 use App\Interfaces\SeloInterface;
 use App\Interfaces\SicPedidoInterface;
+use App\Interfaces\TabEmpresa;
+use App\Interfaces\TabEmpresaInterface;
 use App\Interfaces\UrlInterface;
 use App\Interfaces\WebServiceInterface;
 use App\Models\EstruturaTipo;
+use App\Repositories\EmpenhoFacadeORM;
 use App\Repositories\EntityEloquentORM;
 use App\Repositories\EprocWebServices;
 use App\Repositories\EstruturaEloquentORM;
 use App\Repositories\PublicacaoEloquentORM;
 use App\Repositories\SeloEloquentORM;
 use App\Repositories\SicPedidoEloquentORM;
+use App\Repositories\TabEmpresaFacadeORM;
 use App\Repositories\UrlEloquentORM;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
@@ -39,6 +46,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WebServiceInterface::class, EprocWebServices::class);
         $this->app->bind(SicPedidoInterface::class, SicPedidoEloquentORM::class);
         $this->app->bind(EstruturaInterface::class, EstruturaEloquentORM::class);
+        $this->app->bind(EmpenhoInterface::class, EmpenhoFacadeORM::class);
+        $this->app->bind(TabEmpresaInterface::class, TabEmpresaFacadeORM::class);
     }
 
     /**

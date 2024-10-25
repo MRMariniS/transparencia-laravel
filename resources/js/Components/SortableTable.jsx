@@ -20,7 +20,7 @@ export function SortableTable({
     const TABLE_ROWS = paginate ? dataTable.data : dataTable;
 
     const page = (page) => {
-        router(`?page=${page}`);
+        router.get(`?page=${page}`);
     };
 
     return (
