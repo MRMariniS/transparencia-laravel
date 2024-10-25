@@ -15,8 +15,6 @@ class TabEmpresaController extends Controller
     function getEmpresaReturnJson($exercicio)
     {
         $empresas = $this->empresa->getEmpresas($exercicio);
-        return Inertia::render('Aplicacoes/Empenhos/Index', [
-            'dataSelectEmpresa' => $empresas
-        ]);
+        return $empresas;
     }
 }
