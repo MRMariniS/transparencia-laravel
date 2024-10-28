@@ -33,8 +33,9 @@ Route::resource('/aplicacoes/eouv', EouvController::class)->only('index')->middl
 
 Route::resource('/aplicacoes/publicacao', PublicacaoController::class);
 
-Route::resource('/aplicacoes/empenhos', EmpenhoController::class)->only(['index']);
+Route::get('/aplicacoes/empenhos', [EmpenhoController::class, 'index'])->name('empenho.index');
 Route::post('/aplicacoes/empenhos', [EmpenhoController::class, 'filter'])->name('empenho.filter');
+Route::post('/aplicacoes/empenhos', [EmpenhoController::class, 'empresas'])->name('empenho.empresas');
 
 Route::get('aplicacoes/scpi/empresas/{exercicio}', [TabEmpresaController::class, 'getEmpresaReturnJson'])->name('scpi.tabempresa');
 

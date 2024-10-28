@@ -1,16 +1,27 @@
 import FormFiltroEmpenhos from "@/Components/Form/FormFiltroEmpenhos";
 import { SortableTable } from "@/Components/SortableTable";
-import { usePage } from "@inertiajs/react";
 import React from "react";
 
-const EmpenhosIndex = () => {
-    const { props } = usePage();
+const EmpenhosIndex = ({
+    empenhos,
+    empresas,
+    elementos,
+    exercicios,
+    exercicioDefault,
+    ugDefault,
+}) => {
     return (
         <>
-            <FormFiltroEmpenhos />
+            <FormFiltroEmpenhos
+                empresas={empresas}
+                elementos={elementos}
+                exercicios={exercicios}
+                exercicioDefault={exercicioDefault}
+                ugDefault={ugDefault}
+            />
             <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4 mt-4">
                 <SortableTable
-                    dataTable={props.empenhos}
+                    dataTable={empenhos}
                     paginate={true}
                     tableHeader={[
                         "EMPENHO",

@@ -13,18 +13,23 @@ import React, { useContext, useEffect, useState } from "react";
 import SelectAno from "../Selects/SelectAno";
 import SelectEntidade from "../Selects/SelectEntidade";
 
-const FormFiltroEmpenhos = () => {
+const FormFiltroEmpenhos = ({
+    empresas,
+    elementos,
+    exercicios,
+    exercicioDefault,
+    ugDefault,
+}) => {
     const { darkMode } = useContext(PropsContext);
     const { props } = usePage();
 
-    const [exercicioSelecionado, setExercicioSelecionado] = useState(
-        props.exercicioDefault
-    );
-    const [ugs, setUgs] = useState(props.empresas);
-    const [ugSelecionada, setUgSelecionada] = useState("");
-    const [processing, setProcessing] = useState(false);
+    const [exercicioSelecionado, setExercicioSelecionado] =
+        useState(exercicioDefault);
+    const [ugs, setUgs] = useState(empresas);
+    const [ugSelecionada, setUgSelecionada] = useState();
 
     useEffect(() => {
+        setUgSelecionada();
         handleChangeExercicio(exercicioSelecionado);
     }, [exercicioSelecionado]);
 
@@ -55,7 +60,7 @@ const FormFiltroEmpenhos = () => {
                 <form className="mt-4 w-full">
                     <div className="w-full flex  justify-start">
                         <SelectAno
-                            exercicios={props.exercicios}
+                            exercicios={exercicios}
                             exercicioSelecionado={exercicioSelecionado}
                             setExercicioSelecionado={setExercicioSelecionado}
                         />
@@ -63,7 +68,6 @@ const FormFiltroEmpenhos = () => {
                             ugs={ugs}
                             ugSelecionada={ugSelecionada}
                             setUgSelecionada={setUgSelecionada}
-                            disabled={processing}
                         />
                         <div className="w-full sm:w-auto m-2">
                             <Input
