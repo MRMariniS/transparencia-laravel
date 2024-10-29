@@ -1,12 +1,6 @@
 import { Option, Select } from "@material-tailwind/react";
 
-const SelectAno = ({
-    exercicios,
-    exercicioSelecionado,
-    setExercicioSelecionado,
-    errors,
-    data,
-}) => {
+const SelectAno = ({ exercicios, exercicioSelecionado, setData, errors }) => {
     return (
         <div className="w-full sm:w-auto">
             <Select
@@ -22,10 +16,9 @@ const SelectAno = ({
                     className:
                         "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
                 }}
-                value={data ? `${data.exercicio}` : `${exercicioSelecionado}`}
+                value={`${exercicioSelecionado}`}
                 label="Exercício"
-                defaultValue={`${exercicioSelecionado}`}
-                onChange={(ex) => setExercicioSelecionado(ex)}
+                onChange={(ex) => setData("exercicio", ex)}
             >
                 {exercicios.map(({ ANO }) => (
                     <Option value={`${ANO}`} key={ANO}>{`${ANO}`}</Option>

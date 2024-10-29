@@ -23,11 +23,12 @@ class Helper
 
     static function filterQueryEmpresaScpi($alias, $empresa = '')
     {
-        
+
         $query = "AND ($alias.EMPRESA=" . session()->get('UG') . ")";
 
         if ($empresa) {
-            $query = "AND ($alias.EMPRESA=" . $empresa . ")";
+            $empresa = implode(',', $empresa);
+            $query = "AND ($alias.EMPRESA in(" . $empresa . "))";
         }
 
         return $query;
@@ -108,13 +109,14 @@ class Helper
         return $object;
     }
 
-    static function verificaConnectionBdExercicio($exercicio){
-          try{
-            DB::connection('scpi'.$exercicio)->getPdo();
+    static function verificaConnectionBdExercicio($exercicio)
+    {
+        try {
+            DB::connection('scpi' . $exercicio)->getPdo();
             return $exercicio;
-          }catch(QueryException | InvalidArgumentException $e){
+        } catch (QueryException | InvalidArgumentException $e) {
             return session()->get('ULTIMOANOATIVO');
-          }
-           
+        }
+
     }
 }

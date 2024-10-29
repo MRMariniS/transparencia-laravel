@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from "react";
 import SelectAno from "../Selects/SelectAno";
 import PopoverElementos from "../Popover/PopoverElementos";
 import PopoverEntidade from "../Popover/PopoverEntidade";
+import DatePicker from "../DatePicker";
 
 const FormFiltroEmpenhos = ({
     empresas,
@@ -14,16 +15,18 @@ const FormFiltroEmpenhos = ({
     exercicioDefault,
     ugDefault,
 }) => {
+    const [open, setOpen] = useState(false);
+    const [date, setDate] = useState("");
     const { data, setData, post, processing, errors } = useForm({
         exercicio: exercicioDefault,
-        entidade: "",
-        numero: "",
-        datainicial: "",
-        datafinal: "",
-        covid: "",
-        nomefavorecido: "",
-        cnpj: "",
-        elemento: "",
+        empresa: [],
+        empenho: "",
+        dataInicial: "",
+        dataFinal: "",
+        covid: false,
+        nomeFavorecido: "",
+        cpfCnpj: "",
+        elemento: [],
     });
 
     function submit(e) {
@@ -36,18 +39,21 @@ const FormFiltroEmpenhos = ({
     const [exercicioSelecionado, setExercicioSelecionado] =
         useState(exercicioDefault);
     const [ugs, setUgs] = useState(empresas);
-    const [ugSelecionada, setUgSelecionada] = useState([]);
     const [elementoSelecionado, setElementoSelecionado] = useState([]);
 
     useEffect(() => {
-        setUgSelecionada([]);
-        handleChangeExercicio(exercicioSelecionado);
-    }, [exercicioSelecionado]);
+        setData("entidade", []);
+        handleChangeExercicio(data.exercicio);
+    }, [data.exercicio]);
+
+    useEffect(() => {
+        setData("dataInicial", new Date(date).toLocaleDateString("pt-BR"));
+    }, [date]);
 
     const handleChangeExercicio = (ex) => {
         axios.get(route("scpi.tabempresa", ex)).then((res) => {
             setUgs(res.data[0]);
-            setExercicioSelecionado(res.data.exercicio);
+            setData("exercicio", res.data.exercicio);
         });
     };
 
@@ -71,13 +77,13 @@ const FormFiltroEmpenhos = ({
                 <form
                     className="mt-4 w-full flex flex-col gap-2"
                     onSubmit={submit}
-                    method={post}
                 >
                     <div className="w-full flex justify-start gap-2">
                         <SelectAno
                             exercicios={exercicios}
-                            exercicioSelecionado={exercicioSelecionado}
+                            exercicioSelecionado={data.exercicio}
                             setExercicioSelecionado={setExercicioSelecionado}
+                            setData={setData}
                             errors={errors}
                             data={data}
                         />
@@ -93,21 +99,20 @@ const FormFiltroEmpenhos = ({
                                     "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
                             }}
                             label="Entidade"
-                            value={
-                                data.empresa && JSON.stringify(ugSelecionada)
-                            }
+                            value={JSON.stringify(data.empresa)}
                             icon={
                                 <PopoverEntidade
                                     darkMode={darkMode}
                                     ugs={ugs}
-                                    ugSelecionada={ugSelecionada}
-                                    setUgSelecionada={setUgSelecionada}
+                                    ugSelecionada={data.empresa}
+                                    setData={setData}
                                 />
                             }
+                            error={errors.empresa}
+                            onChange={() => console.warn("Clique no botão +")}
                         />
-                        {errors.entidade && <div>{errors.entidade}</div>}
                         <Input
-                            name="numero"
+                            name="empenho"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -117,13 +122,14 @@ const FormFiltroEmpenhos = ({
                                 className:
                                     "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
                             }}
-                            type="number"
+                            value={data.empenho}
                             inputMode="numeric"
                             label="Número do Empenho"
+                            onChange={(e) => setData("empenho", e.target.value)}
+                            error={errors.empenho}
                         />
-                        {errors.numero && <div>{errors.numero}</div>}
-                        <Input
-                            name="datainicial"
+                        {/* <Input
+                            name="dataInicial"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -133,13 +139,23 @@ const FormFiltroEmpenhos = ({
                                 className:
                                     "bg-white dark:bg-blue-900 rounded-lg",
                             }}
+                            value={data.dataInicial}
                             type="date"
                             inputMode="numeric"
                             label="Data Inicial"
+                            onChange={(e) =>
+                                setData("dataInicial", e.target.value)
+                            }
+                            error={errors.dataInicial}
+                        /> */}
+                        <DatePicker
+                            classeHerdada=""
+                            label="Data Inicial"
+                            value={date}
+                            setValue={setDate}
                         />
-                        {errors.datainicial && <div>{errors.datainicial}</div>}
                         <Input
-                            name="datafinal"
+                            name="dataFinal"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -149,25 +165,34 @@ const FormFiltroEmpenhos = ({
                                 className:
                                     "bg-white dark:bg-blue-900 rounded-lg",
                             }}
+                            value={data.dataFinal}
                             type="date"
                             inputMode="numeric"
                             label="Data Final"
+                            onChange={(e) =>
+                                setData("dataFinal", e.target.value)
+                            }
+                            error={errors.dataFinal}
                         />
-                        {errors.datafinal && <div>{errors.datafinal}</div>}
                         <label
                             htmlFor="covid"
                             className="flex w-fit cursor-pointer items-center text-gray-900 dark:text-white"
                         >
-                            <Checkbox id="covid" ripple={true} name="covid" />
+                            <Checkbox
+                                id="covid"
+                                ripple={true}
+                                name="covid"
+                                checked={data.covid}
+                                onChange={() => setData("covid", !data.covid)}
+                            />
                             <Typography className="w-fit font-medium text-inherit">
                                 Covid-19
                             </Typography>
                         </label>
-                        {errors.covid && <div>{errors.covid}</div>}
                     </div>
                     <div className="w-full flex justify-start gap-2">
                         <Input
-                            name="nomefavorecido"
+                            name="nomeFavorecido"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -177,13 +202,15 @@ const FormFiltroEmpenhos = ({
                                 className:
                                     "bg-white dark:bg-blue-900 rounded-lg min-w-[24rem]",
                             }}
+                            value={data.nomeFavorecido}
                             type="text"
                             inputMode="numeric"
                             label="Nome Favorecido"
+                            onChange={(e) =>
+                                setData("nomeFavorecido", e.target.value)
+                            }
+                            error={errors.nomeFavorecido}
                         />
-                        {errors.nomefavorecido && (
-                            <div>{errors.nomefavorecido}</div>
-                        )}
                         <Input
                             name="cnpj"
                             color={darkMode ? "white" : "gray"}
@@ -199,8 +226,10 @@ const FormFiltroEmpenhos = ({
                             maxLength={14}
                             inputMode="numeric"
                             label="CPF / CNPJ"
+                            value={data.cpfCnpj}
+                            onChange={(e) => setData("cpfCnpj", e.target.value)}
+                            error={errors.cnpj}
                         />
-                        {errors.cnpj && <div>{errors.cnpj}</div>}
                         <Input
                             name="elemento"
                             color={darkMode ? "white" : "gray"}
@@ -224,8 +253,9 @@ const FormFiltroEmpenhos = ({
                                     }
                                 />
                             }
+                            error={errors.elemento}
+                            onChange={() => console.warn("Clique no botão +")}
                         />
-                        {errors.elemento && <div>{errors.elemento}</div>}
                         <div className="w-fit sm:w-auto flex items-end">
                             <Button
                                 type="submit"

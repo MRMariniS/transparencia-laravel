@@ -12,8 +12,7 @@ import { PropsContext } from "../Layouts/RootLayout";
 import "react-day-picker/style.css";
 import { FaCalendarDays } from "react-icons/fa6";
 
-export default function DatePicker({ classeHerdada }) {
-    const [date, setDate] = useState("");
+export default function DatePicker({ classeHerdada, label, value, setValue }) {
     const { darkMode } = useContext(PropsContext);
     const defaultClassNames = getDefaultClassNames();
 
@@ -22,9 +21,9 @@ export default function DatePicker({ classeHerdada }) {
             <Popover placement="bottom">
                 <PopoverHandler>
                     <Input
-                        label="Data de Nascimento"
-                        onChange={() => null}
-                        value={date ? format(date, "dd/MM/yyyy") : ""}
+                        label={label}
+                        onChange={(e) => setValue(e.target.value)}
+                        value={value ? format(value, "dd/MM/yyyy") : ""}
                         color={darkMode ? "white" : "gray"}
                         containerProps={{
                             className:
@@ -46,8 +45,8 @@ export default function DatePicker({ classeHerdada }) {
                         mode="single"
                         locale={ptBR}
                         timeZone="America/Porto_Velho"
-                        selected={date}
-                        onSelect={setDate}
+                        selected={value}
+                        onSelect={setValue}
                         captionLayout="dropdown"
                         classNames={{
                             today: "bg-amber-500 rounded-lg text-white",

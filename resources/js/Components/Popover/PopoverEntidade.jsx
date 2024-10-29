@@ -3,7 +3,6 @@ import {
     PopoverHandler,
     PopoverContent,
     Button,
-    Input,
     List,
     ListItem,
     ListItemPrefix,
@@ -20,21 +19,21 @@ export default function PopoverEntidade({
     darkMode,
     ugs,
     ugSelecionada,
-    setUgSelecionada,
+    setData,
 }) {
     const handleChange = (el) => {
         if (ugSelecionada.includes(el)) {
             let arr = ugSelecionada.filter((elemento) => elemento !== el);
-            setUgSelecionada(arr);
+            setData("empresa", arr);
             return;
         }
 
-        setUgSelecionada([...ugSelecionada, el]);
+        setData("empresa", [...ugSelecionada, el]);
     };
 
     const selectAll = () => {
         let arr = ugs.map((ug) => ug.EMPRESA);
-        setUgSelecionada(arr);
+        setData("empresa", arr);
     };
 
     return (
@@ -65,7 +64,7 @@ export default function PopoverEntidade({
                     </Button>
                     <Button
                         className="interaction w-fit flex flex-row gap-2 justify-start items-center"
-                        onClick={() => setUgSelecionada([])}
+                        onClick={() => setData("empresa", [])}
                     >
                         <FaRegSquareFull className="w-6 h-6" />
                         <Typography className="text-white dark:text-gray-900">

@@ -48,18 +48,14 @@ class EmpenhoController extends Controller
     function filter(Request $request)
     {
         $request->validate([
-            'ano' => 'required|numeric'
+            'exercicio' => 'required|numeric'
         ]);
 
-        dd($request);
-
-        //return to_route('empenho.index');
-
-        // $elementos = $this->empenho->getElementos($request->ano);
-        // $empenhos = $this->empenho->getFilterEmpenhos($request->ano, $request->empresa, $request->numero, $request->cnpj, $request->favorecido, $request->elemento, $request->covid, $request->datainicial, $request->datafinal);
-        // return Inertia::render('Aplicacoes/Empenhos/Index', [
-        //     'empenhos' => $empenhos,
-        //     'elementos' => $elementos
-        // ]);
+        $elementos = $this->empenho->getElementos($request->exercicio);
+        $empenhos = $this->empenho->getFilterEmpenhos($request->exercicio, $request->empresa, $request->empenho, $request->cpfCnpj, $request->nomeFavorecido, $request->elemento, $request->covid, $request->dataInicial, $request->dataFinal);
+        return Inertia::render('Aplicacoes/Empenhos/Index', [
+            'empenhos' => $empenhos,
+            'elementos' => $elementos
+        ]);
     }
 }
