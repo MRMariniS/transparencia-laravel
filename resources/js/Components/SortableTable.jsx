@@ -25,7 +25,7 @@ export function SortableTable({
 
     return (
         <>
-            <table className="mt-4 w-full max-w-full table-auto text-left">
+            <table className="w-full max-w-full table-auto text-left">
                 <thead>
                     <tr>
                         {TABLE_HEAD.map((head, index) => (
@@ -63,15 +63,21 @@ export function SortableTable({
 
                         if (routeName != "") {
                             if (!param) {
-                                var detalhar = (<td className={classes}></td>)
+                                var detalhar = <td className={classes}></td>;
                             } else if (openInModal == true) {
                                 var detalhar = (
                                     <td className={classes}>
                                         <div className="flex items-center gap-3">
-                                            <Modal routeName={route("publicacao.formatJson", param)} aplicacao={aplicacaoModal} />
+                                            <Modal
+                                                routeName={route(
+                                                    "publicacao.formatJson",
+                                                    param
+                                                )}
+                                                aplicacao={aplicacaoModal}
+                                            />
                                         </div>
                                     </td>
-                                )
+                                );
                             } else {
                                 var detalhar = (
                                     <td className={classes}>
@@ -82,10 +88,14 @@ export function SortableTable({
                                                 className="font-normal text-gray-800 dark:text-white text-wrap"
                                             >
                                                 {content[valueFieldParam] !=
-                                                    null ? (
-                                                    <a as="link"
+                                                null ? (
+                                                    <a
+                                                        as="link"
                                                         target={newWindow}
-                                                        href={route(routeName, param)}
+                                                        href={route(
+                                                            routeName,
+                                                            param
+                                                        )}
                                                     >
                                                         {icon}
                                                     </a>

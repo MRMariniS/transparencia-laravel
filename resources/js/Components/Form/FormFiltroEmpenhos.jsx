@@ -37,7 +37,7 @@ const FormFiltroEmpenhos = ({
     return (
         <>
             <Head title="Empenhos" />
-            <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4 mt-4">
+            <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                 <Typography
                     className="text-gray-800 dark:text-white mb-2"
                     variant="h4"
@@ -156,9 +156,10 @@ const FormFiltroEmpenhos = ({
                                 className:
                                     "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
                             }}
-                            type="number"
+                            placeholder="Apenas números"
+                            maxLength={14}
                             inputMode="numeric"
-                            label="CNPJ"
+                            label="CPF / CNPJ"
                         />
                         <Input
                             color={darkMode ? "white" : "gray"}

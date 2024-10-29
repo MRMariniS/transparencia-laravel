@@ -9,6 +9,7 @@ import {
 import { useContext } from "react";
 import { PropsContext } from "../Layouts/RootLayout";
 import DatePicker from "./DatePicker";
+import { FaCalendarDays } from "react-icons/fa6";
 
 const PedidoForm = ({ tipo = "" }) => {
     const { darkMode } = useContext(PropsContext);
@@ -102,7 +103,20 @@ const PedidoForm = ({ tipo = "" }) => {
                                 <Option>Outros</Option>
                             </Select>
                         </div>
-                        <DatePicker classeHerdada={"w-1/3"} />
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="bg-white dark:bg-blue-900 focus:outline-none w-1/3"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            type="date"
+                            inputMode="numeric"
+                            label="Data de Nascimento"
+                        />
                     </div>
                 </div>
                 <div className="flex flex-row gap-2 w-full">
