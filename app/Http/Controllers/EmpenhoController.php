@@ -51,11 +51,15 @@ class EmpenhoController extends Controller
             'ano' => 'required|numeric'
         ]);
 
-        $elementos = $this->empenho->getElementos($request->ano);
-        $empenhos = $this->empenho->getFilterEmpenhos($request->ano, $request->empresa, $request->numero, $request->cnpj, $request->favorecido, $request->elemento, $request->covid, $request->datainicial, $request->datafinal);
-        return Inertia::render('Aplicacoes/Empenhos/Index', [
-            'empenhos' => $empenhos,
-            'elementos' => $elementos
-        ]);
+        dd($request);
+
+        //return to_route('empenho.index');
+
+        // $elementos = $this->empenho->getElementos($request->ano);
+        // $empenhos = $this->empenho->getFilterEmpenhos($request->ano, $request->empresa, $request->numero, $request->cnpj, $request->favorecido, $request->elemento, $request->covid, $request->datainicial, $request->datafinal);
+        // return Inertia::render('Aplicacoes/Empenhos/Index', [
+        //     'empenhos' => $empenhos,
+        //     'elementos' => $elementos
+        // ]);
     }
 }

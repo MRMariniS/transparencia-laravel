@@ -5,9 +5,11 @@ namespace App\Repositories;
 use App\Interfaces\SicPedidoInterface;
 use App\Models\SicPedido;
 use App\Helpers\Helper;
+use Illuminate\Http\Request;
 
 class SicPedidoEloquentORM implements SicPedidoInterface
 {
+   
     function getPedidoPorProtocolo($cpf,  $protocolo)
     {
         $pedido = SicPedido::where('CPF', $cpf)->where('PROTOCOLO', $protocolo)
@@ -94,4 +96,8 @@ class SicPedidoEloquentORM implements SicPedidoInterface
     // private function verificaColetivo($query, $protocolo){
     //     $pedido = SicPedido::where('PROTOCOLO', $protocolo)
     // }
+
+    function createPedido(Request $request){
+        dd($request);
+    }
 }

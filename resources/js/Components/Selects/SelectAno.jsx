@@ -4,10 +4,13 @@ const SelectAno = ({
     exercicios,
     exercicioSelecionado,
     setExercicioSelecionado,
+    errors,
+    data,
 }) => {
     return (
         <div className="w-full sm:w-auto">
             <Select
+                name="exercicio"
                 className="text-gray-800 dark:text-white"
                 labelProps={{
                     className: "text-gray-800 dark:text-white",
@@ -19,7 +22,7 @@ const SelectAno = ({
                     className:
                         "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
                 }}
-                value={`${exercicioSelecionado}`}
+                value={data ? `${data.exercicio}` : `${exercicioSelecionado}`}
                 label="Exercício"
                 defaultValue={`${exercicioSelecionado}`}
                 onChange={(ex) => setExercicioSelecionado(ex)}
@@ -28,6 +31,7 @@ const SelectAno = ({
                     <Option value={`${ANO}`} key={ANO}>{`${ANO}`}</Option>
                 ))}
             </Select>
+            {errors && errors.exercicio && <div>{errors.exercicio}</div>}
         </div>
     );
 };

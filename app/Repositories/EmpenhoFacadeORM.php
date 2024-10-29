@@ -73,28 +73,32 @@ class EmpenhoFacadeORM implements EmpenhoInterface
 
         $empenhos = DB::connection('scpi' . $ano)->table(DB::raw("(
             SELECT
-                B.PKEMP, A.NEMPG, 
-                CASE WHEN D.EXTRA = 'N' THEN A.TPEM ELSE A.TPEM_RESTO END AS TPEM,
-                CAST(A.DATAE AS DATE) AS DTEMPENHO,
-                A.PROC,
-                C.NOME, C.INSMF,
-                EXTRACT(YEAR FROM A.DATAE) AS ANO_EMPENHO,
-                SUM(B.VADEM) AS EMPENHADO, SUM(B.VALIQ) AS LIQUIDADO, SUM(B.VAPAG) AS PAGO
-              FROM CALCULA_SITUACAO('$datafinal') B
-              INNER JOIN DESPES A ON (A.PKEMP = B.PKEMP)
-              INNER JOIN DESDIS D ON (D.FICHA = A.FICHA)
-              INNER JOIN DESFOR C ON (C.CODIF = A.CODIF)
-              LEFT JOIN VINCODIGO V ON (V.VINGRUPO = B.VINGRUPO AND V.VINCODIGO = B.VINCODIGO)
-              WHERE
-                (D.EXTRA = 'N' OR D.BALCO LIKE '321%' $sql_covid_extra)
-                $sql_empresa
-                $sql_filtra_periodo
-                $sql_filtra_num_empenho
-                $sql_covid
-                $sql_filtra_favorecido_nome
-                $sql_filtra_favorecido_cnpj
-                $sql_elemento
-              GROUP BY 1, 2, 3, 4, 5, 6, 7, 8
+            A.PKEMP, A.NEMPG, 
+            CASE WHEN D.EXTRA = 'N' THEN A.TPEM ELSE A.TPEM_RESTO END AS TPEM,
+            CAST(A.DATAE AS DATE) AS DTEMPENHO,
+            A.PROC,
+            C.NOME, C.INSMF,
+            EXTRACT(YEAR FROM A.DATAE) AS ANO_EMPENHO,
+            SUM(COALESCE(B.VADEM, 0)) AS EMPENHADO,
+            SUM(COALESCE(B.VALIQ, 0)) AS LIQUIDADO,
+            SUM(COALESCE(B.VALIQ, 0)) AS PAGO
+          FROM DESPES A
+          INNER JOIN DESDIS D ON (D.FICHA = A.FICHA)
+          INNER JOIN DESFOR C ON (C.CODIF = A.CODIF)
+          LEFT JOIN VINCODIGO V ON (V.VINGRUPO = A.VINGRUPO AND V.VINCODIGO = A.VINCODIGO)
+          LEFT JOIN  CALCULA_SITUACAO_EMPENHO('$datafinal', A.PKEMP) B ON (1=1)
+          WHERE
+            (D.EXTRA = 'N' OR D.BALCO LIKE '321%' $sql_covid_extra)
+            $sql_empresa
+            $sql_filtra_periodo
+            $sql_filtra_num_empenho
+            $sql_covid
+            $sql_filtra_favorecido_nome
+            $sql_filtra_favorecido_cnpj
+            $sql_elemento
+          GROUP BY 1, 2, 3, 4, 5, 6, 7, 8
+          HAVING ((SUM(COALESCE(B.VADEM, 0)) <> 0.00) OR (SUM(COALESCE(B.VALIQ, 0)) <> 0.00) OR (SUM(COALESCE(B.VALIQ, 0)) <> 0.00))
+          ORDER BY 5 ASC, 2 ASC
             ) as subquery")) // Cria uma subconsulta
             ->orderBy('DTEMPENHO', 'ASC')
             ->orderBy('NEMPG', 'ASC')

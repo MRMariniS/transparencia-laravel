@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\SicPedidoInterface;
+use Illuminate\Http\Request;
 
 final class SicPedidoServices
 {
@@ -25,5 +26,10 @@ final class SicPedidoServices
     function getDetalhesPedido($protocolo){
         $pedido = $this->sic->getDetalhesPedido($protocolo);
         return $pedido;
+    }
+
+    function createPedido(Request $request){
+        
+        return $this->sic->createPedido($request);
     }
 }

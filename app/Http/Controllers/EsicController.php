@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SicPedido;
 use App\Services\SicPedidoServices;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -38,7 +39,23 @@ class EsicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'cpf' => 'required',
+            'dtnascimento' => 'required',
+            'nome' => 'required',
+            'email' => 'required|email',
+            'telefone'=> 'required',
+            'objetivo' => 'required',
+            'pedido' => 'required',
+            'prioridade' => 'required',
+            'tipo' => 'required',
+            'ug' => 'required',
+            'rpps' => 'required',
+            'anonimo' =>'required'
+        ]);
+
+        return $this->sic->createPedido($request);
+
     }
 
     /**

@@ -16,26 +16,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('/');
 
 //ACESSO A INFORMAÇÃO
-//Route::get('/aplicacoes/esic/{tipo?}', [SicPedidoController::class, 'esic'])->name('esic');
-//Route::post('/aplicacoes/esic/', [SicPedidoController::class, 'getPedidoPorProtocolo'])->name('ConsultarPedido');
+//Route::get('/acesso-a-informacao/esic/{tipo?}', [SicPedidoController::class, 'esic'])->name('esic');
+//Route::post('/acesso-a-informacao/esic/', [SicPedidoController::class, 'getPedidoPorProtocolo'])->name('ConsultarPedido');
 
 // 
 Route::resource('/aplicacoes/selo', SeloController::class)->only('index');
 
 Route::resource('/{entidade?}', HomeController::class)->only('index');
 Route::resource('/aplicacoes/esic', EsicController::class)->except('destroy')->middleware(CanaisDeInformacao::class . ':esic');
-Route::post('/aplicacoes/esic/consulta/meus-pedidos', [EsicController::class, 'listaPedidoPorCPF'])->name('esic.meuspedidos');
-Route::get('/aplicacoes/esic/pedidos/{tipo}', [EsicController::class, 'filtroPedido'])->name('esic.tipospedidos');
+Route::post('/acesso-a-informacao/esic/consulta/meus-pedidos', [EsicController::class, 'listaPedidoPorCPF'])->name('esic.meuspedidos');
+Route::get('/acesso-a-informacao/esic/pedidos/{tipo}', [EsicController::class, 'filtroPedido'])->name('esic.tipospedidos');
 
-Route::resource('/aplicacoes/lgpd', LgpdController::class)->only('index')->middleware(CanaisDeInformacao::class . ':lgpd');
+Route::resource('/acesso-a-informacao/lgpd', LgpdController::class)->only('index')->middleware(CanaisDeInformacao::class . ':lgpd');
 
-Route::resource('/aplicacoes/eouv', EouvController::class)->only('index')->middleware(CanaisDeInformacao::class . ':eouv');
+Route::resource('/acesso-a-informacao/eouv', EouvController::class)->only('index')->middleware(CanaisDeInformacao::class . ':eouv');
 
 Route::resource('/aplicacoes/publicacao', PublicacaoController::class);
 
-Route::get('/aplicacoes/empenhos', [EmpenhoController::class, 'index'])->name('empenho.index');
-Route::post('/aplicacoes/empenhos', [EmpenhoController::class, 'filter'])->name('empenho.filter');
-Route::post('/aplicacoes/empenhos', [EmpenhoController::class, 'empresas'])->name('empenho.empresas');
+Route::get('/despesa/empenhos', [EmpenhoController::class, 'index'])->name('empenho.index');
+Route::post('/despesa/filter/empenhos/', [EmpenhoController::class, 'filter'])->name('empenho.filter');
+Route::post('/despesa/empenhos', [EmpenhoController::class, 'empresas'])->name('empenho.empresas');
 
 Route::get('aplicacoes/scpi/empresas/{exercicio}', [TabEmpresaController::class, 'getEmpresaReturnJson'])->name('scpi.tabempresa');
 

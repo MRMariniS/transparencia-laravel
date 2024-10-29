@@ -1,5 +1,5 @@
 import { PropsContext } from "@/Layouts/RootLayout";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -14,6 +14,23 @@ const FormFiltroEmpenhos = ({
     exercicioDefault,
     ugDefault,
 }) => {
+    const { data, setData, post, processing, errors } = useForm({
+        exercicio: exercicioDefault,
+        entidade: "",
+        numero: "",
+        datainicial: "",
+        datafinal: "",
+        covid: "",
+        nomefavorecido: "",
+        cnpj: "",
+        elemento: "",
+    });
+
+    function submit(e) {
+        e.preventDefault();
+        post(route("empenho.filter"));
+    }
+
     const { darkMode } = useContext(PropsContext);
 
     const [exercicioSelecionado, setExercicioSelecionado] =
@@ -51,14 +68,21 @@ const FormFiltroEmpenhos = ({
                 >
                     Filtro personalizados de empenhos
                 </Typography>
-                <form className="mt-4 w-full flex flex-col gap-2">
+                <form
+                    className="mt-4 w-full flex flex-col gap-2"
+                    onSubmit={submit}
+                    method={post}
+                >
                     <div className="w-full flex justify-start gap-2">
                         <SelectAno
                             exercicios={exercicios}
                             exercicioSelecionado={exercicioSelecionado}
                             setExercicioSelecionado={setExercicioSelecionado}
+                            errors={errors}
+                            data={data}
                         />
                         <Input
+                            name="empresa"
                             color={darkMode ? "white" : "gray"}
                             className="w-full bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -69,7 +93,9 @@ const FormFiltroEmpenhos = ({
                                     "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
                             }}
                             label="Entidade"
-                            value={JSON.stringify(ugSelecionada)}
+                            value={
+                                data.empresa && JSON.stringify(ugSelecionada)
+                            }
                             icon={
                                 <PopoverEntidade
                                     darkMode={darkMode}
@@ -79,7 +105,9 @@ const FormFiltroEmpenhos = ({
                                 />
                             }
                         />
+                        {errors.entidade && <div>{errors.entidade}</div>}
                         <Input
+                            name="numero"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -93,7 +121,9 @@ const FormFiltroEmpenhos = ({
                             inputMode="numeric"
                             label="Número do Empenho"
                         />
+                        {errors.numero && <div>{errors.numero}</div>}
                         <Input
+                            name="datainicial"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -107,7 +137,9 @@ const FormFiltroEmpenhos = ({
                             inputMode="numeric"
                             label="Data Inicial"
                         />
+                        {errors.datainicial && <div>{errors.datainicial}</div>}
                         <Input
+                            name="datafinal"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -121,18 +153,21 @@ const FormFiltroEmpenhos = ({
                             inputMode="numeric"
                             label="Data Final"
                         />
+                        {errors.datafinal && <div>{errors.datafinal}</div>}
                         <label
                             htmlFor="covid"
                             className="flex w-fit cursor-pointer items-center text-gray-900 dark:text-white"
                         >
-                            <Checkbox id="covid" ripple={true} />
+                            <Checkbox id="covid" ripple={true} name="covid" />
                             <Typography className="w-fit font-medium text-inherit">
                                 Covid-19
                             </Typography>
                         </label>
+                        {errors.covid && <div>{errors.covid}</div>}
                     </div>
                     <div className="w-full flex justify-start gap-2">
                         <Input
+                            name="nomefavorecido"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -146,7 +181,11 @@ const FormFiltroEmpenhos = ({
                             inputMode="numeric"
                             label="Nome Favorecido"
                         />
+                        {errors.nomefavorecido && (
+                            <div>{errors.nomefavorecido}</div>
+                        )}
                         <Input
+                            name="cnpj"
                             color={darkMode ? "white" : "gray"}
                             className="bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -161,7 +200,9 @@ const FormFiltroEmpenhos = ({
                             inputMode="numeric"
                             label="CPF / CNPJ"
                         />
+                        {errors.cnpj && <div>{errors.cnpj}</div>}
                         <Input
+                            name="elemento"
                             color={darkMode ? "white" : "gray"}
                             className="w-full bg-white dark:bg-blue-900 focus:outline-none"
                             labelProps={{
@@ -184,8 +225,15 @@ const FormFiltroEmpenhos = ({
                                 />
                             }
                         />
+                        {errors.elemento && <div>{errors.elemento}</div>}
                         <div className="w-fit sm:w-auto flex items-end">
-                            <Button className="interaction">Consultar</Button>
+                            <Button
+                                type="submit"
+                                className="interaction"
+                                name="consultar"
+                            >
+                                Consultar
+                            </Button>
                         </div>
                     </div>
                 </form>
