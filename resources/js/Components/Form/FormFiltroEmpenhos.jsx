@@ -1,17 +1,11 @@
 import { PropsContext } from "@/Layouts/RootLayout";
-import { Head, router, useForm, usePage } from "@inertiajs/react";
-import {
-    Button,
-    Checkbox,
-    Input,
-    Option,
-    Select,
-    Typography,
-} from "@material-tailwind/react";
+import { Head } from "@inertiajs/react";
+import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 import React, { useContext, useEffect, useState } from "react";
 
 import SelectAno from "../Selects/SelectAno";
-import SelectEntidade from "../Selects/SelectEntidade";
+import PopoverElementos from "../Popover/PopoverElementos";
+import PopoverEntidade from "../Popover/PopoverEntidade";
 
 const FormFiltroEmpenhos = ({
     empresas,
@@ -21,15 +15,15 @@ const FormFiltroEmpenhos = ({
     ugDefault,
 }) => {
     const { darkMode } = useContext(PropsContext);
-    const { props } = usePage();
 
     const [exercicioSelecionado, setExercicioSelecionado] =
         useState(exercicioDefault);
     const [ugs, setUgs] = useState(empresas);
-    const [ugSelecionada, setUgSelecionada] = useState();
+    const [ugSelecionada, setUgSelecionada] = useState([]);
+    const [elementoSelecionado, setElementoSelecionado] = useState([]);
 
     useEffect(() => {
-        setUgSelecionada();
+        setUgSelecionada([]);
         handleChangeExercicio(exercicioSelecionado);
     }, [exercicioSelecionado]);
 
@@ -57,133 +51,140 @@ const FormFiltroEmpenhos = ({
                 >
                     Filtro personalizados de empenhos
                 </Typography>
-                <form className="mt-4 w-full">
-                    <div className="w-full flex  justify-start">
+                <form className="mt-4 w-full flex flex-col gap-2">
+                    <div className="w-full flex justify-start gap-2">
                         <SelectAno
                             exercicios={exercicios}
                             exercicioSelecionado={exercicioSelecionado}
                             setExercicioSelecionado={setExercicioSelecionado}
                         />
-                        <SelectEntidade
-                            ugs={ugs}
-                            ugSelecionada={ugSelecionada}
-                            setUgSelecionada={setUgSelecionada}
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="w-full bg-white dark:bg-blue-900 focus:outline-none"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                            }}
+                            label="Entidade"
+                            value={JSON.stringify(ugSelecionada)}
+                            icon={
+                                <PopoverEntidade
+                                    darkMode={darkMode}
+                                    ugs={ugs}
+                                    ugSelecionada={ugSelecionada}
+                                    setUgSelecionada={setUgSelecionada}
+                                />
+                            }
                         />
-                        <div className="w-full sm:w-auto m-2">
-                            <Input
-                                color={darkMode ? "white" : "gray"}
-                                className="bg-white dark:bg-blue-900 focus:outline-none"
-                                labelProps={{
-                                    className: "text-gray-800 dark:text-white",
-                                }}
-                                containerProps={{
-                                    className:
-                                        "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
-                                }}
-                                type="number"
-                                inputMode="numeric"
-                                label="Número do Empenho"
-                            />
-                        </div>
-                        <div className="w-full sm:w-auto m-2">
-                            <Input
-                                color={darkMode ? "white" : "gray"}
-                                className="bg-white dark:bg-blue-900 focus:outline-none"
-                                labelProps={{
-                                    className: "text-gray-800 dark:text-white",
-                                }}
-                                containerProps={{
-                                    className:
-                                        "bg-white dark:bg-blue-900 rounded-lg",
-                                }}
-                                type="date"
-                                inputMode="numeric"
-                                label="Data Inicial"
-                            />
-                        </div>
-                        <div className="w-full sm:w-auto m-2">
-                            <Input
-                                color={darkMode ? "white" : "gray"}
-                                className="bg-white dark:bg-blue-900 focus:outline-none"
-                                labelProps={{
-                                    className: "text-gray-800 dark:text-white",
-                                }}
-                                containerProps={{
-                                    className:
-                                        "bg-white dark:bg-blue-900 rounded-lg",
-                                }}
-                                type="date"
-                                inputMode="numeric"
-                                label="Data Final"
-                            />
-                        </div>
-                        <div className="w-full sm:w-auto m-2">
-                            <Checkbox label="Covid-19" />
-                        </div>
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="bg-white dark:bg-blue-900 focus:outline-none"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
+                            }}
+                            type="number"
+                            inputMode="numeric"
+                            label="Número do Empenho"
+                        />
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="bg-white dark:bg-blue-900 focus:outline-none"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            type="date"
+                            inputMode="numeric"
+                            label="Data Inicial"
+                        />
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="bg-white dark:bg-blue-900 focus:outline-none"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg",
+                            }}
+                            type="date"
+                            inputMode="numeric"
+                            label="Data Final"
+                        />
+                        <label
+                            htmlFor="covid"
+                            className="flex w-fit cursor-pointer items-center text-gray-900 dark:text-white"
+                        >
+                            <Checkbox id="covid" ripple={true} />
+                            <Typography className="w-fit font-medium text-inherit">
+                                Covid-19
+                            </Typography>
+                        </label>
                     </div>
-                    <div className="flex  justify-start">
-                        <div className="w-full sm:w-auto m-2">
-                            <Input
-                                color={darkMode ? "white" : "gray"}
-                                className="bg-white dark:bg-blue-900 focus:outline-none"
-                                labelProps={{
-                                    className: "text-gray-800 dark:text-white",
-                                }}
-                                containerProps={{
-                                    className:
-                                        "bg-white dark:bg-blue-900 rounded-lg min-w-[24rem]",
-                                }}
-                                type="text"
-                                inputMode="numeric"
-                                label="Nome Favorecido"
-                            />
-                        </div>
-                        <div className="w-full sm:w-auto m-2">
-                            <Input
-                                color={darkMode ? "white" : "gray"}
-                                className="bg-white dark:bg-blue-900 focus:outline-none"
-                                labelProps={{
-                                    className: "text-gray-800 dark:text-white",
-                                }}
-                                containerProps={{
-                                    className:
-                                        "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
-                                }}
-                                type="number"
-                                inputMode="numeric"
-                                label="CNPJ"
-                            />
-                        </div>
-                        <div className="w-full sm:w-auto m-2">
-                            <Select
-                                className="text-gray-800 dark:text-white"
-                                labelProps={{
-                                    className: "text-gray-800 dark:text-white",
-                                }}
-                                containerProps={{
-                                    className:
-                                        "bg-white dark:bg-blue-900 rounded-lg min-w-[27rem]",
-                                }}
-                                menuProps={{
-                                    className:
-                                        "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
-                                }}
-                                label="Elementos"
-                            >
-                                {props.elementos.map(({ ELEMENTO, NOME }) => {
-                                    return (
-                                        <Option
-                                            value={`${ELEMENTO}`}
-                                            key={ELEMENTO}
-                                        >{`${NOME}`}</Option>
-                                    );
-                                })}
-                            </Select>
-                        </div>
-                        <div className="w-full sm:w-auto m-2 flex items-end">
-                            <Button size="md" className="interaction">
-                                Consultar
-                            </Button>
+                    <div className="w-full flex justify-start gap-2">
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="bg-white dark:bg-blue-900 focus:outline-none"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[24rem]",
+                            }}
+                            type="text"
+                            inputMode="numeric"
+                            label="Nome Favorecido"
+                        />
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="bg-white dark:bg-blue-900 focus:outline-none"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                            }}
+                            type="number"
+                            inputMode="numeric"
+                            label="CNPJ"
+                        />
+                        <Input
+                            color={darkMode ? "white" : "gray"}
+                            className="w-full bg-white dark:bg-blue-900 focus:outline-none"
+                            labelProps={{
+                                className: "text-gray-800 dark:text-white",
+                            }}
+                            containerProps={{
+                                className:
+                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                            }}
+                            label="Elementos de Despesa"
+                            value={JSON.stringify(elementoSelecionado)}
+                            icon={
+                                <PopoverElementos
+                                    darkMode={darkMode}
+                                    elementos={elementos}
+                                    elementoSelecionado={elementoSelecionado}
+                                    setElementoSelecionado={
+                                        setElementoSelecionado
+                                    }
+                                />
+                            }
+                        />
+                        <div className="w-fit sm:w-auto flex items-end">
+                            <Button className="interaction">Consultar</Button>
                         </div>
                     </div>
                 </form>

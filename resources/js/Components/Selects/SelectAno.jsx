@@ -6,7 +6,7 @@ const SelectAno = ({
     setExercicioSelecionado,
 }) => {
     return (
-        <div className="w-full sm:w-auto m-2">
+        <div className="w-full sm:w-auto">
             <Select
                 className="text-gray-800 dark:text-white"
                 labelProps={{
