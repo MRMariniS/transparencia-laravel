@@ -1,5 +1,5 @@
 import FormFiltroEmpenhos from "@/Components/Form/FormFiltroEmpenhos";
-import { SortableTable } from "@/Components/SortableTable";
+import { SortableTable } from "@/Components/Tables/SortableTable";
 import React from "react";
 import BaseLayout from "../../../Layouts/BaseLayout";
 
@@ -23,21 +23,21 @@ const EmpenhosIndex = ({
                 />
                 <div className="w-full bg-gray-50 dark:bg-blue-800 rounded-md">
                     <SortableTable
-                        dataTable={empenhos}
                         paginate={true}
-                        tableHeader={[
+                        tableData={empenhos}
+                        tableHeaders={[
                             "EMPENHO",
                             "ANO",
                             "TIPO",
                             "DATA",
-                            "PROC",
+                            "PROCESSO",
                             "NOME",
                             "CNPJ",
                             "EMPENHADO",
                             "LIQUIDADO",
                             "PAGO",
                         ]}
-                        tableKeysObject={[
+                        headerKeys={[
                             "NEMPG",
                             "ANO_EMPENHO",
                             "TPEM",

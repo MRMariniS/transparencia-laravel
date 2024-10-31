@@ -10,7 +10,7 @@ import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import { ptBR } from "react-day-picker/locale";
 import { PropsContext } from "../Layouts/RootLayout";
 import "react-day-picker/style.css";
-import { FaCalendarDays } from "react-icons/fa6";
+import { FaCalendarDays, FaX } from "react-icons/fa6";
 
 export default function DatePicker({ classeHerdada, label, value, setValue }) {
     const { darkMode } = useContext(PropsContext);
@@ -32,7 +32,18 @@ export default function DatePicker({ classeHerdada, label, value, setValue }) {
                         labelProps={{
                             className: "!text-gray-400",
                         }}
-                        icon={<FaCalendarDays />}
+                        icon={
+                            value !== "" ? (
+                                <button
+                                    type="button"
+                                    onClick={() => setValue(null)}
+                                >
+                                    <FaX className="fill-gray-800 dark:fill-white" />
+                                </button>
+                            ) : (
+                                <FaCalendarDays />
+                            )
+                        }
                     />
                 </PopoverHandler>
                 <PopoverContent
@@ -53,7 +64,7 @@ export default function DatePicker({ classeHerdada, label, value, setValue }) {
                             selected:
                                 "bg-gray-50 dark:bg-blue-800 border border-black dark:border-white rouded-lg",
                             root: `${defaultClassNames.root} bg-white dark:bg-blue-900 text-gray-800 dark:text-white`,
-                            chevron: "fill-gray-800 dark:fill-white",
+                            chevron: "fill-gray-900 dark:fill-white",
                         }}
                     />
                 </PopoverContent>

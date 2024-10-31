@@ -52,17 +52,18 @@ class EmpenhoFacadeORM implements EmpenhoInterface
         }
 
         if ($favorecido) {
-            $sql_filtra_favorecido_nome = "AND C.NOME LIKE '$favorecido%'";
+            $sql_filtra_favorecido_nome = "AND C.NOME LIKE '%$favorecido%'";
             $sql_filtra_periodo = "";
         }
 
         if ($cnpj) {
-            $sql_filtra_favorecido_cnpj = "AND C.INSMF='$cnpj'";
+            $sql_filtra_favorecido_cnpj = "AND C.INSMF LIKE '%$cnpj%'";
             $sql_filtra_periodo = "";
         }
 
         if ($elemento) {
-            $sql_elemento = "AND A.ELEMENTO = '$elemento'";
+            $elemento = implode(',', $elemento);
+            $sql_elemento = "AND A.ELEMENTO in($elemento)";
         }
 
         if ($covid) {
@@ -104,18 +105,18 @@ class EmpenhoFacadeORM implements EmpenhoInterface
             ->orderBy('NEMPG', 'ASC')
             ->paginate(10); // Define o número de itens por página
 
-        $empenhos = Helper::convertingDataSCPI($empenhos, ['PROC', 'NOME']);
+        $empenhos = Helper::convertingDataSCPI($empenhos, ['PROC', 'NOME'], ['DTEMPENHO']);
         return $empenhos;
     }
 
     function getElementos($ano = null)
     {
-        if(!$ano){
+        if (!$ano) {
             $ano = date('Y');
         }
-        
-        $elementos = DB::connection('scpi'.$ano)->select("SELECT ELEMENTO, NOME FROM TABELEMENTO ORDER BY ELEMENTO");
-        $elementos = Helper::convertingDataSCPI($elementos,['NOME']);
+
+        $elementos = DB::connection('scpi' . $ano)->select("SELECT ELEMENTO, NOME FROM TABELEMENTO ORDER BY ELEMENTO");
+        $elementos = Helper::convertingDataSCPI($elementos, ['NOME']);
         return $elementos;
     }
 }

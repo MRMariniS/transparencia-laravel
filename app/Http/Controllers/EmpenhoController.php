@@ -53,6 +53,7 @@ class EmpenhoController extends Controller
 
         $elementos = $this->empenho->getElementos($request->exercicio);
         $empenhos = $this->empenho->getFilterEmpenhos($request->exercicio, $request->empresa, $request->empenho, $request->cpfCnpj, $request->nomeFavorecido, $request->elemento, $request->covid, $request->dataInicial, $request->dataFinal);
+
         return Inertia::render('Aplicacoes/Empenhos/Index', [
             'empenhos' => $empenhos,
             'elementos' => $elementos

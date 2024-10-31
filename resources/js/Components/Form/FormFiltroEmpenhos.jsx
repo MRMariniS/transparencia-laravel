@@ -15,11 +15,12 @@ const FormFiltroEmpenhos = ({
     exercicioDefault,
     ugDefault,
 }) => {
-    const [open, setOpen] = useState(false);
-    const [date, setDate] = useState("");
+    const [initialDate, setInitialDate] = useState("");
+    const [finalDate, setFinalDate] = useState("");
+
     const { data, setData, post, processing, errors } = useForm({
         exercicio: exercicioDefault,
-        empresa: [],
+        empresa: [ugDefault],
         empenho: "",
         dataInicial: "",
         dataFinal: "",
@@ -47,8 +48,15 @@ const FormFiltroEmpenhos = ({
     }, [data.exercicio]);
 
     useEffect(() => {
-        setData("dataInicial", new Date(date).toLocaleDateString("pt-BR"));
-    }, [date]);
+        setData(
+            "dataInicial",
+            new Date(initialDate).toLocaleDateString("pt-BR")
+        );
+    }, [initialDate]);
+
+    useEffect(() => {
+        setData("dataFinal", new Date(finalDate).toLocaleDateString("pt-BR"));
+    }, [finalDate]);
 
     const handleChangeExercicio = (ex) => {
         axios.get(route("scpi.tabempresa", ex)).then((res) => {
@@ -128,51 +136,17 @@ const FormFiltroEmpenhos = ({
                             onChange={(e) => setData("empenho", e.target.value)}
                             error={errors.empenho}
                         />
-                        {/* <Input
-                            name="dataInicial"
-                            color={darkMode ? "white" : "gray"}
-                            className="bg-white dark:bg-blue-900 focus:outline-none"
-                            labelProps={{
-                                className: "text-gray-800 dark:text-white",
-                            }}
-                            containerProps={{
-                                className:
-                                    "bg-white dark:bg-blue-900 rounded-lg",
-                            }}
-                            value={data.dataInicial}
-                            type="date"
-                            inputMode="numeric"
-                            label="Data Inicial"
-                            onChange={(e) =>
-                                setData("dataInicial", e.target.value)
-                            }
-                            error={errors.dataInicial}
-                        /> */}
                         <DatePicker
                             classeHerdada=""
                             label="Data Inicial"
-                            value={date}
-                            setValue={setDate}
+                            value={initialDate}
+                            setValue={setInitialDate}
                         />
-                        <Input
-                            name="dataFinal"
-                            color={darkMode ? "white" : "gray"}
-                            className="bg-white dark:bg-blue-900 focus:outline-none"
-                            labelProps={{
-                                className: "text-gray-800 dark:text-white",
-                            }}
-                            containerProps={{
-                                className:
-                                    "bg-white dark:bg-blue-900 rounded-lg",
-                            }}
-                            value={data.dataFinal}
-                            type="date"
-                            inputMode="numeric"
+                        <DatePicker
+                            classeHerdada=""
                             label="Data Final"
-                            onChange={(e) =>
-                                setData("dataFinal", e.target.value)
-                            }
-                            error={errors.dataFinal}
+                            value={finalDate}
+                            setValue={setFinalDate}
                         />
                         <label
                             htmlFor="covid"
@@ -242,15 +216,13 @@ const FormFiltroEmpenhos = ({
                                     "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
                             }}
                             label="Elementos de Despesa"
-                            value={JSON.stringify(elementoSelecionado)}
+                            value={JSON.stringify(data.elemento)}
                             icon={
                                 <PopoverElementos
                                     darkMode={darkMode}
                                     elementos={elementos}
-                                    elementoSelecionado={elementoSelecionado}
-                                    setElementoSelecionado={
-                                        setElementoSelecionado
-                                    }
+                                    elementoSelecionado={data.elemento}
+                                    setElementoSelecionado={setData}
                                 />
                             }
                             error={errors.elemento}

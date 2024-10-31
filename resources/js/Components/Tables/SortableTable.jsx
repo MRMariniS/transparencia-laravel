@@ -1,12 +1,12 @@
 import { Link, router } from "@inertiajs/react";
 import { Typography, Button, CardFooter } from "@material-tailwind/react";
 import { FaSort, FaArrowUpRightFromSquare } from "react-icons/fa6";
-import Modal from "./Modal";
+import Modal from "../Modal";
 
 export function SortableTable({
-    dataTable,
-    tableHeader,
-    tableKeysObject = [],
+    tableData,
+    tableHeaders,
+    headerKeys = [],
     openInModal = false,
     aplicacaoModal = "",
     routeName = "",
@@ -16,8 +16,8 @@ export function SortableTable({
     newWindow = "_self",
     paginate = null,
 }) {
-    const TABLE_HEAD = tableHeader;
-    const TABLE_ROWS = paginate ? dataTable.data : dataTable;
+    const TABLE_HEAD = tableHeaders;
+    const TABLE_ROWS = paginate ? tableData.data : tableData;
 
     const page = (page) => {
         router.get(`?page=${page}`);
@@ -117,7 +117,7 @@ export function SortableTable({
                                 }
                             >
                                 {detalhar ? detalhar : <></>}
-                                {tableKeysObject.map((keyColumn) => {
+                                {headerKeys.map((keyColumn) => {
                                     return (
                                         <td key={keyColumn} className={classes}>
                                             <div className="flex items-center gap-3">
@@ -144,29 +144,29 @@ export function SortableTable({
                         color="blue-gray"
                         className="font-normal text-gray-800 dark:text-white"
                     >
-                        Página {dataTable.current_page} de {dataTable.last_page}{" "}
-                        - {dataTable.from} a {dataTable.to} de {dataTable.total}{" "}
+                        Página {tableData.current_page} de {tableData.last_page}{" "}
+                        - {tableData.from} a {tableData.to} de {tableData.total}{" "}
                         registro(s)
                     </Typography>
                     <div className="flex gap-2">
-                        {dataTable.current_page > 1 ? (
+                        {tableData.current_page > 1 ? (
                             <Button
                                 variant="outlined"
                                 size="sm"
                                 className="interaction"
-                                onClick={() => page(dataTable.current_page - 1)}
+                                onClick={() => page(tableData.current_page - 1)}
                             >
                                 Anterior
                             </Button>
                         ) : (
                             <></>
                         )}
-                        {dataTable.current_page != dataTable.last_page ? (
+                        {tableData.current_page != tableData.last_page ? (
                             <Button
                                 variant="outlined"
                                 size="sm"
                                 className="interaction"
-                                onClick={() => page(dataTable.current_page + 1)}
+                                onClick={() => page(tableData.current_page + 1)}
                             >
                                 Próxima
                             </Button>

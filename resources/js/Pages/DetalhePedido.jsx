@@ -2,7 +2,7 @@ import { Head, usePage } from "@inertiajs/react";
 import BaseLayout from "@/Layouts/BaseLayout";
 import ListData from "@/Components/ListData";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
-import { SortableTable } from "@/Components/SortableTable";
+import { SortableTable } from "@/Components/Tables/SortableTable";
 
 const DetalhePedido = () => {
     const { props } = usePage();
@@ -10,10 +10,13 @@ const DetalhePedido = () => {
         <>
             <Head title="Detalhe Pedido" />
             <div className="w-full h-full flex flex-row justify-between items-start">
-                <BaseLayout >
+                <BaseLayout>
                     {props.pedido.map((pedido) => {
                         return (
-                            <div className="w-full flex flex-col gap-4" key={pedido.PROTOCOLO}>
+                            <div
+                                className="w-full flex flex-col gap-4"
+                                key={pedido.PROTOCOLO}
+                            >
                                 <div className="w-full h-full flex flex-col gap-4">
                                     <div className="w-full flex flex-row justify-between items-center gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                                         <div className="flex gap-2 text-justify indent-10">
@@ -111,14 +114,14 @@ const DetalhePedido = () => {
                                                     "STATUS",
                                                     "DATA STATUS",
                                                     "RESPOSTA",
-                                                    "DATA MOVIMENTO"
+                                                    "DATA MOVIMENTO",
                                                 ]}
                                                 tableKeysObject={[
-                                                    'SEQUENCIA',
-                                                    'STATUS',
-                                                    'DTHRSTATUS',
-                                                    'RESPOSTA',
-                                                    'DTHRMOVTO'
+                                                    "SEQUENCIA",
+                                                    "STATUS",
+                                                    "DTHRSTATUS",
+                                                    "RESPOSTA",
+                                                    "DTHRMOVTO",
                                                 ]}
                                             />
                                         </div>

@@ -25,16 +25,16 @@ export default function PopoverElementos({
     const handleChange = (el) => {
         if (elementoSelecionado.includes(el)) {
             let arr = elementoSelecionado.filter((elemento) => elemento !== el);
-            setElementoSelecionado(arr);
+            setElementoSelecionado("elemento", arr);
             return;
         }
 
-        setElementoSelecionado([...elementoSelecionado, el]);
+        setElementoSelecionado("elemento", [...elementoSelecionado, el]);
     };
 
     const selectAll = () => {
         let arr = elementos.map((ug) => ug.ELEMENTO);
-        setElementoSelecionado(arr);
+        setElementoSelecionado("elemento", arr);
     };
 
     return (
@@ -50,7 +50,7 @@ export default function PopoverElementos({
             <PopoverContent
                 className={
                     (darkMode ? "dark " : "") +
-                    "w-fit h-96 overflow-y-auto bg-gray-50 dark:bg-blue-800 border border-gray-500"
+                    "w-fit h-96 bg-gray-50 dark:bg-blue-800 border border-gray-500 flex flex-col justify-between gap-3"
                 }
             >
                 <div className="w-full flex flex-row justify-between items-center">
@@ -65,7 +65,7 @@ export default function PopoverElementos({
                     </Button>
                     <Button
                         className="interaction w-fit flex flex-row gap-2 justify-start items-center"
-                        onClick={() => setElementoSelecionado([])}
+                        onClick={() => setElementoSelecionado("elemento", [])}
                     >
                         <FaRegSquareFull className="w-6 h-6" />
                         <Typography className="text-white dark:text-gray-900">
@@ -73,12 +73,12 @@ export default function PopoverElementos({
                         </Typography>
                     </Button>
                 </div>
-                <List>
+                <List className="bg-white dark:bg-blue-900 rounded-md max-h-full overflow-y-auto">
                     {elementos.map(({ ELEMENTO, NOME }) => (
                         <ListItem key={ELEMENTO} className="p-0">
                             <label
                                 htmlFor={ELEMENTO}
-                                className="flex w-full cursor-pointer items-center px-3 py-2 text-gray-900 dark:text-white hover:text-white hover:dark:text-gray-900"
+                                className="flex w-full cursor-pointer items-center px-3 py-2 text-gray-900 dark:text-white hover:dark:text-gray-900"
                             >
                                 <ListItemPrefix className="mr-3">
                                     <Checkbox
@@ -95,7 +95,7 @@ export default function PopoverElementos({
                                     />
                                 </ListItemPrefix>
                                 <Typography className="font-medium text-inherit">
-                                    {NOME}
+                                    {ELEMENTO} - {NOME}
                                 </Typography>
                             </label>
                         </ListItem>

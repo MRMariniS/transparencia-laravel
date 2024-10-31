@@ -5,7 +5,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import React from "react";
-import { SortableTable } from "./SortableTable";
+import { SortableTable } from "./Tables/SortableTable";
 
 const PublicacoesAssociadas = ({ publicacoesData }) => {
     console.log(publicacoesData);

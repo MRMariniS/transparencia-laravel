@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader } from "@material-tailwind/react";
 import CardHeaderTablePedido from "./CardHeaderTablePedido";
-import { SortableTable } from "./SortableTable";
+import { SortableTable } from "./Tables/SortableTable";
 
 const TabelaPedidos = ({ pedidosData, routeCreate = "/" }) => {
     return (
