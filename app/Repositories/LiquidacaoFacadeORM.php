@@ -102,8 +102,8 @@ class LiquidacaoFacadeORM implements LiquidacaoInterface
             ->orderBy('DTLIQUIDACAO', 'ASC')
             ->orderBy('NEMPG', 'ASC')
             ->paginate(10); // Define o número de itens por página
-           
-        $empenhos = Helper::convertingDataSCPI($empenhos, ['NOME'], ['DTLIQUIDACAO']);
+
+        $empenhos = Helper::convertingDataSCPI($empenhos, ['NOME', 'PROC', 'DOC'], ['DTLIQUIDACAO']);
         return $empenhos;
     }
 

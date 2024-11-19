@@ -12,7 +12,8 @@ class LiquidacaoController extends Controller
     function __construct(
         protected LiquidacaoServices $liquidacao,
         protected TabEmpresaServices $empresa,
-    ) {}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
@@ -21,6 +22,8 @@ class LiquidacaoController extends Controller
     {
         $liquidacao = $this->liquidacao->getLiquidacaos();
         $elementos = $this->liquidacao->getElementos();
+
+        // dd($liquidacao);
 
         return Inertia::render('Aplicacoes/Liquidacoes/Index', [
             'liquidacoes' => $liquidacao,
@@ -49,7 +52,7 @@ class LiquidacaoController extends Controller
         $request->validate([
             'exercicio' => 'required|numeric'
         ]);
-         
+
         $elementos = $this->liquidacao->getElementos($request->query('exercicio'));
         $liquidacao = $this->liquidacao->getFilterLiquidacao($request->query('exercicio'), $request->query('empresa'), $request->query('empenho'), $request->query('cpfCnpj'), $request->query('nomeFavorecido'), $request->query('elemento'), $request->query('covid'), $request->query('dataInicial'), $request->query('dataFinal'));
 
