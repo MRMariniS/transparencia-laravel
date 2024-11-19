@@ -12,8 +12,7 @@ class EmpenhoController extends Controller
     function __construct(
         protected EmpenhoServices $empenho,
         protected TabEmpresaServices $empresa,
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -51,12 +50,13 @@ class EmpenhoController extends Controller
             'exercicio' => 'required|numeric'
         ]);
 
-        $elementos = $this->empenho->getElementos($request->exercicio);
-        $empenhos = $this->empenho->getFilterEmpenhos($request->exercicio, $request->empresa, $request->empenho, $request->cpfCnpj, $request->nomeFavorecido, $request->elemento, $request->covid, $request->dataInicial, $request->dataFinal);
+        $elementos = $this->empenho->getElementos($request->query('exercicio'));
+        $empenhos = $this->empenho->getFilterEmpenhos($request->query('exercicio'), $request->query('empresa'), $request->query('empenho'), $request->query('cpfCnpj'), $request->query('nomeFavorecido'), $request->query('elemento'), $request->query('covid'), $request->query('dataInicial'), $request->query('dataFinal'));
 
         return Inertia::render('Aplicacoes/Empenhos/Index', [
             'empenhos' => $empenhos,
-            'elementos' => $elementos
+            'elementos' => $elementos,
+            'url' => $request->getRequestUri()
         ]);
     }
 }

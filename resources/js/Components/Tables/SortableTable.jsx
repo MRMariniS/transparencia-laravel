@@ -15,12 +15,16 @@ export function SortableTable({
     valueFieldParam = "",
     newWindow = "_self",
     paginate = null,
+    urlPaginate = null,
 }) {
     const TABLE_HEAD = tableHeaders;
     const TABLE_ROWS = paginate ? tableData.data : tableData;
 
-    const page = (page) => {
-        router.get(`?page=${page}`);
+    const page = (page, urlPaginate) => {
+        console.log(urlPaginate);
+        urlPaginate
+            ? router.get(`${urlPaginate}&page=${page}`)
+            : router.get(`?page=${page}`);
     };
 
     return (
@@ -154,7 +158,12 @@ export function SortableTable({
                                 variant="outlined"
                                 size="sm"
                                 className="interaction"
-                                onClick={() => page(tableData.current_page - 1)}
+                                onClick={() =>
+                                    page(
+                                        tableData.current_page - 1,
+                                        urlPaginate
+                                    )
+                                }
                             >
                                 Anterior
                             </Button>
@@ -166,7 +175,12 @@ export function SortableTable({
                                 variant="outlined"
                                 size="sm"
                                 className="interaction"
-                                onClick={() => page(tableData.current_page + 1)}
+                                onClick={() =>
+                                    page(
+                                        tableData.current_page + 1,
+                                        urlPaginate
+                                    )
+                                }
                             >
                                 Próxima
                             </Button>

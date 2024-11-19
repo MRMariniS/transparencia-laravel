@@ -3,15 +3,13 @@
 namespace App\Repositories;
 
 use App\Helpers\Helper;
-use App\Interfaces\EmpenhoInterface;
-use DateTime;
-use Illuminate\Pagination\Paginator;
+use App\Interfaces\LiquidacaoInterface;
 use Illuminate\Support\Facades\DB;
 
-class EmpenhoFacadeORM implements EmpenhoInterface
+class LiquidacaoFacadeORM implements LiquidacaoInterface
 {
 
-    function getEmpenhos($ano = null, $empresa = null, $numero = null, $cnpj = null, $favorecido = null, $elemento = null, $covid = null, $datainicial = null, $datafinal = null)
+    function getLiquidacao($ano = null, $empresa = null, $numero = null, $cnpj = null, $favorecido = null, $elemento = null, $covid = null, $datainicial = null, $datafinal = null)
     {
         $sql_empresa = "";
         $sql_filtra_periodo = "";
@@ -27,10 +25,7 @@ class EmpenhoFacadeORM implements EmpenhoInterface
         }
 
         if (!$datainicial) {
-            // Calcula a data de 6 meses atrás a partir da data atual
-            $dataAtras = strtotime('-6 months');
-            // Formata a data em 'Y-m-d'
-            $datainicial = date($ano . '.m.d', $dataAtras);
+            $datainicial = $ano . '.01.01';
         }
 
         if (!$datafinal) {
@@ -69,20 +64,29 @@ class EmpenhoFacadeORM implements EmpenhoInterface
 
         $empenhos = DB::connection('scpi' . $ano)->table(DB::raw("(
             SELECT
-            A.PKEMP, A.NEMPG, 
+            B.PKEMP, A.NEMPG, B.NUMSUB, 
             CASE WHEN D.EXTRA = 'N' THEN A.TPEM ELSE A.TPEM_RESTO END AS TPEM,
-            CAST(A.DATAE AS DATE) AS DTEMPENHO,
+            CAST(B.DATAE AS DATE) AS DTLIQUIDACAO,
+            EXTRACT(YEAR FROM A.DATAE) ANO,
             A.PROC,
             C.NOME, C.INSMF,
-            EXTRACT(YEAR FROM A.DATAE) AS ANO_EMPENHO,
-            SUM(COALESCE(B.VADEM, 0)) AS EMPENHADO,
-            SUM(COALESCE(B.VALIQ, 0)) AS LIQUIDADO,
-            SUM(COALESCE(B.VALIQ, 0)) AS PAGO
-          FROM DESPES A
+            B.VADEM AS LIQUIDADO,
+            B.DOC,
+            COALESCE((SELECT SUM(-Z.VADEM) FROM VIEWLIQ Z
+                      WHERE
+                        Z.PKEMP = B.PKEMP
+                        AND Z.NUMSUBA = B.NUMSUB
+                        AND Z.VADEM < 0), 0) AS ANULADO,
+            COALESCE((SELECT SUM(R.VALOR) FROM DESSUB P
+                      INNER JOIN RATEIO_PAGAMENTO R ON (R.PKEMP = P.PKEMP AND R.NUMSUB = P.NUMSUB)
+                      WHERE
+                        P.PKEMP = A.PKEMP
+                        AND P.NUMLIQ = B.NUMSUB), 0) AS PAGO
+          FROM VIEWLIQ B
+          INNER JOIN DESPES A ON (A.PKEMP = B.PKEMP)
           INNER JOIN DESDIS D ON (D.FICHA = A.FICHA)
           INNER JOIN DESFOR C ON (C.CODIF = A.CODIF)
           LEFT JOIN VINCODIGO V ON (V.VINGRUPO = A.VINGRUPO AND V.VINCODIGO = A.VINCODIGO)
-          LEFT JOIN  CALCULA_SITUACAO_EMPENHO('$datafinal', A.PKEMP) B ON (1=1)
           WHERE
             (D.EXTRA = 'N' OR D.BALCO LIKE '321%' $sql_covid_extra)
             $sql_empresa
@@ -92,15 +96,14 @@ class EmpenhoFacadeORM implements EmpenhoInterface
             $sql_filtra_favorecido_nome
             $sql_filtra_favorecido_cnpj
             $sql_elemento
-          GROUP BY 1, 2, 3, 4, 5, 6, 7, 8
-          HAVING ((SUM(COALESCE(B.VADEM, 0)) <> 0.00) OR (SUM(COALESCE(B.VALIQ, 0)) <> 0.00) OR (SUM(COALESCE(B.VALIQ, 0)) <> 0.00))
-          ORDER BY 5 ASC, 2 ASC
+          AND B.VADEM > 0
+          ORDER BY DTLIQUIDACAO DESC, A.NEMPG, B.NUMSUB DESC
             ) as subquery")) // Cria uma subconsulta
-            ->orderBy('DTEMPENHO', 'ASC')
+            ->orderBy('DTLIQUIDACAO', 'ASC')
             ->orderBy('NEMPG', 'ASC')
             ->paginate(10); // Define o número de itens por página
-
-        $empenhos = Helper::convertingDataSCPI($empenhos, ['PROC', 'NOME'], ['DTEMPENHO']);
+           
+        $empenhos = Helper::convertingDataSCPI($empenhos, ['NOME'], ['DTLIQUIDACAO']);
         return $empenhos;
     }
 

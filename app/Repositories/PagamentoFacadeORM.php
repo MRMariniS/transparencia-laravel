@@ -3,15 +3,13 @@
 namespace App\Repositories;
 
 use App\Helpers\Helper;
-use App\Interfaces\EmpenhoInterface;
-use DateTime;
-use Illuminate\Pagination\Paginator;
+use App\Interfaces\PagamentoInterface;
 use Illuminate\Support\Facades\DB;
 
-class EmpenhoFacadeORM implements EmpenhoInterface
+class PagamentoFacadeORM implements PagamentoInterface
 {
 
-    function getEmpenhos($ano = null, $empresa = null, $numero = null, $cnpj = null, $favorecido = null, $elemento = null, $covid = null, $datainicial = null, $datafinal = null)
+    function getPagamentos($ano = null, $empresa = null, $numero = null, $cnpj = null, $favorecido = null, $elemento = null, $covid = null, $datainicial = null, $datafinal = null)
     {
         $sql_empresa = "";
         $sql_filtra_periodo = "";
@@ -27,22 +25,19 @@ class EmpenhoFacadeORM implements EmpenhoInterface
         }
 
         if (!$datainicial) {
-            // Calcula a data de 6 meses atrás a partir da data atual
-            $dataAtras = strtotime('-6 months');
-            // Formata a data em 'Y-m-d'
-            $datainicial = date($ano . '.m.d', $dataAtras);
+            $datainicial = $ano . '.01.01';
         }
 
         if (!$datafinal) {
             $datafinal = date("Y.m.d");
         }
 
-        $sql_filtra_periodo = "AND A.DATAE BETWEEN '$datainicial' and '$datafinal'";
+        $sql_filtra_periodo = "AND B.DTPAG BETWEEN '$datainicial' and '$datafinal'";
 
         $sql_empresa = Helper::filterQueryEmpresaScpi('D', $empresa);
 
         if ($numero) {
-            $sql_filtra_num_empenho = "AND A.NEMPG = $numero";
+            $sql_filtra_num_empenho = "AND B.NEMPG = $numero";
             $sql_filtra_periodo = "";
         }
 
@@ -68,21 +63,20 @@ class EmpenhoFacadeORM implements EmpenhoInterface
 
 
         $empenhos = DB::connection('scpi' . $ano)->table(DB::raw("(
-            SELECT
-            A.PKEMP, A.NEMPG, 
-            CASE WHEN D.EXTRA = 'N' THEN A.TPEM ELSE A.TPEM_RESTO END AS TPEM,
-            CAST(A.DATAE AS DATE) AS DTEMPENHO,
+            SELECT 
+            B.NEMPG, B.TPEM, B.PKEMP, B.NUMSUB,
             A.PROC,
-            C.NOME, C.INSMF,
-            EXTRACT(YEAR FROM A.DATAE) AS ANO_EMPENHO,
-            SUM(COALESCE(B.VADEM, 0)) AS EMPENHADO,
-            SUM(COALESCE(B.VALIQ, 0)) AS LIQUIDADO,
-            SUM(COALESCE(B.VALIQ, 0)) AS PAGO
-          FROM DESPES A
+            C.NOME,
+            C.INSMF,
+            B.VAPAG,
+            B.DTPAG,
+            E.ORDPGSEQ
+          FROM VIEWVAPAG_ORDPG('$datainicial', '$datafinal') B
+          INNER JOIN DESPES A ON (A.PKEMP = B.PKEMP)
           INNER JOIN DESDIS D ON (D.FICHA = A.FICHA)
           INNER JOIN DESFOR C ON (C.CODIF = A.CODIF)
+          INNER JOIN ORDPAG E ON (E.ORDPG = B.ORDPG)
           LEFT JOIN VINCODIGO V ON (V.VINGRUPO = A.VINGRUPO AND V.VINCODIGO = A.VINCODIGO)
-          LEFT JOIN  CALCULA_SITUACAO_EMPENHO('$datafinal', A.PKEMP) B ON (1=1)
           WHERE
             (D.EXTRA = 'N' OR D.BALCO LIKE '321%' $sql_covid_extra)
             $sql_empresa
@@ -92,15 +86,13 @@ class EmpenhoFacadeORM implements EmpenhoInterface
             $sql_filtra_favorecido_nome
             $sql_filtra_favorecido_cnpj
             $sql_elemento
-          GROUP BY 1, 2, 3, 4, 5, 6, 7, 8
-          HAVING ((SUM(COALESCE(B.VADEM, 0)) <> 0.00) OR (SUM(COALESCE(B.VALIQ, 0)) <> 0.00) OR (SUM(COALESCE(B.VALIQ, 0)) <> 0.00))
-          ORDER BY 5 ASC, 2 ASC
+           ORDER BY B.DTPAG DESC, E.ORDPGSEQ DESC, B.NUMSUB DESC
             ) as subquery")) // Cria uma subconsulta
-            ->orderBy('DTEMPENHO', 'ASC')
+            ->orderBy('ORDPGSEQ', 'ASC')
             ->orderBy('NEMPG', 'ASC')
             ->paginate(10); // Define o número de itens por página
 
-        $empenhos = Helper::convertingDataSCPI($empenhos, ['PROC', 'NOME'], ['DTEMPENHO']);
+        $empenhos = Helper::convertingDataSCPI($empenhos, ['NOME'], ['DTPAG']);
         return $empenhos;
     }
 

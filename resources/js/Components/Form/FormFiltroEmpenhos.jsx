@@ -1,5 +1,5 @@
 import { PropsContext } from "@/Layouts/RootLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, router, useForm } from "@inertiajs/react";
 import { Button, Checkbox, Input, Typography } from "@material-tailwind/react";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -9,7 +9,9 @@ import PopoverEntidade from "../Popover/PopoverEntidade";
 import DatePicker from "../DatePicker";
 
 const FormFiltroEmpenhos = ({
+    title,
     empresas,
+    routeFilter,
     elementos,
     exercicios,
     exercicioDefault,
@@ -18,7 +20,7 @@ const FormFiltroEmpenhos = ({
     const [initialDate, setInitialDate] = useState("");
     const [finalDate, setFinalDate] = useState("");
 
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, get, processing, errors } = useForm({
         exercicio: exercicioDefault,
         empresa: [ugDefault],
         empenho: "",
@@ -32,7 +34,7 @@ const FormFiltroEmpenhos = ({
 
     function submit(e) {
         e.preventDefault();
-        post(route("empenho.filter"));
+        get(route(`${routeFilter}`));
     }
 
     const { darkMode } = useContext(PropsContext);
@@ -67,14 +69,14 @@ const FormFiltroEmpenhos = ({
 
     return (
         <>
-            <Head title="Empenhos" />
+            <Head title={title} />
             <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                 <Typography
                     className="text-gray-800 dark:text-white mb-2"
                     variant="h4"
                     color="blue-gray"
                 >
-                    Empenhos
+                    {title}
                 </Typography>
                 <Typography
                     className="text-gray-800 dark:text-white mb-2 mt-1 font-normal"

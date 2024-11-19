@@ -3,8 +3,8 @@ import { SortableTable } from "@/Components/Tables/SortableTable";
 import React from "react";
 import BaseLayout from "../../../Layouts/BaseLayout";
 
-const EmpenhosIndex = ({
-    empenhos,
+const PagamentosIndex = ({
+    pagamentos,
     empresas,
     elementos,
     exercicios,
@@ -12,13 +12,12 @@ const EmpenhosIndex = ({
     ugDefault,
     url,
 }) => {
-    console.log(url);
     return (
         <BaseLayout>
             <div className="flex flex-col gap-4">
                 <FormFiltroEmpenhos
-                    title="Empenhos"
-                    routeFilter="empenho.filter"
+                    title="Pagamentos"
+                    routeFilter="pagamento.filter"
                     empresas={empresas}
                     elementos={elementos}
                     exercicios={exercicios}
@@ -29,30 +28,28 @@ const EmpenhosIndex = ({
                     <SortableTable
                         paginate={true}
                         urlPaginate={url}
-                        tableData={empenhos}
+                        tableData={pagamentos}
                         tableHeaders={[
                             "EMPENHO",
-                            "ANO",
                             "TIPO",
-                            "DATA",
+                            "PARCELA",
                             "PROCESSO",
                             "NOME",
                             "CNPJ",
-                            "EMPENHADO",
-                            "LIQUIDADO",
-                            "PAGO",
+                            "ORD.PAGTO",
+                            "DATA PAGTO",
+                            "VALOR",
                         ]}
                         headerKeys={[
                             "NEMPG",
-                            "ANO_EMPENHO",
                             "TPEM",
-                            "DTEMPENHO",
+                            "NUMSUB",
                             "PROC",
                             "NOME",
                             "INSMF",
-                            "EMPENHADO",
-                            "LIQUIDADO",
-                            "PAGO",
+                            "ORDPGSEQ",
+                            "DTPAG",
+                            "VAPAG",
                         ]}
                     />
                 </div>
@@ -61,4 +58,4 @@ const EmpenhosIndex = ({
     );
 };
 
-export default EmpenhosIndex;
+export default PagamentosIndex;
