@@ -28,8 +28,8 @@ const TabelaPedidos = ({ pedidosData, routeCreate = "/" }) => {
             </CardHeader>
             <CardBody className="overflow-y-auto overflow-x-hidden px-0">
                 <SortableTable
-                    dataTable={pedidosData}
-                    tableHeader={[
+                    tableData={pedidosData}
+                    tableHeaders={[
                         "#",
                         "PROTOCOLO",
                         "OBJETIVO",
@@ -37,7 +37,7 @@ const TabelaPedidos = ({ pedidosData, routeCreate = "/" }) => {
                         "DATA PEDIDO",
                         "STATUS",
                     ]}
-                    tableKeysObject={[
+                    headerKeys={[
                         "PROTOCOLO",
                         "OBJETIVO",
                         "PEDIDO",

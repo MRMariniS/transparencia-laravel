@@ -8,7 +8,6 @@ import React from "react";
 import { SortableTable } from "./Tables/SortableTable";
 
 const PublicacoesAssociadas = ({ publicacoesData }) => {
-    console.log(publicacoesData);
     return (
         <Card className="h-full w-full bg-gray-50 dark:bg-blue-800">
             <CardHeader
@@ -29,19 +28,14 @@ const PublicacoesAssociadas = ({ publicacoesData }) => {
             </CardHeader>
             <CardBody className="overflow-y-auto overflow-x-hidden px-0">
                 <SortableTable
-                    dataTable={publicacoesData}
+                    tableData={publicacoesData}
                     routeName="publicacao.show"
                     paramRoute="idpublicacao"
                     valueFieldParam="ID"
                     openInModal={true}
                     aplicacaoModal="publicacao"
-                    tableHeader={["#", "DESCRIÇÃO", "ANO", "DATA", "EMENTA"]}
-                    tableKeysObject={[
-                        "DESCRICAO",
-                        "ANO",
-                        "DTHRPUBLICADO",
-                        "EMENTA",
-                    ]}
+                    tableHeaders={["#", "DESCRIÇÃO", "ANO", "DATA", "EMENTA"]}
+                    headerKeys={["DESCRICAO", "ANO", "DTHRPUBLICADO", "EMENTA"]}
                 />
             </CardBody>
         </Card>

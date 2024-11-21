@@ -21,7 +21,6 @@ export function SortableTable({
     const TABLE_ROWS = paginate ? tableData.data : tableData;
 
     const page = (page, urlPaginate) => {
-        console.log(urlPaginate);
         urlPaginate
             ? router.get(`${urlPaginate}&page=${page}`)
             : router.get(`?page=${page}`);

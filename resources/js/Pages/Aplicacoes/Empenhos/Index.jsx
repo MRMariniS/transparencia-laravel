@@ -12,7 +12,6 @@ const EmpenhosIndex = ({
     ugDefault,
     url,
 }) => {
-    console.log(url);
     return (
         <BaseLayout>
             <div className="flex flex-col gap-4">

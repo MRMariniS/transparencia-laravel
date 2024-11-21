@@ -18,7 +18,6 @@ createInertiaApp({
         return page;
     },
     setup({ el, App, props }) {
-        console.log(props);
         const root = createRoot(el);
 
         root.render(<App {...props} />);
