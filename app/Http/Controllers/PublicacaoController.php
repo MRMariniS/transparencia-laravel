@@ -10,13 +10,14 @@ class PublicacaoController extends Controller
 {
     function __construct(
         protected PublicacaoServices $publicacao,
-    ) {}
+    ) {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return Inertia::render('/Aplicacoes/Publicacoes/Index');
     }
 
     /**
