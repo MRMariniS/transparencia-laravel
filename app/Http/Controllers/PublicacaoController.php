@@ -70,11 +70,4 @@ class PublicacaoController extends Controller
     {
         //
     }
-
-    //OUTROS MÉTODOS
-    public function showFormatJson(int $idpublicacao)
-    {
-        $publicacao = $this->publicacao->getPublicacao($idpublicacao);
-        return $publicacao;
-    }
 }
