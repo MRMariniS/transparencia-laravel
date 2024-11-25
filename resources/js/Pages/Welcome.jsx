@@ -50,7 +50,11 @@ export default function Welcome() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {props.menus.menuLateral.map((menu) => (
-                                <MenuDefault key={menu.CODIGO} props={menu} />
+                                <MenuDefault
+                                    key={menu.CODIGO}
+                                    props={menu}
+                                    entidadeRota={props.entidadeRota}
+                                />
                             ))}
                         </div>
                     </div>

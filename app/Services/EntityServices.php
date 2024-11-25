@@ -24,7 +24,8 @@ class EntityServices
         if (!isset($ano)) {
             $ano = date('Y');
         }
-        
+       
+
         if ($tipo == 'LEGISLATIVO') {
             $filterTipo = 2;
         } elseif ($tipo == 'PREVIDENCIA') {
@@ -47,7 +48,7 @@ class EntityServices
              $accountingEntity = session()->get('EMPRESAS');
         }
 
-        //dd($accountingEntity, $filterTipo);
+        
             
         return $accountingEntity;
     }

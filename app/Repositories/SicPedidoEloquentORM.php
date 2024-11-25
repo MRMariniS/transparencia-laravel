@@ -98,6 +98,6 @@ class SicPedidoEloquentORM implements SicPedidoInterface
     // }
 
     function createPedido(Request $request){
-        dd($request);
+        //dd($request);
     }
 }

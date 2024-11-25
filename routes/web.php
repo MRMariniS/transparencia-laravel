@@ -15,16 +15,15 @@ use App\Http\Middleware\CanaisDeInformacao;
 use Illuminate\Support\Facades\Route;
 
 //RAIZ
-Route::get('/', [HomeController::class, 'index'])->name('/');
+// Route::get('/', [HomeController::class, 'index'])->name('/');
 
 //ACESSO A INFORMAÇÃO
 //Route::get('/acesso-a-informacao/esic/{tipo?}', [SicPedidoController::class, 'esic'])->name('esic');
 //Route::post('/acesso-a-informacao/esic/', [SicPedidoController::class, 'getPedidoPorProtocolo'])->name('ConsultarPedido');
 
 // 
+Route::get('/{entidade?}', [HomeController::class, 'index'])->name('/');
 Route::resource('/aplicacoes/selo', SeloController::class)->only('index');
-
-Route::resource('/{entidade?}', HomeController::class)->only('index');
 Route::resource('/aplicacoes/esic', EsicController::class)->except('destroy')->middleware(CanaisDeInformacao::class . ':esic');
 Route::post('/acesso-a-informacao/esic/consulta/meus-pedidos', [EsicController::class, 'listaPedidoPorCPF'])->name('esic.meuspedidos');
 Route::get('/acesso-a-informacao/esic/pedidos/{tipo}', [EsicController::class, 'filtroPedido'])->name('esic.tipospedidos');
@@ -33,7 +32,7 @@ Route::resource('/acesso-a-informacao/lgpd', LgpdController::class)->only('index
 
 Route::resource('/acesso-a-informacao/eouv', EouvController::class)->only('index')->middleware(CanaisDeInformacao::class . ':eouv');
 
-Route::resource('/publicacoes', PublicacaoController::class)->only('index');
+Route::resource('/publicacoes/documentos', PublicacaoController::class)->only('index');
 
 Route::get('/despesa/empenhos', [EmpenhoController::class, 'index'])->name('empenho.index');
 Route::get('/despesa/filter/empenhos/', [EmpenhoController::class, 'filter'])->name('empenho.filter');

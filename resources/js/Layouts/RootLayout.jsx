@@ -9,6 +9,7 @@ export const PropsContext = createContext();
 
 export default function RootLayout({ children }) {
     const { props } = usePage();
+    const entidadeRota = props.entidadeRota;
     const app = props.app;
 
     const [darkMode, setDarkMode] = useState(

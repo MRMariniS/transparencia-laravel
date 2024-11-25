@@ -17,7 +17,13 @@ class PublicacaoController extends Controller
      */
     public function index()
     {
-        return Inertia::render('/Aplicacoes/Publicacoes/Index');
+         $publicacao = "Publicações";
+        // return Inertia::render('Aplicacoes/Publicacoes/DetalhePublicacao', [
+        //     'publicacao' => $publicacao
+        // ]);
+        return Inertia::render('Aplicacoes/Publicacoes/Index',[
+            'publicacoes' => $publicacao
+        ]);
     }
 
     /**

@@ -1,3 +1,4 @@
+import { PropsContext } from "@/Layouts/RootLayout";
 import { Link } from "@inertiajs/react";
 import {
     Menu,
@@ -7,8 +8,9 @@ import {
     Button,
     Typography,
 } from "@material-tailwind/react";
+import { useContext } from "react";
 
-export function MenuDefault({ props }) {
+export function MenuDefault({ props, entidadeRota }) {
     return (
         <Menu>
             <MenuHandler>
@@ -34,7 +36,7 @@ export function MenuDefault({ props }) {
                                 className="w-10 h-auto"
                             />
                         )}
-                        <Link href={route(sub.URL)}>
+                        <Link href={sub.URL + "?entidade=" + entidadeRota}>
                             <Typography className="text-gray-800 dark:text-white font-semibold">
                                 {sub.APRESENTACAO}
                             </Typography>

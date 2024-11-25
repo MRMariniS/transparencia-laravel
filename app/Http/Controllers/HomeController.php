@@ -19,13 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         $selo = $this->service->getImagemSelo();
-
-        return Inertia::render('Welcome', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
-        ]);
+        
+        return Inertia::render('Welcome');
     }
    
 }

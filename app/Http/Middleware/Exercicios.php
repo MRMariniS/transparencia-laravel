@@ -48,13 +48,14 @@ class Exercicios extends Middleware
         $nomeUgDefault = session()->get('NOMEENTIDADE');
         $tipo = strtoupper($request->entidade);
         $entidades = $this->entity->getAccountingEntity($ano, $tipo);
-
+        
         return array_merge(parent::share($request), [
             'exercicioDefault' => $ano,
             'ugDefault' => $ugDefault,
             'nomeUgDefault' => $nomeUgDefault,
             'exercicios'=> $exercicios,
-            'empresas' => $entidades
+            'empresas' => $entidades,
+            'entidadeRota' => session()->get('ENTIDADEROTA') ? session()->get('ENTIDADEROTA') : 'executivo'
         ]);
     }
 }

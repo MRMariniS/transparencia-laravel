@@ -1,7 +1,15 @@
 import React from "react";
+import BaseLayout from "../../../Layouts/BaseLayout";
+import { Typography } from "@material-tailwind/react";
 
 const PublicacoesIndex = () => {
-    return <div>PublicacoesIndex</div>;
+    return (
+        <BaseLayout>
+            <div>
+                <Typography>Olá Mundo</Typography>
+            </div>
+        </BaseLayout>
+    );
 };
 
 export default PublicacoesIndex;

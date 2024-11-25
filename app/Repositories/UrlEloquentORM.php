@@ -42,14 +42,6 @@ class UrlEloquentORM implements UrlInterface
         );
 
         foreach ($menuLateral as $item) {
-            // foreach ($item->submenu as $submenu) {
-            //     if (strpos($submenu->URL, 'http') !== 0) {
-            //         $submenuitem = explode('&', $submenu->URL);
-            //         $submenu->URL = str_replace('/', '-', str_replace('index.php?link=', '', $submenuitem[0]));
-            //         $submenu->ENTIDADEROTA = session()->get('ENTIDADEROTA');
-            //         unset($submenuitem);
-            //     }
-            // }
             $item->submenu = Helper::convertingData(
                 $item->submenu,
                 [
