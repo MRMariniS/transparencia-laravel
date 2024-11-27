@@ -28,20 +28,24 @@ export function MenuDefault({ props, entidadeRota }) {
             </MenuHandler>
             <MenuList className="max-h-72">
                 {props.submenu.map((sub) => (
-                    <MenuItem key={sub.CODIGO} className="flex flex-row gap-2">
-                        {sub.GLYPH && (
-                            <img
-                                src={`../../assets/images/${sub.GLYPH}`}
-                                alt={JSON.stringify(sub.GLYPH)}
-                                className="w-10 h-auto"
-                            />
-                        )}
-                        <Link href={sub.URL + "?entidade=" + entidadeRota}>
+                    <Link
+                        key={sub.CODIGO}
+                        href={sub.URL + "?entidade=" + entidadeRota}
+                    >
+                        <MenuItem className="flex flex-row gap-2">
+                            {sub.GLYPH && (
+                                <img
+                                    src={`../../assets/images/${sub.GLYPH}`}
+                                    alt={JSON.stringify(sub.GLYPH)}
+                                    className="w-10 h-auto"
+                                />
+                            )}
+
                             <Typography className="text-gray-800 dark:text-white font-semibold">
                                 {sub.APRESENTACAO}
                             </Typography>
-                        </Link>
-                    </MenuItem>
+                        </MenuItem>
+                    </Link>
                 ))}
             </MenuList>
         </Menu>

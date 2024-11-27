@@ -45,7 +45,7 @@ const FormFiltroEmpenhos = ({
     const [elementoSelecionado, setElementoSelecionado] = useState([]);
 
     useEffect(() => {
-        setData("entidade", []);
+        setData("empresa", []);
         handleChangeExercicio(data.exercicio);
     }, [data.exercicio]);
 
@@ -68,181 +68,175 @@ const FormFiltroEmpenhos = ({
     };
 
     return (
-        <>
-            <Head title={title} />
-            <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
-                <Typography
-                    className="text-gray-800 dark:text-white mb-2"
-                    variant="h4"
-                    color="blue-gray"
-                >
-                    {title}
-                </Typography>
-                <Typography
-                    className="text-gray-800 dark:text-white mb-2 mt-1 font-normal"
-                    color="gray"
-                >
-                    Filtro personalizados de empenhos
-                </Typography>
-                <form
-                    className="mt-4 w-full flex flex-col gap-2"
-                    onSubmit={submit}
-                >
-                    <div className="w-full flex justify-start gap-2">
-                        <SelectAno
-                            exercicios={exercicios}
-                            exercicioSelecionado={data.exercicio}
-                            setExercicioSelecionado={setExercicioSelecionado}
-                            setData={setData}
-                            errors={errors}
-                            data={data}
-                        />
-                        <Input
-                            name="empresa"
-                            color={darkMode ? "white" : "gray"}
-                            className="w-full bg-white dark:bg-blue-900 focus:outline-none"
-                            labelProps={{
-                                className: "text-gray-800 dark:text-white",
-                            }}
-                            containerProps={{
-                                className:
-                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
-                            }}
-                            label="Entidade"
-                            value={JSON.stringify(data.empresa)}
-                            icon={
-                                <PopoverEntidade
-                                    darkMode={darkMode}
-                                    ugs={ugs}
-                                    ugSelecionada={data.empresa}
-                                    setData={setData}
-                                />
-                            }
-                            error={errors.empresa}
-                            onChange={() => console.warn("Clique no botão +")}
-                        />
-                        <Input
-                            name="empenho"
-                            color={darkMode ? "white" : "gray"}
-                            className="bg-white dark:bg-blue-900 focus:outline-none"
-                            labelProps={{
-                                className: "text-gray-800 dark:text-white",
-                            }}
-                            containerProps={{
-                                className:
-                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
-                            }}
-                            value={data.empenho}
-                            inputMode="numeric"
-                            label="Número do Empenho"
-                            onChange={(e) => setData("empenho", e.target.value)}
-                            error={errors.empenho}
-                        />
-                        <DatePicker
-                            classeHerdada=""
-                            label="Data Inicial"
-                            value={initialDate}
-                            setValue={setInitialDate}
-                        />
-                        <DatePicker
-                            classeHerdada=""
-                            label="Data Final"
-                            value={finalDate}
-                            setValue={setFinalDate}
-                        />
-                        <label
-                            htmlFor="covid"
-                            className="flex w-fit cursor-pointer items-center text-gray-900 dark:text-white"
-                        >
-                            <Checkbox
-                                id="covid"
-                                ripple={true}
-                                name="covid"
-                                checked={data.covid}
-                                onChange={() => setData("covid", !data.covid)}
+        <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
+            <Typography
+                className="text-gray-800 dark:text-white mb-2"
+                variant="h4"
+                color="blue-gray"
+            >
+                {title}
+            </Typography>
+            <Typography
+                className="text-gray-800 dark:text-white mb-2 mt-1 font-normal"
+                color="gray"
+            >
+                Filtro personalizados de empenhos
+            </Typography>
+            <form className="mt-4 w-full flex flex-col gap-2" onSubmit={submit}>
+                <div className="w-full flex justify-start gap-2">
+                    <SelectAno
+                        exercicios={exercicios}
+                        exercicioSelecionado={data.exercicio}
+                        setExercicioSelecionado={setExercicioSelecionado}
+                        setData={setData}
+                        errors={errors}
+                        data={data}
+                    />
+                    <Input
+                        name="empresa"
+                        color={darkMode ? "white" : "gray"}
+                        className="w-full bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                        }}
+                        label="Entidade"
+                        value={JSON.stringify(data.empresa)}
+                        icon={
+                            <PopoverEntidade
+                                darkMode={darkMode}
+                                ugs={ugs}
+                                ugSelecionada={data.empresa}
+                                setData={setData}
                             />
-                            <Typography className="w-fit font-medium text-inherit">
-                                Covid-19
-                            </Typography>
-                        </label>
+                        }
+                        error={errors.empresa}
+                        onChange={() => console.warn("Clique no botão +")}
+                    />
+                    <Input
+                        name="empenho"
+                        color={darkMode ? "white" : "gray"}
+                        className="bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
+                        }}
+                        value={data.empenho}
+                        inputMode="numeric"
+                        label="Número do Empenho"
+                        onChange={(e) => setData("empenho", e.target.value)}
+                        error={errors.empenho}
+                    />
+                    <DatePicker
+                        classeHerdada=""
+                        label="Data Inicial"
+                        value={initialDate}
+                        setValue={setInitialDate}
+                    />
+                    <DatePicker
+                        classeHerdada=""
+                        label="Data Final"
+                        value={finalDate}
+                        setValue={setFinalDate}
+                    />
+                    <label
+                        htmlFor="covid"
+                        className="flex w-fit cursor-pointer items-center text-gray-900 dark:text-white"
+                    >
+                        <Checkbox
+                            id="covid"
+                            ripple={true}
+                            name="covid"
+                            checked={data.covid}
+                            onChange={() => setData("covid", !data.covid)}
+                        />
+                        <Typography className="w-fit font-medium text-inherit">
+                            Covid-19
+                        </Typography>
+                    </label>
+                </div>
+                <div className="w-full flex justify-start gap-2">
+                    <Input
+                        name="nomeFavorecido"
+                        color={darkMode ? "white" : "gray"}
+                        className="bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[24rem]",
+                        }}
+                        value={data.nomeFavorecido}
+                        type="text"
+                        inputMode="numeric"
+                        label="Nome Favorecido"
+                        onChange={(e) =>
+                            setData("nomeFavorecido", e.target.value)
+                        }
+                        error={errors.nomeFavorecido}
+                    />
+                    <Input
+                        name="cnpj"
+                        color={darkMode ? "white" : "gray"}
+                        className="bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                        }}
+                        placeholder="Apenas números"
+                        maxLength={14}
+                        inputMode="numeric"
+                        label="CPF / CNPJ"
+                        value={data.cpfCnpj}
+                        onChange={(e) => setData("cpfCnpj", e.target.value)}
+                        error={errors.cnpj}
+                    />
+                    <Input
+                        name="elemento"
+                        color={darkMode ? "white" : "gray"}
+                        className="w-full bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                        }}
+                        label="Elementos de Despesa"
+                        value={JSON.stringify(data.elemento)}
+                        icon={
+                            <PopoverElementos
+                                darkMode={darkMode}
+                                elementos={elementos}
+                                elementoSelecionado={data.elemento}
+                                setElementoSelecionado={setData}
+                            />
+                        }
+                        error={errors.elemento}
+                        onChange={() => console.warn("Clique no botão +")}
+                    />
+                    <div className="w-fit sm:w-auto flex items-end">
+                        <Button
+                            type="submit"
+                            className="interaction"
+                            name="consultar"
+                        >
+                            Consultar
+                        </Button>
                     </div>
-                    <div className="w-full flex justify-start gap-2">
-                        <Input
-                            name="nomeFavorecido"
-                            color={darkMode ? "white" : "gray"}
-                            className="bg-white dark:bg-blue-900 focus:outline-none"
-                            labelProps={{
-                                className: "text-gray-800 dark:text-white",
-                            }}
-                            containerProps={{
-                                className:
-                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[24rem]",
-                            }}
-                            value={data.nomeFavorecido}
-                            type="text"
-                            inputMode="numeric"
-                            label="Nome Favorecido"
-                            onChange={(e) =>
-                                setData("nomeFavorecido", e.target.value)
-                            }
-                            error={errors.nomeFavorecido}
-                        />
-                        <Input
-                            name="cnpj"
-                            color={darkMode ? "white" : "gray"}
-                            className="bg-white dark:bg-blue-900 focus:outline-none"
-                            labelProps={{
-                                className: "text-gray-800 dark:text-white",
-                            }}
-                            containerProps={{
-                                className:
-                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
-                            }}
-                            placeholder="Apenas números"
-                            maxLength={14}
-                            inputMode="numeric"
-                            label="CPF / CNPJ"
-                            value={data.cpfCnpj}
-                            onChange={(e) => setData("cpfCnpj", e.target.value)}
-                            error={errors.cnpj}
-                        />
-                        <Input
-                            name="elemento"
-                            color={darkMode ? "white" : "gray"}
-                            className="w-full bg-white dark:bg-blue-900 focus:outline-none"
-                            labelProps={{
-                                className: "text-gray-800 dark:text-white",
-                            }}
-                            containerProps={{
-                                className:
-                                    "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
-                            }}
-                            label="Elementos de Despesa"
-                            value={JSON.stringify(data.elemento)}
-                            icon={
-                                <PopoverElementos
-                                    darkMode={darkMode}
-                                    elementos={elementos}
-                                    elementoSelecionado={data.elemento}
-                                    setElementoSelecionado={setData}
-                                />
-                            }
-                            error={errors.elemento}
-                            onChange={() => console.warn("Clique no botão +")}
-                        />
-                        <div className="w-fit sm:w-auto flex items-end">
-                            <Button
-                                type="submit"
-                                className="interaction"
-                                name="consultar"
-                            >
-                                Consultar
-                            </Button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </>
+                </div>
+            </form>
+        </div>
     );
 };
 
