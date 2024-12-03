@@ -20,7 +20,7 @@ class LgpdController extends Controller
     {
         $pedido = $this->sic->getPedidos("coletivo");
 
-        return Inertia::render('Aplicacoes/Lgpd/Index', [
+        return Inertia::render('Informacoes/Lgpd/Index', [
             'pedidos' => $pedido
         ]);
     }

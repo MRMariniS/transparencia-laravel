@@ -20,7 +20,7 @@ class EouvController extends Controller
     {
         $pedido = $this->sic->getPedidos("coletivo");
 
-        return Inertia::render('Aplicacoes/Eouv/Index', [
+        return Inertia::render('Informacoes/Eouv/Index', [
             'pedidos' => $pedido
         ]);
     }

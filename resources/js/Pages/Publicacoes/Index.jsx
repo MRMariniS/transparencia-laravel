@@ -1,9 +1,9 @@
 import React from "react";
-import BaseLayout from "../../../Layouts/BaseLayout";
+import BaseLayout from "../../Layouts/BaseLayout";
 import { Typography } from "@material-tailwind/react";
 import { Head } from "@inertiajs/react";
 
-import FormFiltroPublicacoes from "../../../Components/Form/FormFiltroPublicacoes";
+import FormFiltroPublicacoes from "../../Components/Form/FormFiltroPublicacoes";
 
 const PublicacoesIndex = ({
     empresas,

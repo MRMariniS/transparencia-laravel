@@ -25,7 +25,7 @@ class LiquidacaoController extends Controller
 
         // dd($liquidacao);
 
-        return Inertia::render('Aplicacoes/Liquidacoes/Index', [
+        return Inertia::render('Despesa/Liquidacoes/Index', [
             'liquidacoes' => $liquidacao,
             'elementos' => $elementos,
         ]);
@@ -36,7 +36,7 @@ class LiquidacaoController extends Controller
         $request->validate(['exercicio', 'required']);
         $empresas = $this->empresa->getEmpresas($request->exercicio);
         $elementos = $this->liquidacao->getElementos($request->exercicio);
-        return Inertia::render('Aplicacoes/Liquidacoes/Index', ['empresas' => $empresas, 'elementos' => $elementos]);
+        return Inertia::render('Despesa/Liquidacoes/Index', ['empresas' => $empresas, 'elementos' => $elementos]);
     }
 
     /**
@@ -56,7 +56,7 @@ class LiquidacaoController extends Controller
         $elementos = $this->liquidacao->getElementos($request->query('exercicio'));
         $liquidacao = $this->liquidacao->getFilterLiquidacao($request->query('exercicio'), $request->query('empresa'), $request->query('empenho'), $request->query('cpfCnpj'), $request->query('nomeFavorecido'), $request->query('elemento'), $request->query('covid'), $request->query('dataInicial'), $request->query('dataFinal'));
 
-        return Inertia::render('Aplicacoes/Liquidacoes/Index', [
+        return Inertia::render('Despesa/Liquidacoes/Index', [
             'liquidacoes' => $liquidacao,
             'elementos' => $elementos,
             'url' => $request->getRequestUri()

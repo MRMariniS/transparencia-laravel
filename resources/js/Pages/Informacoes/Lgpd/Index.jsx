@@ -16,8 +16,8 @@ function LgpdIndex() {
                             <EnunciadoPedidos
                                 title={"O que é LGPD?"}
                                 resumo={
-                                    "<p>A Lei Geral de Proteção de Dados (LGPD) é uma legislação brasileira que tem como objetivo principal proteger os dados pessoais dos cidadãos e estabelecer diretrizes para o tratamento dessas informações por parte das organizações. Aprovada em 2018, a LGPD entrou em vigor em setembro de 2020.</p> " +
-                                    "<p>Foi inspirada no Regulamento Geral de Proteção de Dados (GDPR, na sigla em inglês), a ideia por trás da LGPD é garantir maior privacidade e segurança no uso de dados pessoais, além de estabelecer regras claras para o tratamento dessas informações.</p> "
+                                    "A Lei Geral de Proteção de Dados (LGPD) é uma legislação brasileira que tem como objetivo principal proteger os dados pessoais dos cidadãos e estabelecer diretrizes para o tratamento dessas informações por parte das organizações. Aprovada em 2018, a LGPD entrou em vigor em setembro de 2020." +
+                                    "Foi inspirada no Regulamento Geral de Proteção de Dados (GDPR, na sigla em inglês), a ideia por trás da LGPD é garantir maior privacidade e segurança no uso de dados pessoais, além de estabelecer regras claras para o tratamento dessas informações."
                                 }
                                 estruturasData={props.estruturas[0]}
                             />

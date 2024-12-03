@@ -21,7 +21,7 @@ class EsicController extends Controller
     {
         $pedido = $this->sic->getPedidos("coletivo");
 
-        return Inertia::render('Aplicacoes/Esic/Index', [
+        return Inertia::render('Informacoes/Esic/Index', [
             'pedidos' => $pedido
         ]);
     }
@@ -31,7 +31,7 @@ class EsicController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Aplicacoes/Esic/Create');
+        return Inertia::render('Informacoes/Esic/Create');
     }
 
     /**
@@ -44,14 +44,14 @@ class EsicController extends Controller
             'dtnascimento' => 'required',
             'nome' => 'required',
             'email' => 'required|email',
-            'telefone'=> 'required',
+            'telefone' => 'required',
             'objetivo' => 'required',
             'pedido' => 'required',
             'prioridade' => 'required',
             'tipo' => 'required',
             'ug' => 'required',
             'rpps' => 'required',
-            'anonimo' =>'required'
+            'anonimo' => 'required'
         ]);
 
         return $this->sic->createPedido($request);
@@ -103,7 +103,7 @@ class EsicController extends Controller
 
         $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
 
-        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
+        return Inertia::render('Informacoes/Esic/Index', ['pedidos' => $pedido]);
 
     }
 
@@ -111,7 +111,7 @@ class EsicController extends Controller
     function filtroPedido($tipo)
     {
         $pedido = $this->sic->getPedidos($tipo);
-        return Inertia::render('Aplicacoes/Esic/Index', ['pedidos' => $pedido]);
+        return Inertia::render('Informacoes/Esic/Index', ['pedidos' => $pedido]);
     }
 
 }
