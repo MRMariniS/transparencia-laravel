@@ -41,7 +41,7 @@ class EntityServices
         }
         
         if(!session()->has('EMPRESAS') || session()->get('TIPOEMPRESA') != $filterTipo){
-            session()->forget('EMPRESAS');
+            session()->flush();
             $accountingEntity = $this->repository->getAccountingEntity($ano, $filterTipo);
             session()->put('EMPRESAS', $accountingEntity);
         }else{

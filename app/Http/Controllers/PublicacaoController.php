@@ -17,7 +17,7 @@ class PublicacaoController extends Controller
      */
     public function index()
     {
-        $publicacao = 'Publicações';
+        $publicacao = $this->publicacao->getPublicacao();
         return Inertia::render('Publicacoes/Index', [
             'publicacoes' => $publicacao
         ]);

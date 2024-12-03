@@ -35,7 +35,7 @@ class SubGrupo extends Model
 
     function publicacao_subgrupo()
     {
-        $this->hasMany(Publicacao::class, 'SUBGRUPO', 'SUBGRUPO')->with('documentos');
+        $this->hasMany(Publicacao::class, 'SUBGRUPO', 'SUBGRUPO');
     }
 
 

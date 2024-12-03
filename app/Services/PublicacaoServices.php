@@ -11,16 +11,18 @@ class PublicacaoServices
     ) {
     }
 
-    function getPublicacaoPorModulo($cdmodulo, int $grupo = null, array $subgrupo = null)
-    {
-        return $this->publicacao->publicacaoPorModulo($cdmodulo, $grupo, $subgrupo);
+    function getPublicacao(){
+        return $this->publicacao->getPublicacao();
     }
 
-    function getPublicacao($idpublicacao){
-        return $this->publicacao->getPublicacao($idpublicacao);
-    }
+    // function getPublicacaoPorModulo($cdmodulo, int $grupo = null, array $subgrupo = null)
+    // {
+    //     return $this->publicacao->publicacaoPorModulo($cdmodulo, $grupo, $subgrupo);
+    // }
 
-    function getPublicacaoPorGrupoOuSubgrupo(int $grupo = 1, array $subgrupo = []){
-        return $this->publicacao->getPublicacaoPorGrupoOuSubgrupo($grupo, $subgrupo);
-    }
+    
+
+    // function getPublicacaoPorGrupoOuSubgrupo(int $grupo = 1, array $subgrupo = []){
+    //     return $this->publicacao->getPublicacaoPorGrupoOuSubgrupo($grupo, $subgrupo);
+    // }
 }

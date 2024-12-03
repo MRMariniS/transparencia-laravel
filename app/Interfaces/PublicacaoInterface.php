@@ -3,7 +3,7 @@
 namespace App\Interfaces;
 
 interface PublicacaoInterface{
-    function publicacaoPorModulo($cdmodulo, int $grupo = null, array $subgrupo = null);
-    function getPublicacao($idpublicacao);
-    function getPublicacaoPorGrupoOuSubgrupo(int $grupo, array $subgrupo = []);
+    function getPublicacao();
+    // function publicacaoPorModulo($cdmodulo, int $grupo = null, array $subgrupo = null);
+    // function getPublicacaoPorGrupoOuSubgrupo(int $grupo, array $subgrupo = []);
 }

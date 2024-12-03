@@ -58,6 +58,6 @@ class Publicacao extends Model
 
     function subgrupo()
     {
-        $this->hasOne(SubGrupo::class, 'SUBGRUPO', 'SUBGRUPO');
+       return $this->hasOne(SubGrupo::class, 'SUBGRUPO', 'SUBGRUPO');
     }
 }
