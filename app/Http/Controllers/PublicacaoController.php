@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\GrupoServices;
 use App\Services\PublicacaoServices;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -10,6 +11,7 @@ class PublicacaoController extends Controller
 {
     function __construct(
         protected PublicacaoServices $publicacao,
+        protected GrupoServices $grupo,
     ) {
     }
     /**
@@ -18,8 +20,10 @@ class PublicacaoController extends Controller
     public function index()
     {
         $publicacao = $this->publicacao->getPublicacao();
+        $grupos_subgrupos = $this->grupo->getAllGruposAndSubgrupos();
         return Inertia::render('Publicacoes/Index', [
-            'publicacoes' => $publicacao
+            'publicacoes' => $publicacao,
+            'gruposSubgrupos' => $grupos_subgrupos
         ]);
     }
 
