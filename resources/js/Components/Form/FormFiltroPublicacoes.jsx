@@ -32,6 +32,7 @@ const FormFiltroPublicacoes = ({
         empresa: [ugDefault],
         dataInicial: "",
         dataFinal: "",
+        ementa: "",
     });
 
     useEffect(() => {
@@ -96,6 +97,23 @@ const FormFiltroPublicacoes = ({
                         onChange={(e) => setData("numero", e.target.value)}
                         error={errors.numero}
                     />
+                    <Input
+                        name="exercicio"
+                        color={darkMode ? "white" : "gray"}
+                        className="bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
+                        }}
+                        value={data.exercicio}
+                        inputMode="numeric"
+                        label="Exercício"
+                        onChange={(e) => setData("exercicio", e.target.value)}
+                        error={errors.exercicio}
+                    />
                     <DatePicker
                         classeHerdada=""
                         label="Data Inicial"
@@ -108,8 +126,6 @@ const FormFiltroPublicacoes = ({
                         value={finalDate}
                         setValue={setFinalDate}
                     />
-                </div>
-                <div className="w-full flex justify-start gap-2">
                     <div className="w-fit sm:w-auto flex items-end">
                         <Button
                             type="submit"
@@ -117,6 +133,33 @@ const FormFiltroPublicacoes = ({
                             name="consultar"
                         >
                             Consultar
+                        </Button>
+                    </div>
+                </div>
+                <div className="w-full flex justify-start gap-2">
+                    <Input
+                        name="ementa"
+                        color={darkMode ? "white" : "gray"}
+                        className="bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
+                        }}
+                        value={data.ementa}
+                        label="Ementa/Palavra-Chave"
+                        onChange={(e) => setData("ementa", e.target.value)}
+                        error={errors.ementa}
+                    />
+                    <div className="w-fit sm:w-auto flex items-end">
+                        <Button
+                            type="submit"
+                            className="interaction"
+                            name="limpar"
+                        >
+                            Limpar
                         </Button>
                     </div>
                 </div>
