@@ -1,9 +1,10 @@
-import { Select } from "@material-tailwind/react";
+import { Option, Select } from "@material-tailwind/react";
 
 const SelectFilter = ({
     selectName,
     selectLabel,
     selectData,
+    selected,
     setData,
     errorsData,
 }) => {
@@ -22,12 +23,14 @@ const SelectFilter = ({
                     className:
                         "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
                 }}
-                value={`${selectData}`}
+                value={`${selected}`}
                 label={selectLabel}
-                onChange={(value) => setData(selectName, value)}
+                onChange={(value) => console.log(value)}
             >
-                {selectData.map(({ key, value }) => (
-                    <Option value={`${value}`} key={key}>{`${value}`}</Option>
+                {selectData.map(({ value, label }) => (
+                    <Option value={value} key={value}>
+                        {label}
+                    </Option>
                 ))}
             </Select>
             {errorsData && <div>{errorsData}</div>}

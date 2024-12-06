@@ -8,6 +8,9 @@ import SelectAno from "../Selects/SelectAno";
 import DatePicker from "../DatePicker";
 import Checkbox from "../Checkbox";
 import PopoverEntidade from "../Popover/PopoverEntidade";
+import SelectFilter from "../Selects/SelectFilter";
+import SelectGrupos from "../Selects/SelectGrupos";
+import PopoverGruposSubgrupos from "../Popover/PopoverGruposSubgrupos";
 
 const FormFiltroPublicacoes = ({
     title,
@@ -17,6 +20,7 @@ const FormFiltroPublicacoes = ({
     exercicios,
     nomeUgDefault,
     ugDefault,
+    gruposSubgrupos,
 }) => {
     const { darkMode } = useContext(PropsContext);
 
@@ -25,6 +29,9 @@ const FormFiltroPublicacoes = ({
     const [finalDate, setFinalDate] = useState("");
     const [initialDate, setInitialDate] = useState("");
     const [ugs, setUgs] = useState(empresas);
+    const [grupoSelecionado, setGrupoSelecionado] = useState([]);
+    const [subgrupoSelecionado, setSubgrupoSelecionado] = useState([]);
+    const [subgrupos, setSubgrupos] = useState();
 
     const { data, setData, get, processing, errors } = useForm({
         exercicio: exercicioDefault,
@@ -33,12 +40,25 @@ const FormFiltroPublicacoes = ({
         dataInicial: "",
         dataFinal: "",
         ementa: "",
+        atualizado: "",
+        grupos: grupoSelecionado,
+        subgrupos: subgrupoSelecionado,
     });
+
+    const filterOptions = [
+        { value: "", label: "Todos" },
+        { value: "S", label: "Sim" },
+        { value: "N", label: "Não" },
+    ];
 
     useEffect(() => {
         setData("entidade", []);
         handleChangeExercicio(data.exercicio);
     }, [data.exercicio]);
+
+    useEffect(() => {
+        setData("grupos", grupoSelecionado);
+    }, [grupoSelecionado]);
 
     useEffect(() => {
         setData(
@@ -129,7 +149,7 @@ const FormFiltroPublicacoes = ({
                     <div className="w-fit sm:w-auto flex items-end">
                         <Button
                             type="submit"
-                            className="interaction"
+                            className="interaction w-32"
                             name="consultar"
                         >
                             Consultar
@@ -153,10 +173,52 @@ const FormFiltroPublicacoes = ({
                         onChange={(e) => setData("ementa", e.target.value)}
                         error={errors.ementa}
                     />
+                    <Input
+                        name="grupo"
+                        color={darkMode ? "white" : "gray"}
+                        className="w-full bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                        }}
+                        label="Grupos"
+                        value={JSON.stringify(data.grupos)}
+                        icon={
+                            <PopoverGruposSubgrupos
+                                darkMode={darkMode}
+                                grupos={gruposSubgrupos}
+                                grupoSelecionado={data.grupos}
+                                setGrupoSelecionado={setData}
+                                subgrupos={subgrupos}
+                                setSubgrupos={setSubgrupos}
+                            />
+                        }
+                        error={errors.grupos}
+                        onChange={() => console.warn("Clique no botão +")}
+                    />
+                    <SelectFilter
+                        selectName="subgrupo"
+                        selectLabel="Subgrupo"
+                        selectData={filterOptions}
+                        selected={data.atualizado}
+                        setData={setData}
+                        errorsData={errors.atualizado}
+                    />
+                    <SelectFilter
+                        selectName="atualizado"
+                        selectLabel="Doc. Atualizado"
+                        selectData={filterOptions}
+                        selected={data.atualizado}
+                        setData={setData}
+                        errorsData={errors.atualizado}
+                    />
                     <div className="w-fit sm:w-auto flex items-end">
                         <Button
-                            type="submit"
-                            className="interaction"
+                            type="button"
+                            className="cancel w-32"
                             name="limpar"
                         >
                             Limpar

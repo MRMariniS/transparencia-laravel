@@ -16,25 +16,25 @@ import {
     FaRegSquarePlus,
 } from "react-icons/fa6";
 
-export default function PopoverElementos({
+const PopoverGruposSubgrupos = ({
     darkMode,
-    elementos,
-    elementoSelecionado,
-    setElementoSelecionado,
-}) {
-    const handleChange = (el) => {
-        if (elementoSelecionado.includes(el)) {
-            let arr = elementoSelecionado.filter((elemento) => elemento !== el);
-            setElementoSelecionado("elemento", arr);
+    grupos,
+    grupoSelecionado,
+    setGrupoSelecionado,
+}) => {
+    const handleChange = (gr) => {
+        if (grupoSelecionado.includes(gr)) {
+            let arr = grupoSelecionado.filter((grupo) => grupo !== gr);
+            setGrupoSelecionado("grupos", arr);
             return;
         }
 
-        setElementoSelecionado("elemento", [...elementoSelecionado, el]);
+        setGrupoSelecionado("grupos", [...grupoSelecionado, gr]);
     };
 
     const selectAll = () => {
-        let arr = elementos.map((ug) => ug.ELEMENTO);
-        setElementoSelecionado("elemento", arr);
+        let arr = grupos.map((gr) => gr.GRUPO);
+        setGrupoSelecionado("grupos", arr);
     };
 
     return (
@@ -65,35 +65,36 @@ export default function PopoverElementos({
                     </Button>
                     <Button
                         className="cancel w-fit flex flex-row gap-2 justify-start items-center"
-                        onClick={() => setElementoSelecionado("elemento", [])}
+                        onClick={() => setGrupoSelecionado("grupos", [])}
                     >
                         <FaRegSquareFull className="w-6 h-6" />
                         <Typography className="text-white">Limpar</Typography>
                     </Button>
                 </div>
                 <List className="bg-white dark:bg-blue-900 rounded-md max-h-full overflow-y-auto">
-                    {elementos.map(({ ELEMENTO, NOME }) => (
-                        <ListItem key={ELEMENTO} className="p-0">
+                    {grupos.map(({ GRUPO, DESCRICAO }) => (
+                        <ListItem key={GRUPO} className="p-0">
                             <label
-                                htmlFor={ELEMENTO}
+                                htmlFor={GRUPO}
                                 className="flex w-full cursor-pointer items-center px-3 py-2 text-gray-900 dark:text-white hover:dark:text-gray-900"
+                                onClick={() => handleChange(GRUPO)}
                             >
                                 <ListItemPrefix className="mr-3">
                                     <Checkbox
-                                        id={ELEMENTO}
+                                        id={GRUPO}
                                         ripple={true}
                                         className="hover:before:opacity-0"
                                         containerProps={{
                                             className: "p-0",
                                         }}
-                                        checked={elementoSelecionado.includes(
-                                            ELEMENTO
+                                        checked={grupoSelecionado.includes(
+                                            GRUPO
                                         )}
-                                        onChange={() => handleChange(ELEMENTO)}
+                                        onChange={() => handleChange(GRUPO)}
                                     />
                                 </ListItemPrefix>
                                 <Typography className="font-medium text-inherit">
-                                    {ELEMENTO} - {NOME}
+                                    {GRUPO} - {DESCRICAO}
                                 </Typography>
                             </label>
                         </ListItem>
@@ -102,4 +103,6 @@ export default function PopoverElementos({
             </PopoverContent>
         </Popover>
     );
-}
+};
+
+export default PopoverGruposSubgrupos;

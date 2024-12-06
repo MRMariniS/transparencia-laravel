@@ -63,13 +63,11 @@ export default function PopoverEntidade({
                         </Typography>
                     </Button>
                     <Button
-                        className="interaction w-fit flex flex-row gap-2 justify-start items-center"
+                        className="cancel w-fit flex flex-row gap-2 justify-start items-center"
                         onClick={() => setData("empresa", [])}
                     >
                         <FaRegSquareFull className="w-6 h-6" />
-                        <Typography className="text-white dark:text-gray-900">
-                            Limpar
-                        </Typography>
+                        <Typography className="text-white">Limpar</Typography>
                     </Button>
                 </div>
                 <List>
