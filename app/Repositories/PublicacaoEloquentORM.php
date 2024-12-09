@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\PublicacaoInterface;
 use App\Models\Publicacao;
 use App\Helpers\Helper;
+use App\Models\Publicarqs;
 use Illuminate\Support\Facades\DB;
 
 class PublicacaoEloquentORM implements PublicacaoInterface
@@ -20,8 +21,6 @@ class PublicacaoEloquentORM implements PublicacaoInterface
         'NUMERO',
         'DESCRICAO',
         'DTHRPUBLICADO',
-        'EMENTAHTML',
-        'PALAVRASCHAVE',
         'UG'
     ];
 
@@ -35,24 +34,49 @@ class PublicacaoEloquentORM implements PublicacaoInterface
 
     function getPublicacao()
     {
-        $publicacao = Publicacao::with('subgrupo')->where(function ($query) {
-            Helper::filterQueryUg($query);
-        })
-            ->select($this->camposPublicacao)
-            ->orderBy('ANO', 'DESC')->orderBy('DATA', 'DESC')->orderBy('NUMERO', 'DESC')
+        $publicacao = DB::connection('transparencia')->table(DB::raw("(
+        select A.ID, A.NUMERO, A.ANO, A.DESCRICAO, A.GRUPO, A.SUBGRUPO, A.EMENTA, A.DATA, A.CONSOLIDACAO,
+                       A.DTHRPUBLICADO,B.DESCRICAO as NOME_SUBGRUPO, A.PUBLICADO
+                        from PUBLICACAO A
+                        inner join SUBGRUPO B on (B.SUBGRUPO = A.SUBGRUPO and B.GRUPO = A.GRUPO)
+                        inner join GRUPO G on (G.GRUPO = A.GRUPO)
+                        where ((A.PUBLICADO = 'S' and
+                            A.LIMITE = 'N') or (A.LIMITE = 'S' and
+                            A.DTHRLIMITE > current_timestamp)) and
+                            exists(select 1
+                                    from PUBLICARQS C
+                                    where C.PUBLICACAO = A.ID and
+                                        ((C.PUBLICADO = 'S' and
+                                        C.LIMITE = 'N') or (C.LIMITE = 'S' and
+                                        C.DTHRLIMITE > current_timestamp))) and
+                            (select count(*)
+                            from PUBLICARQS C
+                            where ((C.PUBLICADO = 'S' and
+                                    C.LIMITE = 'N') or (C.LIMITE = 'S' and
+                                    C.DTHRLIMITE > current_timestamp))) >= 0 and
+                            A.DATA <= current_date and
+                            (A.UG <> 1 or A.UG is null)
+                        order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc) as subquery"))
+            ->orderBy('DATA', 'DESC')
+            ->orderBy('NUMERO', 'DESC')
+            ->orderBy('ANO', 'DESC')
+            ->orderBy('DTHRPUBLICADO', 'DESC')
+            ->orderBy('DESCRICAO', 'DESC')
             ->paginate(10);
 
-        $publicacao = Helper::convertingData($publicacao, $this->camposConvertingData, ['DTHRPUBLICADO', 'DATA']);
-        //dd($publicacao);
-        foreach ($publicacao as $item) {
-            $item->subgrupo = Helper::convertingDataHasOne(
-                $item->subgrupo,
-                [
-                    'DESCRICAO',
-                    'DEFINICAO'
-                ]
-            );
-        }
+
+        //order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc
+
+        $publicacao = Helper::convertingData(
+            $publicacao,
+            [
+                'DESCRICAO',
+                'EMENTA',
+                'NUMERO',
+                'NOME_SUBGRUPO'
+            ],
+            ['DATA', 'DTHRPUBLICADO']
+        );
         return $publicacao;
     }
 

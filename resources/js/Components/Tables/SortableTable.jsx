@@ -26,6 +26,17 @@ export function SortableTable({
             : router.get(`?page=${page}`);
     };
 
+    const objectKeyColumn = (content, keyColumn) => {
+        if (typeof keyColumn == "object") {
+            const keys = Object.keys(keyColumn);
+            keys.forEach((key, index) => {
+                return content[key][keyColumn[key][index]];
+            });
+        } else {
+            return content[keyColumn];
+        }
+    };
+
     return (
         <>
             <table className="w-full max-w-full table-auto text-left">
@@ -129,7 +140,10 @@ export function SortableTable({
                                                     color="blue-gray"
                                                     className="font-normal text-gray-800 dark:text-white text-wrap"
                                                 >
-                                                    {content[keyColumn]}
+                                                    {objectKeyColumn(
+                                                        content,
+                                                        keyColumn
+                                                    )}
                                                 </Typography>
                                             </div>
                                         </td>

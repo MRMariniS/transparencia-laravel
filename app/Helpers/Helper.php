@@ -10,18 +10,26 @@ use Symfony\Component\Console\Input\Input;
 
 class Helper
 {
-    static function filterQueryUg($query)
+    /**
+     * @param table query será TABLE.UG
+     * 
+     */
+    static function filterQueryUg($query, $table = null)
     {
+        $column = 'UG';
+        if ($table) {
+            $column = $table . '.UG';
+        }
         if (session()->get('TIPOEMPRESA') == 1) {
-            $query->whereNotIn('UG', [session()->get('UGCAMARA'), session()->get('UGRPPS')])
-                ->orWhereNull("UG");
+            $query->whereNotIn($column, [session()->get('UGCAMARA'), session()->get('UGRPPS')])
+                ->orWhereNull($column);
         } else {
-            $query->where('UG', session()->get('UG'))->orWhereNull("UG");
+            $query->where($column, session()->get("UG"))->orWhereNull($column);
         }
         return $query;
     }
 
-    static function filterQueryEmpresaScpi($alias, $empresa = '')
+    static function filterQueryEmpresaScpi($alias, $empresa = [])
     {
 
         $query = "AND ($alias.EMPRESA=" . session()->get('UG') . ")";
@@ -117,6 +125,5 @@ class Helper
         } catch (QueryException | InvalidArgumentException $e) {
             return session()->get('ULTIMOANOATIVO');
         }
-
     }
 }

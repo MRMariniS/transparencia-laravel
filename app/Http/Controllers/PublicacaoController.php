@@ -20,10 +20,10 @@ class PublicacaoController extends Controller
     public function index()
     {
         $publicacao = $this->publicacao->getPublicacao();
-        $grupos_subgrupos = $this->grupo->getAllGruposAndSubgrupos();
+        $grupos= $this->grupo->getAllGrupos();
         return Inertia::render('Publicacoes/Index', [
             'publicacoes' => $publicacao,
-            'gruposSubgrupos' => $grupos_subgrupos
+            'grupos' => $grupos
         ]);
     }
 

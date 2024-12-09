@@ -51,6 +51,7 @@ class Publicacao extends Model
             'PUBLICACAO',
             'TIPO',
             'DESCRICAO',
+            'PUBLICADO',
             'DTHRPUBLICADO',
             'QTACESSOS'
         ]);

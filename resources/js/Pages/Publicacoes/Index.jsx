@@ -14,7 +14,7 @@ const PublicacoesIndex = ({
     nomeUgDefault,
     ugDefault,
     publicacoes,
-    gruposSubgrupos,
+    grupos,
 }) => {
     return (
         <>
@@ -29,7 +29,7 @@ const PublicacoesIndex = ({
                         exercicios={exercicios}
                         nomeUgDefault={nomeUgDefault}
                         ugDefault={ugDefault}
-                        gruposSubgrupos={gruposSubgrupos}
+                        gruposSubgrupos={grupos}
                     />
                     <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                         <SortableTable
@@ -45,7 +45,7 @@ const PublicacoesIndex = ({
                                 "DATA PUBLICAÇÃO",
                             ]}
                             headerKeys={[
-                                "SUBGRUPO",
+                                "NOME_SUBGRUPO",
                                 "ANO",
                                 "DATA",
                                 "NUMERO",
