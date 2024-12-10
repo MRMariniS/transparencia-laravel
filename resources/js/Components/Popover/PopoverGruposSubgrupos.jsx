@@ -10,6 +10,7 @@ import {
     Checkbox,
     Typography,
 } from "@material-tailwind/react";
+import { useEffect } from "react";
 import {
     FaRegSquareCheck,
     FaRegSquareFull,
@@ -21,7 +22,14 @@ const PopoverGruposSubgrupos = ({
     grupos,
     grupoSelecionado,
     setGrupoSelecionado,
+    subgrupos,
+    setSubgrupos,
 }) => {
+    useEffect(() => {}, [grupoSelecionado]);
+
+    console.log(grupos);
+    console.log(subgrupos);
+
     const handleChange = (gr) => {
         if (grupoSelecionado.includes(gr)) {
             let arr = grupoSelecionado.filter((grupo) => grupo !== gr);

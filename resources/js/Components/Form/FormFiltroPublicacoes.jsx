@@ -31,7 +31,7 @@ const FormFiltroPublicacoes = ({
     const [ugs, setUgs] = useState(empresas);
     const [grupoSelecionado, setGrupoSelecionado] = useState([]);
     const [subgrupoSelecionado, setSubgrupoSelecionado] = useState([]);
-    const [subgrupos, setSubgrupos] = useState();
+    const [subgrupos, setSubgrupos] = useState([]);
 
     const { data, setData, get, processing, errors } = useForm({
         exercicio: exercicioDefault,
