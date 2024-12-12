@@ -34,12 +34,7 @@ class EntityEloquentORM implements EntityInterface
         $entity = Helper::convertingData(
             $entity,
             [
-                'NOME',
-                'ENDERECO',
-                'CIDADE',
-                'HORARIO',
-                'GESRESPONSAVEL',
-                'GESCARGO'
+                'NOME','ENDERECO', 'CIDADE', 'HORARIO','GESRESPONSAVEL','GESCARGO'
             ]
         );
 
@@ -52,10 +47,13 @@ class EntityEloquentORM implements EntityInterface
 
             if ($filterTipo == 1) {
                 $sqlug = '';
+                session()->put('ENTIDADEROTA', 'executivo');
             } elseif ($filterTipo == 2) {
                 $sqlug = 'AND TIPO IN(2)';
+                session()->put('ENTIDADEROTA', 'legislativo');
             } elseif ($filterTipo == 8) {
                 $sqlug = 'AND TIPO IN(8)';
+                session()->put('ENTIDADEROTA', 'previdencia');
             }
 
             $entityContability = app('db')->connection("scpi$ano")
@@ -63,6 +61,7 @@ class EntityEloquentORM implements EntityInterface
 
             if (!array_key_exists(0, $entityContability)) {
                 $filterTipo = 1;
+                session()->put('ENTIDADEROTA', 'executivo');
                 $entityContability = app('db')->connection("scpi$ano")
                     ->select("SELECT EMPRESA, NOME, TIPO, CGC, ENDERECO, FONE, CEP, NOME_AUTORID, CARGO_AUTORID FROM TABEMPRESA WHERE MOSTRA_WEB = 'S' ORDER BY TIPO");
             }

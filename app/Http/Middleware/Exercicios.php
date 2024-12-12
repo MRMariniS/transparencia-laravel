@@ -55,7 +55,7 @@ class Exercicios extends Middleware
             'nomeUgDefault' => $nomeUgDefault,
             'exercicios'=> $exercicios,
             'empresas' => $entidades,
-            'entidadeRota' => session()->get('ENTIDADEROTA') ? session()->get('ENTIDADEROTA') : 'executivo'
+            'entidadeRota' => session()->get('ENTIDADEROTA') 
         ]);
     }
 }

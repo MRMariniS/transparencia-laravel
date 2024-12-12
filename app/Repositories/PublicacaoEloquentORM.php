@@ -34,6 +34,12 @@ class PublicacaoEloquentORM implements PublicacaoInterface
 
     function getPublicacao()
     {
+        if (session()->get('TIPOEMPRESA') == 1) {
+            $queryUG = "(A.UG NOT IN(" . session()->get('UGCAMARA') . "," . session()->get('UGRPPS') . ") OR A.UG IS NULL)";
+        } else {
+            $queryUG = "(A.UG =" . session()->get("UG") . ")";
+        }
+
         $publicacao = DB::connection('transparencia')->table(DB::raw("(
         select A.ID, A.NUMERO, A.ANO, A.DESCRICAO, A.GRUPO, A.SUBGRUPO, A.EMENTA, A.DATA, A.CONSOLIDACAO,
                        A.DTHRPUBLICADO,B.DESCRICAO as NOME_SUBGRUPO, A.PUBLICADO
@@ -55,7 +61,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
                                     C.LIMITE = 'N') or (C.LIMITE = 'S' and
                                     C.DTHRLIMITE > current_timestamp))) >= 0 and
                             A.DATA <= current_date and
-                            (A.UG <> 1 or A.UG is null)
+                            $queryUG
                         order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc) as subquery"))
             ->orderBy('DATA', 'DESC')
             ->orderBy('NUMERO', 'DESC')
