@@ -79,35 +79,37 @@ const PopoverGruposSubgrupos = ({
                         <Typography className="text-white">Limpar</Typography>
                     </Button>
                 </div>
-                <List className="bg-white dark:bg-blue-900 rounded-md max-h-full overflow-y-auto">
-                    {grupos.map(({ GRUPO, DESCRICAO }) => (
-                        <ListItem key={GRUPO} className="p-0">
-                            <label
-                                htmlFor={GRUPO}
-                                className="flex w-full cursor-pointer items-center px-3 py-2 text-gray-900 dark:text-white hover:dark:text-gray-900"
-                                onClick={() => handleChange(GRUPO)}
-                            >
-                                <ListItemPrefix className="mr-3">
-                                    <Checkbox
-                                        id={GRUPO}
-                                        ripple={true}
-                                        className="hover:before:opacity-0"
-                                        containerProps={{
-                                            className: "p-0",
-                                        }}
-                                        checked={grupoSelecionado.includes(
-                                            GRUPO
-                                        )}
-                                        onChange={() => handleChange(GRUPO)}
-                                    />
-                                </ListItemPrefix>
-                                <Typography className="font-medium text-inherit">
-                                    {GRUPO} - {DESCRICAO}
-                                </Typography>
-                            </label>
-                        </ListItem>
-                    ))}
-                </List>
+                <div className="overflow-auto">
+                    <List className="bg-white dark:bg-blue-900">
+                        {grupos.map(({ GRUPO, DESCRICAO }) => (
+                            <ListItem key={GRUPO} className="p-0">
+                                <label
+                                    htmlFor={GRUPO}
+                                    className="flex w-full cursor-pointer items-center px-3 py-2 text-gray-900 dark:text-white hover:dark:text-gray-900"
+                                    onClick={() => handleChange(GRUPO)}
+                                >
+                                    <ListItemPrefix>
+                                        <Checkbox
+                                            id={GRUPO}
+                                            ripple={true}
+                                            className="hover:before:opacity-0"
+                                            containerProps={{
+                                                className: "p-0",
+                                            }}
+                                            checked={grupoSelecionado.includes(
+                                                GRUPO
+                                            )}
+                                            onChange={() => handleChange(GRUPO)}
+                                        />
+                                    </ListItemPrefix>
+                                    <Typography className="font-medium text-inherit">
+                                        {GRUPO} - {DESCRICAO}
+                                    </Typography>
+                                </label>
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
             </PopoverContent>
         </Popover>
     );

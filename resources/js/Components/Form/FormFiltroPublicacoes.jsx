@@ -71,6 +71,7 @@ const FormFiltroPublicacoes = ({
         setData("dataFinal", new Date(finalDate).toLocaleDateString("pt-BR"));
     }, [finalDate]);
 
+    console.log(grupoSelecionado);
     const handleChangeExercicio = (ex) => {
         axios.get(route("scpi.tabempresa", ex)).then((res) => {
             setUgs(res.data[0]);
