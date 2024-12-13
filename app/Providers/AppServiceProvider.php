@@ -14,6 +14,7 @@ use App\Interfaces\PagamentoInterface;
 use App\Interfaces\PublicacaoInterface;
 use App\Interfaces\SeloInterface;
 use App\Interfaces\SicPedidoInterface;
+use App\Interfaces\SubGrupoInterface;
 use App\Interfaces\TabEmpresa;
 use App\Interfaces\TabEmpresaInterface;
 use App\Interfaces\UrlInterface;
@@ -30,6 +31,7 @@ use App\Repositories\PagamentoFacadeORM;
 use App\Repositories\PublicacaoEloquentORM;
 use App\Repositories\SeloEloquentORM;
 use App\Repositories\SicPedidoEloquentORM;
+use App\Repositories\SubGrupoFacadeORM;
 use App\Repositories\TabEmpresaFacadeORM;
 use App\Repositories\UrlEloquentORM;
 use Illuminate\Support\ServiceProvider;
@@ -59,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LiquidacaoInterface::class, LiquidacaoFacadeORM::class);
         $this->app->bind(PagamentoInterface::class, PagamentoFacadeORM::class);
         $this->app->bind(GrupoInterface::class, GrupoEloquentORM::class);
+        $this->app->bind(SubGrupoInterface::class, SubGrupoFacadeORM::class);
     }
 
     /**
