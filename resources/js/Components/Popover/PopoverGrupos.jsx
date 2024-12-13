@@ -17,19 +17,12 @@ import {
     FaRegSquarePlus,
 } from "react-icons/fa6";
 
-const PopoverGruposSubgrupos = ({
+const PopoverGrupos = ({
     darkMode,
     grupos,
     grupoSelecionado,
     setGrupoSelecionado,
-    subgrupos,
-    setSubgrupos,
 }) => {
-    useEffect(() => {}, [grupoSelecionado]);
-
-    console.log(grupos);
-    console.log(subgrupos);
-
     const handleChange = (gr) => {
         if (grupoSelecionado.includes(gr)) {
             let arr = grupoSelecionado.filter((grupo) => grupo !== gr);
@@ -80,32 +73,26 @@ const PopoverGruposSubgrupos = ({
                     </Button>
                 </div>
                 <div className="overflow-auto">
-                    <List className="bg-white dark:bg-blue-900">
+                    <List className="bg-white dark:bg-blue-900 rounded-lg">
                         {grupos.map(({ GRUPO, DESCRICAO }) => (
-                            <ListItem key={GRUPO} className="p-0">
-                                <label
-                                    htmlFor={GRUPO}
-                                    className="flex w-full cursor-pointer items-center px-3 py-2 text-gray-900 dark:text-white hover:dark:text-gray-900"
-                                    onClick={() => handleChange(GRUPO)}
-                                >
-                                    <ListItemPrefix>
-                                        <Checkbox
-                                            id={GRUPO}
-                                            ripple={true}
-                                            className="hover:before:opacity-0"
-                                            containerProps={{
-                                                className: "p-0",
-                                            }}
-                                            checked={grupoSelecionado.includes(
-                                                GRUPO
-                                            )}
-                                            onChange={() => handleChange(GRUPO)}
-                                        />
-                                    </ListItemPrefix>
-                                    <Typography className="font-medium text-inherit">
-                                        {GRUPO} - {DESCRICAO}
-                                    </Typography>
-                                </label>
+                            <ListItem
+                                key={GRUPO}
+                                className="!bg-blue-700 dark:!bg-sky-200 !text-white dark:!text-gray-800 py-2 px-4 flex items-center gap-2"
+                                onClick={() => handleChange(GRUPO)}
+                            >
+                                <ListItemPrefix>
+                                    <Checkbox
+                                        id={GRUPO}
+                                        ripple={true}
+                                        checked={grupoSelecionado.includes(
+                                            GRUPO
+                                        )}
+                                        onChange={() => handleChange(GRUPO)}
+                                    />
+                                </ListItemPrefix>
+                                <Typography className="font-medium text-inherit">
+                                    {GRUPO} - {DESCRICAO}
+                                </Typography>
                             </ListItem>
                         ))}
                     </List>
@@ -115,4 +102,4 @@ const PopoverGruposSubgrupos = ({
     );
 };
 
-export default PopoverGruposSubgrupos;
+export default PopoverGrupos;

@@ -10,7 +10,7 @@ import Checkbox from "../Checkbox";
 import PopoverEntidade from "../Popover/PopoverEntidade";
 import SelectFilter from "../Selects/SelectFilter";
 import SelectGrupos from "../Selects/SelectGrupos";
-import PopoverGruposSubgrupos from "../Popover/PopoverGruposSubgrupos";
+import PopoverGrupos from "../Popover/PopoverGrupos";
 
 const FormFiltroPublicacoes = ({
     title,
@@ -71,7 +71,6 @@ const FormFiltroPublicacoes = ({
         setData("dataFinal", new Date(finalDate).toLocaleDateString("pt-BR"));
     }, [finalDate]);
 
-    console.log(grupoSelecionado);
     const handleChangeExercicio = (ex) => {
         axios.get(route("scpi.tabempresa", ex)).then((res) => {
             setUgs(res.data[0]);
@@ -188,13 +187,11 @@ const FormFiltroPublicacoes = ({
                         label="Grupos"
                         value={JSON.stringify(data.grupos)}
                         icon={
-                            <PopoverGruposSubgrupos
+                            <PopoverGrupos
                                 darkMode={darkMode}
                                 grupos={gruposSubgrupos}
                                 grupoSelecionado={data.grupos}
                                 setGrupoSelecionado={setData}
-                                subgrupos={subgrupos}
-                                setSubgrupos={setSubgrupos}
                             />
                         }
                         error={errors.grupos}
