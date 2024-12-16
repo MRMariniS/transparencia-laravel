@@ -36,7 +36,7 @@ Route::resource('/acesso-a-informacao/lgpd', LgpdController::class)->only('index
 Route::resource('/acesso-a-informacao/eouv', EouvController::class)->only('index')->middleware(CanaisDeInformacao::class . ':eouv');
 
 Route::resource('/publicacoes/documentos', PublicacaoController::class)->only('index');
-Route::get('publicacoes/documentos/subgrupos/{grupo}', [SubGrupoController::class, 'getSubgrupos'])->name('grupo.subgrupos');
+Route::post('publicacoes/documentos/subgrupos', [SubGrupoController::class, 'getSubgrupos'])->name('grupo.subgrupos');
 
 Route::get('/despesa/empenhos', [EmpenhoController::class, 'index'])->name('empenho.index');
 Route::get('/despesa/filter/empenhos/', [EmpenhoController::class, 'filter'])->name('empenho.filter');

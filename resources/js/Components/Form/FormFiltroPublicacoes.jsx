@@ -52,15 +52,6 @@ const FormFiltroPublicacoes = ({
     ];
 
     useEffect(() => {
-        setData("entidade", []);
-        handleChangeExercicio(data.exercicio);
-    }, [data.exercicio]);
-
-    useEffect(() => {
-        setData("grupos", grupoSelecionado);
-    }, [grupoSelecionado]);
-
-    useEffect(() => {
         setData(
             "dataInicial",
             new Date(initialDate).toLocaleDateString("pt-BR")
@@ -71,11 +62,21 @@ const FormFiltroPublicacoes = ({
         setData("dataFinal", new Date(finalDate).toLocaleDateString("pt-BR"));
     }, [finalDate]);
 
-    const handleChangeExercicio = (ex) => {
-        axios.get(route("scpi.tabempresa", ex)).then((res) => {
-            setUgs(res.data[0]);
-            setData("exercicio", res.data.exercicio);
-        });
+    useEffect(() => {
+        handleChangeSubgrupo(data.grupos);
+    }, [data.grupos]);
+
+    const handleChangeSubgrupo = (gr) => {
+        if (gr.length === 0) return;
+
+        axios
+            .post(route("grupo.subgrupos", { grupos: gr }))
+            .then((res) => {
+                setSubgrupos(res.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     function submit(e) {
