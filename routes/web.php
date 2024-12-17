@@ -29,7 +29,7 @@ Route::resource('/aplicacoes/selo', SeloController::class)->only('index');
 Route::resource('/aplicacoes/esic', EsicController::class)->except('destroy')->middleware(CanaisDeInformacao::class . ':esic');
 Route::post('/acesso-a-informacao/esic/consulta/meus-pedidos', [EsicController::class, 'listaPedidoPorCPF'])->name('esic.meuspedidos');
 Route::get('/acesso-a-informacao/esic/pedidos/{tipo}', [EsicController::class, 'filtroPedido'])->name('esic.tipospedidos');
-Route::get('/acesso-a-informacao/principal', [InformacoesController::class, 'index'])->name('info.index');
+// Route::get('/acesso-a-informacao/principal', [InformacoesController::class, 'index'])->name('info.index');
 
 Route::resource('/acesso-a-informacao/lgpd', LgpdController::class)->only('index')->middleware(CanaisDeInformacao::class . ':lgpd');
 

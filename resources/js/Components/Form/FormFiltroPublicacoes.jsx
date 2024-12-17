@@ -11,6 +11,7 @@ import PopoverEntidade from "../Popover/PopoverEntidade";
 import SelectFilter from "../Selects/SelectFilter";
 import SelectGrupos from "../Selects/SelectGrupos";
 import PopoverGrupos from "../Popover/PopoverGrupos";
+import PopoverSubGrupos from "../Popover/PopoverSubgrupos";
 
 const FormFiltroPublicacoes = ({
     title,
@@ -19,6 +20,7 @@ const FormFiltroPublicacoes = ({
     exercicioDefault,
     exercicios,
     nomeUgDefault,
+    routeFilter,
     ugDefault,
     gruposSubgrupos,
 }) => {
@@ -44,7 +46,10 @@ const FormFiltroPublicacoes = ({
         grupos: grupoSelecionado,
         subgrupos: subgrupoSelecionado,
     });
-
+    function submit(e) {
+        e.preventDefault();
+        get(route(`${routeFilter}`));
+    }
     const filterOptions = [
         { value: "", label: "Todos" },
         { value: "S", label: "Sim" },
@@ -59,7 +64,15 @@ const FormFiltroPublicacoes = ({
     }, [initialDate]);
 
     useEffect(() => {
-        setData("dataFinal", new Date(finalDate).toLocaleDateString("pt-BR"));
+        if (initialDate > finalDate) {
+            alert("A data inicial não pode ser maior que a data final");
+            setFinalDate(initialDate);
+        } else {
+            setData(
+                "dataFinal",
+                new Date(finalDate).toLocaleDateString("pt-BR")
+            );
+        }
     }, [finalDate]);
 
     useEffect(() => {
@@ -67,7 +80,10 @@ const FormFiltroPublicacoes = ({
     }, [data.grupos]);
 
     const handleChangeSubgrupo = (gr) => {
-        if (gr.length === 0) return;
+        if (gr.length === 0) {
+            setSubgrupos([]);
+            return;
+        }
 
         axios
             .post(route("grupo.subgrupos", { grupos: gr }))
@@ -83,6 +99,18 @@ const FormFiltroPublicacoes = ({
         e.preventDefault();
         get(route(`${routeFilter}`));
     }
+
+    useEffect(() => {
+        setData("empresa", []);
+        handleChangeExercicio(data.exercicio);
+    }, [data.exercicio]);
+
+    const handleChangeExercicio = (ex) => {
+        axios.get(route("scpi.tabempresa", ex)).then((res) => {
+            setUgs(res.data[0]);
+            setData("exercicio", res.data.exercicio);
+        });
+    };
 
     return (
         <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
@@ -101,6 +129,38 @@ const FormFiltroPublicacoes = ({
             </Typography>
             <form className="mt-4 w-full flex flex-col gap-2" onSubmit={submit}>
                 <div className="w-full flex justify-start gap-2">
+                    <SelectAno
+                        exercicios={exercicios}
+                        exercicioSelecionado={data.exercicio}
+                        setExercicioSelecionado={setExercicioSelecionado}
+                        setData={setData}
+                        errors={errors}
+                        data={data}
+                    />
+                    <Input
+                        name="empresa"
+                        color={darkMode ? "white" : "gray"}
+                        className="w-full bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                        }}
+                        label="Entidade"
+                        value={JSON.stringify(data.empresa)}
+                        icon={
+                            <PopoverEntidade
+                                darkMode={darkMode}
+                                ugs={ugs}
+                                ugSelecionada={data.empresa}
+                                setData={setData}
+                            />
+                        }
+                        error={errors.empresa}
+                        onChange={() => console.warn("Clique no botão +")}
+                    />
                     <Input
                         name="publicacao"
                         color={darkMode ? "white" : "gray"}
@@ -118,34 +178,19 @@ const FormFiltroPublicacoes = ({
                         onChange={(e) => setData("numero", e.target.value)}
                         error={errors.numero}
                     />
-                    <Input
-                        name="exercicio"
-                        color={darkMode ? "white" : "gray"}
-                        className="bg-white dark:bg-blue-900 focus:outline-none"
-                        labelProps={{
-                            className: "text-gray-800 dark:text-white",
-                        }}
-                        containerProps={{
-                            className:
-                                "bg-white dark:bg-blue-900 rounded-lg min-w-[8rem]",
-                        }}
-                        value={data.exercicio}
-                        inputMode="numeric"
-                        label="Exercício"
-                        onChange={(e) => setData("exercicio", e.target.value)}
-                        error={errors.exercicio}
-                    />
                     <DatePicker
                         classeHerdada=""
                         label="Data Inicial"
                         value={initialDate}
                         setValue={setInitialDate}
+                        exercicio={data.exercicio}
                     />
                     <DatePicker
                         classeHerdada=""
                         label="Data Final"
                         value={finalDate}
                         setValue={setFinalDate}
+                        exercicio={data.exercicio}
                     />
                     <div className="w-fit sm:w-auto flex items-end">
                         <Button
@@ -198,13 +243,29 @@ const FormFiltroPublicacoes = ({
                         error={errors.grupos}
                         onChange={() => console.warn("Clique no botão +")}
                     />
-                    <SelectFilter
-                        selectName="subgrupo"
-                        selectLabel="Subgrupo"
-                        selectData={filterOptions}
-                        selected={data.atualizado}
-                        setData={setData}
-                        errorsData={errors.atualizado}
+                    <Input
+                        name="subgrupo"
+                        color={darkMode ? "white" : "gray"}
+                        className="w-full bg-white dark:bg-blue-900 focus:outline-none"
+                        labelProps={{
+                            className: "text-gray-800 dark:text-white",
+                        }}
+                        containerProps={{
+                            className:
+                                "bg-white dark:bg-blue-900 rounded-lg min-w-[16rem]",
+                        }}
+                        label="Subgrupos"
+                        value={JSON.stringify(data.subgrupos)}
+                        icon={
+                            <PopoverSubGrupos
+                                darkMode={darkMode}
+                                subgrupos={subgrupos}
+                                subGrupoSelecionado={data.subgrupos}
+                                setsubGrupoSelecionado={setData}
+                            />
+                        }
+                        error={errors.subgrupos}
+                        onChange={() => console.warn("Clique no botão +")}
                     />
                     <SelectFilter
                         selectName="atualizado"

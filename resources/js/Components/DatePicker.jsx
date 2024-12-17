@@ -1,20 +1,36 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import {
     Input,
     Popover,
     PopoverHandler,
     PopoverContent,
 } from "@material-tailwind/react";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import { ptBR } from "react-day-picker/locale";
 import { PropsContext } from "../Layouts/RootLayout";
 import "react-day-picker/style.css";
 import { FaCalendarDays, FaX } from "react-icons/fa6";
 
-export default function DatePicker({ classeHerdada, label, value, setValue }) {
+export default function DatePicker({
+    classeHerdada,
+    label,
+    value,
+    setValue,
+    exercicio,
+}) {
     const { darkMode } = useContext(PropsContext);
     const defaultClassNames = getDefaultClassNames();
+    const [monthStart, setMonthStart] = useState(0);
+
+    useEffect(() => {
+        const data = new Date();
+        if (data.getFullYear() == exercicio) {
+            setMonthStart(data.getMonth());
+        } else {
+            setMonthStart(0);
+        }
+    }, [exercicio]);
 
     return (
         <div className={classeHerdada}>
@@ -30,7 +46,7 @@ export default function DatePicker({ classeHerdada, label, value, setValue }) {
                                 "min-w-0 bg-white dark:bg-blue-900 rounded-lg",
                         }}
                         labelProps={{
-                            className: "!text-gray-400",
+                            className: "!text-gray-400 ",
                         }}
                         icon={
                             value !== "" ? (
@@ -59,12 +75,15 @@ export default function DatePicker({ classeHerdada, label, value, setValue }) {
                         selected={value}
                         onSelect={setValue}
                         captionLayout="dropdown"
+                        defaultMonth={new Date(exercicio, monthStart)}
+                        startMonth={new Date(exercicio, 0)}
+                        endMonth={new Date(exercicio, 11)}
                         classNames={{
                             today: "bg-amber-500 rounded-lg text-white",
-                            selected:
-                                "bg-gray-50 dark:bg-blue-800 border border-black dark:border-white rouded-lg",
+
                             root: `${defaultClassNames.root} bg-white dark:bg-blue-900 text-gray-800 dark:text-white`,
                             chevron: "fill-gray-900 dark:fill-white",
+                            dropdown: `${defaultClassNames.dropdown} bg-white dark:bg-blue-900 text-gray-800 dark:text-white p-1`,
                         }}
                     />
                 </PopoverContent>

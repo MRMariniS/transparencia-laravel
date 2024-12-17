@@ -10,34 +10,24 @@ use Illuminate\Support\Facades\DB;
 
 class PublicacaoEloquentORM implements PublicacaoInterface
 {
-    private $camposPublicacao = [
-        'ID',
-        'GRUPO',
-        'SUBGRUPO',
-        'ANO',
-        'DATA',
-        'DESCRICAO',
-        'EMENTA',
-        'NUMERO',
-        'DESCRICAO',
-        'DTHRPUBLICADO',
-        'UG'
-    ];
 
-    private $camposConvertingData = [
-        'NUMERO',
-        'DESCRICAO',
-        'EMENTA',
-        'PALAVRASCHAVE',
-        'EMENTAHTML',
-    ];
-
-    function getPublicacao()
+    function getPublicacao($ano, $empresa = null, $numero = null, $ementa = null, $datainicial = null, $datafinal = null, $grupo = null, $subgrupo = null)
     {
-        if (session()->get('TIPOEMPRESA') == 1) {
-            $queryUG = "(A.UG NOT IN(" . session()->get('UGCAMARA') . "," . session()->get('UGRPPS') . ") OR A.UG IS NULL)";
+        
+        if (!$empresa) {
+            if (session()->get('TIPOEMPRESA') == 1) {
+                $queryUG = "(A.UG NOT IN(" . session()->get('UGCAMARA') . "," . session()->get('UGRPPS') . ") OR A.UG IS NULL)";
+            } else if (session()->get('TIPOEMPRESA') == 8) {
+                $queryUG = "(A.UG =" . session()->get("UG") . " OR A.RPPS = 'S')";
+            } else {
+                $queryUG = "(A.UG =" . session()->get("UG") . ")";
+            }
         } else {
-            $queryUG = "(A.UG =" . session()->get("UG") . ")";
+            $queryUG = "(A.UG IN($empresa)";
+        }
+
+        if (!$ano) {
+            $ano = date('Y');
         }
 
         $publicacao = DB::connection('transparencia')->table(DB::raw("(
@@ -62,6 +52,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
                                     C.DTHRLIMITE > current_timestamp))) >= 0 and
                             A.DATA <= current_date and
                             $queryUG
+                            AND EXTRACT(YEAR FROM A.DTHRPUBLICADO) = $ano
                         order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc) as subquery"))
             ->orderBy('DATA', 'DESC')
             ->orderBy('NUMERO', 'DESC')

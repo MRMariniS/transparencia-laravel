@@ -7,6 +7,8 @@ const SelectFilter = ({
     selected,
     setData,
     errorsData,
+    subgrupos,
+    setSubgrupos,
 }) => {
     return (
         <div className="w-full sm:w-auto">

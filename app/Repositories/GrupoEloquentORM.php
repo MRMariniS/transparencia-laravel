@@ -10,8 +10,8 @@ class GrupoEloquentORM implements GrupoInterface
 {
     function getAllGrupos()
     {
-        $grupos = Grupo::whereHas('publicacao_grupo', function($query){
-            Helper::filterQueryUg($query);
+        $grupos = Grupo::whereHas('publicacao_grupo', function ($query) {
+            Helper::filterQueryUg($query,null, 'RPPS');
         })->get();
 
         $grupos = Helper::convertingData($grupos, ['DESCRICAO', 'DEFINICAO']);
@@ -19,15 +19,15 @@ class GrupoEloquentORM implements GrupoInterface
         return $grupos;
     }
 
-    function getAllGruposAndSubGrupos($grupo = null) 
+    function getAllGruposAndSubGrupos($grupo = null)
     {
-        $grupos = Grupo::with('subgrupo_grupo')
+        $grupos = Grupo::whereHas('subgrupo_grupo', function ($query) {
+            Helper::filterQueryUg($query,null, 'RPPS');
+        })
             ->where(function ($query) use ($grupo) {
                 if ($grupo) {
                     $query->where('GRUPO', $grupo);
                 }
-
-                Helper::filterQueryUg($query);
             })
             ->get();
         $grupos = Helper::convertingData($grupos, ['DESCRICAO', 'DEFINICAO']);

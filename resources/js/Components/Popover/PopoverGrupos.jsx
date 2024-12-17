@@ -51,7 +51,7 @@ const PopoverGrupos = ({
             <PopoverContent
                 className={
                     (darkMode ? "dark " : "") +
-                    "w-fit h-96 bg-gray-50 dark:bg-blue-800 border border-gray-500 flex flex-col justify-between gap-3"
+                    "w-fit max-h-96 bg-gray-50 dark:bg-blue-800 border border-gray-500 flex flex-col justify-between gap-3"
                 }
             >
                 <div className="w-full flex flex-row justify-between items-center">

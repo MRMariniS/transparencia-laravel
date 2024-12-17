@@ -14,17 +14,32 @@ class Helper
      * @param table query será TABLE.UG
      * 
      */
-    static function filterQueryUg($query, $table = null)
+    static function filterQueryUg($query, $table = null, $nameColumnRpps = null, $acceptUgCMNull = 'N')
     {
         $column = 'UG';
+        $columnRpps = $nameColumnRpps;
         if ($table) {
             $column = $table . '.UG';
+            if ($columnRpps) {
+                $columnRpps = $table . ".$columnRpps";
+            }
         }
         if (session()->get('TIPOEMPRESA') == 1) {
-            $query->whereNotIn($column, [session()->get('UGCAMARA'), session()->get('UGRPPS')])
+                $query->whereNotIn($column, [session()->get('UGCAMARA'), session()->get('UGRPPS')])
                 ->orWhereNull($column);
+            
+        } else if (session()->get('TIPOEMPRESA') == 8) {
+            $query->where($column, session()->get("UG"))->orWhere(function ($subquery) use ($columnRpps) {
+                if ($columnRpps) {
+                    $subquery->where($columnRpps, 'S');
+                }
+            });
         } else {
-            $query->where($column, session()->get("UG"))->orWhereNull($column);
+            if($acceptUgCMNull == 'S'){
+                $query->where($column, session()->get("UG"))->orWhereNull($column);
+            }else{
+                $query->where($column, session()->get("UG"));
+            }
         }
         return $query;
     }

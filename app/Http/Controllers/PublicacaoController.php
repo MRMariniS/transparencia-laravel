@@ -12,18 +12,30 @@ class PublicacaoController extends Controller
     function __construct(
         protected PublicacaoServices $publicacao,
         protected GrupoServices $grupo,
-    ) {
-    }
+    ) {}
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $publicacao = $this->publicacao->getPublicacao();
-        $grupos= $this->grupo->getAllGrupos();
+        //dd($request);
+        $ano = $request->query('exercicio');
+        $empresa = $request->query('empresa');
+        $numero = $request->query('numero');
+        $ementa = $request->query('ementa');
+        $datainicial = $request->query('dataInicial');
+        $datafinal = $request->query('dataFinal');
+        $grupo = $request->query('grupo');
+        $subgrupo = $request->query('subgrupo');
+
+
+
+        $publicacao = $this->publicacao->getPublicacao($ano, $empresa, $numero, $ementa, $datainicial, $datafinal, $grupo,$subgrupo);
+        $grupos = $this->grupo->getAllGrupos();
         return Inertia::render('Publicacoes/Index', [
             'publicacoes' => $publicacao,
-            'grupos' => $grupos
+            'grupos' => $grupos,
+            'url' => $request->getRequestUri()
         ]);
     }
 

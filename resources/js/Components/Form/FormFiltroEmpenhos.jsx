@@ -50,14 +50,19 @@ const FormFiltroEmpenhos = ({
     }, [data.exercicio]);
 
     useEffect(() => {
-        setData(
-            "dataInicial",
-            new Date(initialDate).toLocaleDateString("pt-BR")
-        );
+        setData("dataFinal", new Date(initialDate).toLocaleDateString("pt-BR"));
     }, [initialDate]);
 
     useEffect(() => {
-        setData("dataFinal", new Date(finalDate).toLocaleDateString("pt-BR"));
+        if (initialDate > finalDate) {
+            alert("A data inicial não pode ser maior que a data final");
+            setFinalDate(initialDate);
+        } else {
+            setData(
+                "dataFinal",
+                new Date(finalDate).toLocaleDateString("pt-BR")
+            );
+        }
     }, [finalDate]);
 
     const handleChangeExercicio = (ex) => {
@@ -138,12 +143,14 @@ const FormFiltroEmpenhos = ({
                         label="Data Inicial"
                         value={initialDate}
                         setValue={setInitialDate}
+                        exercicio={data.exercicio}
                     />
                     <DatePicker
                         classeHerdada=""
                         label="Data Final"
                         value={finalDate}
                         setValue={setFinalDate}
+                        exercicio={data.exercicio}
                     />
                     <label
                         htmlFor="covid"

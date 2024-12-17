@@ -15,7 +15,9 @@ const PublicacoesIndex = ({
     ugDefault,
     publicacoes,
     grupos,
+    url,
 }) => {
+    console.log(url);
     return (
         <>
             <Head title={"Publicações"} />
@@ -30,11 +32,13 @@ const PublicacoesIndex = ({
                         nomeUgDefault={nomeUgDefault}
                         ugDefault={ugDefault}
                         gruposSubgrupos={grupos}
+                        routeFilter="documentos.index"
                     />
                     <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
                         <SortableTable
                             tableData={publicacoes}
                             paginate={true}
+                            urlPaginate={url}
                             tableHeaders={[
                                 "TIPO",
                                 "ANO",

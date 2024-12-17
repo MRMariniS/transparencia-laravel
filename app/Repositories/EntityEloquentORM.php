@@ -66,10 +66,6 @@ class EntityEloquentORM implements EntityInterface
                     ->select("SELECT EMPRESA, NOME, TIPO, CGC, ENDERECO, FONE, CEP, NOME_AUTORID, CARGO_AUTORID FROM TABEMPRESA WHERE MOSTRA_WEB = 'S' ORDER BY TIPO");
             }
 
-            session()->put('UG', $entityContability[0]->EMPRESA);
-            session()->put('TIPOEMPRESA', $entityContability[0]->TIPO);
-            session()->put('NOMEENTIDADE', "{$entityContability[0]->NOME}");
-
             $entityContability = Helper::convertingDataSCPI($entityContability, [
                 'NOME',
                 'ENDERECO',
@@ -77,6 +73,9 @@ class EntityEloquentORM implements EntityInterface
                 'CARGO_AUTORID'
             ]);
 
+            session()->put('UG', $entityContability[0]->EMPRESA);
+            session()->put('TIPOEMPRESA', $entityContability[0]->TIPO);
+            session()->put('NOMEENTIDADE', "{$entityContability[0]->NOME}");
             
             if ($filterTipo == 1) {
                 foreach($entityContability as $entity){
@@ -89,6 +88,8 @@ class EntityEloquentORM implements EntityInterface
                     }
                 }
             }
+
+            
             
             return $entityContability;
         } catch (InvalidArgumentException $e) {

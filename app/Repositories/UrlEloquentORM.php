@@ -13,21 +13,21 @@ class UrlEloquentORM implements UrlInterface
     {
         $menuSuperior = Url::where('ATIVO', 'S')->where('TIPOMENU', 'SUPERIOR')
             ->where(function ($query) {
-                Helper::filterQueryUg($query);
+                Helper::filterQueryUg($query,null,'RPPS','S');
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL']);
         $menuSuperior = Helper::convertingData($menuSuperior, ['APRESENTACAO']);
 
         return $menuSuperior;
     }
-    //In ? [1,NULL] : [session()->get('UG')]);
+
     function getMenuLateral()
     {
         $menuLateral = UrlGrupo::with([
             'submenu' => function ($query) {
                 $query->select('CODIGO', 'APRESENTACAO', 'DEFINICAO', 'URL', 'CDGRUPO', 'GLYPH', 'UG')
                     ->where(function ($query) {
-                        Helper::filterQueryUg($query);
+                        Helper::filterQueryUg($query,null,'RPPS','S');
                     });
             }
         ])
@@ -60,7 +60,7 @@ class UrlEloquentORM implements UrlInterface
     {
         $menuHome = Url::where('ATIVO', 'S')->where('TIPOMENU', 'HOME')
             ->where(function ($query) {
-                Helper::filterQueryUg($query);
+                Helper::filterQueryUg($query,null,'RPPS','S');
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL', 'UG', 'GLYPH']);
         $menuHome = Helper::convertingData($menuHome, ['APRESENTACAO']);
@@ -71,7 +71,7 @@ class UrlEloquentORM implements UrlInterface
     {
         $menuSocial = Url::where('ATIVO', 'S')->where('TIPOMENU', 'SOCIAL')
             ->where(function ($query) {
-                Helper::filterQueryUg($query);
+                Helper::filterQueryUg($query,null,'RPPS','S');
             })
             ->get(['CODIGO', 'APRESENTACAO', 'URL', 'GLYPH']);
         $menuSocial = Helper::convertingData($menuSocial, ['APRESENTACAO']);

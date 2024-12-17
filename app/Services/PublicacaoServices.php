@@ -11,8 +11,8 @@ class PublicacaoServices
     ) {
     }
 
-    function getPublicacao(){
-        return $this->publicacao->getPublicacao();
+    function getPublicacao($ano, $empresa = null, $numero = null, $ementa = null, $datainicial = null, $datafinal = null, $grupo = null, $subgrupo = null){
+        return $this->publicacao->getPublicacao($ano, $empresa = null, $numero = null, $ementa = null, $datainicial = null, $datafinal = null, $grupo = null, $subgrupo = null);
     }
 
     // function getPublicacaoPorModulo($cdmodulo, int $grupo = null, array $subgrupo = null)
