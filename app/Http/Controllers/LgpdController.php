@@ -72,4 +72,17 @@ class LgpdController extends Controller
     {
         //
     }
+
+    function listaPedidoPorCPF(Request $request)
+    {
+        $request->validate([
+            'cpf' => 'required|numeric',
+            'protocolo' => 'required|numeric'
+        ]);
+
+        $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
+        //dd($pedido);
+        return Inertia::render('Informacoes/Lgpd/Index', ['pedidos' => $pedido]);
+
+    }
 }

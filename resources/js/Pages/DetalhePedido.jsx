@@ -4,14 +4,14 @@ import ListData from "@/Components/ListData";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { SortableTable } from "@/Components/Tables/SortableTable";
 
-const DetalhePedido = () => {
-    const { props } = usePage();
+const DetalhePedido = ({ pedido }) => {
+    console.log(pedido);
     return (
         <>
             <Head title="Detalhe Pedido" />
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <BaseLayout>
-                    {props.pedido.map((pedido) => {
+                    {pedido.map((pedido) => {
                         return (
                             <div
                                 className="w-full flex flex-col gap-4"
@@ -102,21 +102,21 @@ const DetalhePedido = () => {
                                                 Movimentação do Pedido
                                             </Typography>
                                             <SortableTable
-                                                dataTable={pedido.movimento}
-                                                routeName="publicacao.show"
-                                                paramRoute="idpublicacao"
-                                                valueFieldParam="ID_PUBLICACAO"
-                                                openInModal={true}
+                                                tableData={pedido.movimento}
                                                 aplicacaoModal="publicacao"
-                                                tableHeader={[
-                                                    "PUBLICACÃO",
+                                                routeName="publicacao.show"
+                                                valueFieldParam="ID_PUBLICACAO"
+                                                paramRoute="idpublicacao"
+                                                openInModal={true}
+                                                tableHeaders={[
+                                                    "PUBLICAÇÃO",
                                                     "SEQUÊNCIA",
                                                     "STATUS",
                                                     "DATA STATUS",
                                                     "RESPOSTA",
                                                     "DATA MOVIMENTO",
                                                 ]}
-                                                tableKeysObject={[
+                                                headerKeys={[
                                                     "SEQUENCIA",
                                                     "STATUS",
                                                     "DTHRSTATUS",

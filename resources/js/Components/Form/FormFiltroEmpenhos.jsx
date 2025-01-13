@@ -50,7 +50,10 @@ const FormFiltroEmpenhos = ({
     }, [data.exercicio]);
 
     useEffect(() => {
-        setData("dataFinal", new Date(initialDate).toLocaleDateString("pt-BR"));
+        setData(
+            "dataInicial",
+            new Date(initialDate).toLocaleDateString("pt-BR")
+        );
     }, [initialDate]);
 
     useEffect(() => {

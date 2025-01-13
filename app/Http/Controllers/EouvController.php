@@ -43,9 +43,10 @@ class EouvController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($protocolo)
     {
-        //
+        $pedido = $this->sic->getDetalhesPedido($protocolo);
+        return Inertia::render('DetalhePedido', ['pedido' => $pedido]);
     }
 
     /**
@@ -70,5 +71,18 @@ class EouvController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    function listaPedidoPorCPF(Request $request)
+    {
+        $request->validate([
+            'cpf' => 'required|numeric',
+            'protocolo' => 'required|numeric'
+        ]);
+
+        $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
+        
+        return Inertia::render('DetalhePedido', ['pedido' => $pedido]);
+
     }
 }

@@ -41,6 +41,6 @@ class SicPedido extends Model
     public $timestamps = false;
 
     function movimento(){
-        return $this->hasMany(SicMovimento::class, 'ID_PEDIDO', 'ID');
+        return $this->hasMany(SicMovimento::class, 'ID_PEDIDO', 'ID')->with('documento_publicacao');
     }
 }

@@ -12,4 +12,8 @@ class SicMovimento extends Model
     function pedido(){
         return $this->hasOne(SicPedido::class, 'ID', 'ID_PEDIDO');
     }
+
+    function documento_publicacao(){
+        return $this->hasOne(Publicacao::class, 'ID', 'ID_PUBLICACAO')->with('documentos');
+    }
 }

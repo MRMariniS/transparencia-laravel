@@ -2,7 +2,7 @@ import { Option, Select } from "@material-tailwind/react";
 
 const SelectGrupos = ({ grupos, grupoSelecionado, setGrupoSelecionado }) => {
     return (
-        <div className="w-full sm:w-auto m-2">
+        <div className="w-full sm:w-auto">
             <Select
                 name="grupos"
                 className="text-gray-800 dark:text-white"

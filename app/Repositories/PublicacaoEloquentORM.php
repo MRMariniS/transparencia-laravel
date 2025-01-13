@@ -13,7 +13,8 @@ class PublicacaoEloquentORM implements PublicacaoInterface
 
     function getPublicacao($ano, $empresa = null, $numero = null, $ementa = null, $datainicial = null, $datafinal = null, $grupo = null, $subgrupo = null)
     {
-        
+        $queryGrupo = "";
+        $querySubGrupo = "";
         if (!$empresa) {
             if (session()->get('TIPOEMPRESA') == 1) {
                 $queryUG = "(A.UG NOT IN(" . session()->get('UGCAMARA') . "," . session()->get('UGRPPS') . ") OR A.UG IS NULL)";
@@ -23,11 +24,22 @@ class PublicacaoEloquentORM implements PublicacaoInterface
                 $queryUG = "(A.UG =" . session()->get("UG") . ")";
             }
         } else {
-            $queryUG = "(A.UG IN($empresa)";
+            $empresa = implode(",", $empresa);
+            $queryUG = "(A.UG IN($empresa) AND EXTRACT(YEAR FROM A.DTHRPUBLICADO) = $ano)";
         }
 
         if (!$ano) {
             $ano = date('Y');
+        }
+
+        if ($grupo) {
+            $grupo = implode(",", $grupo);
+            $queryGruposSubgrupo = "AND A.GRUPO IN($grupo)";
+        }
+
+        if ($grupo && $subgrupo) {
+            $subgrupo = implode(",", $subgrupo);
+            $queryGruposSubgrupo = "AND A.SUBGRUP IN($subgrupo)";
         }
 
         $publicacao = DB::connection('transparencia')->table(DB::raw("(
@@ -52,7 +64,8 @@ class PublicacaoEloquentORM implements PublicacaoInterface
                                     C.DTHRLIMITE > current_timestamp))) >= 0 and
                             A.DATA <= current_date and
                             $queryUG
-                            AND EXTRACT(YEAR FROM A.DTHRPUBLICADO) = $ano
+                            $queryGrupo
+                            $querySubGrupo
                         order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc) as subquery"))
             ->orderBy('DATA', 'DESC')
             ->orderBy('NUMERO', 'DESC')
@@ -99,33 +112,49 @@ class PublicacaoEloquentORM implements PublicacaoInterface
 
 
 
-    // function getPublicacaoPorGrupoOuSubgrupo(int $grupo = 1, array $subgrupo = [])
-    // {
-    //     $publicacao = Publicacao::with('documentos')->where(function ($query) use ($grupo, $subgrupo) {
-    //         $query->where('GRUPO', $grupo);
-    //         if (count($subgrupo) > 0) {
-    //             $query->whereIn('SUBGRUPO', $subgrupo);
-    //         }
-    //     })
-    //         ->where(function ($query) {
-    //             Helper::filterQueryUg($query);
-    //         })
-    //         ->get($this->camposPublicacao);
+    function getPublicacaoPorGrupoOuSubgrupo(int $grupo = 1, array $subgrupo = [])
+    {
+        $publicacao = Publicacao::with('documentos')->where(function ($query) use ($grupo, $subgrupo) {
+            $query->where('GRUPO', $grupo);
+            if (count($subgrupo) > 0) {
+                $query->whereIn('SUBGRUPO', $subgrupo);
+            }
+        })
+            ->where(function ($query) {
+                Helper::filterQueryUg($query);
+            })
+            ->get([
+                'ID',
+                'NUMERO',
+                'ANO',
+                'DESCRICAO',
+                'GRUPO',
+                'SUBGRUPO',
+                'EMENTA',
+                'DATA',
+                'CONSOLIDACAO',
+                'DTHRPUBLICADO',
+                'PUBLICADO'
+            ]);
 
-    //     $publicacao = Helper::convertingData($publicacao, $this->camposConvertingData, ['DTHRPUBLICADO', 'DATA']);
+        $publicacao = Helper::convertingData($publicacao, [
+            'DESCRICAO',
+            'EMENTA',
+            'NUMERO'
+        ], ['DTHRPUBLICADO', 'DATA']);
 
-    //     foreach ($publicacao as $item) {
-    //         $item->documentos = Helper::convertingData(
-    //             $item->documentos,
-    //             [
-    //                 'DESCRICAO'
-    //             ],
-    //             [
-    //                 'DTHRPUBLICADO'
-    //             ]
-    //         );
-    //     }
+        foreach ($publicacao as $item) {
+            $item->documentos = Helper::convertingData(
+                $item->documentos,
+                [
+                    'DESCRICAO'
+                ],
+                [
+                    'DTHRPUBLICADO'
+                ]
+            );
+        }
 
-    //     return $publicacao;
-    // }
+        return $publicacao;
+    }
 }

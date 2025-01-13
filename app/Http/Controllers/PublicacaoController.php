@@ -25,17 +25,16 @@ class PublicacaoController extends Controller
         $ementa = $request->query('ementa');
         $datainicial = $request->query('dataInicial');
         $datafinal = $request->query('dataFinal');
-        $grupo = $request->query('grupo');
-        $subgrupo = $request->query('subgrupo');
-
-
+        $grupo = $request->query('grupos');
+        $subgrupo = $request->query('subgrupos');
 
         $publicacao = $this->publicacao->getPublicacao($ano, $empresa, $numero, $ementa, $datainicial, $datafinal, $grupo,$subgrupo);
         $grupos = $this->grupo->getAllGrupos();
         return Inertia::render('Publicacoes/Index', [
             'publicacoes' => $publicacao,
             'grupos' => $grupos,
-            'url' => $request->getRequestUri()
+            'url' => $request->getRequestUri(),
+            'dadosRequest' => $request->query()
         ]);
     }
 

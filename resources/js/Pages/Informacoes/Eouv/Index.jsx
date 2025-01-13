@@ -4,7 +4,7 @@ import EnunciadoPedidos from "../../../Components/EnunciadoPedidos";
 import TabelaPedidos from "../../../Components/TabelaPedidos";
 import PublicacoesAssociadas from "../../../Components/PublicacoesAssociadas";
 
-function EouvIndex() {
+function EouvIndex({ pedidos }) {
     const { props } = usePage();
     return (
         <>
@@ -22,7 +22,7 @@ function EouvIndex() {
                                 estruturasData={props.estruturas[0]}
                             />
                         </div>
-                        <TabelaPedidos pedidosData={props.pedidos} />
+                        <TabelaPedidos pedidosData={pedidos} page={"eouv"} />
                         <PublicacoesAssociadas
                             publicacoesData={props.publicacoes}
                         />

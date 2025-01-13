@@ -31,10 +31,15 @@ class EmpenhoFacadeORM implements EmpenhoInterface
             $dataAtras = strtotime('-6 months');
             // Formata a data em 'Y-m-d'
             $datainicial = date($ano . '.m.d', $dataAtras);
+        }else{
+            $datainicial = str_replace('/', '.', $datainicial);
         }
-
+        
+        
         if (!$datafinal) {
             $datafinal = date("Y.m.d");
+        }else{
+            $datafinal = str_replace('/', '.', $datafinal);
         }
 
         $sql_filtra_periodo = "AND A.DATAE BETWEEN '$datainicial' and '$datafinal'";

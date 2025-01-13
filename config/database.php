@@ -163,6 +163,17 @@ return [
             'charset' => env('SCPI_DB_CHARSET'),
             'role' => null,
         ],
+
+        'scpi2025' => [
+            'driver' => 'firebird',
+            'host' => env('SCPI_DB_HOST'),
+            'port' => env('SCPI_DB_PORT'),
+            'database' => env('SCPI_DB_DATABASE') . '/ARQ2025/SCPI2025.FDB',
+            'username' => env('SCPI_DB_USERNAME'),
+            'password' => env('SCPI_DB_PASSWORD'),
+            'charset' => env('SCPI_DB_CHARSET'),
+            'role' => null,
+        ],
     ],
 
     /*

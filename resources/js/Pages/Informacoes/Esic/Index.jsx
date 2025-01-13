@@ -24,6 +24,7 @@ function EsicIndex() {
                     <TabelaPedidos
                         pedidosData={props.pedidos}
                         routeCreate={route("esic.create")}
+                        page={"esic"}
                     />
                     <PublicacoesAssociadas
                         publicacoesData={props.publicacoes}

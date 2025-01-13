@@ -103,7 +103,7 @@ class EsicController extends Controller
 
         $pedido = $this->sic->getPedidoPorProtocolo($request->cpf, $request->protocolo);
 
-        return Inertia::render('Informacoes/Esic/Index', ['pedidos' => $pedido]);
+        return Inertia::render('DetalhePedido', ['pedido' => $pedido]);
 
     }
 
@@ -111,6 +111,7 @@ class EsicController extends Controller
     function filtroPedido($tipo)
     {
         $pedido = $this->sic->getPedidos($tipo);
+       
         return Inertia::render('Informacoes/Esic/Index', ['pedidos' => $pedido]);
     }
 

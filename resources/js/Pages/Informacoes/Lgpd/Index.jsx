@@ -22,7 +22,10 @@ function LgpdIndex() {
                                 estruturasData={props.estruturas[0]}
                             />
                         </div>
-                        <TabelaPedidos pedidosData={props.pedidos} />
+                        <TabelaPedidos
+                            pedidosData={props.pedidos}
+                            page={"lgpd"}
+                        />
                         <PublicacoesAssociadas
                             publicacoesData={props.publicacoes}
                         />

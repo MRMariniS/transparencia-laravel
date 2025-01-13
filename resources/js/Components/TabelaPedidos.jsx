@@ -2,7 +2,7 @@ import { Card, CardBody, CardHeader } from "@material-tailwind/react";
 import CardHeaderTablePedido from "./CardHeaderTablePedido";
 import { SortableTable } from "./Tables/SortableTable";
 
-const TabelaPedidos = ({ pedidosData, routeCreate = "/" }) => {
+const TabelaPedidos = ({ page, pedidosData, routeCreate = "/" }) => {
     return (
         <Card className="h-full w-full bg-gray-50 dark:bg-blue-800">
             <CardHeader
@@ -24,6 +24,7 @@ const TabelaPedidos = ({ pedidosData, routeCreate = "/" }) => {
                         },
                     ]}
                     routeCreate={routeCreate}
+                    page={page}
                 />
             </CardHeader>
             <CardBody className="overflow-y-auto overflow-x-hidden px-0">
@@ -44,7 +45,7 @@ const TabelaPedidos = ({ pedidosData, routeCreate = "/" }) => {
                         "DTHRPEDIDO",
                         "STATUS",
                     ]}
-                    routeName="esic.show"
+                    routeName={page + ".show"}
                     paramRoute="protocolo"
                     valueFieldParam="PROTOCOLO"
                     paginate={true}

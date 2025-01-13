@@ -12,9 +12,10 @@ class SicPedidoEloquentORM implements SicPedidoInterface
    
     function getPedidoPorProtocolo($cpf,  $protocolo)
     {
-        $pedido = SicPedido::where('CPF', $cpf)->where('PROTOCOLO', $protocolo)
-            ->select(['PROTOCOLO', 'OBJETIVO', 'PEDIDO', 'DTHRPEDIDO', 'STATUS'])
-            ->paginate(10);
+        $pedido = SicPedido::with('movimento')->where('CPF', $cpf)->where('PROTOCOLO', $protocolo)
+        ->get(['ID', 'PROTOCOLO', 'DTHRPEDIDO', 'OBJETIVO', 'PEDIDO', 'PRIORIDADE', 'STATUS', 'DTHRSTATUS', 'COLETIVO']);
+         
+            //dd($pedido);
 
         $pedido = Helper::convertingData(
             $pedido,
@@ -58,13 +59,10 @@ class SicPedidoEloquentORM implements SicPedidoInterface
 
     function getDetalhesPedido($protocolo)
     {
-        $pedido = SicPedido::with(['movimento' => function ($query) {
-            $query->select(['ID_PEDIDO', 'SEQUENCIA', 'STATUS', 'DTHRSTATUS', 'RESPOSTA', 'DTHRMOVTO', 'ID_PUBLICACAO'])
-                ->paginate(10);
-        }])->where('PROTOCOLO', $protocolo)
+        $pedido = SicPedido::with('movimento')->where('PROTOCOLO', $protocolo)
             ->get(['ID', 'PROTOCOLO', 'DTHRPEDIDO', 'OBJETIVO', 'PEDIDO', 'PRIORIDADE', 'STATUS', 'DTHRSTATUS', 'COLETIVO']);
 
-
+           // dd($pedido);
         $pedido = Helper::convertingData(
             $pedido,
             [

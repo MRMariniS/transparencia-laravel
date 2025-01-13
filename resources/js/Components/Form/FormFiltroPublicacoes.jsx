@@ -23,6 +23,7 @@ const FormFiltroPublicacoes = ({
     routeFilter,
     ugDefault,
     gruposSubgrupos,
+    dadosRequest,
 }) => {
     const { darkMode } = useContext(PropsContext);
 
@@ -36,15 +37,15 @@ const FormFiltroPublicacoes = ({
     const [subgrupos, setSubgrupos] = useState([]);
 
     const { data, setData, get, processing, errors } = useForm({
-        exercicio: exercicioDefault,
-        numero: "",
-        empresa: [ugDefault],
-        dataInicial: "",
-        dataFinal: "",
-        ementa: "",
-        atualizado: "",
-        grupos: grupoSelecionado,
-        subgrupos: subgrupoSelecionado,
+        exercicio: dadosRequest.exercicio ?? exercicioDefault,
+        numero: dadosRequest.numero ?? "",
+        empresa: dadosRequest.empresa ?? [ugDefault],
+        dataInicial: dadosRequest.dataInicial ?? "",
+        dataFinal: dadosRequest.dataInicial ?? "",
+        ementa: dadosRequest.ementa ?? "",
+        atualizado: dadosRequest.atualizado ?? "",
+        grupos: dadosRequest.grupos ?? grupoSelecionado,
+        subgrupos: dadosRequest.subgrupos ?? subgrupoSelecionado,
     });
     function submit(e) {
         e.preventDefault();
@@ -219,7 +220,12 @@ const FormFiltroPublicacoes = ({
                         onChange={(e) => setData("ementa", e.target.value)}
                         error={errors.ementa}
                     />
-                    <Input
+                    <SelectGrupos
+                        grupoSelecionado={data.grupos}
+                        grupos={gruposSubgrupos}
+                        setGrupoSelecionado={setData}
+                    />
+                    {/* <Input
                         name="grupo"
                         color={darkMode ? "white" : "gray"}
                         className="w-full bg-white dark:bg-blue-900 focus:outline-none"
@@ -242,7 +248,7 @@ const FormFiltroPublicacoes = ({
                         }
                         error={errors.grupos}
                         onChange={() => console.warn("Clique no botão +")}
-                    />
+                    /> */}
                     <Input
                         name="subgrupo"
                         color={darkMode ? "white" : "gray"}

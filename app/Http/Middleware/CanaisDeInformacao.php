@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\Helper;
 use App\Services\EstruturaServices;
 use App\Services\PublicacaoServices;
 use Closure;
@@ -36,6 +37,8 @@ class CanaisDeInformacao
             $estrutura = $this->estrutura->getEstrutura(16);
         }
 
+        //var_dump($publicacoes);
+        
         Inertia::share([
             'publicacoes' => $publicacoes,
             'estruturas' => $estrutura

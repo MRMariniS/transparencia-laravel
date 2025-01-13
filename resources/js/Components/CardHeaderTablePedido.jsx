@@ -11,7 +11,7 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import PopoverPrint from "./PopoverPrint";
 import { Link, router } from "@inertiajs/react";
 
-const CardHeaderTablePedido = ({ tabs = [], routeCreate }) => {
+const CardHeaderTablePedido = ({ tabs = [], routeCreate, page }) => {
     const TABS = tabs;
     const currentPath = window.location.pathname;
     const selectedTab = currentPath.split("/").pop();
@@ -38,7 +38,7 @@ const CardHeaderTablePedido = ({ tabs = [], routeCreate }) => {
                 </div>
                 <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
                     <PopoverForm
-                        routerForm={"/aplicacoes/esic/consulta/meus-pedidos"}
+                        routerForm={page + ".consultapedido"}
                         label={"Consultar pedido"}
                         labelInputFieldOne={"Protocolo"}
                         labelInputFieldTwo={"CPF"}
