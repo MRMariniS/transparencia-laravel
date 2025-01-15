@@ -10,7 +10,6 @@ export const PropsContext = createContext();
 export default function RootLayout({ children }) {
     const { props } = usePage();
     const app = props.app;
-    console.log(props);
 
     const [darkMode, setDarkMode] = useState(
         localStorage.getItem("darkMode")

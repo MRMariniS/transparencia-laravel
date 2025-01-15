@@ -8,7 +8,7 @@ export default function Welcome() {
 
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Portal da Transparência" />
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <BaseLayout>
                     <div className="w-full h-full flex flex-col gap-4">

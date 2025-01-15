@@ -3,6 +3,7 @@ import { PropsContext } from "./RootLayout";
 import { SearchBar } from "../Components/SearchBar";
 import SelectDefault from "../Components/SelectDefault";
 import HeaderButtons from "../Components/HeaderButtons";
+import { BreadcrumbsWithIcon } from "../Components/BreadCrumbsWithIcon";
 
 function BaseLayout({ children }) {
     const { darkMode, setDarkMode } = useContext(PropsContext);
@@ -25,6 +26,7 @@ function BaseLayout({ children }) {
                     <SearchBar />
                 </div>
             </div>
+            <BreadcrumbsWithIcon />
             <div className="w-full h-full flex justify-between items-start gap-4">
                 {children}
             </div>
