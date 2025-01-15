@@ -3,7 +3,89 @@ import { Typography, Button, CardFooter } from "@material-tailwind/react";
 import { FaSort, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import Modal from "../Modal";
 
+function sortTable(n) {
+    var table,
+        rows,
+        switching,
+        i,
+        x,
+        y,
+        shouldSwitch,
+        dir,
+        switchcount = 0;
+    table = document.getElementById("Sortable");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+      first, which contains table headers): */
+        for (i = 1; i < rows.length - 1; i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            // Check if the two rows should switch place, based on the direction, asc or desc:
+            if (dir == "asc") {
+                if (
+                    !isNaN(parseFloat(x.innerText)) &&
+                    !isNaN(parseFloat(y.innerText))
+                ) {
+                    if (parseFloat(x.innerText) > parseFloat(y.innerText)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (
+                    x.innerText.toLowerCase() > y.innerText.toLowerCase()
+                ) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                console.log(x.innerText);
+                if (
+                    !isNaN(parseFloat(x.innerText)) &&
+                    !isNaN(parseFloat(y.innerText))
+                ) {
+                    if (parseFloat(x.innerText) < parseFloat(y.innerText)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (
+                    x.innerText.toLowerCase() < y.innerText.toLowerCase()
+                ) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount++;
+        } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+
 export function SortableTable({
+    idTable = "Sortable",
     tableData,
     tableHeaders,
     headerKeys = [],
@@ -37,19 +119,33 @@ export function SortableTable({
         }
     };
 
+    // const sortTable = (key) => {
+    //     const sortedData = [...TABLE_ROWS].sort((a, b) => {
+    //         if (a[key] < b[key]) return -1;
+    //         if (a[key] > b[key]) return 1;
+    //         return 0;
+    //     });
+    //     return sortedData;
+    // };
+
     return (
         <>
-            <table className="w-full max-w-full table-auto text-left">
+            <table
+                className="w-full max-w-full table-auto text-left"
+                id={idTable}
+            >
                 <thead>
                     <tr>
                         {TABLE_HEAD.map((head, index) => (
                             <th
+                                id={index}
                                 key={head}
                                 className="cursor-pointer border-y border-blue-gray-100 bg-blue-700 dark:bg-sky-200 p-4 transition-colors hover:bg-blue-500 dark:hover:bg-sky-300"
                             >
                                 <Typography
                                     variant="small"
                                     className="flex items-center justify-between gap-2 font-normal leading-none text-white dark:text-gray-800"
+                                    onClick={() => sortTable(index)}
                                 >
                                     {head}
                                     {index !== TABLE_HEAD.length - 1 && (
@@ -131,9 +227,13 @@ export function SortableTable({
                                 }
                             >
                                 {detalhar ? detalhar : <></>}
-                                {headerKeys.map((keyColumn) => {
+                                {headerKeys.map((keyColumn, index) => {
                                     return (
-                                        <td key={keyColumn} className={classes}>
+                                        <td
+                                            key={keyColumn}
+                                            className={classes}
+                                            id={`td${index + 1}`}
+                                        >
                                             <div className="flex items-center gap-3">
                                                 <Typography
                                                     variant="small"

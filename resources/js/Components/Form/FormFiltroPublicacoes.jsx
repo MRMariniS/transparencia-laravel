@@ -47,10 +47,12 @@ const FormFiltroPublicacoes = ({
         grupos: dadosRequest.grupos ?? grupoSelecionado,
         subgrupos: dadosRequest.subgrupos ?? subgrupoSelecionado,
     });
+
     function submit(e) {
         e.preventDefault();
         get(route(`${routeFilter}`));
     }
+
     const filterOptions = [
         { value: "", label: "Todos" },
         { value: "S", label: "Sim" },

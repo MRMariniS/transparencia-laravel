@@ -105,7 +105,7 @@ class EmpenhoFacadeORM implements EmpenhoInterface
             ->orderBy('NEMPG', 'ASC')
             ->paginate(10); // Define o número de itens por página
 
-        $empenhos = Helper::convertingDataSCPI($empenhos, ['PROC', 'NOME'], ['DTEMPENHO']);
+        $empenhos = Helper::convertingDataSCPI($empenhos, ['PROC', 'NOME'], ['DTEMPENHO'], ['EMPENHADO', 'LIQUIDADO', 'PAGO']);
         return $empenhos;
     }
 

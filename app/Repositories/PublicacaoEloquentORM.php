@@ -41,6 +41,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
             $subgrupo = implode(",", $subgrupo);
             $queryGruposSubgrupo = "AND A.SUBGRUP IN($subgrupo)";
         }
+        
 
         $publicacao = DB::connection('transparencia')->table(DB::raw("(
         select A.ID, A.NUMERO, A.ANO, A.DESCRICAO, A.GRUPO, A.SUBGRUPO, A.EMENTA, A.DATA, A.CONSOLIDACAO,
