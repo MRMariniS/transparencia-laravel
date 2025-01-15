@@ -25,7 +25,7 @@ class Helper
             }
         }
         if (session()->get('TIPOEMPRESA') == 1) {
-            $query->whereNotIn($column, [session()->get('UGCAMARA'), session()->get('UGRPPS')])
+            $query->whereNotIn($column, [session()->get('UGCAMARA'), session()->has('UGRPPS') ? session()->get('UGRPPS') : -1])
                 ->orWhereNull($column);
         } else if (session()->get('TIPOEMPRESA') == 8) {
             $query->where($column, session()->get("UG"))->orWhere(function ($subquery) use ($columnRpps) {
