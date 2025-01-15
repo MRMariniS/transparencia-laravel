@@ -17,7 +17,8 @@ class PublicacaoEloquentORM implements PublicacaoInterface
         $querySubGrupo = "";
         if (!$empresa) {
             if (session()->get('TIPOEMPRESA') == 1) {
-                $queryUG = "(A.UG NOT IN(" . session()->get('UGCAMARA') . "," . session()->get('UGRPPS') . ") OR A.UG IS NULL)";
+                $ugrpps = session()->has('UGRPPS') ? "," . session()->get('UGRPPS') : "";
+                $queryUG = "(A.UG NOT IN(" . session()->get('UGCAMARA') . $ugrpps . ") OR A.UG IS NULL)";
             } else if (session()->get('TIPOEMPRESA') == 8) {
                 $queryUG = "(A.UG =" . session()->get("UG") . " OR A.RPPS = 'S')";
             } else {
@@ -25,7 +26,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
             }
         } else {
             $empresa = implode(",", $empresa);
-            $queryUG = "(A.UG IN($empresa) AND EXTRACT(YEAR FROM A.DTHRPUBLICADO) = $ano)";
+            $queryUG = "(A.UG IN($empresa))";
         }
 
         if (!$ano) {
@@ -41,7 +42,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
             $subgrupo = implode(",", $subgrupo);
             $queryGruposSubgrupo = "AND A.SUBGRUP IN($subgrupo)";
         }
-        
+
 
         $publicacao = DB::connection('transparencia')->table(DB::raw("(
         select A.ID, A.NUMERO, A.ANO, A.DESCRICAO, A.GRUPO, A.SUBGRUPO, A.EMENTA, A.DATA, A.CONSOLIDACAO,
@@ -67,6 +68,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
                             $queryUG
                             $queryGrupo
                             $querySubGrupo
+                            AND A.ANO = $ano
                         order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc) as subquery"))
             ->orderBy('DATA', 'DESC')
             ->orderBy('NUMERO', 'DESC')
