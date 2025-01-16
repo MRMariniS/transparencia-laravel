@@ -39,7 +39,7 @@ Route::resource('/acesso-a-informacao/eouv', EouvController::class)->except('des
 Route::post('/acesso-a-informacao/eouv/consulta', [EouvController::class, 'listaPedidoPorCPF'])->name('eouv.consultapedido');
 Route::get('/acesso-a-informacao/eouv/pedidos/{tipo}', [EouvController::class, 'filtroPedido'])->name('eouv.tipospedidos');
 
-Route::resource('/publicacoes/documentos', PublicacaoController::class)->only('index');
+Route::resource('/publicacoes/documentos', PublicacaoController::class)->only(['index','show']);
 Route::post('publicacoes/documentos/subgrupos', [SubGrupoController::class, 'getSubgrupos'])->name('grupo.subgrupos');
 
 Route::get('/despesa/empenhos', [EmpenhoController::class, 'index'])->name('empenho.index');

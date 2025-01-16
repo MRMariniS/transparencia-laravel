@@ -16,25 +16,11 @@ class PublicacaoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        //dd($request);
-        $ano = $request->query('exercicio');
-        $empresa = $request->query('empresa');
-        $numero = $request->query('numero');
-        $ementa = $request->query('ementa');
-        $datainicial = $request->query('dataInicial');
-        $datafinal = $request->query('dataFinal');
-        $grupo = $request->query('grupos');
-        $subgrupo = $request->query('subgrupos');
-
-        $publicacao = $this->publicacao->getPublicacao($ano, $empresa, $numero, $ementa, $datainicial, $datafinal, $grupo,$subgrupo);
         $grupos = $this->grupo->getAllGrupos();
         return Inertia::render('Publicacoes/Index', [
-            'publicacoes' => $publicacao,
-            'grupos' => $grupos,
-            'url' => $request->getRequestUri(),
-            'dadosRequest' => $request->query()
+            'grupos' => $grupos
         ]);
     }
 
@@ -57,12 +43,26 @@ class PublicacaoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $idpublicacao)
+    public function show(Request $request)
     {
-        // $publicacao = $this->publicacao->getPublicacao($idpublicacao);
-        // return Inertia::render('Aplicacoes/Publicacoes/DetalhePublicacao', [
-        //     'publicacao' => $publicacao
-        // ]);
+        //dd($request);
+        $ano = $request->query('exercicio');
+        $empresa = $request->query('empresa');
+        $numero = $request->query('numero');
+        $ementa = $request->query('ementa');
+        $datainicial = $request->query('dataInicial');
+        $datafinal = $request->query('dataFinal');
+        $grupo = $request->query('grupos');
+        $subgrupo = $request->query('subgrupos');
+
+        $publicacao = $this->publicacao->getPublicacao($ano, $empresa, $numero, $ementa, $datainicial, $datafinal, $grupo, $subgrupo);
+        $grupos = $this->grupo->getAllGrupos();
+        return Inertia::render('Publicacoes/Documentos', [
+            'publicacoes' => $publicacao,
+            'grupos' => $grupos,
+            'url' => $request->getRequestUri(),
+            'dadosRequest' => $request->query()
+        ]);
     }
 
     /**
