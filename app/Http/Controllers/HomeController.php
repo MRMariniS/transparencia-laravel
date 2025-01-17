@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\GrupoServices;
+use App\Services\PublicacaoServices;
 use App\Services\SeloServices;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
     function __construct(
         protected SeloServices $service,
+        protected PublicacaoServices $publicacao,
+        protected GrupoServices $grupo
     ) {}
     /**
      * Display a listing of the resource.
@@ -21,6 +22,13 @@ class HomeController extends Controller
         $selo = $this->service->getImagemSelo();
         
         return Inertia::render('Welcome');
+    }
+
+    public function homePublicacao(){
+        $grupos_subgrupos = $this->grupo->getAllGruposAndSubGrupos();
+        return Inertia::render('Publicacoes/Index', [
+            'grupos_subgrupos' => $grupos_subgrupos
+        ]);
     }
    
 }

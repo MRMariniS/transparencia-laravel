@@ -17,7 +17,7 @@ export function MenuDefault({ props, entidadeRota }) {
                 <>
                     <Link
                         className="w-full h-24 bg-gray-50 dark:bg-blue-800"
-                        href={route("documentos.index")}
+                        href={"aplicacoes/publicacoes?entidade=" + entidadeRota}
                     >
                         {props.GLYPH && (
                             <img

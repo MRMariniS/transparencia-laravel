@@ -8,8 +8,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-const PublicacoesIndex = ({ grupos }) => {
-    console.log(grupos);
+const PublicacoesIndex = ({ grupos_subgrupos }) => {
     return (
         <>
             <Head title="Painel de Grupos e Subgrupos de publicações" />
@@ -30,7 +29,7 @@ const PublicacoesIndex = ({ grupos }) => {
                             </div>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {grupos.map((grupo) => (
+                            {grupos_subgrupos.map((grupo) => (
                                 <Menu>
                                     <MenuHandler>
                                         <Button className="w-full h-24 bg-gray-50 dark:bg-blue-800">
@@ -47,34 +46,34 @@ const PublicacoesIndex = ({ grupos }) => {
                                             </Typography>
                                         </Button>
                                     </MenuHandler>
-                                    {/* <MenuList className="max-h-72">
-                                    {grupo.submenu.map((sub) => (
-                                        <Link
-                                            key={sub.CODIGO}
-                                            href={
-                                                sub.URL +
-                                                "?entidade=" +
-                                                entidadeRota
-                                            }
-                                        >
-                                            <MenuItem className="flex flex-row gap-2">
-                                                {sub.GLYPH && (
-                                                    <img
-                                                        src={`../../assets/images/${sub.GLYPH}`}
-                                                        alt={JSON.stringify(
-                                                            sub.GLYPH
-                                                        )}
-                                                        className="w-10 h-auto"
-                                                    />
-                                                )}
+                                    <MenuList className="max-h-72">
+                                        {grupo.subgrupo_grupo.map((sub) => (
+                                            <Link
+                                                key={sub.CODIGO}
+                                                href={
+                                                    sub.URL +
+                                                    "?entidade=" +
+                                                    entidadeRota
+                                                }
+                                            >
+                                                <MenuItem className="flex flex-row gap-2">
+                                                    {sub.GLYPH && (
+                                                        <img
+                                                            src={`../../assets/images/${sub.GLYPH}`}
+                                                            alt={JSON.stringify(
+                                                                sub.GLYPH
+                                                            )}
+                                                            className="w-10 h-auto"
+                                                        />
+                                                    )}
 
-                                                <Typography className="text-gray-800 dark:text-white font-semibold">
-                                                    {sub.APRESENTACAO}
-                                                </Typography>
-                                            </MenuItem>
-                                        </Link>
-                                    ))}
-                                </MenuList> */}
+                                                    <Typography className="text-gray-800 dark:text-white font-semibold">
+                                                        {sub.APRESENTACAO}
+                                                    </Typography>
+                                                </MenuItem>
+                                            </Link>
+                                        ))}
+                                    </MenuList>
                                 </Menu>
                             ))}
                         </div>
