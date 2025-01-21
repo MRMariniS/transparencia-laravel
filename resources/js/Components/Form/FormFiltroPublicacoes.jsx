@@ -222,12 +222,12 @@ const FormFiltroPublicacoes = ({
                         onChange={(e) => setData("ementa", e.target.value)}
                         error={errors.ementa}
                     />
-                    <SelectGrupos
+                    {/* <SelectGrupos
                         grupoSelecionado={data.grupos}
                         grupos={gruposSubgrupos}
                         setGrupoSelecionado={setData}
-                    />
-                    {/* <Input
+                    /> */}
+                    <Input
                         name="grupo"
                         color={darkMode ? "white" : "gray"}
                         className="w-full bg-white dark:bg-blue-900 focus:outline-none"
@@ -250,7 +250,7 @@ const FormFiltroPublicacoes = ({
                         }
                         error={errors.grupos}
                         onChange={() => console.warn("Clique no botão +")}
-                    /> */}
+                    />
                     <Input
                         name="subgrupo"
                         color={darkMode ? "white" : "gray"}

@@ -16,7 +16,7 @@ export function MenuDefault({ props, entidadeRota }) {
             {props.CODIGO == 10 ? (
                 <>
                     <Link
-                        className="w-full h-24 bg-gray-50 dark:bg-blue-800"
+                        className="w-full h-24 bg-gray-50 dark:bg-blue-800 flex justify-center items-center"
                         href={"aplicacoes/publicacoes?entidade=" + entidadeRota}
                     >
                         {props.GLYPH && (

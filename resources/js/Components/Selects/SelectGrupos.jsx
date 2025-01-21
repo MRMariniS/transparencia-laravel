@@ -4,7 +4,7 @@ const SelectGrupos = ({ grupos, grupoSelecionado, setGrupoSelecionado }) => {
     return (
         <div className="w-full sm:w-auto">
             <Select
-                name="grupos"
+                name="grupo"
                 className="text-gray-800 dark:text-white"
                 labelProps={{
                     className: "text-gray-800 dark:text-white",

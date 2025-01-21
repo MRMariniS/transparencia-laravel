@@ -18,6 +18,7 @@ const Documentos = ({
     url,
     dadosRequest,
 }) => {
+    console.log(empresas, grupos, exercicios, publicacoes);
     return (
         <>
             <Head title={"Publicações"} />

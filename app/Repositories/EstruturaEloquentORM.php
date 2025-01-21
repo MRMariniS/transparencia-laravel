@@ -38,7 +38,7 @@ class EstruturaEloquentORM implements EstruturaInterface
     {
         $estrutura = Estrutura::with('tipo_estrutura',)
             ->where(function ($query) {
-                Helper::filterQueryUg($query);
+                Helper::filterQueryUg($query, null, 'RPPS');
             })
             ->where('PUBLICADO', 'S')
             ->where(function($query) use ($tipo){

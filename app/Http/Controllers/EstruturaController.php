@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estrutura;
 use Illuminate\Http\Request;
 
 class EstruturaController extends Controller
 {
+    function __construct(
+        protected Estrutura $estrutura,
+    )
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      */

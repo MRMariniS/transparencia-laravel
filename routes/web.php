@@ -39,6 +39,8 @@ Route::resource('/acesso-a-informacao/eouv', EouvController::class)->except('des
 Route::post('/acesso-a-informacao/eouv/consulta', [EouvController::class, 'listaPedidoPorCPF'])->name('eouv.consultapedido');
 Route::get('/acesso-a-informacao/eouv/pedidos/{tipo}', [EouvController::class, 'filtroPedido'])->name('eouv.tipospedidos');
 
+Route::get('/acesso-a-informacao/estrutura', [HomeController::class, 'homeEstrutura'])->name('estrutura.index');
+
 Route::get('/aplicacoes/publicacoes', [HomeController::class, 'homePublicacao'])->name('publicacoes.index');
 Route::resource('/publicacoes/documentos', PublicacaoController::class)->only(['index','show']);
 Route::post('publicacoes/documentos/subgrupos', [SubGrupoController::class, 'getSubgrupos'])->name('grupo.subgrupos');
@@ -54,6 +56,8 @@ Route::post('/despesa/liquidacao', [LiquidacaoController::class, 'empresas'])->n
 Route::get('/despesa/pagamento', [PagamentoController::class, 'index'])->name('pagamento.index');
 Route::get('/despesa/filter/pagamento/', [PagamentoController::class, 'filter'])->name('pagamento.filter');
 Route::post('/despesa/pagamento', [PagamentoController::class, 'empresas'])->name('pagamento.empresas');
+
+
 
 Route::get('aplicacoes/scpi/empresas/{exercicio}', [TabEmpresaController::class, 'getEmpresaReturnJson'])->name('scpi.tabempresa');
 

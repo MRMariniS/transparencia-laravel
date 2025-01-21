@@ -7,6 +7,7 @@ use App\Http\Controllers\TabEmpresaController;
 use App\Interfaces\EmpenhoInterface;
 use App\Interfaces\EntityInterface;
 use App\Interfaces\EstruturaInterface;
+use App\Interfaces\EstruturaTipoInterface;
 use App\Interfaces\GrupoInterface;
 use App\Interfaces\LiquidacaInterface;
 use App\Interfaces\LiquidacaoInterface;
@@ -24,6 +25,7 @@ use App\Repositories\EmpenhoFacadeORM;
 use App\Repositories\EntityEloquentORM;
 use App\Repositories\EprocWebServices;
 use App\Repositories\EstruturaEloquentORM;
+use App\Repositories\EstruturaTipoEloquentORM;
 use App\Repositories\GrupoEloquentORM;
 use App\Repositories\LiquidacaoFacadeORM;
 use App\Repositories\LiquidicaoFacadeORM;
@@ -62,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PagamentoInterface::class, PagamentoFacadeORM::class);
         $this->app->bind(GrupoInterface::class, GrupoEloquentORM::class);
         $this->app->bind(SubGrupoInterface::class, SubGrupoFacadeORM::class);
+        $this->app->bind(EstruturaTipoInterface::class, EstruturaTipoEloquentORM::class);
     }
 
     /**

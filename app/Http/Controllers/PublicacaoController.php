@@ -16,11 +16,24 @@ class PublicacaoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $ano = $request->query('exercicio');
+        $empresa = $request->query('empresa');
+        $numero = $request->query('numero');
+        $ementa = $request->query('ementa');
+        $datainicial = $request->query('dataInicial');
+        $datafinal = $request->query('dataFinal');
+        $grupo = $request->query('grupos');
+        $subgrupo = $request->query('subgrupos');
+
+        $publicacao = $this->publicacao->getPublicacao($ano, $empresa, $numero, $ementa, $datainicial, $datafinal, $grupo, $subgrupo);
         $grupos = $this->grupo->getAllGrupos();
-        return Inertia::render('Publicacoes/Index', [
-            'grupos' => $grupos
+        return Inertia::render('Publicacoes/Documentos', [
+            'publicacoes' => $publicacao,
+            'grupos' => $grupos,
+            'url' => $request->getRequestUri(),
+            'dadosRequest' => $request->query()
         ]);
     }
 
@@ -46,23 +59,7 @@ class PublicacaoController extends Controller
     public function show(Request $request)
     {
         //dd($request);
-        $ano = $request->query('exercicio');
-        $empresa = $request->query('empresa');
-        $numero = $request->query('numero');
-        $ementa = $request->query('ementa');
-        $datainicial = $request->query('dataInicial');
-        $datafinal = $request->query('dataFinal');
-        $grupo = $request->query('grupos');
-        $subgrupo = $request->query('subgrupos');
-
-        $publicacao = $this->publicacao->getPublicacao($ano, $empresa, $numero, $ementa, $datainicial, $datafinal, $grupo, $subgrupo);
-        $grupos = $this->grupo->getAllGrupos();
-        return Inertia::render('Publicacoes/Documentos', [
-            'publicacoes' => $publicacao,
-            'grupos' => $grupos,
-            'url' => $request->getRequestUri(),
-            'dadosRequest' => $request->query()
-        ]);
+        
     }
 
     /**

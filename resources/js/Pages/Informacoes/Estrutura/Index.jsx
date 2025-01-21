@@ -1,19 +1,13 @@
-import React from "react";
-import { Head, Link, router } from "@inertiajs/react";
 import BaseLayout from "@/Layouts/BaseLayout";
-import {
-    Button,
-    Menu,
-    MenuHandler,
-    MenuItem,
-    MenuList,
-    Typography,
-} from "@material-tailwind/react";
+import { Head, Link } from "@inertiajs/react";
+import { Button, Menu, MenuHandler, MenuItem, MenuList, Typography } from "@material-tailwind/react";
+import React from "react";
 
-const PublicacoesIndex = ({ grupos_subgrupos }) => {
+const Estratura = ({ tiposEstrutura }) => {
+    console.log(tiposEstrutura);
     return (
         <>
-            <Head title="Painel de Grupos e Subgrupos de publicações" />
+            <Head title="Estrutura Organizacional" />
             <div className="w-full h-full flex flex-row justify-between items-start">
                 <BaseLayout>
                     <div className="flex flex-col w-full h-fit items-center justify-between gap-4">
@@ -23,58 +17,50 @@ const PublicacoesIndex = ({ grupos_subgrupos }) => {
                                     variant="h4"
                                     className="text-xl indent-0 text-center"
                                 >
-                                    Grupos e Subgrupos de publicações
+                                    Estrutra Organizacional
                                 </Typography>
                                 <Typography>
-                                    Selecione a natureza de publicacões
+                                A estrutura organizacional define a divisão de responsabilidades, funções e hierarquia entre os órgãos e entidades governamentais, visando a eficiência na administração dos recursos e serviços para a sociedade.
                                 </Typography>
                             </div>
-
                         </div>
-                        <Link className="w-full h-24 bg-gray-50 dark:bg-blue-800 flex justify-center items-center"
-                        key={'todas'}
-                        href={route('documentos.index')}>
-                            <Typography className="text-gray-800 dark:text-white font-semibold">
-                                ACESSAR TODAS AS PUBLICAÇÕES
-                            </Typography>
-                        </Link>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {grupos_subgrupos.map((grupo) => (
+                            {tiposEstrutura.map((tipo) => (
                                 <Menu>
                                     <MenuHandler>
                                         <Button className="w-full h-24 bg-gray-50 dark:bg-blue-800">
-                                            {grupo.GLYPH && (
+                                            {/* {grupo.GLYPH && (
                                                 <img
                                                     src={`../../assets/images/${grupo.GLYPH}`}
                                                     alt={JSON.stringify(
                                                         grupo.GLYPH
                                                     )}
                                                 />
-                                            )}
+                                            )} */}
                                             <Typography className="text-gray-800 dark:text-white font-semibold">
-                                                {grupo.DESCRICAO}
+                                                {tipo.DESCRICAO}
                                             </Typography>
                                         </Button>
                                     </MenuHandler>
                                     <MenuList className="max-h-72">
-                                        {grupo.subgrupo_grupo.map((sub) => (
+                                        {tipo.estruturas.map((estrutura) => (
                                             <Link
-                                                key={sub.CODIGO}
+                                                key={estrutura.CODIGO}
                                                 href={'#'}
                                             >
                                                 <MenuItem className="flex flex-row gap-2">
-                                                    {sub.GLYPH && (
+                                                    {estrutura.GLYPH && (
                                                         <img
-                                                            src={`../../assets/images/${sub.GLYPH}`}
+                                                            src={`../../assets/images/${estrutura.GLYPH}`}
                                                             alt={JSON.stringify(
-                                                                sub.GLYPH
+                                                                estrutura.GLYPH
                                                             )}
                                                             className="w-10 h-auto"
                                                         />
                                                     )}
 
                                                     <Typography className="text-gray-800 dark:text-white font-semibold">
-                                                        {sub.DESCRICAO}
+                                                        {estrutura.DESCRICAO}
                                                     </Typography>
                                                 </MenuItem>
                                             </Link>
@@ -88,6 +74,6 @@ const PublicacoesIndex = ({ grupos_subgrupos }) => {
             </div>
         </>
     );
-};
+}
 
-export default PublicacoesIndex;
+export default Estratura;

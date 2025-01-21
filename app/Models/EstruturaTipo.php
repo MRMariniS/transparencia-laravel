@@ -19,4 +19,9 @@ class EstruturaTipo extends Model
 
     protected $connection = "transparencia";
 
+    public function estruturas(){
+        return $this->hasMany(Estrutura::class, 'TIPO', 'ID')
+        ->select(['CODIGO','DESCRICAO','TIPO']);
+    }
+
 }
