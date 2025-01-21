@@ -53,4 +53,9 @@ class EntityServices
         return $accountingEntity;
     }
 
+    function getValores(){
+        $valores = $this->repository->getValores();
+        return $valores;
+    }
+
 }

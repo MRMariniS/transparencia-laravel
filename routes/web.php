@@ -25,21 +25,20 @@ use Illuminate\Support\Facades\Route;
 
 // 
 Route::get('/{entidade?}', [HomeController::class, 'index'])->name('/');
+Route::get('/entidade/valores',[HomeController::class, 'homeValores'])->name('valores.index');
+
 Route::resource('/aplicacoes/selo', SeloController::class)->only('index');
 Route::resource('/acesso-a-informacao/esic', EsicController::class)->except('destroy')->middleware(CanaisDeInformacao::class . ':esic');
 Route::post('/acesso-a-informacao/esic/consulta', [EsicController::class, 'listaPedidoPorCPF'])->name('esic.consultapedido');
 Route::get('/acesso-a-informacao/esic/pedidos/{tipo}', [EsicController::class, 'filtroPedido'])->name('esic.tipospedidos');
-// Route::get('/acesso-a-informacao/principal', [InformacoesController::class, 'index'])->name('info.index');
-
 Route::resource('/acesso-a-informacao/lgpd', LgpdController::class)->except('destroy')->middleware(CanaisDeInformacao::class . ':lgpd');
 Route::post('/acesso-a-informacao/lgpd/consulta', [LgpdController::class, 'listaPedidoPorCPF'])->name('lgpd.consultapedido');
 Route::get('/acesso-a-informacao/lgpd/pedidos/{tipo}', [LgpdController::class, 'filtroPedido'])->name('lgpd.tipospedidos');
-
 Route::resource('/acesso-a-informacao/eouv', EouvController::class)->except('destroy')->middleware(CanaisDeInformacao::class . ':eouv');
 Route::post('/acesso-a-informacao/eouv/consulta', [EouvController::class, 'listaPedidoPorCPF'])->name('eouv.consultapedido');
 Route::get('/acesso-a-informacao/eouv/pedidos/{tipo}', [EouvController::class, 'filtroPedido'])->name('eouv.tipospedidos');
-
 Route::get('/acesso-a-informacao/estrutura', [HomeController::class, 'homeEstrutura'])->name('estrutura.index');
+
 
 Route::get('/aplicacoes/publicacoes', [HomeController::class, 'homePublicacao'])->name('publicacoes.index');
 Route::resource('/publicacoes/documentos', PublicacaoController::class)->only(['index','show']);

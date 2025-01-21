@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\EntityServices;
 use App\Services\EstruturaServices;
 use App\Services\EstruturaTipoServices;
 use App\Services\GrupoServices;
@@ -15,7 +16,8 @@ class HomeController extends Controller
         protected SeloServices $service,
         protected PublicacaoServices $publicacao,
         protected GrupoServices $grupo,
-        protected EstruturaTipoServices $estrutura
+        protected EstruturaTipoServices $estrutura,
+        protected EntityServices $entity
     ) {}
     /**
      * Display a listing of the resource.
@@ -40,6 +42,13 @@ class HomeController extends Controller
         $tiposEstrutura = $this->estrutura->getEstruturaTipo();
         return Inertia::render('Informacoes/Estrutura/Index', [
             'tiposEstrutura' => $tiposEstrutura
+        ]);
+    }
+
+    public function homeValores(){
+        $valores = $this->entity->getValores();
+        return Inertia::render('Informacoes/Valores/Index', [
+            'valores' => $valores
         ]);
     }
 }

@@ -96,4 +96,22 @@ class EntityEloquentORM implements EntityInterface
             return $e->getMessage();
         }
     }
+
+    function getValores(){
+        $valores = Entity::whereNull('UG')->get([
+            'GESMISSAO',
+            'GESVALORES',
+            'GESVISAO',
+            'UG'
+        ]);
+
+        $valores = Helper::convertingData(
+            $valores,
+            [
+                'GESMISSAO','GESVALORES', 'GESVISAO'
+            ]
+        );
+
+        return $valores;
+    }
 }
