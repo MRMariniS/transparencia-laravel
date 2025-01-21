@@ -11,7 +11,7 @@ class GrupoEloquentORM implements GrupoInterface
     function getAllGrupos()
     {
         $grupos = Grupo::whereHas('publicacao_grupo', function ($query) {
-            Helper::filterQueryUg($query,null, 'RPPS');
+            Helper::filterQueryUg($query, null, 'RPPS');
         })->get();
 
         $grupos = Helper::convertingData($grupos, ['DESCRICAO', 'DEFINICAO']);
@@ -21,15 +21,16 @@ class GrupoEloquentORM implements GrupoInterface
 
     function getAllGruposAndSubGrupos($grupo = null)
     {
-        $grupos = Grupo::whereHas('subgrupo_grupo', function ($query) {
-            Helper::filterQueryUg($query,null, 'RPPS');
+        $grupos = Grupo::with('subgrupo_grupo')->where(function ($query) use ($grupo) {
+            if ($grupo) {
+                $query->where('GRUPO', $grupo);
+            }
         })
-            ->where(function ($query) use ($grupo) {
-                if ($grupo) {
-                    $query->where('GRUPO', $grupo);
-                }
-            })
-            ->get();
+        ->whereHas('publicacao_grupo', function ($query) {
+            Helper::filterQueryUg($query, null, 'RPPS');
+        })
+        ->where('PUBLICADO', 'S')
+        ->get();
         $grupos = Helper::convertingData($grupos, ['DESCRICAO', 'DEFINICAO']);
         foreach ($grupos as $item) {
             $item->subgrupo_grupo = Helper::convertingData($item->subgrupo_grupo, ['DESCRICAO', 'DEFINICAO']);

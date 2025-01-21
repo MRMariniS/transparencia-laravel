@@ -46,7 +46,8 @@ class Publicacao extends Model
 
     function documentos()
     {
-        return $this->hasMany(Publicarqs::class, 'PUBLICACAO', 'ID')->select([
+        return $this->hasMany(Publicarqs::class, 'PUBLICACAO', 'ID')
+        ->select([
             'ID',
             'PUBLICACAO',
             'TIPO',

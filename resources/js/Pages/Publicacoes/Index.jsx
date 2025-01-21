@@ -1,10 +1,12 @@
 import React from "react";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import BaseLayout from "@/Layouts/BaseLayout";
 import {
     Button,
     Menu,
     MenuHandler,
+    MenuItem,
+    MenuList,
     Typography,
 } from "@material-tailwind/react";
 
@@ -27,7 +29,13 @@ const PublicacoesIndex = ({ grupos_subgrupos }) => {
                                     Selecione a natureza de publicacões
                                 </Typography>
                             </div>
+
                         </div>
+                        <Button className="w-full h-24 bg-gray-50 dark:bg-blue-800">
+                            <Typography className="text-gray-800 dark:text-white font-semibold">
+                                ACESSAR TODAS AS PUBLICAÇÕES
+                            </Typography>
+                        </Button>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {grupos_subgrupos.map((grupo) => (
                                 <Menu>
@@ -50,11 +58,7 @@ const PublicacoesIndex = ({ grupos_subgrupos }) => {
                                         {grupo.subgrupo_grupo.map((sub) => (
                                             <Link
                                                 key={sub.CODIGO}
-                                                href={
-                                                    sub.URL +
-                                                    "?entidade=" +
-                                                    entidadeRota
-                                                }
+                                                href={'#'}
                                             >
                                                 <MenuItem className="flex flex-row gap-2">
                                                     {sub.GLYPH && (
@@ -68,7 +72,7 @@ const PublicacoesIndex = ({ grupos_subgrupos }) => {
                                                     )}
 
                                                     <Typography className="text-gray-800 dark:text-white font-semibold">
-                                                        {sub.APRESENTACAO}
+                                                        {sub.DESCRICAO}
                                                     </Typography>
                                                 </MenuItem>
                                             </Link>

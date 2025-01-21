@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +24,9 @@ class Grupo extends Model
     ];
 
     public function subgrupo_grupo(){
-        return $this->hasMany(SubGrupo::class, 'GRUPO', 'GRUPO');
+        return $this->hasMany(SubGrupo::class, 'GRUPO', 'GRUPO')
+        ->select('GRUPO', 'DESCRICAO', 'DEFINICAO', 'URL', 'PUBLICADO', 'GLYPH')
+        ->where('PUBLICADO','S');
     }
 
     public function publicacao_grupo(){
