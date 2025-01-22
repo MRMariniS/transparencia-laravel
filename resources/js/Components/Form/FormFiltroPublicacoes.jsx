@@ -32,7 +32,7 @@ const FormFiltroPublicacoes = ({
     const [finalDate, setFinalDate] = useState("");
     const [initialDate, setInitialDate] = useState("");
     const [ugs, setUgs] = useState(empresas);
-    const [grupoSelecionado, setGrupoSelecionado] = useState([]);
+    const [grupoSelecionado, setGrupoSelecionado] = useState("");
     const [subgrupoSelecionado, setSubgrupoSelecionado] = useState([]);
     const [subgrupos, setSubgrupos] = useState([]);
 
@@ -44,7 +44,7 @@ const FormFiltroPublicacoes = ({
         dataFinal: dadosRequest.dataInicial ?? "",
         ementa: dadosRequest.ementa ?? "",
         atualizado: dadosRequest.atualizado ?? "",
-        grupos: dadosRequest.grupos ?? grupoSelecionado,
+        grupo: dadosRequest.grupo ?? grupoSelecionado,
         subgrupos: dadosRequest.subgrupos ?? subgrupoSelecionado,
     });
 
@@ -79,17 +79,17 @@ const FormFiltroPublicacoes = ({
     }, [finalDate]);
 
     useEffect(() => {
-        handleChangeSubgrupo(data.grupos);
-    }, [data.grupos]);
+        handleChangeSubgrupo(data.grupo);
+    }, [data.grupo]);
 
     const handleChangeSubgrupo = (gr) => {
-        if (gr.length === 0) {
+        if (gr === "") {
             setSubgrupos([]);
             return;
         }
 
         axios
-            .post(route("grupo.subgrupos", { grupos: gr }))
+            .post(route("grupo.subgrupos", { grupo: Number(gr) }))
             .then((res) => {
                 setSubgrupos(res.data);
             })
@@ -222,12 +222,12 @@ const FormFiltroPublicacoes = ({
                         onChange={(e) => setData("ementa", e.target.value)}
                         error={errors.ementa}
                     />
-                    {/* <SelectGrupos
-                        grupoSelecionado={data.grupos}
+                    <SelectGrupos
+                        grupoSelecionado={data.grupo}
                         grupos={gruposSubgrupos}
                         setGrupoSelecionado={setData}
-                    /> */}
-                    <Input
+                    />
+                    {/* <Input
                         name="grupo"
                         color={darkMode ? "white" : "gray"}
                         className="w-full bg-white dark:bg-blue-900 focus:outline-none"
@@ -250,7 +250,7 @@ const FormFiltroPublicacoes = ({
                         }
                         error={errors.grupos}
                         onChange={() => console.warn("Clique no botão +")}
-                    />
+                    /> */}
                     <Input
                         name="subgrupo"
                         color={darkMode ? "white" : "gray"}

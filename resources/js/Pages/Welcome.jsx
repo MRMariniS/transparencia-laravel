@@ -48,7 +48,7 @@ export default function Welcome() {
                                 />
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-gray-50 dark:bg-blue-800 p-4 rounded-lg">
                             {props.menus.menuLateral.map((menu) => (
                                 <MenuDefault
                                     key={menu.CODIGO}

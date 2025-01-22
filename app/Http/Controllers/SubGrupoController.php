@@ -14,7 +14,7 @@ class SubGrupoController extends Controller
 
     function getSubGrupos(Request $request)
     {
-        $subgrupos = $this->subgrupo->getSubGrupos($request->grupos);
+        $subgrupos = $this->subgrupo->getSubGrupos($request->grupo);
         return $subgrupos;
     }
 }

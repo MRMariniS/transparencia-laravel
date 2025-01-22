@@ -33,10 +33,10 @@ function Header() {
                     />
                 </div>
 
-                <div className="w-3/5 hidden xl:flex flex-row justify-between items-center gap-6">
-                    <div className="w-full hidden xl:flex flex-row justify-end items-center">
+                <div className="w-3/5 hidden xl:flex flex-row justify-end items-center gap-2">
+                    {/* <div className="w-full hidden xl:flex flex-row justify-end items-center">
                         <HeaderMenu props={props} />
-                    </div>
+                    </div> */}
                     <HeaderButtons
                         darkMode={darkMode}
                         setDarkMode={setDarkMode}
@@ -56,7 +56,7 @@ function Header() {
                         <div className="flex flex-row justify-start items-center gap-4">
                             <button
                                 onClick={openDrawer}
-                                className="hidden sm:block hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
+                                className="hidden sm:block p-1 rounded-lg interaction-color"
                             >
                                 <FaBars className="w-6 h-6 fill-inherit" />
                             </button>

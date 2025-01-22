@@ -15,17 +15,18 @@ const SelectGrupos = ({ grupos, grupoSelecionado, setGrupoSelecionado }) => {
                 }}
                 menuProps={{
                     className:
-                        "bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
+                        "flex flex-col gap-2 bg-white dark:bg-blue-900 text-gray-800 dark:text-white border-gray-500",
                 }}
                 label="Grupos"
                 value={grupoSelecionado}
-                onChange={(value) => setGrupoSelecionado(value)}
+                onChange={(value) => setGrupoSelecionado("grupo", value)}
             >
                 {grupos.map(({ GRUPO, DESCRICAO }) => {
                     return (
                         <Option
                             value={`${GRUPO}`}
                             key={GRUPO}
+                            className="interaction-color"
                         >{`${DESCRICAO}`}</Option>
                     );
                 })}

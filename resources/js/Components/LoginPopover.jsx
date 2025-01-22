@@ -12,7 +12,7 @@ export default function LoginPopover({ darkMode }) {
     return (
         <Popover placement="bottom-end">
             <PopoverHandler>
-                <button className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800">
+                <button className="p-1 rounded-lg interaction-color">
                     <FaUser className="h-6 w-6 fill-inherit" />
                 </button>
             </PopoverHandler>

@@ -13,30 +13,30 @@ import LoginPopover from "./LoginPopover";
 
 function HeaderButtons({ darkMode, setDarkMode }) {
     return (
-        <div className="w-56 flex flex-row justify-between items-center gap-4">
-            <div className="flex justify-center items-center gap-4">
+        <div className="w-fit h-full p-2 flex flex-row justify-between items-center gap-4">
+            <div className="flex justify-center items-center gap-2">
                 <Link
                     href={route("lgpd.index")}
-                    className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
+                    className="interaction-color p-1 rounded-lg"
                 >
                     <FaFileShield className="h-6 w-6 fill-inherit" />
                 </Link>
                 <Link
                     href={route("eouv.index")}
-                    className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
+                    className="interaction-color p-1 rounded-lg"
                 >
                     <FaHeadset className="h-6 w-6 fill-inherit" />
                 </Link>
 
                 <Link
                     href={route("esic.index")}
-                    className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
+                    className="interaction-color p-1 rounded-lg"
                 >
                     <FaComment className="h-6 w-6 fill-inherit" />
                 </Link>
                 <button
                     onClick={() => setDarkMode(!darkMode)}
-                    className="hover:bg-blue-700 hover:dark:bg-sky-200 p-1 rounded-lg fill-gray-800 dark:fill-white hover:fill-white hover:dark:fill-gray-800"
+                    className="interaction-color p-1 rounded-lg"
                 >
                     {darkMode ? (
                         <FaMoon className="h-6 w-6 fill-inherit" />

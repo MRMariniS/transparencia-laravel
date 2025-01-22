@@ -153,6 +153,14 @@
         @apply !bg-blue-700 dark:!bg-sky-200 !text-white dark:!text-gray-800 py-2 px-4 rounded-full flex justify-center items-center gap-2;
     }
 
+    .interaction-color {
+        @apply !bg-blue-700 dark:!bg-sky-200 !text-white dark:!text-gray-800 !fill-white dark:!fill-gray-800 hover:opacity-75;
+    }
+
+    .interaction-color-hover {
+        @apply !bg-blue-700 dark:!bg-sky-200 !text-white dark:!text-gray-800 !fill-white dark:!fill-gray-800;
+    }
+
     .cancel {
         @apply !bg-red-500 !text-white py-2 px-4 rounded-full flex justify-center items-center gap-2;
     }

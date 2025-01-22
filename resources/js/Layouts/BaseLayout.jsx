@@ -4,9 +4,12 @@ import { SearchBar } from "../Components/SearchBar";
 import SelectDefault from "../Components/SelectDefault";
 import HeaderButtons from "../Components/HeaderButtons";
 import { BreadcrumbsWithIcon } from "../Components/BreadCrumbsWithIcon";
+import { usePage } from "@inertiajs/react";
+import HeaderMenu from "../Components/HeaderMenu";
 
 function BaseLayout({ children }) {
     const { darkMode, setDarkMode } = useContext(PropsContext);
+    const { props } = usePage();
 
     return (
         <div className="container py-4 px-4 md:px-0">
@@ -26,7 +29,10 @@ function BaseLayout({ children }) {
                     <SearchBar />
                 </div>
             </div>
-            <BreadcrumbsWithIcon />
+            <div className="flex flex-row w-full h-fit justify-between items-center mb-4">
+                <BreadcrumbsWithIcon />
+                <HeaderMenu props={props} />
+            </div>
             <div className="w-full h-full flex justify-between items-start gap-4">
                 {children}
             </div>

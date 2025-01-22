@@ -4,7 +4,6 @@ import { Typography } from "@material-tailwind/react";
 import { SortableTable } from "@/Components/Tables/SortableTable";
 
 const PublicacoesIndex = ({ publicacoes }) => {
-    console.log(publicacoes);
     return (
         <BaseLayout>
             <div>
