@@ -3,8 +3,8 @@ import { Head, Link } from "@inertiajs/react";
 import { Button, Menu, MenuHandler, MenuItem, MenuList, Typography } from "@material-tailwind/react";
 import React from "react";
 
-const Estratura = ({ tiposEstrutura }) => {
-    console.log(tiposEstrutura);
+const Estratura = ({ tiposEstrutura, breadcrumbs }) => {
+    console.log(tiposEstrutura, breadcrumbs);
     return (
         <>
             <Head title="Estrutura Organizacional" />

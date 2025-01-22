@@ -24,7 +24,8 @@ use Illuminate\Support\Facades\Route;
 //Route::post('/acesso-a-informacao/esic/', [SicPedidoController::class, 'getPedidoPorProtocolo'])->name('ConsultarPedido');
 
 // 
-Route::get('/{entidade?}', [HomeController::class, 'index'])->name('/');
+Route::get('/{entidade?}', [HomeController::class, 'index'])->name('home');
+
 Route::get('/entidade/valores',[HomeController::class, 'homeValores'])->name('valores.index');
 
 Route::resource('/aplicacoes/selo', SeloController::class)->only('index');

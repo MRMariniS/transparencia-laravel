@@ -8,6 +8,7 @@ use App\Services\EstruturaTipoServices;
 use App\Services\GrupoServices;
 use App\Services\PublicacaoServices;
 use App\Services\SeloServices;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -26,7 +27,9 @@ class HomeController extends Controller
     {
         $selo = $this->service->getImagemSelo();
 
-        return Inertia::render('Welcome');
+        return Inertia::render('Welcome', 
+        ['breadcrumbs' => Breadcrumbs::generate('home')]
+    );
     }
 
     public function homePublicacao()
@@ -41,11 +44,13 @@ class HomeController extends Controller
     {
         $tiposEstrutura = $this->estrutura->getEstruturaTipo();
         return Inertia::render('Informacoes/Estrutura/Index', [
-            'tiposEstrutura' => $tiposEstrutura
+            'tiposEstrutura' => $tiposEstrutura,
+            'breadcrumbs' => Breadcrumbs::generate('estrutura')
         ]);
     }
 
-    public function homeValores(){
+    public function homeValores()
+    {
         $valores = $this->entity->getValores();
         return Inertia::render('Informacoes/Valores/Index', [
             'valores' => $valores

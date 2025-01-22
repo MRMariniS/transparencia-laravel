@@ -4,12 +4,9 @@ import { FaHouse } from "react-icons/fa6";
 
 export function BreadcrumbsWithIcon() {
     return (
-        <Breadcrumbs className="bg-gray-50 dark:bg-blue-800">
-            <Link
-                href={route("/")}
-                className="p-1 rounded-md fill-gray-800 dark:fill-white hover:interaction-color-hover"
-            >
-                <FaHouse className="h-6 w-6 fill-inherit" />
+        <Breadcrumbs className="mb-4 bg-gray-50 dark:bg-blue-800 ">
+            <Link href={route("home")}>
+                <FaHouse className="h-6 w-6 fill-gray-800 dark:fill-white hover:opacity-60" />
             </Link>
             <Link
                 href="#"
