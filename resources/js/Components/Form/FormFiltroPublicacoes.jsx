@@ -42,7 +42,7 @@ const FormFiltroPublicacoes = ({
         numero: dadosRequest.numero ?? "",
         empresa: dadosRequest.empresa ?? [ugDefault],
         dataInicial: dadosRequest.dataInicial ?? "",
-        dataFinal: dadosRequest.dataInicial ?? "",
+        dataFinal: dadosRequest.dataFinal ?? "",
         ementa: dadosRequest.ementa ?? "",
         atualizado: dadosRequest.atualizado ?? "",
         grupo: dadosRequest.grupo ?? grupoSelecionado,
@@ -63,7 +63,7 @@ const FormFiltroPublicacoes = ({
     useEffect(() => {
         setData(
             "dataInicial",
-            new Date(initialDate).toLocaleDateString("pt-BR")
+            new Date(initialDate)
         );
     }, [initialDate]);
 
@@ -74,7 +74,7 @@ const FormFiltroPublicacoes = ({
         } else {
             setData(
                 "dataFinal",
-                new Date(finalDate).toLocaleDateString("pt-BR")
+                new Date(finalDate)
             );
         }
     }, [finalDate]);

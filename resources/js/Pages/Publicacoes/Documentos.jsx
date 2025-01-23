@@ -40,11 +40,14 @@ const Documentos = ({
                             tableData={publicacoes}
                             paginate={true}
                             urlPaginate={url}
+                            routeName="documentos.show"
+                            valueFieldParam="ID"
                             tableHeaders={[
+                                "DETALHAR",
                                 "TIPO",
                                 "NÚMERO",
                                 "ANO",
-                                "DATA",
+                                "DATA DOCUMENTO",
                                 "DESCRIÇÃO",
                                 "EMENTA",
                                 "DATA PUBLICAÇÃO",

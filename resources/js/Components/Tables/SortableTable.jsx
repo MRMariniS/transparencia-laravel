@@ -92,7 +92,6 @@ export function SortableTable({
     openInModal = false,
     aplicacaoModal = "",
     routeName = "",
-    paramRoute = "",
     icon = <FaArrowUpRightFromSquare />,
     valueFieldParam = "",
     newWindow = "_self",
@@ -118,15 +117,6 @@ export function SortableTable({
             return content[keyColumn];
         }
     };
-
-    // const sortTable = (key) => {
-    //     const sortedData = [...TABLE_ROWS].sort((a, b) => {
-    //         if (a[key] < b[key]) return -1;
-    //         if (a[key] > b[key]) return 1;
-    //         return 0;
-    //     });
-    //     return sortedData;
-    // };
 
     return (
         <>
@@ -167,7 +157,7 @@ export function SortableTable({
                             : "p-4 border-b border-gray-800 dark:border-white";
                         const isOdd = index % 2;
 
-                        if (paramRoute != "" && valueFieldParam != "") {
+                        if (valueFieldParam != "") {
                             var param = content[valueFieldParam];
                         }
 
@@ -200,6 +190,7 @@ export function SortableTable({
                                                 {content[valueFieldParam] !=
                                                 null ? (
                                                     <a
+                                                        className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none interaction "
                                                         as="link"
                                                         target={newWindow}
                                                         href={route(
@@ -207,7 +198,7 @@ export function SortableTable({
                                                             param
                                                         )}
                                                     >
-                                                        {icon}
+                                                        DETALHAR {icon}
                                                     </a>
                                                 ) : (
                                                     <></>

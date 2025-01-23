@@ -15,6 +15,8 @@ class PublicacaoEloquentORM implements PublicacaoInterface
     {
         $queryGrupo = "";
         $queryGruposSubgrupo = "";
+        $queryEmenta = "";
+        $queryPeriodo = "";
         
         if (!$empresa) {
             if (session()->get('TIPOEMPRESA') == 1) {
@@ -43,6 +45,19 @@ class PublicacaoEloquentORM implements PublicacaoInterface
             $queryGruposSubgrupo = "AND A.SUBGRUPO IN($subgrupo)";
         }
 
+        if($ementa){
+            $queryEmenta = "AND (A.EMENTA LIKE '%$ementa%')";
+        }
+
+        if($datainicial){
+            $datainicial = date('d.m.Y', strtotime($datainicial));
+            $queryPeriodo = "AND (A.DTHRPUBLICADO >= '$datainicial')";
+        }
+
+        if($datainicial && $datafinal){
+            $datafinal = date('d.m.Y', strtotime($datafinal));
+            $queryPeriodo = "AND (A.DTHRPUBLICADO BETWEEN '$datainicial' AND '$datafinal')";
+        }
 
         $publicacao = DB::connection('transparencia')->table(DB::raw("(
         select A.ID, A.NUMERO, A.ANO, A.DESCRICAO, A.GRUPO, A.SUBGRUPO, A.EMENTA, A.DATA, A.CONSOLIDACAO,
@@ -69,6 +84,8 @@ class PublicacaoEloquentORM implements PublicacaoInterface
                             $queryGrupo
                             $queryGruposSubgrupo
                             AND (EXTRACT(YEAR FROM DTHRPUBLICADO) = $ano)
+                            $queryEmenta
+                            $queryPeriodo
                         order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc) as subquery"))
             ->orderBy('DATA', 'DESC')
             ->orderBy('NUMERO', 'DESC')
