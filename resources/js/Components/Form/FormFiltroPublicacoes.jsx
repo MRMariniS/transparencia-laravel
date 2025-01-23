@@ -12,6 +12,7 @@ import SelectFilter from "../Selects/SelectFilter";
 import SelectGrupos from "../Selects/SelectGrupos";
 import PopoverGrupos from "../Popover/PopoverGrupos";
 import PopoverSubGrupos from "../Popover/PopoverSubgrupos";
+import { set } from "date-fns";
 
 const FormFiltroPublicacoes = ({
     title,
@@ -91,6 +92,7 @@ const FormFiltroPublicacoes = ({
         axios
             .post(route("grupo.subgrupos", { grupo: Number(gr) }))
             .then((res) => {
+                setData('subgrupos',[]);
                 setSubgrupos(res.data);
             })
             .catch((error) => {

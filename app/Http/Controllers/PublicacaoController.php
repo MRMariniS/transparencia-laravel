@@ -18,13 +18,14 @@ class PublicacaoController extends Controller
      */
     public function index(Request $request)
     {
+        
         $ano = $request->query('exercicio');
         $empresa = $request->query('empresa');
         $numero = $request->query('numero');
         $ementa = $request->query('ementa');
         $datainicial = $request->query('dataInicial');
         $datafinal = $request->query('dataFinal');
-        $grupo = $request->query('grupos');
+        $grupo = $request->query('grupo');
         $subgrupo = $request->query('subgrupos');
 
         $publicacao = $this->publicacao->getPublicacao($ano, $empresa, $numero, $ementa, $datainicial, $datafinal, $grupo, $subgrupo);

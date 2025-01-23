@@ -42,18 +42,18 @@ const Documentos = ({
                             urlPaginate={url}
                             tableHeaders={[
                                 "TIPO",
+                                "NÚMERO",
                                 "ANO",
                                 "DATA",
-                                "NÚMERO",
                                 "DESCRIÇÃO",
                                 "EMENTA",
                                 "DATA PUBLICAÇÃO",
                             ]}
                             headerKeys={[
                                 "NOME_SUBGRUPO",
+                                "NUMERO",
                                 "ANO",
                                 "DATA",
-                                "NUMERO",
                                 "DESCRICAO",
                                 "EMENTA",
                                 "DTHRPUBLICADO",

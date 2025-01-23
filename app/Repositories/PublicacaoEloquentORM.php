@@ -14,7 +14,8 @@ class PublicacaoEloquentORM implements PublicacaoInterface
     function getPublicacao($ano, $empresa = null, $numero = null, $ementa = null, $datainicial = null, $datafinal = null, $grupo = null, $subgrupo = null)
     {
         $queryGrupo = "";
-        $querySubGrupo = "";
+        $queryGruposSubgrupo = "";
+        
         if (!$empresa) {
             if (session()->get('TIPOEMPRESA') == 1) {
                 $ugrpps = session()->has('UGRPPS') ? "," . session()->get('UGRPPS') : "";
@@ -34,13 +35,12 @@ class PublicacaoEloquentORM implements PublicacaoInterface
         }
 
         if ($grupo) {
-            $grupo = implode(",", $grupo);
-            $queryGruposSubgrupo = "AND A.GRUPO IN($grupo)";
+            $queryGrupo = "AND A.GRUPO = $grupo";
         }
 
         if ($grupo && $subgrupo) {
             $subgrupo = implode(",", $subgrupo);
-            $queryGruposSubgrupo = "AND A.SUBGRUP IN($subgrupo)";
+            $queryGruposSubgrupo = "AND A.SUBGRUPO IN($subgrupo)";
         }
 
 
@@ -67,8 +67,8 @@ class PublicacaoEloquentORM implements PublicacaoInterface
                             A.DATA <= current_date and
                             $queryUG
                             $queryGrupo
-                            $querySubGrupo
-                            AND A.ANO = $ano
+                            $queryGruposSubgrupo
+                            AND (EXTRACT(YEAR FROM DTHRPUBLICADO) = $ano)
                         order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc) as subquery"))
             ->orderBy('DATA', 'DESC')
             ->orderBy('NUMERO', 'DESC')
