@@ -1,0 +1,177 @@
+Illuminate\Support\Collection Object
+(
+    [items:protected] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [ID] => 66422
+                    [NUMERO] => 6474
+                    [ANO] => 2025
+                    [DESCRICAO] => DECRETO Nº 6474, DE 14 DE JANEIRO DE 2025.
+                    [GRUPO] => 2
+                    [SUBGRUPO] => 1
+                    [EMENTA] => HOMOLOGA PREÇOS DE GÊNEROS ALIMENTÍCIOS HORTIFRUTIGRANJEIROS PARA ATENDIMENTO DA ALIMENTAÇÃO ESCOLAR E DÁ OUTRAS PROVIDÊNCIAS
+
+                    [DATA] => 14/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 15/01/2025
+                    [NOME_SUBGRUPO] => Decretos
+                    [PUBLICADO] => S
+                )
+
+            [1] => stdClass Object
+                (
+                    [ID] => 66421
+                    [NUMERO] => 009
+                    [ANO] => 2025
+                    [DESCRICAO] => CONTRATO N° 009/PGM/2025
+                    [GRUPO] => 9
+                    [SUBGRUPO] => 107
+                    [EMENTA] => "CONTRATO QUE CELEBRAM O MUNICÍPIO DE ESPIGÃO DO OESTE E A EMPRESA COMÉRCIO DE COMBÚSTIVEIS ESPIGÃO LTDA.
+
+                    [DATA] => 14/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 15/01/2025
+                    [NOME_SUBGRUPO] => Contratos
+                    [PUBLICADO] => S
+                )
+
+            [2] => stdClass Object
+                (
+                    [ID] => 66420
+                    [NUMERO] => 007
+                    [ANO] => 2025
+                    [DESCRICAO] => CONTRATO N° 007/PGM/2025
+                    [GRUPO] => 9
+                    [SUBGRUPO] => 107
+                    [EMENTA] => CONTRATO QUE CELEBRAM O MUNICÍPIO DE ESPIGÃO DO OESTE E A EMPRESA COMÉRCIO DE COMBÚSTIVEIS ESPIGÃO LTDA.
+
+                    [DATA] => 14/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 15/01/2025
+                    [NOME_SUBGRUPO] => Contratos
+                    [PUBLICADO] => S
+                )
+
+            [3] => stdClass Object
+                (
+                    [ID] => 66406
+                    [NUMERO] => 6473
+                    [ANO] => 2025
+                    [DESCRICAO] => DECRETO Nº 6473, DE 13 DE JANEIRO DE 2025
+                    [GRUPO] => 2
+                    [SUBGRUPO] => 1
+                    [EMENTA] => ABRE CRÉDITO ADICIONAL SUPLEMENTAR AO ORÇAMENTO VIGENTE DO EXERCÍCIO DE 2025 DO MUNICÍPIO DE ESPIGÃO DO OESTE E DÁ OUTRAS PROVIDÊNCIAS.
+ 
+
+                    [DATA] => 13/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 14/01/2025
+                    [NOME_SUBGRUPO] => Decretos
+                    [PUBLICADO] => S
+                )
+
+            [4] => stdClass Object
+                (
+                    [ID] => 66407
+                    [NUMERO] => 6472
+                    [ANO] => 2025
+                    [DESCRICAO] =>  DECRETO Nº 6472, DE 13 DE JANEIRO DE 2025
+                    [GRUPO] => 2
+                    [SUBGRUPO] => 1
+                    [EMENTA] => ABRE CRÉDITO ADICIONAL SUPLEMENTAR AO ORÇAMENTO VIGENTE DO EXERCÍCIO DE 2025 DO MUNICÍPIO DE ESPIGÃO DO OESTE E DÁ OUTRAS PROVIDÊNCIAS.
+
+                    [DATA] => 13/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 14/01/2025
+                    [NOME_SUBGRUPO] => Decretos
+                    [PUBLICADO] => S
+                )
+
+            [5] => stdClass Object
+                (
+                    [ID] => 66414
+                    [NUMERO] => 029/A
+                    [ANO] => 2025
+                    [DESCRICAO] => PARECER JURÍDICO Nº 029/A 
+                    [GRUPO] => 103
+                    [SUBGRUPO] => 101
+                    [EMENTA] => SOLICITA GOZO DE LICENÇA PRÊMIO
+                    [DATA] => 13/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 14/01/2025
+                    [NOME_SUBGRUPO] => Parecer Jurídico 
+                    [PUBLICADO] => S
+                )
+
+            [6] => stdClass Object
+                (
+                    [ID] => 66410
+                    [NUMERO] => 029
+                    [ANO] => 2025
+                    [DESCRICAO] => PARECER Nº 029/PGM/2025
+                    [GRUPO] => 103
+                    [SUBGRUPO] => 101
+                    [EMENTA] => PARECER FINAL DE LICITAÇÃO  PREGÃO ELETRÔNICO
+
+                    [DATA] => 13/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 14/01/2025
+                    [NOME_SUBGRUPO] => Parecer Jurídico 
+                    [PUBLICADO] => S
+                )
+
+            [7] => stdClass Object
+                (
+                    [ID] => 66409
+                    [NUMERO] => 028
+                    [ANO] => 2025
+                    [DESCRICAO] => PARECER JURÍDICO Nº 028
+                    [GRUPO] => 103
+                    [SUBGRUPO] => 101
+                    [EMENTA] => SOLICITA ORIENTAÇÕES PAD
+
+                    [DATA] => 13/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 14/01/2025
+                    [NOME_SUBGRUPO] => Parecer Jurídico 
+                    [PUBLICADO] => S
+                )
+
+            [8] => stdClass Object
+                (
+                    [ID] => 66412
+                    [NUMERO] => 025
+                    [ANO] => 2025
+                    [DESCRICAO] => 1º TERMO ADITIVO AO CONTRATO Nº 238/PGM/2024, DO PROCESSO Nº 5393/2024.
+                    [GRUPO] => 114
+                    [SUBGRUPO] => 101
+                    [EMENTA] => 1º TERMO ADITIVO AO CONTRATO Nº 238/PGM/2024, DO PROCESSO Nº 5393/2024.
+
+                    [DATA] => 13/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 14/01/2025
+                    [NOME_SUBGRUPO] => Termos Aditivos
+                    [PUBLICADO] => S
+                )
+
+            [9] => stdClass Object
+                (
+                    [ID] => 66392
+                    [NUMERO] => 001
+                    [ANO] => 2025
+                    [DESCRICAO] => PLANO DE GOVERNO 
+                    [GRUPO] => 99
+                    [SUBGRUPO] => 9
+                    [EMENTA] => PLANO DE GOVERNO
+                    [DATA] => 13/01/2025
+                    [CONSOLIDACAO] => N
+                    [DTHRPUBLICADO] => 13/01/2025
+                    [NOME_SUBGRUPO] => Objetivos, Metas e Estratégias
+                    [PUBLICADO] => S
+                )
+
+        )
+
+    [escapeWhenCastingToString:protected] => 
+)
