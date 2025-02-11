@@ -5,6 +5,7 @@ import { Head } from "@inertiajs/react";
 
 import FormFiltroPublicacoes from "../../Components/Form/FormFiltroPublicacoes";
 import { SortableTable } from "@/Components/Tables/SortableTable";
+import Table from "@/Components/Tables/Table";
 
 const Documentos = ({
     empresas,
@@ -18,6 +19,17 @@ const Documentos = ({
     url,
     dadosRequest,
 }) => {
+    const columns = [
+        { label: "DETALHAR", accessor: "ID", sortable: false },
+        { label: "TIPO", accessor: "NOME_SUBGRUPO", sortable: false },
+        { label: "NÚMERO", accessor: "NUMERO", sortable: true },
+        { label: "ANO", accessor: "ANO", sortable: false },
+        { label: "DATA DOCUMENTO", accessor: "DATA", sortable: true },
+        { label: "DESCRIÇÃO", accessor: "DESCRICAO", sortable: true },
+        { label: "EMENTA", accessor: "EMENTA", sortable: false },
+        { label: "DATA PUBLICAÇÃO", accessor: "DTHRPUBLICADO", sortable: true },
+    ];
+
     return (
         <>
             <Head title={"Publicações"} />
@@ -36,31 +48,12 @@ const Documentos = ({
                         dadosRequest={dadosRequest}
                     />
                     <div className="w-full gap-4 bg-gray-50 dark:bg-blue-800 rounded-md p-4">
-                        <SortableTable
-                            tableData={publicacoes}
+                        <Table
+                            columns={columns}
+                            data={publicacoes}
+                            routeName="documentos.show"
                             paginate={true}
                             urlPaginate={url}
-                            routeName="documentos.show"
-                            valueFieldParam="ID"
-                            tableHeaders={[
-                                "DETALHAR",
-                                "TIPO",
-                                "NÚMERO",
-                                "ANO",
-                                "DATA DOCUMENTO",
-                                "DESCRIÇÃO",
-                                "EMENTA",
-                                "DATA PUBLICAÇÃO",
-                            ]}
-                            headerKeys={[
-                                "NOME_SUBGRUPO",
-                                "NUMERO",
-                                "ANO",
-                                "DATA",
-                                "DESCRICAO",
-                                "EMENTA",
-                                "DTHRPUBLICADO",
-                            ]}
                         />
                     </div>
                 </div>
