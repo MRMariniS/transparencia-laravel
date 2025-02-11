@@ -19,6 +19,11 @@ Breadcrumbs::for('estrutura', function (BreadcrumbTrail $trail) {
     $trail->push('Estrutura Organizacional', route('estrutura.index'));
 });
 
+// Home > Blog
+Breadcrumbs::for('publicacoes', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Publicações', route('publicacoes.index'));
+});
 // // Home > Blog > [Category]
 // Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
 //     $trail->parent('blog');
