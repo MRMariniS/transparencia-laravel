@@ -92,8 +92,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
             ->orderBy('ANO', 'DESC')
             ->orderBy('DTHRPUBLICADO', 'DESC')
             ->orderBy('DESCRICAO', 'DESC')
-            ->limit(10)
-            ->get();
+            ->paginate(10);
 
 
         //order by A.DATA desc, A.NUMERO desc, A.ANO desc, A.DTHRPUBLICADO desc, A.DESCRICAO desc
@@ -108,7 +107,7 @@ class PublicacaoEloquentORM implements PublicacaoInterface
             ],
             ['DATA', 'DTHRPUBLICADO']
         );
-        file_put_contents('publicacoes.json', print_r($publicacao, true));
+        //file_put_contents('publicacoes.json', print_r($publicacao, true));
         return $publicacao;
     }
 
